@@ -56,7 +56,7 @@ Some notes on simplicial homotopy theory
 \begin{lemma} For $0 \leq k \leq n$, the horn inclusion $i \co \Lambda^k[n] \to \Delta[n]$ is a retract of
 the pushout product
 \[
-i \hattimes \kcyl \big( \Lambda^k[n] \times \Delta[1] \big) \cup (\Delta[n] \times {k}) \to \Delta[n] \times \Delta[1] \, .
+i \hattimes \kcyl \co \big( \Lambda^k[n] \times \Delta[1] \big) \cup (\Delta[n] \times {k}) \to \Delta[n] \times \Delta[1] \, .
 \]
 \end{lemma} 
 
@@ -79,14 +79,25 @@ i \hattimes \kcyl \big( \Lambda^k[n] \times \Delta[1] \big) \cup (\Delta[n] \tim
 
 Recall that we work in a constructive set theory with two universes $\mathsf{u}_1$ and $\mathsf{u}_2$
 and that we refer to elements of $\mathsf{u}_1$ as small sets. We then define a simplicial
-set $X$ to be \emph{small} if $X_n$ is a small set for every $[n] \in \Delta$. 
+set $X$ to be \emph{small}
 
 
-\begin{definition} We say that a map $f \co Y \to X$ in $\SSet$ is small if for every $x \co \Delta[n] 
-\to X$ the simplicial set $Y_x$ is small.
+\begin{definition} \hfill 
+\label{thm:small}
+\begin{enumerate}[(i)]
+\item We say that a simplicial set $X$ is \emph{small}  if $X_n$ is a small set for every $[n] \in \Delta$. 
+\item We say that a map $f \co Y \to X$ in $\SSet$ is \emph{small} if for every $x \co \Delta[n] 
+\to X$ the simplicial set~$Y_x$ fitting in the pullback square
+\[
+\xymatrix{
+Y_x \ar[r] \ar[d] \drpullback & Y \ar[d]^{f} \\
+\Delta[n] \ar[r]_x & X }
+\]
+is small.
+\end{enumerate}
 \end{definition} 
 
-By the results in~\cite{HofmannM:universe} for arbitrary presheaf categories, small maps in
+By the results in~\cite{hofmann-streicher-universes} for arbitrary presheaf categories, small maps in
  $\SSet$ admit a weak classifier, \ie a small map $\rho \co \VV \to \V$ such 
 that for every small map $f \co Y \to X$ there exists  a pullback diagram of the form
 \[
@@ -126,7 +137,7 @@ X \ar[r] & \U }
 \end{enumerate}
 \end{proposition}
 
-\begin{proof} We prove the two claims separately.
+\begin{proof} We prove the three claims separately.
 \begin{enumerate}[(i)] 
 \item Should follow by locality.
 \item Should be immediate.
@@ -138,7 +149,7 @@ However, the simplicial set $\U$ does not appear to be cofibrant and hence it do
 with a trivial fibration $p \co \U_c \to \U$, and the pullback
 \[
 \xymatrix{
-\UU_c \ar[d]_{\pi_c} \ar[r] & \UU \ar[d]^{\pi}  \\
+\UU_c \ar[d]_{\pi_c} \ar[r] \drpullback & \UU \ar[d]^{\pi}  \\
 \U_c \ar[r]_p & \U}
 \]
 We can now prove that $\pi_c \co \UU_c \to \U_c$ has the desired properties.
@@ -159,13 +170,13 @@ X \ar[r] & \U_c }
 \end{enumerate}
 \end{proposition}
 
-\begin{proof} Part~(i) follows directly from part~(i) of~\cref{thm:universe-u}. For part~(ii), 
-let $p \co Y \to X$ be a small Kan fibration with $X$ cofibrant. Since $p$ is a
+\begin{proof} Part~(i) follows from part~(i) of~\cref{thm:universe-u}. For part~(ii), 
+let $f \co Y \to X$ be a small Kan fibration with $X$ cofibrant. Since $f$ is a
 small Kan fibration, we know 
 from~\cref{thm:universe-u} that there is a pullback diagram of the form 
 \[
 \xymatrix{
-Y \ar[r] \ar[d]_p \drpullback & \UU \ar[d]^{\pi} \\
+Y \ar[r] \ar[d]_f \drpullback & \UU \ar[d]^{\pi} \\
 X \ar[r] & \U }
 \]
 Since $X$ is cofibrant, we have the lifting diagram
