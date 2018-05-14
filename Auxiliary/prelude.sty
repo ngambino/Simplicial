@@ -24,7 +24,7 @@
 % \renewenvironment{proof}[1][\proofname]{\noindent {\sc #1.}\ }{\qed}
 
 \makeatletter
-\renewenvironment{proof}[1][\proofname] {\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\sc#1\@addpunct{.}]\ignorespaces}{\popQED\endtrivlist\@endpefalse}
+\renewenvironment{proof}[1][\proofname] {\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\bf#1\@addpunct{.}]\ignorespaces}{\popQED\endtrivlist\@endpefalse}
 \makeatother
 
 %\makeatletter
@@ -49,7 +49,7 @@
 {0mm}% indent
 {-\baselineskip}% beforeskip
 {0.5\baselineskip}% afterskip
-{\large \bfseries}}% style
+{\Large \bfseries}}% style
 
 \renewcommand{\subsection}{\@startsection
 {subsection}% name
@@ -57,7 +57,7 @@
 {0mm}% indent
 {1mm}% beforeskip
 {-1ex}% afterskip
-{\normalfont\normalsize\bfseries}}% styles
+{\normalfont\large\bfseries}}% styles
 
 \makeatother
 
@@ -80,7 +80,7 @@
 {}% Space below 
 {\itshape}% Body font 
 {}% Indent amount 
-{\sc}%  Theorem head font 
+{\bf}%  Theorem head font 
 {.}% Punctuation after theorem head 
 {.5em}% Space after theorem head 
 {}% 
@@ -90,7 +90,7 @@
 {3pt}% Space below 
 {}% Body font 
 {}% Indent amount 
-{\sc}%  Theorem head font 
+{\bf}%  Theorem head font 
 {.}% Punctuation after theorem head 
 {.5em}% Space after theorem head 
 {}% 
@@ -100,7 +100,7 @@
 {3pt}% Space below 
 {}% Body font 
 {}% Indent amount 
-{\sc}%  Theorem head font 
+{\bf}%  Theorem head font 
 {.}% Punctuation after theorem head 
 {.5em}% Space after theorem head 
 {}% 
@@ -203,8 +203,11 @@
 
 \newcommand{\SSet}{\mathbf{SSet}}
 \newcommand{\CSet}{\mathbf{CSet}}
-\newcommand{\UU}{\overline{\mathsf{W}}}
-\newcommand{\U}{\mathsf{W}}
+\newcommand{\UU}{\overline{\mathsf{U}}}
+\newcommand{\U}{\mathsf{U}}
+\newcommand{\VV}{\overline{\mathsf{V}}}
+\newcommand{\V}{\mathsf{V}}
+
 \newcommand{\Weq}{\operatorname{Eq}}
 \newcommand{\Set}{\mathbf{Set}}
 
@@ -269,7 +272,7 @@
 \newcommand{\retA}{\mathit{x}}
 \newcommand{\retB}{\mathit{y}}
 
-% Stolen from Mike Shulman.
+% Taken from Mike Shulman.
 \newcommand{\xto}{\xrightarrow}
 
 \newcommand{\fib}{\twoheadrightarrow}

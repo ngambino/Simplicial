@@ -27,26 +27,208 @@ Some notes on simplicial homotopy theory
 
 \section{Constructive simplicial homotopy theory}
 
+\begin{itemize}
+\item Basics on $\SSet$ and notation. 
+\item We use $\Delta[n]$, $\partial \Delta[n]$ and $\Lambda^{k}[n]$ and following Joyal.
+\item Recall the existence of a weak model structure on $\SSet$:
+\begin{itemize}
+\item Fibrations  = Kan fibrations
+\item Cofibrations = Levelwise complemented monomorphisms such that degeracies are decidable on the complement of the image. 
+\item Cofibrant objects are simplicial sets in which degeneracies are decidable.
+\end{itemize}
+\item It would be good to have an explicit definition of the cofibrant replacement functor.
+\item Recall the pushout product property.
+\end{itemize}
+
+
+
+
+
+
+\begin{proposition} Cofibrations are closed under pullbacks.
+\end{proposition}
+
+\begin{proof} To be added.
+\end{proof} 
+
+
+
+\begin{lemma} For $0 \leq k \leq n$, the horn inclusion $i \co \Lambda^k[n] \to \Delta[n]$ is a retract of
+the pushout product
+\[
+i \hattimes \kcyl \big( \Lambda^k[n] \times \Delta[1] \big) \cup (\Delta[n] \times {k}) \to \Delta[n] \times \Delta[1] \, .
+\]
+\end{lemma} 
+
+\begin{proposition} A map is a Kan fibration if and only if it has the right lifting property with respect to the pushout products $i \hattimes \kcyl$.
+\end{proposition} 
+
+
 \newpage
 
 \section{Dependent products}
+
+\begin{itemize}
+\item We wish to establish a restricted form of the Frobenius condition.
+\item We follow Gambino-Sattler, but without making use of the assumption that every object is cofibrant.
+\end{itemize}
 
 \newpage
 
 \section{The universe}
 
+Recall that we work in a constructive set theory with two universes $\mathsf{u}_1$ and $\mathsf{u}_2$
+and that we refer to elements of $\mathsf{u}_1$ as small sets. We then define a simplicial
+set $X$ to be \emph{small} if $X_n$ is a small set for every $[n] \in \Delta$. 
+
+
+\begin{definition} We say that a map $f \co Y \to X$ in $\SSet$ is small if for every $x \co \Delta[n] 
+\to X$ the simplicial set $Y_x$ is small.
+\end{definition} 
+
+By the results in~\cite{HofmannM:universe} for arbitrary presheaf categories, small maps in
+ $\SSet$ admit a weak classifier, \ie a small map $\rho \co \VV \to \V$ such 
+that for every small map $f \co Y \to X$ there exists  a pullback diagram of the form
+\[
+\xymatrix{
+Y \ar[r] \ar[d]_f \drpullback  & \VV \ar[d]^\rho \\
+X \ar[r] & \V }
+\]
+Letting $X = \Delta[n]$ in this diagram suggests to define $\V_n$ as the set of all small maps with codomain~$\Delta[n]$. In this way, however, one does not obtain a presheaf since the transition functions
+will satisfy the functorial laws only up to isomorphism rather than equality. To remedy this, the $n$-simplices of $\V$ are defined instead to be the functors $F \co (\Delta/[n])^{\op} \to \Set$ such that 
+the corresponding map of simplicial sets $ \mathsf{El}(F) \to \Delta[n]$ is small. MORE TO BE ADDED.
+
+\medskip
+
+Following~\cite{cisinski-univalence,voevodsky-simplicial-model}, we consider the pullback 
+\[
+\xymatrix{
+\UU \ar[r] \ar[d]_\pi \drpullback  & \VV \ar[d]^\rho \\
+\U \ar[r] & \V }
+\]
+where $\U \subseteq \V$ is defined by letting 
+\[
+\U_n = \{ F \in \V_n \ | \ \mathsf{El}(F) \to \Delta[n] \text{ is a small Kan fibration } \}
+\]
+
+
+\begin{proposition} \label{thm:universe-u}  \hfill 
+\begin{enumerate}[(i)] 
+\item $\pi \co \UU \to \U$ is a small Kan fibration.
+\item $\pi \co \UU \to \U$ classifies small Kan fibrations, \ie 
+for every small Kan fibration $f \co Y \to X$ there exists  a pullback diagram of the form
+\[
+\xymatrix{
+Y \ar[r] \ar[d]_f \drpullback & \UU \ar[d]^\pi \\
+X \ar[r] & \U }
+\]
+\item  The simplicial set $\UU$ is cofibrant.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} We prove the two claims separately.
+\begin{enumerate}[(i)] 
+\item Should follow by locality.
+\item Should be immediate.
+\item See handwritten notes. Key step is the constructive version of the Eilenberg-Zilber lemma. \qedhere
+\end{enumerate}
+\end{proof} 
+
+However, the simplicial set $\U$ does not appear to be cofibrant and hence it does not seem possible to show that  $\pi \co \UU \to \U$ is a weak classifier for small Kan fibrations with cofibrant codomain. In order to remedy this, we consider the cofibrant replacement $\U_c$ of $\U$, which comes equipped
+with a trivial fibration $p \co \U_c \to \U$, and the pullback
+\[
+\xymatrix{
+\UU_c \ar[d]_{\pi_c} \ar[r] & \UU \ar[d]^{\pi}  \\
+\U_c \ar[r]_p & \U}
+\]
+We can now prove that $\pi_c \co \UU_c \to \U_c$ has the desired properties.
+
+
+\begin{proposition} \label{thm:universe-uc} 
+\hfill 
+\begin{enumerate}[(i)] 
+\item $\pi_c \co \UU_c \to \U_c$ is a small Kan fibration with fibrant codomain. 
+\item The map $\pi_c \co \UU_c \to \U_c$ classifies small Kan fibrations with cofibrant domain, \ie 
+for every small Kan fibration $f \co Y \to X$ with $X$ cofibrant there exists  a pullback diagram of the form
+\[
+\xymatrix{
+Y \ar[r] \ar[d]_f & \UU_c \ar[d]^{\pi_c} \\
+X \ar[r] & \U_c }
+\]
+\item The simplicial set $\UU_c$ is cofibrant.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} Part~(i) follows directly from part~(i) of~\cref{thm:universe-u}. For part~(ii), 
+let $p \co Y \to X$ be a small Kan fibration with $X$ cofibrant. Since $p$ is a
+small Kan fibration, we know 
+from~\cref{thm:universe-u} that there is a pullback diagram of the form 
+\[
+\xymatrix{
+Y \ar[r] \ar[d]_p \drpullback & \UU \ar[d]^{\pi} \\
+X \ar[r] & \U }
+\]
+Since $X$ is cofibrant, we have the lifting diagram
+\[
+\xymatrix{
+0 \ar[r] \ar[d] & \U_c \ar[d]^{p} \\
+X \ar[r] \ar@{.>}[ur] & \U }
+\]
+which shows that the map $X \to \U$ factors via $\U_c$.  We then obtain the diagram
+\[
+\xymatrix{
+Y \ar[r] \ar[d]_f &  \UU_c \ar[r]  \ar[d]^{\pi_c} \drpullback & \UU \ar[d]^{\pi} \\
+X \ar[r] & \U_c \ar[r]_p &  \U }
+\]
+Here, the right-hand side square and the rectangle are pullbacks and therefore the left-hand
+side square is also a pullback, as required. Part (iii) follows from the fact that both $\U_c$ and
+$\UU$ are cofibrant, the latter being part (iii) of~\cref{thm:universe-u}.
+\end{proof} 
+
+
+
+
+
+
+
+
+Note that we have not shown yet that $\U_c$ fibrant. This will be done in~\cref{sec:fibuu}, as a consequence of the equivalence extension property for fibrations, which we establish in~\cref{sec:equep}.
+
 \newpage
 
 \section{The equivalence extension property}
+\label{sec:equep}
+
+\begin{itemize}
+\item Here we follow Kapulkin and Lumsdaine.
+\end{itemize}
 
 \newpage
 
 \section{Fibrancy and univalence of the universe}
+\label{sec:fibuu}
+
+\begin{itemize}
+\item Fibrancy should follow directly from equivalence extension property, without using `composition vs filling' but rather retract property for horns (see notes).
+\item Once we have established fibrancy of $U_c$, then one can prove univalence by showing that 
+$t \co \mathsf{Weq}(U_c) \to U_c$ is a trivial fibration. 
+\item Question: do we need to know that $\mathsf{Weq}(U_c)$ is a cofibrant object to get univalence? 
+\end{itemize}
+
 
 \newpage
 
 \section{Semantics}
 
 
+\begin{itemize}
+\item This should be essentially straightforward, following Kapulkin and Lumsdaine, but we may need to modify the notion of a $\Pi$-structure to accommodate the cofibrant replacements that we take for $\Pi$.
+\end{itemize}
+
+\nocite{*}
+
+
+\bibliographystyle{plain}
+\bibliography{../Auxiliary/bibliography}
 
 \end{document}
