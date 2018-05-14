@@ -68,10 +68,75 @@ i \hattimes \kcyl \co \big( \Lambda^k[n] \times \Delta[1] \big) \cup (\Delta[n] 
 
 \section{Dependent products}
 
-\begin{itemize}
-\item We wish to establish a restricted form of the Frobenius condition.
-\item We follow Gambino-Sattler, but without making use of the assumption that every object is cofibrant.
-\end{itemize}
+We say that a semi-model structure on a category $\cal{E}$ has the \emph{restricted Frobenius property} if for every fibration 
+$f \co B \to A$~with $A$ cofibrant, the pullback functor
+\[
+f^* \co \catE_{/A} \to \calE_{/B}
+\]
+preserves trivial cofibrations. When the semi-model structure is cofibrantly generated, it is sufficient [TO CHECK] that 
+the pullback functor sends generating trivial cofibrations to trivial cofibrations. Note that, by adjointness,
+it follows that the pushforward functor
+\[
+f_* \co \catE_{/B} \to \calE_{/A}
+\]
+preserves fibrations. Note, however, that the result of applying $f_*$ may not be a cofibration. 
+
+\begin{lemma} \hfill 
+\begin{enumerate}[(i)] 
+\item $\mathcal{J} \subset \Cof \cap \mathcal{S}$.
+\item $\Cof \cap \mathcal{S} \subseteq \TrivCof$.
+\end{enumerate}
+\end{lemma} 
+
+\begin{lemma} 
+\label{thm:missing-2}
+For $k \in \{0,1\}$, the pullback of a strong $k$-oriented homotopy equivalence 
+with cofibrant codomain along a
+fibration is a strong $k$-oriented homotopy equivalence.
+\end{lemma}
+
+
+
+
+
+
+\begin{theorem} 
+\label{thm:restricted-frobenius}
+The semi-model structure for Kan complexes on $\SSet$ has the restricted Frobenius condition.
+\end{theorem} 
+
+\begin{proof} It suffices to show that, for a pullback diagram of the form
+\[
+\xymatrix{
+Y \ar[r] \ar[d]_j & \Lambda^k[n] \ar[d]^{i} \\
+X \ar[r]_-{f} & \Delta[n] }
+\]
+if $f$ is a Kan fibration then $j$ is a trivial cofibration.  
+First, since $i$ is a trivial cofibration, it is also
+a cofibration and so its pullback is again a cofibration. Secondly, since $i$ is
+trivial cofibration with 
+cofibrant codomain, its pullback is a strong homotopy equivalence by~\cref{thm:missing-2}.
+But now $j$ is both a cofibration and a strong homotopy equivalence
+and hence it is a trivial cofibration by~\cref{thm:missing-2}.
+\end{proof} 
+
+
+The plan to interpret $\Pi$-types is as follows. Suppose you have fibrations 
+$q \co \Gamma.A.B \to \Gamma.A$ and~$p \co \Gamma.A \to \Gamma$, with
+all objects both fibrant and cofibrant. 
+We begin by applying 
+\[
+p_* \co \SSet_{/\Gamma.A.B} \to \SSet_{/\Gamma.A}
+\]
+to $q$, so as to obtain $p_*(q) \co \Gamma.(\Pi x \co A) B(x) \to \Gamma$, which is
+a fibration by~\cref{thm:restricted-frobenius}. The domain of this map is fibrant but
+not necessarily cofibrant, so we take a cofibrant replacement [OF WHAT? OF THE 
+OBJECT IN $\cal{E}_{/\Gamma}$ OR OF THE MAP?] and obtain a map that we denote as
+\[
+\Gamma.(\widetilde{\Pi} x \co A) B(x)  \to \Gamma \, .
+\]
+This will satisfy the $\beta$-rule but not the $\eta$-rule for $\Pi$-types.
+
 
 \newpage
 
