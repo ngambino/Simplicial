@@ -25,28 +25,52 @@ Some notes on simplicial homotopy theory
 
 \newpage
 
-\section{Constructive simplicial homotopy theory}
+\section{Review of the semi-model structure on simplicial sets}
+
+Let $\cal{E}$ be a category with an initial object $0$ and a terminal object $1$. Recall that a semi-model structure on $\cal{E}$ consists of three classes of maps $\Weq$, $\Fib$ and $\Cof$  in $\cal{E}$ satisfying some axioms, which we now recall. When stating these axioms, and in the following, we refer to elements of $\Weq$, $\Fib$ and $\Cof$ as weak equivalences, fibrations and cofibrations, respectively, call  \emph{fibrant}
+the objects $X$ for which the unique map $\top_X  \co X \to 1$ is a fibration, and \emph{cofibrant}
+the objects $Y$ for which the unique map $\bot_Y \co 0 \to Y$ is a cofibration.
+
+The axioms for a semi-model structure can then be stated as follows:
+\begin{enumerate}[(SM1)]
+\item A
+\item
+\end{enumerate}
+
+It is important to note the similarities and differences between semi-model structures and model
+structures. 
+
+
 
 \begin{itemize}
 \item Basics on $\SSet$ and notation. 
-\item We use $\Delta[n]$, $\partial \Delta[n]$ and $\Lambda^{k}[n]$ and following Joyal.
-\item Recall the existence of a weak model structure on $\SSet$:
+\item We use $\Delt{n}$, $\partial \Delt{n}$ and $\Horn{k}{n}$.
+\item Recall the semi model structure on $\SSet$:
 \begin{itemize}
-\item Fibrations  = Kan fibrations
+\item Generating cofibrations are the boundary inclusions, 
+\[
+\cal{I} \defeq \{ \inc{n} \co  \partial \Delt{n} \to \Delt{n} \ | \ n \geq 0 \}
+\]
+\item Trivial Kan fibrations = maps with the right lifting property with respect to $\cal{I}$.
 \item Cofibrations = Levelwise complemented monomorphisms such that degeracies are decidable on the complement of the image. 
 \item Cofibrant objects are simplicial sets in which degeneracies are decidable.
+\item Generating trivial cofibrations are the horn inclusions:
+\[
+\cal{J} \defeq \{ \horninc{k}{n}  \co \Horn{k}{n} \to \Delt{n} \ | \ 0 \leq k \leq n \} \, .
+\]
+\item Kan fibrations = maps with the right lifting property with respect to $\cal{J}$.
+\item Fibrant objects are Kan complexes.
+\item Interval object is $\Delt{1}$. Endpoint inclusions $\kcyl \co \braces{ k} \to \Delt{1}$ are
+defined by $\kcyl \defeq \horninc{1}{k}$.
 \end{itemize}
 \item It would be good to have an explicit definition of the cofibrant replacement functor.
 \item Recall the pushout product property.
 \end{itemize}
 
 
-\begin{lemma} \label{thm:cof-pbk} Cofibrations are closed under pullbacks.
-\end{lemma}
 
 
-
-\begin{proposition} Cofibrations are closed under pullbacks.
+\begin{proposition}  \label{thm:cof-pbk} Cofibrations are closed under pullbacks.
 \end{proposition}
 
 \begin{proof} To be added.
@@ -54,10 +78,10 @@ Some notes on simplicial homotopy theory
 
 
 
-\begin{lemma} For $0 \leq k \leq n$, the horn inclusion $i \co \Lambda^k[n] \to \Delta[n]$ is a retract of
+\begin{lemma} For $0 \leq k \leq n$, the horn inclusion $\horninc{k}{n} \co \Horn{k}{n} \to \Delt{n}$ is a retract of
 the pushout product
 \[
-i \hattimes \kcyl \co \big( \Lambda^k[n] \times \Delta[1] \big) \cup (\Delta[n] \times {k}) \to \Delta[n] \times \Delta[1] \, .
+\horninc{k}{1} \hattimes i^n \co (\Delt{1} \times \Sphere{n} ) \cup (\braces{k} \times \Delt{n} ) \to \Delt{1} \times \Delt{n} 
 \]
 \end{lemma} 
 
