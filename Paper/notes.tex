@@ -70,7 +70,18 @@ defined by $\kcyl \defeq \horninc{1}{k}$.
 
 
 
-\begin{proposition}  \label{thm:cof-pbk} Cofibrations are closed under pullbacks.
+
+
+\begin{lemma}
+If $B$ and $C$ are cofibrants, and $A$ is any simplicial sets with maps $B \rightarrow A$, $C \rightarrow A$ then the pullback $B \times_{A} C$ is cofibrant.
+\end{lemma}
+
+\begin{proof}
+Sketche: we check it first for the product $B \times C$, and then observe that $B \times_A C \subset B \times C$ and a subobject of a cofibrant object is cofibrant.
+\end{proof}
+
+
+\begin{proposition} \label{thm:cof-pbk} If $A,B,C$ are cofibrant simplicial sets, $A \hookrightarrow C$ is a cofibrations and $f:B \rightarrow C$ is any morphism, then the natural projection map $A \times_C B \rightarrow B$ is a cofibration.
 \end{proposition}
 
 \begin{proof} To be added.
