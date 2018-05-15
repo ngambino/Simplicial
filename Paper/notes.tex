@@ -25,22 +25,72 @@ Some notes on simplicial homotopy theory
 
 \newpage
 
-\section{Review of the semi-model structure on simplicial sets}
+\section{The semi-model structure on simplicial sets}
 
-Let $\cal{E}$ be a category with an initial object $0$ and a terminal object $1$. Recall that a semi-model structure on $\cal{E}$ consists of three classes of maps $\Weq$, $\Fib$ and $\Cof$  in $\cal{E}$ satisfying some axioms, which we now recall. When stating these axioms, and in the following, we refer to elements of $\Weq$, $\Fib$ and $\Cof$ as weak equivalences, fibrations and cofibrations, respectively, call  \emph{fibrant}
-the objects $X$ for which the unique map $\top_X  \co X \to 1$ is a fibration, and \emph{cofibrant}
-the objects $Y$ for which the unique map $\bot_Y \co 0 \to Y$ is a cofibration.
+\subsection*{Semi-model structures} 
 
-The axioms for a semi-model structure can then be stated as follows:
-\begin{enumerate}[(SM1)]
-\item A
-\item
+Let $\cal{E}$ be a category with an initial object $0$. A {\bf class of cofibrations} in $\cal{E}$ is
+a class of maps $\Cof$ of $\cal{E}$ with the following properties:
+\begin{enumerate}[(C1)]
+\item $\Cof$ contains identities and is closed under composition;
+\item For all $i \co A \to B$ in $\Cof$, $A$ is cofibrant;
+\item For all $i \co A \to B$ in $\Cof$ and $f \co A \to A'$ with $A'$ cofibrant, there is a pushout
+\[
+\xymatrix{
+A \ar[r]^f \ar[d]_{i}  & A' \ar[d] \\
+B \ar[r] & \ulpullback B }
+\]
+with $A' \to B'$ in $\Cof$.
+\item Isomorphisms whose domain is cofibrant are in $\Cof$.
 \end{enumerate}
+There is a dual notion of a class of fibrations in a category with a terminal object, which we do
+not spell out.
+
+\medskip
+
+Let now $\cal{E}$ be a category with both an initial object $0$ and a terminal object $1$,
+a class of cofibrations $\Cof$ and a class of fibrations $\Fib$. We say that a map is a {\bf trivial fibration}
+if it is a fibration and it has the right lifting property with respect to all cofibrations. Dually, we say that
+a map is a {\bf trivial cofibration} if it is a cofibration and it has the left lifting property with respect to
+all fibrations. An object is said to be {\bf bifibrant} if it is both fibrant and cofibrant.
+
+
+\begin{definition} A {\bf semi-model structure} on $\cal{E}$ consists of a class of cofibrations $\Cof$, a class of
+fibrations $\Fib$ such that
+\begin{enumerate}[(SM1)]
+\item Every map $f \co A \to X$, where $A$ is cofibrant and $X$ is fibrant, factors both as a
+cofibration followed by a trivial fibration and as a trivial cofibration followed by a trivial fibration.
+\item For every bifibrant object $X$, we have a factorisation of the codiagonal $\nabla_X \co 
+X + X \to X$ as a cofibration followed by a fibration 
+\[
+\xymatrix{X + X \ar[r] &  {\bf I}(X) \ar[r] & X}
+\]
+such that the composites 
+\[
+\xymatrix{X \ar[r]^-{\iota_k}  & X+X \ar[r] & {\bf I }(X)}
+\]
+are trivial cofibrations.
+\item For every bifibrant object $X$, we have a factorisation of the diagonal $\Delta_X \co X \to 
+X \times X$ as a cofibration followed by a fibration
+\[
+\xymatrix{X  \ar[r]  & {\bf P}(X) \ar[r] & X \times X }
+ \]
+ such that the composites
+\[
+\xymatrix{ {\bf P}(X) \ar[r] &  X \times X \ar[r]^-{\pi_k} &  X }
+\]
+are trivial fibrations.
+\end{enumerate}
+\end{definition}
+
+\bigskip
+
+
 
 It is important to note the similarities and differences between semi-model structures and model
 structures. 
 
-
+\subsection*{Simplicial sets} 
 
 \begin{itemize}
 \item Basics on $\SSet$ and notation. 
