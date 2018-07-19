@@ -163,6 +163,188 @@ For our first aim, let $p \co B \to A$ be a fibration with cofibrant codomain an
 $\Pi_p \co \catE_{/B} \to \calE_{/A}$  preserves fibrations if and only if its left adjoint 
 \[
 p^* \co \catE_{/A} \to \calE_{/B}
+\documentclass[reqno,10pt,a4paper,oneside,draft]{amsart}
+\setcounter{tocdepth}{1}
+\usepackage{../Auxiliary/prelude}
+
+
+
+\title[]{Notes on simplicial homotopy theory}
+
+\begin{document}
+
+\begin{abstract}
+Some notes on simplicial homotopy theory
+\end{abstract}
+
+\author{Nicola Gambino}
+
+\author{Simon Henry}
+
+
+ \date{\today}
+
+\maketitle
+
+\section{Introduction}
+
+\newpage
+
+\section{The semi-model structure on simplicial sets}
+
+\subsection*{Semi-model structures} 
+
+Let $\cal{E}$ be a category with an initial object $0$. A {\bf class of cofibrations} in $\cal{E}$ is
+a class of maps $\Cof$ of $\cal{E}$ with the following properties:
+\begin{enumerate}[(C1)]
+\item $\Cof$ contains identities and is closed under composition;
+\item For all $i \co A \to B$ in $\Cof$, $A$ is cofibrant;
+\item For all $i \co A \to B$ in $\Cof$ and $f \co A \to A'$ with $A'$ cofibrant, there is a pushout
+\[
+\xymatrix{
+A \ar[r]^f \ar[d]_{i}  & A' \ar[d] \\
+B \ar[r] & \ulpullback B }
+\]
+with $A' \to B'$ in $\Cof$.
+\item Isomorphisms whose domain is cofibrant are in $\Cof$.
+\end{enumerate}
+There is a dual notion of a class of fibrations in a category with a terminal object, which we do
+not spell out.
+
+\medskip
+
+Let now $\cal{E}$ be a category with both an initial object $0$ and a terminal object $1$,
+a class of cofibrations $\Cof$ and a class of fibrations $\Fib$. We say that a map is a {\bf trivial fibration}
+if it is a fibration and it has the right lifting property with respect to all cofibrations. Dually, we say that
+a map is a {\bf trivial cofibration} if it is a cofibration and it has the left lifting property with respect to
+all fibrations. An object is said to be {\bf bifibrant} if it is both fibrant and cofibrant.
+
+
+\begin{definition} A {\bf semi-model structure} on $\cal{E}$ consists of a class of cofibrations $\Cof$, a class of
+fibrations $\Fib$ such that
+\begin{enumerate}[(SM1)]
+\item Every map $f \co A \to X$, where $A$ is cofibrant and $X$ is fibrant, factors both as a
+cofibration followed by a trivial fibration and as a trivial cofibration followed by a trivial fibration.
+\item For every bifibrant object $X$, we have a factorisation of the codiagonal $\nabla_X \co 
+X + X \to X$ as a cofibration followed by a fibration 
+\[
+\xymatrix{X + X \ar[r] &  {\bf I}(X) \ar[r] & X}
+\]
+such that the composites 
+\[
+\xymatrix{X \ar[r]^-{\iota_k}  & X+X \ar[r] & {\bf I }(X)}
+\]
+are trivial cofibrations.
+\item For every bifibrant object $X$, we have a factorisation of the diagonal $\Delta_X \co X \to 
+X \times X$ as a cofibration followed by a fibration
+\[
+\xymatrix{X  \ar[r]  & {\bf P}(X) \ar[r] & X \times X }
+ \]
+ such that the composites
+\[
+\xymatrix{ {\bf P}(X) \ar[r] &  X \times X \ar[r]^-{\pi_k} &  X }
+\]
+are trivial fibrations.
+\end{enumerate}
+\end{definition}
+
+\bigskip
+
+
+
+It is important to note the similarities and differences between semi-model structures and model
+structures. 
+
+\subsection*{Simplicial sets} 
+
+\begin{itemize}
+\item Basics on $\SSet$ and notation. 
+\item We use $\Delt{n}$, $\partial \Delt{n}$ and $\Horn{k}{n}$.
+\item Recall the semi model structure on $\SSet$:
+\begin{itemize}
+\item Generating cofibrations are the boundary inclusions, 
+\[
+\cal{I} \defeq \{ \inc{n} \co  \partial \Delt{n} \to \Delt{n} \ | \ n \geq 0 \}
+\]
+\item Trivial Kan fibrations = maps with the right lifting property with respect to $\cal{I}$.
+\item Cofibrations = Levelwise complemented monomorphisms such that degeracies are decidable on the complement of the image. 
+\item Cofibrant objects are simplicial sets in which degeneracies are decidable.
+\item Generating trivial cofibrations are the horn inclusions:
+\[
+\cal{J} \defeq \{ \horninc{k}{n}  \co \Horn{k}{n} \to \Delt{n} \ | \ 0 \leq k \leq n \} \, .
+\]
+\item Kan fibrations = maps with the right lifting property with respect to $\cal{J}$.
+\item Fibrant objects are Kan complexes.
+\item Interval object is $\Delt{1}$. Endpoint inclusions $\kcyl \co \braces{ k} \to \Delt{1}$ are
+defined by $\kcyl \defeq \horninc{1}{k}$.
+\end{itemize}
+\item It would be good to have an explicit definition of the cofibrant replacement functor.
+\item Recall the pushout product property.
+\end{itemize}
+
+ 
+
+
+We recall (from $5.1.5$ of \cite{henry2018wms}) that the Eilenberg-Zilber lemma holds for cofibrant simplicial sets:
+
+\begin{lemma}
+\label{lem:EZ_cof}In a cofibrant simplicial set $X$, any cell $x \in X$ can be written uniquely as $p^* y$ where $y$ is a non-degenerate cell of $X$ and $p$ is a degeneracy.
+\end{lemma}
+
+
+
+
+\begin{lemma}\label{lem:cofibrant_fiber_product}
+If $B$ and $C$ are cofibrants, and $A$ is any simplicial sets with maps $B \rightarrow A$, $C \rightarrow A$ then the pullback $B \times_{A} C$ is cofibrant.
+\end{lemma}
+
+\begin{proof}
+We check it first in the case $A=1$, i.e. for the product $B \times C$. Let $x = (b,c) \in (B \times C)_n$, if $B$ and $C$ are cofibrant one can apply lemma \ref{lem:EZ_cof} and write $b=p^* b'$ and $c=q^* c'$ with $b'$ and $c'$ non-degenerate cells and $p:[n] \twoheadrightarrow [m]$ and $q:[n] \twoheadrightarrow [k]$ are two degeneracies. We claim that $x$ is degenerate if and only if the map $(p,q):[n] \rightarrow [m] \times [k]$ is not monic, which is indeed a decidable condition as $(p,q)$ is a map between finite decidable sets.
+
+Indeed, the pair of map $(p,q)$ corresponding to a degenerate cell $x=r^* x'$ for any non-trivial degeneracy $r:[n] \twoheadrightarrow [n']$, is  $(p'r,q'r)$ where $(p',q')$ are the maps corresponding to $x'$, and this is never monic as it factor into $r$, hence for a degenerate cell the condition above is always satisfied. Conversely, if $(p,q): [n] \rightarrow [m] \times [k]$ is not monic then as it is an increasing map there is some $i$ such that $p(i)=p(i+1)$ and $q(i)=q(i+1)$, hence $(p,q)$ can be factored into the $i$-th degeneracy map:$p=p' d_i$ and $q=q' d_i$ and in this case $x= d_i^* (p'^* b',q'^* c')$ is indeed a degenerate cell.
+
+
+In the case where $A$ is non-trivial, $B \times_A C$ is a sub-simplicial set of $B \times C$ hence a cell of $B \times_A C$ is degenerate if and only if it is degenerate as a cell of $B \times C$, hence degeneratness in $B \times_A C$ is indeed decidable. 
+\end{proof}
+
+
+\begin{proposition} \label{thm:cof-pbk} If $A,B,C$ are cofibrant simplicial sets, $A \hookrightarrow C$ is a cofibrations and $f:B \rightarrow C$ is any morphism, then the natural projection map $A \times_C B \rightarrow B$ is a cofibration.
+\end{proposition}
+
+\begin{proof} As $B$ is cofibrant the proposition just claim that $A \times_C B \rightarrow B$ is a levelwise complemented monomorphism. A cell $b \in B_n$ is in  $(A \times_C B)_n$ if and only if its image in $C_n$ belong to $A_n$. As $A \rightarrow C$ is a levelwise complemented monomorphism, this is indeed decidable.
+\end{proof} 
+
+
+
+% \begin{lemma} For $0 \leq k \leq n$, the horn inclusion $\horninc{k}{n} \co \Horn{k}{n} \to \Delt{n}$ is a retract of
+% the pushout product
+% \[
+% \horninc{k}{1} \hattimes i^n \co (\Delt{1} \times \Sphere{n} ) \cup (\braces{k} \times \Delt{n} ) \to \Delt{1} \times \Delt{n} 
+% \]
+% \end{lemma} 
+
+
+
+\begin{proposition} A map is a Kan fibration if and only if it has the right lifting property with respect to the pushout products $i \hattimes \kcyl$.
+\end{proposition} 
+
+\begin{proof}The proof of theorem $3.2.3$ in \cite{joyal-tierney:simplicial-homotopy-theory} is completely constructive and sufficient to implies this results.
+For more details see also the last claim of corrolary $5.3.2$ in \cite{henry2018wms} (which follows from proposition $5.2.6$ of the same reference). 
+\end{proof}
+
+\newpage
+
+\section{Dependent products}
+
+The first aim of this section is to show that for every fibration $p \co B \to A$~with $A$ cofibrant, the pushforward functor $\Pi_p \co \catE_{/B} \to \calE_{/A}$ 
+preserves fibrations. Our second aim is to build on this result to define sufficient structure to interpret Martin-L\"of's rules for $\Pi$-types. 
+
+\medskip
+
+For our first aim, let $p \co B \to A$ be a fibration with cofibrant codomain and observe that 
+$\Pi_p \co \catE_{/B} \to \calE_{/A}$  preserves fibrations if and only if its left adjoint 
+\[
+p^* \co \catE_{/A} \to \calE_{/B}
 \]
 preserves trivial cofibrations. Furthermore,
 \begin{lemma} \label{thm:missing-1}
