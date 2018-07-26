@@ -443,6 +443,118 @@ Note that we have not shown yet that $\U_c$ fibrant. This will be done in~\cref{
 \item Here we follow Kapulkin and Lumsdaine.
 \end{itemize}
 
+
+(WORK IN PROGRESS)
+
+
+\begin{lemma}
+
+\begin{enumerate}
+
+\item For any map $i:A \rightarrow B$ with $A$ cofibrant, the functor
+
+ \[ \Pi_i : \SSet /A \rightarrow \SSet/B  \]
+
+send trivial fibrations to trivial fibrations.
+
+\item If $i$ is a monomorphism then the co-unit of adjunction $i^* \pi_i \rightarrow Id_{\SSet/A}$ is an isomorphism.
+
+\item Let $A \hookrightarrow B$ be a cofibration, and $X \rightarrow A$ be a cofibrant object in $\SSet_{/A}$. Then $\Pi_i X$ is also cofibrant.
+
+\item Trivial fibrations extend along monomorphism with cofibrant domain, i.e. given a trivial fibration $p$ and a cofibration $i$ as in the solid diagram:
+
+\[
+\xymatrix{
+Y \ar@{.>}[r] \ar@{->>}[d]^{\sim}_{p} \drpullback  & Y' \ar@{.>>}[d]^{\sim}_{p'} \\
+X \ar@{^{(}->}[r]^i &  X' }
+\]
+
+with $X$ cofibrant, then there exists a trivial fibration $Y' \rightarrow X'$ which fits in the dotted pullback square above. Moreover if $Y$ is cofibrant and $i$ is a cofibration, then $Y'$ can be taken cofibrant as well.
+
+
+
+\end{enumerate}
+
+\end{lemma}
+
+ 
+NOTE: I remember we proved $(iii)$ explicitely as this was something I was worried about. but the following proof is a lot harder than in my memories. Do you have any notes about this claims ? If not just erase this NOTE.
+
+
+\begin{proof}
+
+\begin{enumerate}
+
+\item $\Pi_i$ is the right adjoint to the pullback functor: $i^*:\SSet/B \rightarrow \SSet/A$, and by lemma \ref{thm:cof-pbk}, $i^*$ preserve cofibration between cofibrant objects. As in simplicial sets trivial fibrations are characterized by the right lifting property along cofibrations between cofibration objects (the generating cofibrations are between cofibrant objects), this shows that $\Pi_i$ preserve trivial fibrations.
+
+\item As $i$ is a monomorphism, the forgetful functor: $\Sigma_i : \SSet/A \rightarrow \SSet/B$ is fully faithful, hence the unit $Id_{\SSet_{/A}} \rightarrow i^* \Sigma_i$ is an isomorphism, and hence by adjunction the counit $Id_{\SSet_{/A}} \rightarrow i^* \Pi_i$ is also an isomorphism.
+
+\item Let $v$ be a $n$-cell in $\Pi_i(X)$. If the image of $v$ is in $A$ then $v$ is a cell of $X \subset \Pi_i(X)$ and hence it is decidable whether $v$ is degenerate or not.
+So one can assume that $v$ is not in the image of $A$, hence it is decidable if the image of $v$ in $B$ is degenerate or not. By the Eilenberg-Zilber lemma one can also decide for each given degeneracy if the image of $v$ is degenerate for this precise degeneracy or not. 
+
+Let $\sigma:[n] \twoheadrightarrow [k]$ be any degeneracy, we will show that it is decidable whether $v$ is ``$\sigma$-degenerate, i.e. if $v =\sigma^* v'$ for some $v'$. If this is the case, then such a $v'$ is neccesarilly $j^* v$ for $j$ any section of $\sigma$, and hence this implies that the image of $v$ in $B$ is $\sigma$-degenerate as well. Hence one can freely assume that the image of $v$ in $B$ is a $\sigma^* b$ for some $b \in B$ (and not in $A$).
+
+ One can form the pullback squares:
+
+
+\[
+\xymatrix{
+V \ar@{^{(}->}[r] \drpullback \ar[d] & \Delta[n] \ar@{->}[d]^{\sigma} \\
+V_{\sigma} \ar@{^{(}->}[r] \drpullback \ar[d] & \Delta[k] \ar@{->}[d]^b \\
+A \ar@{^{(}->}[r] &  B }
+\]
+
+Given its image in $B$, the cell $v: \Delta[n] \rightarrow \Pi_i X$ is uniquely determined by the data of a morphism $\lambda: V\rightarrow X$, it is $\sigma$-degenerate if and only if it factors into $V_{\sigma}$. Note that such a factorization is unique. For $J \subset [n]$, the $J$-face of a cell is said to be $\sigma$-degenerate if and only if it is degenerate for the (potentially trivial) degeneracy: $\sigma_{|J} : J \rightarrow \sigma(J)$. But one can see that $\lambda$ factor into $V_{\sigma}$ if and only for all $i:[f] \hookrightarrow [n]$ that belong to $V$ (and $V$ is decidable so there is only a finite cardinal of them), $i^* \lambda$ is degenerate at $\sigma$. Indeed $V$ is the gluing of all the $\sigma \circ i$ for such faces, for each individual face $i$ one has a factorization into its image in $V_{\sigma}$ if and only if $i^* \lambda$ is $\sigma$-degenerate, and as such factorization are unique they patch together on $V_{\sigma}$ is they all exists.
+
+\item One can simply take $p'= \Pi_i p$: it is a trivial fibration by point $(i)$ and the square is a pullback by point $(ii)$. The final remark about the cofibracancy of $Y'$ follow from $(iii)$.
+
+\end{enumerate}
+\end{proof}
+
+
+
+\begin{proposition}[Homotopy extention property]
+
+Given the Solid part of the diagram:
+
+\[ 
+\xymatrix{
+  X_0
+  \ar@{.>}[rr]
+  \ar[dr]^{\sim}
+  \ar@{->>}[dd]
+&&
+  Y_0
+  \ar@{.>}[dr]^{\sim}
+  \ar@{.>>}[dd]|{\hole}
+&\\&
+  X_1
+  \ar[rr]
+  \ar@{->>}[dl]
+&&
+  Y_1
+  \ar@{->>}[dl]
+\\
+  A
+  \ar@{^{(}->}[rr]^i
+&&
+  B
+&
+}
+\]
+
+where $X_1$ is the pullback $i^* Y_1$, and all the maps drawn as cofibration, fibration and weak equivalences are, Then there is an object $Y_0$ which fit into the dotted diagram and such that $X_0$ is the pullback $i^* Y_0$.
+
+TODO:Cofibracancy claim.
+
+\end{proposition}
+
+\begin{proof}
+ TODO
+
+
+\end{proof}
+
 \newpage
 
 \section{Fibrancy and univalence of the universe}
