@@ -167,6 +167,26 @@ In the case where $A$ is non-trivial, $B \times_A C$ is a sub-simplicial set of 
 For more details see also the last claim of corrolary $5.3.2$ in \cite{henry2018wms} (which follows from proposition $5.2.6$ of the same reference). 
 \end{proof}
 
+In a general weak model category, one can only show that a trivial fibration between fibrant objects is a weak equivalence. But in simplicial sets one can do a little better, because every cofibrant object has a strong cylinder given by $X \coprod X \hookrightarrow \Delta[1] \times X \rightarrow X$ :
+
+\begin{lemma}\label{lemma:triv_fib_are_we}
+A trivial fibrations between cofibrant simplicial sets is a weak equivalence.
+In particular, any weak equivalence between cofibrant simplicial set can be factored as a trivial cofibration followed by a trivial fibration.
+\end{lemma}
+
+\begin{proof}
+Let $p:X \overset{\sim}{\twoheadrightarrow} Y$ a trivial fibration between two cofibrant objects. One show that $p$ is invertible in the homotopy category by constructing first a section $i:Y \rightarrow X$ of $p$ and then a homotopy between $i \circ p$ and the identity of $X$. They are obtained as diagonal filling in the following two squares:
+
+\[
+\xymatrix{\emptyset \ar[r] \ar@{^{(}->}[d] & X \ar@{->>}[d]^{\sim} \\ Y \ar@{.>}[ur]^{i} \ar[r] & Y}
+\qquad
+\xymatrix{X \coprod X \ar[rr]^{(Id, i \circ p)} \ar@{^{(}->}[d] & &  X \ar@{->>}[d]^{\sim} \\ \Delta[1] \times X \ar@{.>}[rru] \ar[r]& X \ar[r]^{p} & Y  }
+\]
+
+It follows that if $X \rightarrow Y$ is a weak equivalences between two cofibrant objects then if one factor it as a cofibration followed by a trivial fibration, then the cofibration part is a trivial cofibration.
+\end{proof}
+
+
 \newpage
 
 \section{Dependent products}
@@ -447,7 +467,7 @@ Note that we have not shown yet that $\U_c$ fibrant. This will be done in~\cref{
 (WORK IN PROGRESS)
 
 
-\begin{lemma}
+\begin{lemma}\label{Lemma:ForTheExtProperty}
 
 \begin{enumerate}
 
@@ -459,9 +479,9 @@ send trivial fibrations to trivial fibrations.
 
 \item If $i$ is a monomorphism then the co-unit of adjunction $i^* \pi_i \rightarrow Id_{\SSet/A}$ is an isomorphism.
 
-\item Let $A \hookrightarrow B$ be a cofibration, and $X \rightarrow A$ be a cofibrant object in $\SSet_{/A}$. Then $\Pi_i X$ is also cofibrant.
+\item If $i:A \hookrightarrow B$ is a cofibration, and $X \in \SSet_{/A}$ is cofibrant. Then $\Pi_i X$ is also cofibrant.
 
-\item Trivial fibrations extend along monomorphism with cofibrant domain, i.e. given a trivial fibration $p$ and a cofibration $i$ as in the solid diagram:
+\item Trivial fibrations extend along monomorphism with cofibrant domain, i.e. given a trivial fibration $p$ and a monomorphism $i$ as in the solid diagram:
 
 \[
 \xymatrix{
@@ -478,7 +498,7 @@ with $X$ cofibrant, then there exists a trivial fibration $Y' \rightarrow X'$ wh
 \end{lemma}
 
  
-NOTE: I remember we proved $(3)$ explicitely as this was something I was worried about. but the following proof is a lot harder than in my memories. Do you have any notes about this claims ? If not just erase this NOTE.
+NOTE: I remember we proved $(3)$ explicitely as this was something I was worried about. but the following proof is a lot harder than in my memories. Do you have any notes about this claims ? If not just erase this note.
 
 
 \begin{proof}
@@ -494,9 +514,9 @@ If the image of $v$ is in $A$ then $v$ is a cell of $X \subset \Pi_i(X)$, in whi
 As $A$ is levelwise complemented in $B$, one can assume that $v$ is not in the image of $A$. In this case it is decidable if the image of $v$ in $B$ is degenerate or not.
 Infact, by the Eilenberg-Zilber lemma one can also decide for each given degeneracy if the image of $v$ is degenerate for this precise degeneracy or not. 
 
-Let $\sigma:[n] \twoheadrightarrow [k]$ be any degeneracy, we will show that it is decidable whether $v$ is ``$\sigma$-degenerate, i.e. if $v =\sigma^* v'$ for some $v'$. Note that if $v$ is $\sigma$-degenerate then its image in $B$ is as well. As this is a decidable question, one can freely assume that the image of $v$ in $B$ is \sigma$ degenerate, i.e. for the form $\sigma^* b$ for some $b \in B$ (and not in $A$).
+Let $\sigma:[n] \twoheadrightarrow [k]$ be any degeneracy, we will show that it is decidable whether $v$ is ``$\sigma$-degenerate, i.e. if $v =\sigma^* v'$ for some $v'$. Note that if $v$ is $\sigma$-degenerate then its image in $B$ is as well. As this is a decidable question, one can freely assume that the image of $v$ in $B$ is $\sigma$-degenerate, i.e. for the form $\sigma^* b$ for some $b \in B$ (and not in $A$).
 
- One can form the pullback squares:
+ One can form the pullback square:
 
 
 \[
@@ -545,15 +565,62 @@ Given the Solid part of the diagram:
 }
 \]
 
-where $X_1$ is the pullback $i^* Y_1$, and all the maps drawn as cofibration, fibration and weak equivalences are, Then there is an object $Y_0$ which fit into the dotted diagram and such that $X_0$ is the pullback $i^* Y_0$.
+where all the objects are cofibrant, $X_1$ is the pullback $i^* Y_1$, and all the maps drawn as cofibration, fibration and weak equivalences are. Then there is a cofibrant object $Y_0$ which fit into the dotted diagram and such that $X_0$ is the pullback $i^* Y_0$.
 
-TODO:Cofibrancy claim.
+
 
 \end{proposition}
 
 \begin{proof}
- TODO
+ 
+One define $Y_0$ as the following pullback:
 
+\[\xymatrix{
+Y_0 \ar[d] \ar[r] \drpullback & \Pi_i X_0 \ar[d] \\
+Y_1 \ar[r] & \Pi_i X_1
+}\]
+
+Where $Y_1 \rightarrow \Pi_i X_1$ is the unit of adjunction between $i^*$ and $\Pi_i$, as $X_1 \simeq i^* Y_1$.
+
+If one applies $i^*$ to this pullback square, one gets a pullback square:
+
+
+\[\xymatrix{
+i^* Y_0 \ar[d] \ar[r] \drpullback & X_0 \ar[d] \\
+X_1 \ar[r] & X_1
+}\]
+
+as $i^* \Pi_i \simeq Id$ by the second point of lemma \ref{Lemma:ForTheExtProperty}. Hence $X_0$ is indeed the pullback of $Y_0$.
+
+
+As $X_0$ is cofibrant then $\Pi_i X_0$ is cofibrant by point $(3)$ of lemma \ref{Lemma:ForTheExtProperty}, and hence $Y_0$ as defined above is also cofibrant because of lemma \ref{lem:cofibrant_fiber_product}. This also implies that the maps $X_0 \rightarrow Y_0$ and $X_1 \rightarrow Y_1$ are cofibrations by lemma \ref{thm:cof-pbk}, as they are pullback of $A \hookrightarrow B$.
+
+
+
+
+
+It remains to prove that $Y_0 \rightarrow Y_1$ is a weak equivalence and that $Y_0 \rightarrow B$ is a fibration. By lemma \ref{lemma:triv_fib_are_we}, one can factor the map $w:X_0 \rightarrow X_1$ into a trivial cofibration followed by a trivial fibration, and by functoriality of our construction it is sufficient to prove these claims when $w$ is a trivial fibration or a trivial cofibration.
+
+If $w:X_0 \rightarrow X_1$ is a trivial fibration, then its image under $\Pi$ is a trivial fibration by the first point of lemma \ref{Lemma:ForTheExtProperty}, and the maps $Y_0 \rightarrow Y_1$ being a pullback of this map is also a trivial fibration. This also implies that $Y_0 \rightarrow Y_1 \rightarrow B$ is a fibration.
+
+
+We now assume that $j:X_0 \rightarrow X_1$ is a trivial cofibration. Using that the maps from $X_0$ and $X_1$ to $A$ are fibrations, this allows to show that $j$ is a strong deformation retract over $A$, i.e. there is a retraction $r:X_1 \rightarrow X_0$ of $j$ in $\SSet_{/A}$ And a homotopy $H: \Delta[1] \times X_1 \rightarrow X_1$ between $j \circ r$ and $Id_{X_1}$, whose composte with $X_1 \rightarrow A$ is the trivial homotopy.
+
+We want to show that $Y_0 \rightarrow Y_1$ is also a deformation retract by constructing a similar homotopy $H':\Delta[1] \times Y_1 \rightarrow Y_1$. This homotpy will be constructed so that on $\Delta[1] \times X_1$ it is $H$, on $\Delta[0] \times Y_0 $ it is the map $\Delta[1] \times Y_0 \rightarrow \Delta[0] \times Y_0 \simeq Y_0 \rightarrow Y_1$ (and the indeed both agree on $\Delta[1] \times X_0$ and on $\Delta[0] \times Y_1$ it is the identity. This is achieved by taking a diagonal filling in the square:
+
+
+\[\xymatrix{
+\left[ \Delta[1] \times (Y_0 \cup X_1) \right] \cup \left[ \Delta[0] \times Y_1 \right] \ar@{^{(}->}[d]^{\sim} \ar[r] & Y_1 \ar@{->>}[d] \\
+\Delta[1] \times Y_1 \ar[r] \ar@{.>}[ur]^{H'} & B
+}\]
+
+The right map being a trivial cofibration as the pushout-product of $\delta_0 : \Delta[0] \rightarrow \Delta[1]$ against the map $Y_0 \cup X_1 \rightarrow Y_1$ which is indeed a cofibration.
+
+It remains to see that the map $H_{1}:Y_1 \rightarrow Y_1$ is indeed a projection on $Y_0$ (retraction of $Y_0 \rightarrow Y_1$). We already know that the restriction of $H_{1}$ to $Y_0$ is indeed the inclusion of $Y_0$ in $Y_1$, so it is enough to show that $H_{1}$ has values in $Y_0$. We also know that $H_{1}$ restricted to $X_1$ takes values in $X_0 \subset Y_0$. By definition of $Y_0$, the map $H_1$ factor into $Y_0$ if and only if it takes values in $\Pi_i X_0$ when seen as a map to $\Pi_i X_1$, and by adjunction this is the case if and only if the map corresponding to $H_1$, $X_1=i^* Y_1 \rightarrow X_1$ takes values in $X_0$, but already mentioned above that this was indeed the case.
+
+The fact that $Y_0 \rightarrow Y_1$ is a deformation retract show that it is invertible in the homotopy category, in particular it is indeed a weak equivalence.
+
+The construction above also shows that in this case $Y_0$ is retract of $Y_1$ in $\SSet_{/B}$ hence $Y_0 \rightarrow B$ is a fibration because $Y_1 \rightarrow B$ is.
 
 \end{proof}
 
