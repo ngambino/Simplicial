@@ -227,7 +227,7 @@ $\Pi_p \co \catE_{/B} \to \calE_{/A}$  preserves fibrations if and only if its l
 \[
 p^* \co \catE_{/A} \to \calE_{/B}
 \]
-preserves trivial cofibrations. As the left adjoint is already known to preserve cofibration (by lemma \ref{thm:cof-pbk}) what we need is essentially a form of right properness. We achieve that by following closely section 3 of \cite{sattler2015Frobenius}. One cannot directly applies the result of this reference as not every object is cofibrant, but only minor modification are enough.
+preserves trivial cofibrations. As the left adjoint is already known to preserve cofibration (by lemma \ref{thm:cof-pbk}) what we need is essentially a form of right properness. We achieve that by following closely section 3 of \cite{gambino2017frobenius}. One cannot directly applies the result of this reference as not every object is cofibrant, but only minor modification are enough.
 
 
 % \begin{lemma} \label{thm:missing-1}
@@ -243,17 +243,17 @@ preserves trivial cofibrations. As the left adjoint is already known to preserve
 One say that a map $f :X \rightarrow Y$ is a strong $k$-oriented homotopy equivalence if there are map $H$ and $H_X$ which exhibit $f$ as a retract of $\delta^k \times ' f$ as follows:
 
 \[\xymatrix{X \ar[d]^{f} \ar[r]^{\hspace{-0.8cm}\delta^{1-k} \times X} & \Delta[1] \times X \cup Y \ar[d]^{\delta^k \times' f} \ar[r]^{\hspace{1cm}H_X} & X \ar[d]^{f} \\
-Y \ar[r]^{\delta^{1-k} \times Y} & I \times Y \ar[r]^{H} & Y 
+Y \ar[r]^{\delta^{1-k} \times Y} & \Delta[1] \times Y \ar[r]^{H} & Y 
 }\]
 
 %I'm not very familiar with xymatrix (I'm usually using Tikzcd) so If you know a better way to fix the position of the name of arrows than using hspace you're welcome !
 
 \end{definition}
 
-Note that the definition given in \cite{sattler2015Frobenius} is different, but the equivalence with this notion is proved there as lemma $3.3$. It is immediate with this definition that a cofibration which is a strong $k$-oriented homotopy equivalence is a trivial cofibration.
+Note that the definition given in \cite{gambino2017frobenius} is different, but the equivalence with this notion is proved there as lemma $3.3$. It is immediate with this definition that a cofibration which is a strong $k$-oriented homotopy equivalence is a trivial cofibration.
 
-\begin{lemma}
-The generating trivial cofibrations $\Lambda^i[n] \hookrightarrow \Delta[n]$ are strong $k$-oriented deformation retract.
+\begin{lemma}\label{lemma:genTcof_strongHequiv}
+The generating trivial cofibrations $\Lambda^i[n] \hookrightarrow \Delta[n]$ are strong $k$-oriented homotopy equivalence.
 More precisely, for $k=0$ if $i<n$ and for $k=1$ for $i>0$. 
 \end{lemma}
 
@@ -271,7 +271,7 @@ For $k \in \{0,1\}$, the pullback of a strong $k$-oriented homotopy equivalence
  along a fibration with cofibrant domain is a strong $k$-oriented homotopy equivalence.
 \end{lemma}
 
-This is essentially lemma $3.7$ of \cite{sattler2015Frobenius}, with almost exactly the same proof.
+This is essentially lemma $3.7$ of \cite{gambino2017frobenius}, with almost exactly the same proof.
 
 \begin{proof}
 
@@ -575,7 +575,7 @@ Here we follow closely the approach of \cite{voevodsky-simplicial-model}.
 
 send trivial fibrations to trivial fibrations.
 
-\item If $i$ is a monomorphism then the co-unit of adjunction $i^* \pi_i \rightarrow Id_{\SSet/A}$ is an isomorphism.
+\item If $i$ is a monomorphism then the co-unit of adjunction $i^* \Pi_i \rightarrow Id_{\SSet/A}$ is an isomorphism.
 
 \item If $i:A \hookrightarrow B$ is a cofibration, and $X \in \SSet_{/A}$ is cofibrant. Then $\Pi_i X$ is also cofibrant.
 
@@ -729,14 +729,12 @@ The construction above also shows that in this case $Y_0$ is retract of $Y_1$ in
 
 
 \begin{itemize}
-\item Fibrancy should follow directly from equivalence extension property, without using `composition vs filling' but rather retract property for horns (see notes).
-\item Once we have established fibrancy of $U_c$, then one can prove univalence by showing that 
-$t \co \mathsf{Weq}(U_c) \to U_c$ is a trivial fibration. 
+% \item Fibrancy should follow directly from equivalence extension property, without using `composition vs filling' but rather retract property for horns (see notes).
+% \item Once we have established fibrancy of $U_c$, then one can prove univalence by showing that 
+% $t \co \mathsf{Weq}(U_c) \to U_c$ is a trivial fibration. 
 \item Question: do we need to know that $\mathsf{Weq}(U_c)$ is a cofibrant object to get univalence? >> I'm relatively sure $\mathsf{Weq}(U_c)$ is not cofibrant. But all these property proved here will imediately pass to any cofibrant replacement. This is also why I'm working with  $\mathsf{Weq}(\U)$ instead: everything will be pulled back to the version for $\U_c$.
 \end{itemize}
 
-
-(WORK IN PROGRESS: it remains to prove that $\U$ is fibrant - And I'm using it to prove that $\mathsf{Weq}(U)$ is fibrant)
 
 \begin{definition}
 \leavevmode
@@ -795,9 +793,9 @@ by assumption $x^* v$ is a weak equivalence between fibrant objects hence it has
 
 \item The map $\mathsf{Weq}(\U) \rightarrow \U \times \U$ is a fibration.
 
-\item $\mathsf{Weq}(\U)$ is fibrant.
-
 \item The target projection $\mathsf{Weq}(\U) \rightarrow \U$ is a trivial fibration.
+
+\item $\U$ and $\mathsf{Weq}(\U)$ are fibrant.
 
 \end{enumerate}
 
@@ -834,9 +832,6 @@ But as the maps $E_i \rightarrow B$ are fibration with cofibrant domain, so prop
 
 
 
-
-\item In particular $\mathsf{Weq}(\U) \twoheadrightarrow \U \times \U \rightarrow 1$ is fibrant.
-
 \item Consider any cofibration $A\hookrightarrow B$ between cofibrant objects, and a lifting problem:
 
 \[\xymatrix{ A \ar[d] \ar[r] & \mathsf{Weq}(\U) \ar[d] \\
@@ -845,9 +840,63 @@ B \ar[r] \ar@{.>}[ur]^{\exists ?} & \U
 
 Then because of proposition \ref{prop:Weq_classify_Weq} this corresponds exactly to a diagram as in the equivalence extention properpty (see \ref{Prop:Homotopy_ext_prop}): the map $A \rightarrow  \mathsf{Weq}(\U)$ gives us $X_0$ and $X_1$ over $A$ and the weak equivalence between them, and the map $B \rightarrow \U$ gives us the object $Y_1$ over $B$. The commutation of the square shows that $X_1$ is the pullback of $Y_1$, and the completion of this diagram claimed by proposition \ref{Prop:Homotopy_ext_prop} is exactly what one needs to produce a diagonal filling.
 
+\item Given the first two part of the proposition, it is sufficient to show that $\U$ is fibrant.
+
+An interesting consequence of the fact that $\mathsf{Weq}(\U) \rightarrow \U \times \U$ is fibrant is that for any cofibrant object $X$, given two maps $f_1,f_2:X \rightrightarrows \U$ and a homotopy $h:\Delta[1] \times X \rightarrow \U$ from $f_1$ to $f_2$, them there is a weak equivalence in $\SSet_{/X}$ between the object classified by $f_1$ and $f_2$. Indeed, it is constructed as follows, one first take a lift:
+
+\[\xymatrix{ X \ar[r]^{i_1} \ar[d]^{\delta^0} & \mathsf{Weq}(\U) \ar@{->>}[d] \\
+\Delta[1] \times X \ar[r]^{(f_1,h)} \ar@{.>}[ur] & \U \times \U
+}\]
+
+Where $i_1$ denotes a map classyfing the identify of the object classified by $f_1$, and by $f_1$ in the first component of the bottom arrow we mean the composite $\Delta[1] \times X \rightarrow X \rightarrow \U$. Composing the dotted arrow with $\delta^1$ gives us a map $X \rightarrow  \mathsf{Weq}(\U)$ whose projection to $\U \times \U$ if $(f_1,f_2)$, i.e. it classifies a weak equivalence between the objects classified by $f_1$ and $f_2$. Note that one can do the exact same thing with $\delta^0$ and $\delta^1$ exchanged to get a weak equivalence in the other direction.
+
+
+We are now ready to prove that $\U$ is fibrant. Consider any map $\Lambda^k[n] \rightarrow \U $, it classifies a certain to a cofibrant object $V \twoheadrightarrow \Lambda^k[n]$.
+
+As mentioned in \ref{lemma:genTcof_strongHequiv}, all $\Lambda^k [n] \hookrightarrow \Delta[n]$ are strong $k$-oriented homotopy equivalence, i.e. this can be extended by the retract diagram (where the precise maps depends on if $k<n$ or $k>0$):
+
+\[\xymatrix{\Lambda^k[n] \ar[d] \ar[r] & \Delta[1] \times \Lambda^k[n] \cup \Delta[n] \ar[d] \ar[r] & \Lambda^k[n] \ar[d] \ar[r] & \U \\
+\Delta[n] \ar[r] & \Delta[1] \times \Delta[n] \ar[r] & \Delta[n] 
+}\]
+
+
+
+By the observation above, the map $\Delta[1] \times \Lambda^k[n] \cup \Delta[n] \rightarrow \U$ in the diagram gives a solid diagram as:
+
+\[ 
+\xymatrix{
+  V
+  \ar@{.>}[rr]
+  \ar[dr]^{\sim}
+  \ar@{->>}[dd]
+&&
+  W
+  \ar@{.>}[dr]^{\sim}
+  \ar@{.>>}[dd]|{\hole}
+&\\&
+  E
+  \ar[rr]
+  \ar@{->>}[dl]
+&&
+  F
+  \ar@{->>}[dl]
+\\
+  \Lambda^k[n]
+  \ar@{^{(}->}[rr]^i
+&&
+  \Delta[n]
+&
+}
+\] 
+
+
+So one can construct an object $W$ fibrant and cofibrant over $\Delta[n]$ whose pullback to $\lambda^k[n]$ is (isomorphic to) $V$. The map $\Delta[n] \rightarrow \U$ classying the object gives the lift we are looking for (more precisely, one can use $W$ to construct  a map $\Delta[n] \rightarrow \U$ which extend the one we started from and which classifies something isormophic to $W$).
+
+
 \end{enumerate}
 
 \end{proof}
+
 
 
 \newpage
@@ -866,4 +915,6 @@ Then because of proposition \ref{prop:Weq_classify_Weq} this corresponds exactly
 \bibliography{../Auxiliary/bibliography}
 
 \end{document}
+
+
 
