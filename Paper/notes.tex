@@ -215,6 +215,107 @@ As $X \twoheadrightarrow A$ is a fibration, the map $X \times_A X \twoheadrighta
 
 \newpage
 
+\section{On the cofibrant replacement functor}
+
+The goal of this section is to give a more explicit description of the cofibrant replacement functor on simplicial sets.
+
+
+\begin{definition}
+If $x \in X([n])$ is an $n$-cell in a simplicial set $X$, the degeneracy type of $x$ is the set of of faces map $\delta:[i] \rightarrow [n]$ such that $\delta^* x$ is a degenerate cell. 
+By a ``degeneracy type'', or ``degeneracy $n$-type'' we mean a subset of faces of $\Delta[n]$ that can appear as the degeneracy type of an $n$-cell of a simplicial sets.
+\end{definition}
+
+We will construct a ``simplicial set of degeneracy type $D$''. We start with a simplicial set $D_0$ whose $n$-cell are all the subset of the faces of $\Delta[n]$, i.e. subsets of the set of finite subset of $[n]$. If $f : [m] \rightarrow [n]$ and $P \in D_0([n])$ one defines $f^* P$ as the set of faces  $[i] \rightarrow [m]$ such that the composite $[i] \rightarrow [m] \overset{f}{\rightarrow} [n]$ is either in $P$ or non-injective.
+
+\begin{lemma}
+$D_0$ is a simplicial set, and for any simplicial set $X$, the map $X \rightarrow D_0$ sending each $n$ cell to its degeneracy type is a simplicial map preserving and detecting degeneracy.
+\end{lemma}
+
+\begin{proof}
+It is immediate to check that $D_0$ is a simplicial set. Let $x \in X([n])$ and $f:[m] \rightarrow [n]$, one need to check that the degeneracy type of $f^* x$ is indeed described from the degeneracy type of $x$ using the formula for the functoriality of $D_0$. But for face $[i] \rightarrow [m]$ the cell $i^* f^* x$ is degenerated as soon as $f \circ i$ is non injective, and if $f\circ i$ is injective, then it depends on whether $f \circ i$ is in the degeneracy type of $x$ or not.
+
+If $f:[n] \rightarrow [m]$ is non-injective then for any $s \in D_0([m])$ the identity map $[n] \rightarrow [n]$ is in $f^* s$. So a degenerate cell of $D_0$ always contains the maximal face. In particular the map $X \rightarrow D_0$ constructed above send non-degenerate cell of $X$ to non-degenerate cells of $D_0$.
+
+\end{proof}
+
+In particular, the lemma construct a map from $D_0$ to itself sending any cell to its degeneracy type. As this map detects degeneracy, it preserves the degeneracy type and hence it is an idempotent endomorphisms of $D_0$. One immediately obtains:
+
+\begin{lemma}
+$n$-cells of $D$ are in bijection with degeneracy $n$-type. Each simplicial set $X$ has a unique map preserving non-degeneracy to $D$, which is the map sending a cell to its degeneracy type.
+\end{lemma}
+
+
+
+
+We are mostly interested in degeneracy type of cofibrant simplicial set, those can easily be identified:
+
+\begin{lemma}
+A degeneracy $n$-type $s \subset Faces(\Delta[n])$ appears as the degeneracy type of a cell in a cofibrant simplicial set if and only if it is decidable (complemented) as a subset of the set of face. Decidable degeneracy type form a sub-simplicial set of $D$ which is cofibrant.
+\end{lemma}
+
+\begin{proof}
+If $x$ is an $n$-cell of cofibrant simplicial set $X$, then the degeneracy type of $x$ is decidable as for each face $\delta:[i] \rightarrow [n]$ it is decidable if $\delta^* x $ is degenerated or not.
+Conversely, if $X$ is any simplicial set and $x \in X$ is an $n$-cell whose degeneracy type is decidable, then the image of the map $\Delta[n] \overset{x}{\rightarrow} X$ is a cofibrant sub-simplicial set of $x$. Indeed it only contains cells of the form $f^*x$ for $f:[k] \rightarrow [n]$. For each such cell, either $f$ is injective in which can it is decidable whether $f^*x$ is degenerated or not by assumption, or $f$ is not injective in which case $f^*x$ is always degenerated. And the degeneracy type of $x$ is the same whether one see as a cell of $X$ or as a cell of this cofibrant subobject.
+One immediately see that the subset of $D_0$ of decidable subset is stable under the functoriality of $D_0$ hence form decidable degeneracy types form a simplicial subobject of $D$. This sub-simplicial set has decidable equality and decidable degeneracies.
+\end{proof}
+
+\begin{lemma}
+
+Given a map $\partial \Delta[n] \rightarrow D$ there is a unique way to extend it into map $\Delta[n] \rightarrow D$ such that the non-degenerate $n$-cell of $\Delta[n]$ is send to a non-degenerate cell.
+\end{lemma}
+
+\begin{proof}
+If such an extension exists the $n$-cell $x$ corresponding to $\Delta[n] \rightarrow D$ has to be as follows: $x$ does not contains the face $[n] \rightarrow [n]$, and for all other face $\delta:[i] \rightarrow [n]$ it is in $x$ is and only the composite $[i] \rightarrow \partial \Delta[n] \rightarrow D$ is a degenerate cell. So the uniqueness is clear. We only need to show that this set is indeed a degeneracy type. But if one form $D \coprod_{\partial \Delta[n]} \Delta[n]$ then the new added $n$-cell has exactly this degeneracy type so this conclude the proof.
+\end{proof}
+
+Let $X_c \overset{\sim}{\twoheadrightarrow} X $ be the cofibrant replacement of a simplicial set $X$ constructed using R.Garner version of the small object argument from \cite{garner:small-object-argument}.
+
+\begin{proposition}
+The map from $X_c \rightarrow D \times X$ sending an $n$-cell to its degeneracy type $s \in D$ and its image is $X$ induce a bijection between $X_c([n])$ and the set of pairs of a decidable degeneracy type $s$ and a cell of $x$ of degeneracy type larger than $s$.
+\end{proposition}
+
+\begin{proof}
+
+Due to the ``stratified'' nature of the simplicial generating cofibration, $X_c$ can be written as the colimit of a sequence:
+
+
+ \[ X^{(0)}_c \hookrightarrow X^{(1)}_c \hookrightarrow \dots \hookrightarrow X^{(n)}_c \hookrightarrow \dots \]
+
+where $X^{(0)}_c$ is just the set of $0$-cell of $X$ and $X^{(n)}_c$ can be constructed from $X^{(n-1)}$ by taking a multiple pushout $\Delta[n] \coprod_{\partial \Delta[n]} X^{(n-1)}_c$ for each square of the form:
+
+\[ \xymatrix{\partial \Delta[n]  \ar[r] \ar@{^{(}->}[d] & X^{(n-1)}_c \ar[d] \\ \Delta[n]  \ar[r] & X} \]
+
+Indeed, the pushout of $\partial \Delta[n] \hookrightarrow \Delta[n]$ does not change the $k$-skeleton of $X$ for $k <n$ and the set of maps $\partial \Delta[k] \rightarrow X$ only depends on the $k$-skeleton of $X$, so one can always do all the necessary pushout by $\partial \Delta[k] \hookrightarrow \Delta[k]$ by for $k<n$ before those by $\partial \Delta[n] \hookrightarrow \Delta[n]$.
+
+
+We will prove by induction on $n$ that $X^{(n)}_c$ identifies with $n$-skeleton of the simplicial set mentioned in the proposition, i.e. the sub-simplicial set $Y^n$ of $D \times X$ of pairs $(s,x)$ such $s$ is decidable,  the degeneracy type of $x$ is at least $s$ and $(s,x)$ is of dimension at most $n$, or a degeneracy of a cell of dimension at most $n$.
+
+Note that as the degeneracy type of $x$ is larger than $s$, $s$ is the degeneracy type of the pair $(s,x)$, so the condition on $(s,x)$ being a degeneracy is equivalent to the same condition on $s$.
+
+In the case $n=0$, there is only one degeneracy type in dimension $0$, so both $X^{(0)}_c$ and $Y^0$ are the simplicial set of cells of $X$ that are degeneracy of $0$-cells.
+
+Assuming $Y^{n-1}$ and $X^{(n-1)}_c$ are isomorphic as claimed. One only need to check that the new non-degenerate $n$-cell that appears in $Y^{n}$ and $X^{(n)}_c$ are in bijection compatible to their boundary and their image in $X$.
+In $X^{(n)}_s$ there is exactly one such cell for each square as above. In $Y^{n}$, any non-degenerate $n$-cells does produce such a square, and conversely given a square:
+
+\[ \xymatrix{\partial \Delta[n]  \ar[r] \ar@{^{(}->}[d] & Y^{n-1} \ar[d] \\ \Delta[n]  \ar[r] & X} \]
+
+Then the lemma above give a unique map to extend $\partial \Delta[n] \rightarrow D$ to a non-degenerate $n$-cell of $D$, and the image of $\Delta[n]$ in $X$ automatically have a larger degeneracy type that this extension so this gives a non-degenerate cell of $Y^{n}$ generating this square. This is unique way to get such a cell to be non-degenerate as a cell in $Y^n$ is non-degenerate if and only if its image in $D$ is non-degenerate.
+
+\end{proof}
+
+
+This proposition has some interesting corollaries:
+
+\begin{itemize}
+
+\item $1_c$ is exactly the sub-simplicial set of $D$ of decidable degeneracy type.
+
+\item Even if $X$ is a large simplicial set, its cofibrant replacement $X_c \rightarrow X$ has fiber controlled in size: indeed the fiber over an $n$-cell $x \in X$ is the set of decidable degeneracy $n$-type smaller than the degeneracy type of $x$. In particular it is a subset of the finite set of decidable degeneracy $n$-type. Not that in order to conclude in general that the fiber are small on need some sort of propositional resizing axiom saying that a subclass of a finite set is a small set.
+
+\end{itemize}
+
+\newpage
+
 \section{Dependent products}
 
 The first aim of this section is to show that for every fibration $p \co B \to A$~with $A$ cofibrant, the pushforward functor $\Pi_p \co \catE_{/B} \to \calE_{/A}$ 
