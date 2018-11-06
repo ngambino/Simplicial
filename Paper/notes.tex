@@ -37,6 +37,22 @@ defined by $\kcyl \defeq \horninc{1}{k}$.
 \end{itemize}
 
 
+\begin{definition} \hfill 
+\label{thm:small}
+\begin{enumerate}[(i)]
+\item We say that a simplicial set $X$ is \emph{small}  if $X_n$ is a small set for every $[n] \in \Delta$. 
+\item We say that a map $p \co Y \to X$ of simplicial sets is \emph{small} if for every $x \co \Delta[n] 
+\to X$ the simplicial set~$Y_x$ fitting in the pullback square
+\[
+\xymatrix{
+Y_x \ar[r] \ar[d] \drpullback & Y \ar[d]^{p} \\
+\Delta[n] \ar[r]_-{x} & X }
+\]
+is small.
+\end{enumerate}
+\end{definition} 
+
+
 \section{Two weak factorisation systems} 
 
 The aim of this section is to construct two weak factorisation systems on $\SSet$. These are the counterparts in our setting of the classical weak factorisation systems of cofibrations and trivial fibrations and of trivial cofibrations and fibrations, respectively. 
@@ -90,7 +106,7 @@ objects. This holds since all the domains of maps in $\mathcal{I}$ are cofibrant
 
 For the second weak factorisation system, we consider 
 \[
-\cal{J} \defeq \{ \horninc{k}{n}  \co \Horn{k}{n} \to \Delt{n} \ | \ 0 \leq k \leq n \} \, .
+\cal{J} \defeq \{ h^k_n  \co \Lambda^n_k \to \Delt{n} \ | \ 0 \leq k \leq n \} \, .
 \]
 We refer to maps in $\mathcal{J}$ as horn inclusions.
 
@@ -189,7 +205,7 @@ We now turn our attention to fibrations. The next proposition will be essential 
 \begin{proposition} A map is a Kan fibration if and only if it has the right lifting property with respect to the pushout products $i \hattimes \kcyl$.
 \end{proposition} 
 
-\begin{proof}The proof of \cite[Theorem~3.2.3]{joyal-tierney:simplicial-homotopy-theory} is completely constructive and sufficient to imply this results.
+\begin{proof}The proof of \cite[Theorem~3.2.3]{joyal-tierney:simplicial-homotopy-theory} is completely constructive and sufficient to imply this result.
 For more details see also the last claim of \cite[Corollary~5.3.2]{henry2018wms}, which follows from Proposition~5.2.6 therein. 
 \end{proof}
 
@@ -200,7 +216,8 @@ WE NEED TO CLARIFY THE DISTINCTION BETWEEN SATTLER WEAK EQUIVALENCES AND HENRY W
 
 \bigskip
 
-In a general weak model category, one can only show the equivalence between trivial fibration and fibration which is a weak equivalence for fibration between fibrant objects. But in simplicial sets one can prove if also for map between cofibrant objects. This is because every cofibrant object has a strong cylinder given by $X \coprod X \hookrightarrow \Delta[1] \times X \rightarrow X$ :
+In a general weak model category, one can only show that a map $p \co Y \to X$ is a trivial fibration
+if and only if $p$ is a fibration and a weak equivalence when $X$ is fibrant. But in the special case of simplicial sets one can prove that this holds also when $X$ and $Y$ are cofibrant. This is because every cofibrant object has a strong cylinder given by $X + X \rightarrowtail \Delta[1] \times X \rightarrow X$.
 
 \begin{lemma}\label{lemma:triv_fib_are_we}
 A fibration between cofibrant simplicial sets is a weak equivalence if and only if it is a trivial fibration.
@@ -208,38 +225,37 @@ In particular, any weak equivalence between cofibrant simplicial set can be fact
 \end{lemma}
 
 \begin{proof}
-One first prove that any trivial fibration  $p:X \overset{\sim}{\twoheadrightarrow} Y$ between cofibrant object is a weak equivalence. More precisely, one shows that $p$ is invertible in the homotopy category by constructing first a section $i:Y \rightarrow X$ of $p$ and then a homotopy between $i \circ p$ and the identity of $X$. They are obtained as diagonal filling in the following two squares:
-
+One first prove that any trivial fibration  $p \co Y \overset{\sim}{\twoheadrightarrow} X$ between cofibrant object is a weak equivalence. More precisely, one shows that $p$ is invertible in the homotopy category by constructing first a section $i \co X \rightarrow Y$ of $p$ and then a homotopy between $i  p$ and the identity 
+of~$Y$. They are obtained as diagonal filling in the following two squares:
 \[
-\xymatrix{\emptyset \ar[r] \ar@{>->}[d] & X \ar@{->>}[d]^{\sim} \\ Y \ar@{.>}[ur]^{i} \ar[r] & Y}
+\xymatrix{0 \ar[r] \ar@{>->}[d] & Y \ar@{->>}[d]^{\sim} \\ X \ar@{.>}[ur]^{i} \ar[r] & X}
 \qquad
-\xymatrix{X + X \ar[rr]^{(1_X \, , i  p)} \ar@{>->}[d] & &  X \ar@{->>}[d]^{\sim} \\ \Delta[1] \times X \ar@{.>}[rru] \ar[r]& X \ar[r]^{p} & Y  }
+\xymatrix{Y + Y \ar[rr]^{(1_Y , i  p)} \ar@{>->}[d] & &  Y \ar@{->>}[d]^{\sim} \\ \Delta[1] \times Y \ar@{.>}[rru] \ar[r]& Y \ar[r]^{p} & X  }
 \]
+It follows that if $p \co Y \rightarrow X$ is a weak equivalences between two cofibrant objects then if one factor it as a cofibration followed by a trivial fibration, then the cofibration part is a trivial cofibration. 
 
-It follows that if $X \rightarrow Y$ is a weak equivalences between two cofibrant objects then if one factor it as a cofibration followed by a trivial fibration, then the cofibration part is a trivial cofibration. 
-
-Finally, if $p : X \twoheadrightarrow Y$ is a fibration between cofibrant objects which is also a weak equivalence then one can factor it as a trivial cofibration $j$ followed by a trivial fibration $p'$, and using the lifting property of $j$ against $p$ one obtained that $p$ is a retract of $p'$, hence a trivial fibration as well.
+Finally, if $p \co Y \twoheadrightarrow X$ is a fibration between cofibrant objects which is also a weak equivalence then one can factor it as a trivial cofibration $j$ followed by a trivial fibration $p'$, and using the lifting property of $j$ against $p$ one obtained that $p$ is a retract of $p'$, hence a trivial fibration as well.
 \end{proof}
 
 
 %The following is technically speaking not really needed, but it is a nice fact and it makes lots of formulation later nicer.
 
 \begin{corollary}
-For any cofibrant simplicial set $A$, the category $\SSet_{/A}$ admitst a weak model structure with cofibrations and fibrations  being those of $\SSet$.
+For any cofibrant simplicial set $A$, the category $\SSet_{/A}$ admits a weak model structure with cofibrations and fibrations  being those of $\SSet$.
 \end{corollary}
 
 \begin{proof}
 
-It is clear that one has two weak factorization system on $\SSet_{/A}$ for all object $A$. So acording to  in \cite[Definition~2.1.11]{henry2018wms} we only have to show that bifibrant objects admits cylinder objects and path objects.
+It is clear that one has two weak factorization systems on $\SSet_{/A}$ for all object $A$. So according to  in \cite[Definition~2.1.11]{henry2018wms} we only have to show that bifibrant objects admits cylinder objects and path objects.
 
 Let $X$ be a cofibrant object of $\SSet_{/A}$. One forms a cofibration,trivial fibration factorization:
-
-\[ X +_A X \hookrightarrow I_A X \overset{\sim}{\twoheadrightarrow} X \]
-
-Since, by  \cref{lemma:triv_fib_are_we}, the trivial fibration above is a weak equivalence in $\SSet$, both legs $X \hookrightarrow I_A X$ are weak equivalences in $\SSet$ as well, hence they are trivial cofibrations. This shows that every cofibrant object admit a strong cylinder object. Similarly, let $X$ be a bifibrant object of $\SSet_{/A}$, i.e. $X$ is cofibrant and $X \twoheadrightarrow A$ is a fibration, then one can form a trivial cofibration, fibration factorization:
-
-\[ X \overset{\sim}{\hookrightarrow} P_A X {\twoheadrightarrow} X \times_{A} X \]
-
+\[ 
+X +_A X \hookrightarrow I_A X \overset{\sim}{\twoheadrightarrow} X 
+\]
+Since, by  \cref{lemma:triv_fib_are_we}, the trivial fibration above is a weak equivalence in $\SSet$, both legs $X \hookrightarrow I_A X$ are weak equivalences in $\SSet$ as well and hence they are trivial cofibrations. This shows that every cofibrant object admit a strong cylinder object. Similarly, let $X$ be a bifibrant object of $\SSet_{/A}$, i.e. $X$ is cofibrant and $X \twoheadrightarrow A$ is a fibration, then one can form a factorisation as a trivial cofibration followed by a fibration:
+\[ 
+X \overset{\sim}{\hookrightarrow} P_A X {\twoheadrightarrow} X \times_{A} X 
+\]
 As $X \twoheadrightarrow A$ is a fibration, the map $X \times_A X \twoheadrightarrow X$ is also a fibration, hence the map $P_A X \twoheadrightarrow X$ is a fibration, and as it is a retraction of the trivial cofibration $X \hookrightarrow P_A X$ it is also a weak equivalence (note that the objec $X \times_A X$ if cofibrant because of lemma \ref{lem:cofibrant_fiber_product}), hence it is a trivial fibration again by \cref{lemma:triv_fib_are_we}. This proves that every bifibrant object of $\SSet_{/A}$ also has a strong path object.
 \end{proof}
 
@@ -346,9 +362,22 @@ This proposition has some interesting corollaries:
 
 \newpage
 
-\section{Dependent products of fibrations}
+\section{Pushforward of fibrations}
 
- Let $p \co Y \twoheadrightarrow X$ be a map in $\SSet$. Observe that $p_* \co \SSet_{/Y} \to \SSet_{/X}$  preserves fibrations if and only if its left adjoint 
+This section is devoted to proving a counterpart of the classical result that, for a Kan fibration $p \co Y \twoheadrightarrow X$, the pushforward functor $p_* \co \SSet_{/Y} \to \SSet_{/X}$ preserves Kan
+fibrations. 
+
+\medskip
+
+We shall concentrate on the classes of fibrations $\Fib$ and of trivial cofibrations $\mathsf{TrivCof}$. 
+Recall that the latter is defined to be the class of maps with the left lifting property
+with respect to fibrations with fibrant codomain. Furthermore, by the general theory of weak model
+structures, we know that a map with cofibrant domain is a trivial cofibration if and only if it is a cofibration
+and weak equivalence~\cite[Proposition~2.2.9]{henry2018wms}.  
+
+\medskip
+
+Let $p \co Y \twoheadrightarrow X$ be a map in $\SSet$. Observe that $p_* \co \SSet_{/Y} \to \SSet_{/X}$  preserves fibrations if and only if its left adjoint 
 \[
 p^* \co \SSet_{/X} \to \SSet_{/Y}
 \]
@@ -366,9 +395,8 @@ the assumption that every object is cofibrant does not hold in our setting. Howe
 % \end{lemma} 
 
 
-\begin{definition} \label{def:strhtpyequiv}
-A map $f \co X' \rightarrow X$ in $\SSet$ is a \myemph{strong $k$-oriented homotopy equivalence}, where
-$k \in \braces{0 \, , 1 }$, if there are maps $H$ and $H_X$ which exhibit $f$ as a retract of $\delta^k \times ' f$ as follows:
+\begin{definition} \label{def:strhtpyequiv} Let $k \in \braces{0 \, , 1 }$.
+A map $f \co X' \rightarrow X$ in $\SSet$ is a \myemph{strong $k$-oriented homotopy equivalence} if there are maps $H$ and $H_X$ which exhibit $f$ as a retract of $\delta^k \times ' f$ as follows:
 
 \[
 \xymatrix@C=2cm{
@@ -381,7 +409,10 @@ X  }
 \]
 \end{definition}
 
-Note that the definition given in \cite{gambino2017frobenius} is different, but the equivalence with this notion is proved there as Lemma~3.3. It is immediate with this definition that a cofibration which is a strong $k$-oriented homotopy equivalence is a trivial cofibration.
+This definition is equivalent to the one given in \cite{gambino2017frobenius} by Lemma~3.3 therein.
+With this definition, it is immediate to observe that a cofibration which is a strong $k$-oriented homotopy equivalence is a trivial cofibration. Indeed, if $f$ is a cofibration then $\delta^k \times ' f$ is a trivial
+cofibration and so $f$ is, since it is a retract of $\delta^k \times ' f$ and hence inherits from it the
+required left lifting property.
 
 \begin{lemma}\label{lemma:genTcof_strongHequiv} \hfill 
 \begin{enumerate}[$(i)$]
@@ -391,7 +422,7 @@ Note that the definition given in \cite{gambino2017frobenius} is different, but 
 \end{lemma}
 
 \begin{proof}
-This is shown as part of~\cite[Theorem 3.2.3]{joyal-tierney:simplicial-homotopy-theory}. The proof given there can be easily checked to be constructive. This argument as also been reproduced (in the context of complicial sets) in the first part of the proof of proposition $5.2.6$ \cite{henry2018wms} which is developed in constructive settings.
+This is shown as part of~\cite[Theorem 3.2.3]{joyal-tierney:simplicial-homotopy-theory}. The proof given there can be easily checked to be constructive. This argument as also been reproduced (in the context of complicial sets) in the first part of the proof of \cite[Proposition~5.2.6]{henry2018wms} which is developed in constructive settings.
 \end{proof}
 
 %I've only added the reference to my paper to avoid having Joyal and Tierney's notes as unique reference for this. But If you think it is fine, you can remove it.
@@ -436,15 +467,15 @@ We define it using the universal property of $Y'$ as the unique map to $Y'$ such
 
 
 \begin{proposition}\label{prop:Frobenius}
-Let $f \co Y \twoheadrightarrow X$ is a fibration with cofibrant domain. Then the pullback functor 
+Let $p \co Y \twoheadrightarrow X$ is a fibration with cofibrant domain. Then the pullback functor 
 \[
-f^* : \SSet_{/X} \rightarrow \SSet_{/Y}
+p^* : \SSet_{/X} \rightarrow \SSet_{/Y}
 \] 
 preserves cofibrations and trivial cofibrations.
 \end{proposition}
 
 
-\begin{proof} Since the pullback functor $f^*$ has a right adjoint,  it is enough to check that pullbacks of generating trivial cofibrations and generating cofibrations are trivial cofibrations and cofibrations, respectively. For cofibrations, this is \cref{thm:cof-pbk}. For trivial cofibrations, the generating trivial cofibrations of $\SSet_{/Y}$ are the horn inclusions $\Lambda^{k}[n] \hookrightarrow \Delta[n]$ for all possible choices of $\Delta[n] \rightarrow Y$. By \cref{lemma:genTcof_strongHequiv} they are all strong $k$-oriented homotopy equivalences. Moreover, their pullback to $X$ is also their pullback along the map $X \times_Y \Delta[n] \rightarrow \Delta[n]$ which is again a fibration with cofibrant domain by \cref{lem:cofibrant_fiber_product}. Hence  \cref{lemma:pb_of_StrongHomotopyEq} implies that the pullback to $X$ are also strong $k$-oriented homotopy equivalences. Since they are cofibrations, they are trivial cofibrations.
+\begin{proof} Since the pullback functor $p^*$ has a right adjoint,  it is enough to check that pullbacks of generating trivial cofibrations and generating cofibrations are trivial cofibrations and cofibrations, respectively. For cofibrations, this is \cref{thm:cof-pbk}. For trivial cofibrations, the generating trivial cofibrations of $\SSet_{/Y}$ are the horn inclusions $\Lambda^{k}[n] \hookrightarrow \Delta[n]$ for all possible choices of $\Delta[n] \rightarrow Y$. By \cref{lemma:genTcof_strongHequiv} they are all strong $k$-oriented homotopy equivalences. Moreover, their pullback to $X$ is also their pullback along the map $X \times_Y \Delta[n] \rightarrow \Delta[n]$ which is again a fibration with cofibrant domain by \cref{lem:cofibrant_fiber_product}. Hence  \cref{lemma:pb_of_StrongHomotopyEq} implies that the pullback to $X$ are also strong $k$-oriented homotopy equivalences. Since they are cofibrations, they are trivial cofibrations.
 \end{proof}
 
 \begin{corollary}\label{cor:Pi_types_are_fibrant}
@@ -452,7 +483,7 @@ Let $p \co Y \twoheadrightarrow X$ be a fibration with cofibrant domain and $q \
 \end{corollary}
 
 \begin{proof}
-Under the assumptions, $p^*$ is a left Quillen functor. Therefore $p_* \co \SSet_{/Y} \rightarrow \SSet_{/X}$ is a right Quillen functor and so it preserve fibrant objects.
+Since $p^*$ preserves cofibrations and trivial cofibrations. its right adjoint $p_*$ preserves fibrations and trivial fibrations. In particular, it preserves fibrant objects.
 \end{proof}
 
 
@@ -491,74 +522,63 @@ theory, which we discuss in~\cref{sec:conout}.
 
 \newpage
 
-\section{The universe}
+\section{A weakly universal fibration}
 
-Recall that we work in a constructive set theory with two universes $\mathsf{u}_1$ and $\mathsf{u}_2$
-and that we refer to elements of $\mathsf{u}_1$ as small sets. 
-
-
-\begin{definition} \hfill 
-\label{thm:small}
-\begin{enumerate}[(i)]
-\item We say that a simplicial set $X$ is \emph{small}  if $X_n$ is a small set for every $[n] \in \Delta$. 
-\item We say that a map $f \co Y \to X$ in $\SSet$ is \emph{small} if for every $x \co \Delta[n] 
-\to X$ the simplicial set~$Y_x$ fitting in the pullback square
+Our next goal is to define a bifibrant simplicial set $\U_c$ and a small fibration $\pi_c \co \UU_c \to \U_c$ that weakly classifies small fibrations between cofibrant objects, in the sense that for every such fibration $p \co Y \to X$ there exists a pullback diagram of the form
 \[
 \xymatrix{
-Y_x \ar[r] \ar[d] \drpullback & Y \ar[d]^{f} \\
-\Delta[n] \ar[r]_x & X }
+Y \ar[r] \ar[d]_p \drpullback  & \UU_c \ar[d] \\
+X \ar[r] &  \U_c }
 \]
-is small.
-\end{enumerate}
-\end{definition} 
-
-By the results in~\cite{hofmann-streicher-universes} for arbitrary presheaf categories, small maps in
- $\SSet$ admit a weak classifier, \ie a small map $\rho \co \VV \to \V$ such 
-that for every small map $f \co Y \to X$ there exists  a pullback diagram of the form
-\[
-\xymatrix{
-Y \ar[r] \ar[d]_f \drpullback  & \VV \ar[d]^\rho \\
-X \ar[r] & \V }
-\]
-Letting $X = \Delta[n]$ in this diagram suggests to define $\V_n$ as the set of all small maps with codomain~$\Delta[n]$. In this way, however, one does not obtain a presheaf since the transition functions
-will satisfy the functorial laws only up to isomorphism rather than equality. To remedy this, the $n$-simplices of $\V$ are defined instead to be the functors $F \co (\Delta/[n])^{\op} \to \Set$ such that 
-the corresponding map of simplicial sets $ \mathsf{El}(F) \to \Delta[n]$ is small. MORE TO BE ADDED.
+In order to do this, we shall modify  the construction of the weak classifier for small Kan fibrations 
+in~\cite{voevodsky-simplicial-model} and then consider a suitable cofibrant replacement. 
 
 \medskip
 
-Following~\cite{cisinski-univalence,voevodsky-simplicial-model}, we consider the pullback 
+We begin by reviewing the definition of the weak classifier of arbitrary small maps of simplicial sets, which
+can be obtained as a special case of the results in~\cite{hofmann-streicher-universes} for arbitrary presheaf
+categories. For this, it is convenient to recall that, again as a special case of a general result for presheaf categories, for every $[n] \in \Delta$, the slice category $\SSet_{/\Delta[n]}$ is equivalent to the category of presheaves over the slice category~$\Delta_{/[n]}$. For a presheaf $F$ over $\Delta_{/[n]}$, we shall write $\pi_1 \co \mathrm{el}(F) \to \Delta[n]$
+for the corresponding object of~$\SSet_{/\Delta[n]}$. The simplicial set $\V$ is then defined by letting
+\[
+\mathsf{V}_n \defeq \{ F \in \Psh(\Delta_{/[n]}) \ | \ \pi_1 \co \mathsf{el}(F) \to \Delta[n] \text{ is a small
+map} \}
+\]
+for $[n] \in \Delta$. The weak classifier $\rho \co \VV \to \V$ is then defined in an evident way. 
+
+\medskip
+
+We define a subobject $\U \rightarrowtail \V$ by letting, for $[n] \in \Delta$, 
+\[
+\U_n = \{ F \in \V_n \ | \ \pi_1 \co \mathsf{el}(F) \to \Delta[n] \text{ is a small Kan fibration and $\mathsf{el}(F)$ is cofibrant} \} \, .
+\]
+We then define the map $\pi \co \UU \to \U$ via the pullback 
 \[
 \xymatrix{
 \UU \ar[r] \ar[d]_\pi \drpullback  & \VV \ar[d]^\rho \\
-\U \ar[r] & \V }
+\U \ar@{>->}[r] & \V }
 \]
-where $\U \subseteq \V$ is defined by letting 
-\[
-\U_n = \{ F \in \V_n \ | \ \mathsf{El}(F) \to \Delta[n] \text{ is a small Kan fibration and $\mathsf{El}(F)$ is cofibrant} \}
-\]
+
+
 
 
 \begin{proposition} \label{thm:universe-u}  \hfill 
 \begin{enumerate}[(i)] 
-\item $\pi \co \UU \to \U$ is a small Kan fibration.
-\item For any map $X \rightarrow U$ with $X$ cofibrant, the object $Y$ in the pullback:
-
+\item The map $\pi \co \UU \to \U$ is a small Kan fibration.
+\item For any map $f \co X \rightarrow \U$ with $X$ cofibrant, the object $Y$ in the pullback
 \[
 \xymatrix{
-Y \ar[r] \ar[d] \drpullback & \UU \ar[d]^\pi \\
-X \ar[r] & \U }
+Y \ar[r] \ar[d]_p \drpullback & \UU \ar[d]^\pi \\
+X \ar[r]_f & \U }
 \]
-
 is cofibrant.
-
-\item $\pi \co \UU \to \U$ classifies small Kan fibrations between cofibrant object, \ie 
-for every small Kan fibration $f \co Y \to X$ between cofibrant object there exists a pullback diagram of the form
+\item The map $\pi \co \UU \to \U$ weakly classifies small fibrations between cofibrant object, \ie 
+for every small fibration $p \co Y \to X$ between cofibrant object there exists a map $f \co X \to \U$
+and a pullback  of the form
 \[
 \xymatrix{
-Y \ar[r] \ar[d]_f \drpullback & \UU \ar[d]^\pi \\
-X \ar[r] & \U }
+Y \ar[r] \ar[d]_p \drpullback & \UU \ar[d]^\pi \\
+X \ar[r]_f & \U }
 \]
-
 \end{enumerate}
 \end{proposition}
 
@@ -612,14 +632,14 @@ Indeed as $y$ is the image of $e$ then if $e$ is degenerate then $y$ is. Convers
 
 
 
-The simplicial set $\U$ and $\UU$ does not appear to be cofibrant themselve. So we need to take a cofibrant replacement $p:\U_c \overset{\sim}{\twoheadrightarrow} \U$ of $\U$ (with $p$ a trivial fibration). One define $\UU_c$ as the pullback: 
+The simplicial set $\U$ and $\UU$ does not appear to be cofibrant. So we need to take a cofibrant replacement $p \co \U_c \overset{\sim}{\twoheadrightarrow} \U$ of $\U$ (with $p$ a trivial fibration). 
+We then define $\UU_c$ via the pullback
 \[
 \xymatrix{
 \UU_c \ar[d]_{\pi_c} \ar[r] \drpullback & \UU \ar[d]^{\pi}  \\
 \U_c \ar[r]_p & \U}
 \]
-
-$\UU_c$ is cofibrant because of point $(ii)$ of \ref{thm:universe-u}, and  we can now prove that $\pi_c \co \UU_c \to \U_c$ has the desired properties.
+The simplicial set $\UU_c$ is cofibrant by part~(ii) of \cref{thm:universe-u}.  We now prove that $\pi_c \co \UU_c \to \U_c$ has the desired properties.
 
 
 \begin{proposition} \label{thm:universe-uc} 
@@ -679,32 +699,22 @@ Note that we have not shown yet that $\U_c$ fibrant. This will be done in~\cref{
 Here we follow closely the approach of \cite{voevodsky-simplicial-model}.
 
 
-\begin{lemma}\label{Lemma:ForTheExtProperty}
-
-\begin{enumerate}
-
-\item For any map $i:A \rightarrow B$ with $A$ cofibrant, the functor
-
- \[ \Pi_i : \SSet /A \rightarrow \SSet/B  \]
-
-send trivial fibrations to trivial fibrations.
-
+\begin{lemma}\label{Lemma:ForTheExtProperty} \hfill 
+\begin{enumerate}[$(i)$]
+\item For any map $i \co A \rightarrow B$ with $A$ cofibrant, the functor
+\[ 
+ i_* \co \SSet_{/A} \rightarrow \SSet_{/B}  
+ \]
+preserves trivial fibrations.
 \item If $i$ is a monomorphism then the co-unit of adjunction $i^* \Pi_i \rightarrow Id_{\SSet/A}$ is an isomorphism.
-
-\item If $i:A \hookrightarrow B$ is a cofibration, and $X \in \SSet_{/A}$ is cofibrant. Then $\Pi_i X$ is also cofibrant.
-
+\item If $i \co A \hookrightarrow B$ is a cofibration, and $X \in \SSet_{/A}$ is cofibrant. Then $i_*(X)$ is also cofibrant.
 \item Trivial fibrations extend along monomorphism with cofibrant domain, i.e. given a trivial fibration $p$ and a monomorphism $i$ as in the solid diagram:
-
 \[
 \xymatrix{
 Y \ar@{.>}[r] \ar@{->>}[d]^{\sim}_{p} \drpullback  & Y' \ar@{.>>}[d]^{\sim}_{p'} \\
 X \ar@{^{(}->}[r]^i &  X' }
 \]
-
 with $X$ cofibrant, then there exists a trivial fibration $Y' \rightarrow X'$ which fits in the dotted pullback square above. Moreover if $Y$ is cofibrant and $i$ is a cofibration, then $Y'$ can be taken cofibrant as well.
-
-
-
 \end{enumerate}
 
 \end{lemma}
@@ -713,10 +723,8 @@ with $X$ cofibrant, then there exists a trivial fibration $Y' \rightarrow X'$ wh
 NOTE: I remember we proved $(3)$ explicitely as this was something I was worried about. but the following proof is a lot harder than in my memories. Do you have any notes about this claims ? If not just erase this note.
 
 
-\begin{proof}
-
-\begin{enumerate}
-
+\begin{proof} We prove the different parts separately. 
+\begin{enumerate}[$(i)$] 
 \item $\Pi_i$ is the right adjoint to the pullback functor: $i^*:\SSet/B \rightarrow \SSet/A$, and by lemma \ref{thm:cof-pbk}, $i^*$ preserve cofibration between cofibrant objects. As in simplicial sets trivial fibrations are characterized by the right lifting property along cofibrations between cofibration objects (the generating cofibrations are between cofibrant objects), this shows that $\Pi_i$ preserve trivial fibrations.
 
 \item As $i$ is a monomorphism, the forgetful functor: $\Sigma_i : \SSet/A \rightarrow \SSet/B$ is fully faithful, hence the unit $Id_{\SSet_{/A}} \rightarrow i^* \Sigma_i$ is an isomorphism, and hence by adjunction the counit $Id_{\SSet_{/A}} \rightarrow i^* \Pi_i$ is also an isomorphism.
@@ -747,9 +755,9 @@ Given its image in $B$, the cell $v: \Delta[n] \rightarrow \Pi_i X$ is uniquely 
 
 
 
-\begin{proposition}[Homotopy extention property]
+\begin{proposition}[Homotopy extension property]
 \label{Prop:Homotopy_ext_prop}
-Given the Solid part of the diagram:
+Given the solid part of the diagram:
 
 \[ 
 \xymatrix{
@@ -776,8 +784,7 @@ Given the Solid part of the diagram:
 &
 }
 \]
-
-where all the objects are cofibrant, $X_1$ is the pullback $i^* Y_1$, and all the maps drawn as cofibration, fibration and weak equivalences are. Then there is a cofibrant object $Y_0$ which fit into the dotted diagram and such that $X_0$ is the pullback $i^* Y_0$.
+where all the objects are cofibrant, $X_1$ is the pullback $i^* Y_1$, and all the maps drawn as cofibration, fibration and weak equivalences are. Then there is a cofibrant object $Y_0$ which fits into the dotted diagram and such that $X_0$ is the pullback $i^* Y_0$.
 
 
 
