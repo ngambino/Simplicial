@@ -31,9 +31,9 @@ Some notes on simplicial homotopy theory
 
 \begin{itemize}
 \item Basics on $\SSet$ and notation. 
-\item We use $\Delt{n}$, $\partial \Delt{n}$ and $\Horn{k}{n}$.
-\item Interval object is $\Delt{1}$. Endpoint inclusions $\kcyl \co \braces{ k} \to \Delt{1}$ are
-defined by $\kcyl \defeq \horninc{1}{k}$.
+\item We use $\Delta[n]$, $\partial \Delta[n]$ and $h^n_k$.
+\item Interval object is $\Delta[1]$. Endpoint inclusions $\kcyl \co \braces{ k} \to \Delta[1]$ are
+defined by $\kcyl \defeq h^1_k$.
 \end{itemize}
 
 
@@ -128,7 +128,8 @@ We provide some additional information on the classes of cofibrations and fibrat
 We begin with cofibrations and recall from \cite[\S5.1.5]{henry2018wms} that the Eilenberg-Zilber lemma holds for cofibrant simplicial sets.
 
 \begin{lemma}
-\label{lem:EZ_cof}In a cofibrant simplicial set $X$, any cell $x \in X$ can be written uniquely as $p^* y$ where $y$ is a non-degenerate cell of $X$ and $p$ is a degeneracy.
+\label{lem:EZ_cof}
+In a cofibrant simplicial set $X$, any cell $x \in X$ can be written uniquely as $p^* y$ where $y$ is a non-degenerate cell of $X$ and $p$ is a degeneracy.
 \end{lemma}
 
 
@@ -535,15 +536,20 @@ in~\cite{voevodsky-simplicial-model} and then consider a suitable cofibrant repl
 
 \medskip
 
-We begin by reviewing the definition of the weak classifier of arbitrary small maps of simplicial sets, which
+We begin by reviewing the definition of the weakly universal small map of simplicial sets, which
 can be obtained as a special case of the results in~\cite{hofmann-streicher-universes} for arbitrary presheaf
-categories. For this, it is convenient to recall that, again as a special case of a general result for presheaf categories, for every $[n] \in \Delta$, the slice category $\SSet_{/\Delta[n]}$ is equivalent to the category of presheaves over the slice category~$\Delta_{/[n]}$. For a presheaf $F$ over $\Delta_{/[n]}$, we shall write $\pi_1 \co \mathrm{el}(F) \to \Delta[n]$
+categories. Recall that, again as a special case of a general result for presheaf categories, for every $[n] \in \Delta$, there is an equivalence of categories
+\begin{equation}
+\label{equ:pshslice}
+\SSet_{/\Delta[n]} \simeq \Psh \big( \Delta_{/[n]} \big )
+\end{equation}
+For $F \co {\Delta_{/[n]}}^{\op} \to \Set$, we write $\pi_1 \co \mathrm{el}(F) \to \Delta[n]$
 for the corresponding object of~$\SSet_{/\Delta[n]}$. The simplicial set $\V$ is then defined by letting
 \[
 \mathsf{V}_n \defeq \{ F \in \Psh(\Delta_{/[n]}) \ | \ \pi_1 \co \mathsf{el}(F) \to \Delta[n] \text{ is a small
 map} \}
 \]
-for $[n] \in \Delta$. The weak classifier $\rho \co \VV \to \V$ is then defined in an evident way. 
+for $[n] \in \Delta$. The weakly universal small map $\rho \co \VV \to \V$ is then defined in an evident way. 
 
 \medskip
 
@@ -563,7 +569,7 @@ We then define the map $\pi \co \UU \to \U$ via the pullback
 
 \begin{proposition} \label{thm:universe-u}  \hfill 
 \begin{enumerate}[(i)] 
-\item The map $\pi \co \UU \to \U$ is a small Kan fibration.
+\item The map $\pi \co \UU \to \U$ is a small fibration.
 \item For any map $f \co X \rightarrow \U$ with $X$ cofibrant, the object $Y$ in the pullback
 \[
 \xymatrix{
@@ -584,49 +590,37 @@ X \ar[r]_f & \U }
 
 \begin{proof} We prove the three claims separately.
 \begin{enumerate}[(i)] 
-\item For any map $\Delta[n] \rightarrow U$, if one form the pullbacks:
-
+\item For any map $x \co \Delta[n] \rightarrow U$, we can consider the following pullbacks
 \[
 \xymatrix{
-X \ar[r] \ar[d] \drpullback & \UU \ar[d]^\pi \ar[r] & \VV \ar[d]^{\rho} \\
-\Delta[n] \ar[r]^{x} & \U \ar[r] & V }
+X \ar[r] \ar[d]_p \drpullback & \UU \ar[d]^\pi \ar[r]  \drpullback & \VV \ar[d]^{\rho} \\
+\Delta[n] \ar[r]_{x} & \U \ar@{>->}[r]_{i} & V }
 \]
-
-
-$X \rightarrow \Delta[n]$ is hence the object $ \mathsf{El}(F) \rightarrow \Delta[n]$ for the $F$ corresponding to $\Delta[n] \rightarrow V$, hence by definition of $U$, $X$ is cofibrant and $X \rightarrow \Delta[n]$ is a small Kan fibration. This implies that $\pi:\UU \rightarrow \U$ is small, and that it it has a chosen lift against all the $\Lambda^k[n] \hookrightarrow \Delta[n]$:
-
-
+This shows that $p \co X \rightarrow \Delta[n]$ is isomorphic to $\pi_1 \co \mathrm{el}(F) \rightarrow \Delta[n]$ in $\SSet_{/ \Delta[n]}$, where $F$ corresponds under the equivalence in~\eqref{equ:pshslice} to 
+$i x \co \Delta[n] \rightarrow \V$, hence by definition of $\U$, $X$ is cofibrant and $p \co X \rightarrow \Delta[n]$ is a small fibration. This implies that $\pi:\UU \rightarrow \U$ is small. Furthermore, $\pi$ is a fibration
+since we can rewrite a general lifting problem against a horn inclusion $h^n_k \co \Lambda^k[n] \hookrightarrow \Delta[n]$ as follows:
 \[
 \xymatrix{
-\Lambda^k[n] \ar[r] \ar[d] & X \drpullback \ar@{->>}[d] \ar[r] & \UU \ar[d]^\pi \\
-\Delta[n] \ar[r]^{id} \ar@{.>}[ur]^{\exists} & \Delta[n] \ar[r] & \U  }
+\Lambda^k[n] \ar[r] \ar[d]_{h^k_n} & X \drpullback \ar@{->>}[d]^{p} \ar[r] & \UU \ar[d]^\pi \\
+\Delta[n] \ar@{=}[r]  & \Delta[n] \ar[r] & \U  }
 \]
-
-
-
-\item 
-
-Let $y \in Y_n$, and let $x$ its image in $X$. As $X$ is cofibrant one can write in a unique way $x=s^* x'$ with $s:[n] \twoheadrightarrow [k]$ a degeneracies and $x' \in X_k$ a non-degenerate cell. Let $x': \Delta[k] \rightarrow X$ be the corresponding map.
-
-One form the pullback
-
+and then use that $p \co X \to \Delta[n]$ is a fibration.
+\item  Let $[n] \in \Delta$, $y \in Y_n$ and define $x \defeq p(y)$. Since $X$ is cofibrant, by \cref{lem:EZ_cof} can write it in a unique way as $x=s^*(x')$, where $s \co [n] \twoheadrightarrow [k]$ is a degeneracy and 
+$x' \in X_k$ is a non-degenerate cell. Let $x' \co \Delta[k] \rightarrow X$ be the corresponding map. We now form the pullback
 \[
 \xymatrix{
-E \ar[r]^w \ar[d] \drpullback & Y \ar[r] \ar[d]_f \drpullback & \UU \ar[d]^\pi \\
-\Delta[k] \ar[r]^x' & X \ar[r] & \U }
+E \ar[r]^w \ar[d] \drpullback & Y \ar[r] \ar[d]_{p} \drpullback & \UU \ar[d]^\pi \\
+\Delta[k] \ar[r]_{x'} & X \ar[r] & \U }
 \]
+By the universal property of the pullback, there is a unique cell $e \in E_n$ such that $w(e)=y$, and the image of $e$ in $\Delta[k]$ is the cell $s \co [n] \twoheadrightarrow [k]$, whose image in $X$ are both equal to $x=s^* x'$.
 
-By the universal property of the pullback, there is a unique cell $e \in E_n$ such that $w(e)=y$, and the image of $e$ in $\Delta[k]$ is the cell $s:[n] \twoheadrightarrow [k]$, whose image in $X$ are both equal to $x=s^* x'$.
+By definition of $\U$, the simplicial set $E$ is cofibrant and hence it is decidable whether $e$ is degenerate or not. We claim that $y$ is degenerate if and only if $e$ is, which implies that it is decidable whether $y$ is degenerate:
 
-By definition of $U$, $E$ is a cofibrant object, hence it is decidable whether $e$ is degenerate or not. We claim that $y$ is degenerate if and only if $e$ is, which implies that it is decidable whether $y$ is degenerate:
-
-Indeed as $y$ is the image of $e$ then if $e$ is degenerate then $y$ is. Conversely, assume that $y=p^* y_1$ for a non-trivial degeneracy $p$, then $x=p^* x_1$, hence by the uniqueness part of the Eilenberg-Zilber lemma (in $X$) one has that $s=q \circ p$ for some degeneracy $q$, and $x_1 = q^* x'$. One in particular get a unique cell $e_1$ of $E$ whose image in $\Delta[n]$ and $Y$ are respectively $q$ and $y_1$, whose image in $X$ are both equal to $x_1=q^* x'$. Finally, the image of $p^* e_1$ in $\Delta[n]$ and $Y$ are repectively $p^* y_1 =y$ and $q \circ p =s$, hence $p^* e_1 =e$ which proves that $e$ is degenerate as soon as $y$ is.
-
+Indeed as $y = w(e)$ then if $e$ is degenerate so $y$ is. Conversely, assume that $y=p^*(y_1)$ for a non-trivial degeneracy $p$. Then $x=p^*(x_1)$, hence by the uniqueness part of the Eilenberg-Zilber lemma for $X$ one has that $s=q \circ p$ for some degeneracy $q$, and $x_1 = q^*(x')$. In particular, we get a unique cell $e_1$ of $E$ whose image in $\Delta[n]$ and $Y$ are  $q$ and $y_1$, respectively, whose images in $X$ are both equal to $x_1=q^*(x')$. Finally, the image of $p^*(e_1)$ in $\Delta[n]$ and~$Y$ are  $p^* y_1 =y$ and $q \circ p =s$, respectively, and hence $p^*(e_1) =e$, which proves that $e$ is degenerate as soon as $y$ is.
 
 
-\item Any map $Y \rightarrow X$ is a pullback of $\rho: \VV \rightarrow \V$. The corresponding map $X \rightarrow \V$ factor in $U \subset V$ if and only if for every $\Delta[n] \rightarrow X$ the pullback of $Y$, $E \rightarrow \Delta[n]$ is a small fibration with $E$ cofibrant. So if $Y$ is cofibrant then $E$ is cofibrant because of \ref{lem:cofibrant_fiber_product} and if $Y \rightarrow X$ is a small fibration then any of its pullback is also a small fibration.
 
- \qedhere
+\item Any small map $Y \rightarrow X$ is a pullback of $\rho \co \VV \rightarrow \V$. The corresponding map $X \rightarrow \V$ factors in $U \subset V$ if and only if for every $\Delta[n] \rightarrow X$ the pullback of $Y$, $E \rightarrow \Delta[n]$ is a small fibration with $E$ cofibrant. So if $Y$ is cofibrant then $E$ is cofibrant because of~\cref{lem:cofibrant_fiber_product} and if $Y \rightarrow X$ is a small fibration then any of its pullback is also a small fibration.  \qedhere
 \end{enumerate}
 \end{proof} 
 
@@ -645,22 +639,24 @@ The simplicial set $\UU_c$ is cofibrant by part~(ii) of \cref{thm:universe-u}.  
 \begin{proposition} \label{thm:universe-uc} 
 \hfill 
 \begin{enumerate}[(i)] 
-\item $\pi_c \co \UU_c \to \U_c$ is a small Kan fibration between fibrant objects. 
-\item The map $\pi_c \co \UU_c \to \U_c$ classifies small Kan fibrations between cofibrant objects, \ie 
-for every small Kan fibration $f \co Y \to X$ with $X$ and $Y$ cofibrant there exists a pullback diagram of the form
+\item $\pi_c \co \UU_c \to \U_c$ is a small fibration between fibrant objects. 
+\item The map $\pi_c \co \UU_c \to \U_c$ classifies small fibrations between cofibrant objects, \ie 
+for every small fibration $f \co Y \to X$ with $X$ and $Y$ cofibrant there exists a pullback diagram of the form
 \[
 \xymatrix{
 Y \ar[r] \ar[d]_f & \UU_c \ar[d]^{\pi_c} \\
 X \ar[r] & \U_c }
 \]
-
+\item The object $\UU_c$ is cofibrant. \notec{Not sure we need this}
 \end{enumerate}
 \end{proposition}
 
-\begin{proof} Part~(i) follows from part~(i) and part~(ii) of~\cref{thm:universe-u}. For part~(ii), 
-let $f \co Y \to X$ be a small Kan fibration with $X$ cofibrant. Since $f$ is a
-small Kan fibration, we know 
-from~\cref{thm:universe-u} that there is a pullback diagram of the form 
+\begin{proof} \hfill
+\begin{enumerate}[(i)] 
+\item The claim follows from parts~(i) and~(ii) of~\cref{thm:universe-u}. 
+\item Let $f \co Y \to X$ be a small fibration with $X$ cofibrant. Since $f$ is a
+small fibration, we know 
+from part~(iii) of \cref{thm:universe-u} that there is a pullback diagram of the form 
 \[
 \xymatrix{
 Y \ar[r] \ar[d]_f \drpullback & \UU \ar[d]^{\pi} \\
@@ -669,25 +665,27 @@ X \ar[r] & \U }
 Since $X$ is cofibrant, we have the lifting diagram
 \[
 \xymatrix{
-0 \ar[r] \ar[d] & \U_c \ar[d]^{p} \\
+0 \ar[r] \ar@{>->}[d] & \U_c \ar[d]^{p} \\
 X \ar[r] \ar@{.>}[ur] & \U }
 \]
 which shows that the map $X \to \U$ factors via $\U_c$.  We then obtain the diagram
 \[
 \xymatrix{
 Y \ar[r] \ar[d]_f &  \UU_c \ar[r]  \ar[d]^{\pi_c} \drpullback & \UU \ar[d]^{\pi} \\
-X \ar[r] & \U_c \ar[r]_p &  \U }
+X \ar[r] & \U_c \ar[r] &  \U }
 \]
 Here, the right-hand side square and the rectangle are pullbacks and therefore the left-hand
-side square is also a pullback, as required. Part (iii) follows from the fact that both $\U_c$ and
-$\UU$ are cofibrant, the latter being part (iii) of~\cref{thm:universe-u}.
+side square is also a pullback, as required. 
+\item The claim follows from the fact that both $\U_c$ and
+$\UU$ are cofibrant, the latter holding by part (iii) of~\cref{thm:universe-u}, via \cref{lem:cofibrant_fiber_product}. \qedhere
+\end{enumerate} 
 \end{proof} 
 
 
 
 
 
-Note that we have not shown yet that $\U_c$ fibrant. This will be done in~\cref{sec:fibuu}, as a consequence of the equivalence extension property for fibrations, which we establish in~\cref{sec:equep}.
+Note that we have not shown yet that the simplicial set $\U_c$ fibrant. This will be done in~\cref{sec:fibuu}, as a consequence of the equivalence extension property for fibrations, which we establish in~\cref{sec:equep}.
 
 \newpage
 
