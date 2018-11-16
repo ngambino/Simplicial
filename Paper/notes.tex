@@ -236,7 +236,9 @@ structure rather than just two weak factorisation systems.
 
 
 
-\section{Two weak factorisation systems} 
+\section{Review of the weak model structure on simplicial sets} 
+
+\subsection*{Two weak factorisation systems}
 
 The aim of this section is to construct two weak factorisation systems on $\SSet$. These are the counterparts in our setting of the classical weak factorisation systems of cofibrations and trivial fibrations and of trivial cofibrations and fibrations, respectively. 
 
@@ -302,7 +304,6 @@ We refer to maps in $\mathcal{J}$ as horn inclusions.
 
 
 
-\section{Remarks on cofibrations and fibrations}
 
 We provide some additional information on the classes of cofibrations and fibrations. 
 
@@ -386,7 +387,7 @@ We now turn our attention to fibrations. The next proposition will be essential 
 For more details see also the last claim of \cite[Corollary~5.3.2]{henry2018wms}, which follows from Proposition~5.2.6 therein. 
 \end{proof}
 
-\section{Weak equivalences} 
+\subsection*{Weak equivalences} 
 
 WE NEED TO CLARIFY THE DISTINCTION BETWEEN SATTLER WEAK EQUIVALENCES AND HENRY WEAK EQUIVALENCES. ALSO A GOOD PLACE TO RECALL THE EXISTENCE OF THE WEAK MODEL STRUCTURE.
 
@@ -699,184 +700,13 @@ theory, which we discuss in~\cref{sec:conout}.
 
 \newpage
 
-\section{The universe}
 
-Our next goal is to define a bifibrant simplicial set $\U_c$ and a small fibration $\pi_c \co \UU_c \to \U_c$ that weakly classifies small fibrations between cofibrant objects, in the sense that for every such fibration $p \co A \to X$ there exists a map $a \co X \to \U_c$ such that $p$ is a pullback of $\pi_c$ along $a$, \ie we have a pullback diagram of the form
-\[
-\xymatrix{
-A \ar[r] \ar[d]_p   & \UU_c \ar[d]^{\pi_c} \\
-X \ar[r]_a &  \U_c }
-\]
-We shall refer to $\U_c$ as the universe of small fibrant simplicial sets and to $\pi_c$ as the 
-weakly universal small fibration between cofibrant simplicial sets.
-In order to do this, we shall modify  the construction of the weak classifier for small fibrations 
-in~\cite{voevodsky-simplicial-model} and then consider a suitable cofibrant replacement. 
-
-\medskip
-
-We begin by reviewing the definition of the weakly universal small map of simplicial sets, which
-can be obtained as a special case of the results in~\cite{hofmann-streicher-universes} for arbitrary presheaf
-categories. Recall that, again as a special case of a general result for presheaf categories, for every $[n] \in \Delta$, there is an equivalence of categories
-\begin{equation}
-\label{equ:pshslice}
-\SSet_{/\Delta[n]} \simeq \Psh \big( \Delta_{/[n]} \big )
-\end{equation}
-For $F \co {\Delta_{/[n]}}^{\op} \to \Set$, we write $\pi_1 \co \mathrm{el}(F) \to \Delta[n]$
-for the corresponding object of~$\SSet_{/\Delta[n]}$. The simplicial set $\V$ is then defined by letting
-\[
-\mathsf{V}_n \defeq \{ F \in \Psh(\Delta_{/[n]}) \ | \ \pi_1 \co \mathsf{el}(F) \to \Delta[n] \text{ is a small
-map} \}
-\]
-for $[n] \in \Delta$. The weakly universal small map $\rho \co \VV \to \V$ is then defined in an evident way. 
-
-\medskip
-
-We define a subobject $\U \rightarrowtail \V$ by letting, for $[n] \in \Delta$, 
-\[
-\U_n = \{ F \in \V_n \ | \ \pi_1 \co \mathsf{el}(F) \to \Delta[n] \text{ is a small Kan fibration and $\mathsf{el}(F)$ is cofibrant} \} \, .
-\]
-We then define the map $\pi \co \UU \to \U$ via the pullback 
-\[
-\xymatrix{
-\UU \ar[r] \ar[d]_\pi \drpullback  & \VV \ar[d]^\rho \\
-\U \ar@{>->}[r] & \V }
-\]
-
-
-
-
-\begin{proposition} \label{thm:universe-u}  \hfill 
-\begin{enumerate}[(i)] 
-\item The map $\pi \co \UU \to \U$ is a small fibration.
-\item For any map $a \co X \rightarrow \U$ with $X$ cofibrant, the 
-simplicial set $X.\mathsf{T}(a)$ given by the pullback
-\[
-\xymatrix{
-X.\mathsf{T}(a) \ar[r] \ar[d]_p & \UU \ar[d]^\pi \\
-X \ar[r]_a & \U }
-\]
-is cofibrant.
-\item The map $\pi \co \UU \to \U$ weakly classifies small fibrations between cofibrant object, \ie 
-for every small fibration $p \co A \to X$ between cofibrant object there exists a map 
-$a \co X \to \U$ and a pullback  of the form
-\[
-\xymatrix{
-A \ar[r] \ar[d]_p \drpullback & \UU \ar[d]^\pi \\
-X \ar[r]_{a} & \U }
-\]
-\end{enumerate}
-\end{proposition}
-
-\begin{proof} We prove the three claims separately.
-\begin{enumerate}[(i)] 
-\item For any map $a \co \Delta[n] \rightarrow \U$, we can consider the following pullbacks
-\[
-\xymatrix{
-E \ar[r] \ar[d]_p  & \UU \ar[d] \ar[r]  & \VV \ar[d] \\
-\Delta[n] \ar[r]_{a} & \U \ar[r]_{i} & \V }
-\]
-This shows that $p \co E \rightarrow \Delta[n]$ is isomorphic to $\pi_1 \co \mathrm{el}(F) \rightarrow \Delta[n]$ in $\SSet_{/ \Delta[n]}$, where $F$ corresponds under the equivalence in~\eqref{equ:pshslice} to 
-$i a \co \Delta[n] \rightarrow \V$, hence by definition of $\U$, $E$ is cofibrant and $p \co E \rightarrow \Delta[n]$ is a small fibration. This implies that $\pi:\UU \rightarrow \U$ is a small map. Furthermore, $\pi$ is a fibration
-since we can rewrite a general lifting problem against a horn inclusion $h^n_k \co \Lambda^k[n] \rightarrow \Delta[n]$ as follows:
-\[
-\xymatrix{
-\Lambda^k[n] \ar[r] \ar[d]_{h^k_n} & \Delta[n]. \mathsf{T}(a)  \ar[d]^{p} \ar[r] & \UU \ar[d]^\pi \\
-\Delta[n] \ar@{=}[r]  & \Delta[n] \ar[r]_a & \U  }
-\]
-and then use that $p \co \Delta[n]. \mathsf{T}(a)  \to \Delta[n]$ is a fibration.
-\item  Let $[n] \in \Delta$, $y \in Y_n$ and define $x \defeq p(y)$. Since $X$ is cofibrant, by \cref{lem:EZ_cof} can write it in a unique way as $x=s^*(x')$, where $s \co [n] \twoheadrightarrow [k]$ is a degeneracy and 
-$x' \in X_k$ is a non-degenerate cell. Let $x' \co \Delta[k] \rightarrow X$ be the corresponding map. We now form the pullback
-\[
-\xymatrix{
-E \ar[r]^w \ar[d] \drpullback & Y \ar[r] \ar[d]_{p} \drpullback & \UU \ar[d]^\pi \\
-\Delta[k] \ar[r]_{x'} & X \ar[r] & \U }
-\]
-By the universal property of the pullback, there is a unique cell $e \in E_n$ such that $w(e)=y$, and the image of $e$ in $\Delta[k]$ is the cell $s \co [n] \twoheadrightarrow [k]$, whose image in $X$ are both equal to $x=s^* x'$.
-
-By definition of $\U$, the simplicial set $E$ is cofibrant and hence it is decidable whether $e$ is degenerate or not. We claim that $y$ is degenerate if and only if $e$ is, which implies that it is decidable whether $y$ is degenerate:
-
-Indeed as $y = w(e)$ then if $e$ is degenerate so $y$ is. Conversely, assume that $y=p^*(y_1)$ for a non-trivial degeneracy $p$. Then $x=p^*(x_1)$, hence by the uniqueness part of the Eilenberg-Zilber lemma for $X$ one has that $s=q \circ p$ for some degeneracy $q$, and $x_1 = q^*(x')$. In particular, we get a unique cell $e_1$ of $E$ whose image in $\Delta[n]$ and $Y$ are  $q$ and $y_1$, respectively, whose images in $X$ are both equal to $x_1=q^*(x')$. Finally, the image of $p^*(e_1)$ in $\Delta[n]$ and~$Y$ are  $p^* y_1 =y$ and $q \circ p =s$, respectively, and hence $p^*(e_1) =e$, which proves that $e$ is degenerate as soon as $y$ is.
-
-
-
-\item Any small map $Y \rightarrow X$ is a pullback of $\rho \co \VV \rightarrow \V$. The corresponding map $X \rightarrow \V$ factors in $U \subset V$ if and only if for every $\Delta[n] \rightarrow X$ the pullback of $Y$, $E \rightarrow \Delta[n]$ is a small fibration with $E$ cofibrant. So if $Y$ is cofibrant then $E$ is cofibrant because of~\cref{lem:cofibrant_fiber_product} and if $Y \rightarrow X$ is a small fibration then any of its pullback is also a small fibration.  \qedhere
-\end{enumerate}
-\end{proof} 
-
-
-
-The simplicial set $\U$ and $\UU$ does not appear to be cofibrant, but we can consider a cofibrant replacement of $\U$, given by a cofibrant object $\U_c$ and a trivial cofibration
-\begin{equation}
-\label{equ:ucu}
-p \co \U_c \rightarrow \U
-\end{equation}
-We then define $\UU_c$ via the pullback
-\[
-\xymatrix{
-\UU_c \ar[d]_{\pi_c} \ar[r] \drpullback & \UU \ar[d]^{\pi}  \\
-\U_c \ar[r]_p & \U}
-\]
-We now prove that $\U_c$ and $\pi_c \co \UU_c \to \U_c$ have the desired properties.
-
-
-\begin{proposition} \label{thm:universe-uc} 
-\hfill 
-\begin{enumerate}[(i)] 
-\item $\pi_c \co \UU_c \to \U_c$ is a small fibration between fibrant objects. 
-\item The map $\pi_c \co \UU_c \to \U_c$ classifies small fibrations between cofibrant objects, \ie 
-for every small fibration $p \co A \to X$ with $X$ and $A$ cofibrant there exists a pullback diagram of the form
-\[
-\xymatrix{
-A \ar[r] \ar[d]_p & \UU_c \ar[d]^{\pi_c} \\
-X \ar[r]_a & \U_c }
-\]
-\item The object $\UU_c$ is cofibrant. \noten{Not sure we need this}
-\end{enumerate}
-\end{proposition}
-
-\begin{proof} \hfill
-\begin{enumerate}[(i)] 
-\item The claim follows from parts~(i) and~(ii) of~\cref{thm:universe-u}. 
-\item Let $p \co A \to X$ be a small fibration with $X$ cofibrant. Since $p$ is a
-small fibration, we know 
-from part~(iii) of \cref{thm:universe-u} that there is a pullback diagram of the form 
-\[
-\xymatrix{
-A \ar[r] \ar[d]_p \drpullback & \UU \ar[d]^{\pi} \\
-X \ar[r] & \U }
-\]
-Since $X$ is cofibrant, we have the lifting diagram
-\[
-\xymatrix{
-0 \ar[r] \ar[d] & \U_c \ar[d]^{} \\
-X \ar[r]_a \ar@{.>}[ur] & \U }
-\]
-which shows that the map $a \co X \to \U$ factors via $\U_c$.  We then obtain the diagram
-\[
-\xymatrix{
-A \ar[r] \ar[d]_p &  \UU_c \ar[r]  \ar[d]^{\pi_c} \drpullback & \UU \ar[d]^{\pi} \\
-X \ar[r]_{a_c} & \U_c \ar[r]_{a} &  \U }
-\]
-Here, the right-hand side square and the rectangle are pullbacks and therefore the left-hand
-side square is also a pullback, as required. 
-\item The claim follows from the fact that both $\U_c$ and
-$\UU$ are cofibrant, the latter holding by part (iii) of~\cref{thm:universe-u}, via \cref{lem:cofibrant_fiber_product}. \qedhere
-\end{enumerate} 
-\end{proof} 
-
-
-
-
-
-Note that we have not shown yet that the simplicial set $\U_c$ fibrant. This will be done in~\cref{sec:fibuu}, as a consequence of the equivalence extension property for fibrations, which we establish in~\cref{sec:equep}.
-
-\newpage
 
 
 \section{The weak equivalence extension property}
 \label{sec:equep}
 
-The main goal of this section is to prove the so-called weak equivalence extension property, which will be the key to prove that the universe $\UU_c$ is fibrant and that the weakly universal fibration $\pi \co \UU_c \to $ is univalent.  For this, we follow closely the approach in \cite{voevodsky-simplicial-model}, but exploiting crucially the cofibrancy requirements that are part of our set-up.
+The main goal of this section is to prove the so-called weak equivalence extension property, which will be the key to prove the existence and univalence of a weakly universal fibration.  For this, we follow closely the approach in \cite{voevodsky-simplicial-model}, but exploiting crucially the cofibrancy requirements that are part of our set-up.
 
 
 
@@ -1047,44 +877,132 @@ The fact that $\bar{B} \rightarrow A$ is a deformation retract show that it is i
 
 \newpage
 
-\section{Fibrancy and univalence of the universe}
-\label{sec:fibuu}
+\section{The universe}
+
+Our next goal is to define a bifibrant simplicial set $\U_c$ and a small fibration $\pi_c \co \UU_c \to \U_c$ that weakly classifies small fibrations between cofibrant objects, in the sense that for every such fibration $p \co A \to X$ there exists a map $a \co X \to \U_c$ such that $p$ is a pullback of $\pi_c$ along $a$, \ie we have a pullback diagram of the form
+\[
+\xymatrix{
+A \ar[r] \ar[d]_p   & \UU_c \ar[d]^{\pi_c} \\
+X \ar[r]_a &  \U_c }
+\]
+In order to do this, we shall modify  the construction of the weak classifier for small fibrations 
+in~\cite{voevodsky-simplicial-model} and then consider a suitable cofibrant replacement. 
+We shall refer to $\U_c$ as the universe of small bifibrant objects and to $\pi_c$ as the 
+weakly universal small fibration between bifibrant objects.
 
 
-\begin{itemize}
-% \item Fibrancy should follow directly from equivalence extension property, without using `composition vs filling' but rather retract property for horns (see notes).
-% \item Once we have established fibrancy of $U_c$, then one can prove univalence by showing that 
-% $t \co \mathsf{Weq}(U_c) \to U_c$ is a trivial fibration. 
-\item Question: do we need to know that $\mathsf{Weq}(\U_c)$ is a cofibrant object to get univalence? >> I'm relatively sure $\mathsf{Weq}(\U_c)$ is not cofibrant. But all these property proved here will imediately pass to any cofibrant replacement. This is also why I'm working with  $\mathsf{Weq}(\U)$ instead: everything will be pulled back to the version for $\U_c$.
-\end{itemize}
+\medskip
+
+We begin by reviewing the definition of the weakly universal small map of simplicial sets, which
+can be obtained as a special case of the results in~\cite{hofmann-streicher-universes} for arbitrary presheaf
+categories. Recall that, again as a special case of a general result for presheaf categories, for every $[n] \in \Delta$, there is an equivalence of categories
+\begin{equation}
+\label{equ:pshslice}
+\SSet_{/\Delta[n]} \simeq \Psh \big( \Delta_{/[n]} \big )
+\end{equation}
+For $F \co {\Delta_{/[n]}}^{\op} \to \Set$, we write $\pi_1 \co \mathrm{el}(F) \to \Delta[n]$
+for the corresponding object of~$\SSet_{/\Delta[n]}$. The simplicial set $\V$ is then defined by letting
+\[
+\mathsf{V}_n \defeq \{ F \in \Psh(\Delta_{/[n]}) \ | \ \pi_1 \co \mathsf{el}(F) \to \Delta[n] \text{ is a small
+map} \}
+\]
+for $[n] \in \Delta$. The weakly universal small map $\rho \co \VV \to \V$ is then defined in an evident way. 
+We define a subobject $\U \rightarrowtail \V$ by letting, for $[n] \in \Delta$, 
+\[
+\U_n = \{ F \in \V_n \ | \ \pi_1 \co \mathsf{el}(F) \to \Delta[n] \text{ is a small Kan fibration and $\mathsf{el}(F)$ is cofibrant} \} \, .
+\]
+We then define the map $\pi \co \UU \to \U$ via the pullback 
+\[
+\xymatrix{
+\UU \ar[r] \ar[d]_\pi \drpullback  & \VV \ar[d]^\rho \\
+\U \ar@{>->}[r] & \V }
+\]
 
 
-\begin{definition}
-\leavevmode
-\begin{itemize}
-
-\item Let $\U^{\rightarrow}$ be the simplicial set whose $n$-cells are given by a pair of $n$-cells of $\U$, i.e. functor $(\Delta/[n])^{op} \rightarrow Set$, together with a natural transformation between them.
 
 
-\item Let $\mathsf{Weq}(\U)$ be the subobject of $\U^{\rightarrow}$ of $n$-cells $\Delta[n] \rightarrow \U^{\rightarrow}$ such that in the corresponding diagram:
- 
+\begin{proposition} \label{thm:universe-u}  \hfill 
+\begin{enumerate}[(i)] 
+\item The map $\pi \co \UU \to \U$ is a small fibration.
+\item For any map $a \co X \rightarrow \U$ with $X$ cofibrant, the 
+simplicial set $\mathsf{T}(a)$ given by the pullback
+\[
+\xymatrix{
+\mathsf{T}(a) \ar[r] \ar[d]_p & \UU \ar[d]^\pi \\
+X \ar[r]_a & \U }
+\]
+is cofibrant.
+\item The map $\pi \co \UU \to \U$ weakly classifies small fibrations between cofibrant object, \ie 
+for every small fibration $p \co A \to X$ between cofibrant object there exists a map 
+$a \co X \to \U$ and a pullback  of the form
+\[
+\xymatrix{
+A \ar[r] \ar[d]_p \drpullback & \UU \ar[d]^\pi \\
+X \ar[r]_{a} & \U }
+\]
+\end{enumerate}
+\end{proposition}
 
-\[\xymatrix{ X \ar[r]^{f} \ar@{->>}[dr] & Y \ar@{->>}[d] \\
-& \Delta[n]
-}\]
+\begin{proof} We prove the three claims separately.
+\begin{enumerate}[(i)] 
+\item For any map $a \co \Delta[n] \rightarrow \U$, we can consider the following pullbacks
+\[
+\xymatrix{
+E \ar[r] \ar[d]_p  & \UU \ar[d] \ar[r]  & \VV \ar[d] \\
+\Delta[n] \ar[r]_{a} & \U \ar[r]_{i} & \V }
+\]
+This shows that $p \co E \rightarrow \Delta[n]$ is isomorphic to $\pi_1 \co \mathrm{el}(F) \rightarrow \Delta[n]$ in $\SSet_{/ \Delta[n]}$, where $F$ corresponds under the equivalence in~\eqref{equ:pshslice} to 
+$i a \co \Delta[n] \rightarrow \V$, hence by definition of $\U$, $E$ is cofibrant and $p \co E \rightarrow \Delta[n]$ is a small fibration. This implies that $\pi:\UU \rightarrow \U$ is a small map. Furthermore, $\pi$ is a fibration
+since we can rewrite a general lifting problem against a horn inclusion $h^n_k \co \Lambda^k[n] \rightarrow \Delta[n]$ as follows:
+\[
+\xymatrix{
+\Lambda^k[n] \ar[r] \ar[d]_{h^k_n} & \Delta[n]. \mathsf{T}(a)  \ar[d]^{p} \ar[r] & \UU \ar[d]^\pi \\
+\Delta[n] \ar@{=}[r]  & \Delta[n] \ar[r]_a & \U  }
+\]
+and then use that $p \co \Delta[n]. \mathsf{T}(a)  \to \Delta[n]$ is a fibration.
+\item  Let $[n] \in \Delta$, $y \in Y_n$ and define $x \defeq p(y)$. Since $X$ is cofibrant, by \cref{lem:EZ_cof} can write it in a unique way as $x=s^*(x')$, where $s \co [n] \twoheadrightarrow [k]$ is a degeneracy and 
+$x' \in X_k$ is a non-degenerate cell. Let $x' \co \Delta[k] \rightarrow X$ be the corresponding map. We now form the pullback
+\[
+\xymatrix{
+E \ar[r]^w \ar[d] \drpullback & Y \ar[r] \ar[d]_{p} \drpullback & \UU \ar[d]^\pi \\
+\Delta[k] \ar[r]_{x'} & X \ar[r] & \U }
+\]
+By the universal property of the pullback, there is a unique cell $e \in E_n$ such that $w(e)=y$, and the image of $e$ in $\Delta[k]$ is the cell $s \co [n] \twoheadrightarrow [k]$, whose image in $X$ are both equal to $x=s^* x'$.
 
-The map $f$ is weak equivalence.
+By definition of $\U$, the simplicial set $E$ is cofibrant and hence it is decidable whether $e$ is degenerate or not. We claim that $y$ is degenerate if and only if $e$ is, which implies that it is decidable whether $y$ is degenerate:
 
-\end{itemize}
-
-\end{definition}
+Indeed as $y = w(e)$ then if $e$ is degenerate so $y$ is. Conversely, assume that $y=p^*(y_1)$ for a non-trivial degeneracy $p$. Then $x=p^*(x_1)$, hence by the uniqueness part of the Eilenberg-Zilber lemma for $X$ one has that $s=q \circ p$ for some degeneracy $q$, and $x_1 = q^*(x')$. In particular, we get a unique cell $e_1$ of $E$ whose image in $\Delta[n]$ and $Y$ are  $q$ and $y_1$, respectively, whose images in $X$ are both equal to $x_1=q^*(x')$. Finally, the image of $p^*(e_1)$ in $\Delta[n]$ and~$Y$ are  $p^* y_1 =y$ and $q \circ p =s$, respectively, and hence $p^*(e_1) =e$, which proves that $e$ is degenerate as soon as $y$ is.
 
 
-The fact that $\mathsf{Weq}(\U)$ is well defined is because pullback along any morphism $f:X \rightarrow Y$ is always a right Quillen functor $\SSet_{/Y} \rightarrow \SSet_{/X}$ so in particular it preserves weak equivalence between fibrant objects, so $\mathsf{Weq}(\U)$ as defined here is indeed a sub-simplicial set of $\U^{\rightarrow}$
+
+\item Any small map $Y \rightarrow X$ is a pullback of $\rho \co \VV \rightarrow \V$. The corresponding map $X \rightarrow \V$ factors in $U \subset V$ if and only if for every $\Delta[n] \rightarrow X$ the pullback of $Y$, $E \rightarrow \Delta[n]$ is a small fibration with $E$ cofibrant. So if $Y$ is cofibrant then $E$ is cofibrant because of~\cref{lem:cofibrant_fiber_product} and if $Y \rightarrow X$ is a small fibration then any of its pullback is also a small fibration.  \qedhere
+\end{enumerate}
+\end{proof} 
+
+
+
+
+
+
+
+
+ Let $\U^{\rightarrow}$ be the simplicial set whose $n$-cells are given by triples $(F_0, F_1, \phi)$ where
+ $F_0$ and $F_1$ are $n$-cells of $\U$, \ie functors
+ \[
+F_0, F_1 \co {\Delta_{/[n]}}^{\op} \rightarrow \Set
+\]
+and $\phi \co F_0 \Rightarrow F_1$ is a natural transformation. We define the subobject $\mathsf{Weq}(\U) \subseteq \U^{\rightarrow}$ as consisting of the 
+$n$-cells $(F_0, F_1, \phi) \co \Delta[n] \rightarrow \U^{\rightarrow}$ such that in the corresponding diagram:
+\[
+\xymatrix{ 
+\mathsf{El}(F_0) \ar[rr]^{f} \ar@{->>}[dr] & & \mathsf{El}(F_1) \ar@{->>}[dl] \\
+& \Delta[n] & }
+\]
+the map $f$ is weak equivalence. The simplicial set $\mathsf{Weq}(\U)$ is well defined because pullback along any morphism $f \co X \rightarrow Y$ is always a right Quillen functor $\SSet_{/Y} \rightarrow \SSet_{/X}$ so in particular it preserves weak equivalence between fibrant objects. Hence,$\mathsf{Weq}(\U)$ as defined here is indeed a subobject of $\U^{\rightarrow}$
 
 \begin{proposition}
 \label{prop:Weq_classify_Weq}
-For any cofibrant object $X$, a morphism $f:X \rightarrow \U^{\rightarrow}$ factors into the subobject $\mathsf{Weq}(\U)$ if and only the map in $\SSet_{/X}$ classified by $f$ is a weak equivalence.
+For any cofibrant object $X$, a morphism $f:X \rightarrow \U^{\rightarrow}$ factors via the subobject $\mathsf{Weq}(\U)$ if and only the map in $\SSet_{/X}$ classified by $f$ is a weak equivalence.
 
 \end{proposition}
 
@@ -1104,29 +1022,22 @@ But one can then pullback everything to $\Delta[n]$:
 \Delta[n] \ar[r] & E_2 \times_X \Delta[n]  \\
 } \]
 
-by assumption $x^* v$ is a weak equivalence between fibrant objects hence it has the weak lifting property against $\partial \Delta[n] \rightarrow \Delta[n]$ and a weak lift in the square gives in particular a weak lift in the original square.
+By assumption $x^* v$ is a weak equivalence between fibrant objects hence it has the weak lifting property against $\partial \Delta[n] \rightarrow \Delta[n]$ and a weak lift in the square gives in particular a weak lift in the original square.
 \end{proof}
 
 
 
-\begin{proposition}
-\leavevmode
+\begin{proposition} \label{thm:fibrancy-of-u} \hfill 
 \begin{enumerate}[(i)]
-
 \item The map $\mathsf{Weq}(\U) \rightarrow \U \times \U$ is a fibration.
-
 \item The target projection $\mathsf{Weq}(\U) \rightarrow \U$ is a trivial fibration.
-
 \item $\U$ and $\mathsf{Weq}(\U)$ are fibrant.
-
 \end{enumerate}
-
 \end{proposition}
 
 \begin{proof}
 \leavevmode
 \begin{enumerate}[(i)]
-
 \item First, one observe that $\U^{\rightarrow}$ can be defined as a $\Pi$-type: It is exactly $\Pi_p(\UU \times \UU)$ where $p$ is the projection $\UU \times \U \rightarrow \U \times \U$,
 so it follows from corollary \ref{cor:Pi_types_are_fibrant} that $\U^{\rightarrow} \rightarrow \U \times \U$ is a fibration.
 More precisely, it follows from corollary  \ref{cor:Pi_types_are_fibrant} that any pullback of  $\U^{\rightarrow} \rightarrow \U \times \U$ to a cofibrant
@@ -1134,8 +1045,7 @@ $X \rightarrow \U \times \U$ is a fibration (due to the cofibrancy assumption of
 but this is sufficient to prove that $\U^{\rightarrow} \rightarrow \U \times \U$ is a fibration (see for example the argument
 in the proof of point $(1)$ of proposition \ref{thm:universe-u}).
 
-
-Let $j:A \overset{\sim}{\hookrightarrow} B$ be any trivial cofibration between cofibrant objects, and consider a square:
+Let $j \co A \overset{\sim}{\hookrightarrow} B$ be any trivial cofibration between cofibrant objects, and consider a square:
 
 \[ \xymatrix{ A \ar@{^{(}->}[d] \ar[r]^{f} & \mathsf{Weq}(\U) \ar[d] \\
 B \ar[r]^{g} & \U^{\rightarrow}
@@ -1150,21 +1060,15 @@ A \ar@{^{(}->}[r]^{\sim} & B \\
 }\]
 
 But as the maps $E_i \rightarrow B$ are fibration with cofibrant domain, so proposition \ref{prop:Frobenius} implies that pullbacks of trivial cofibration (between cofibrant objects) along such map are trivial cofibration. This implies that all the horizontal maps of the diagram above are weak equivalence, and to the upper right map also is. This shows that $\mathsf{Weq}(\U) \twoheadrightarrow \U^{\rightarrow} \twoheadrightarrow \U \times \U$ is a fibration.
-
-
-
-
 \item Consider any cofibration $A\hookrightarrow B$ between cofibrant objects, and a lifting problem:
 
 \[\xymatrix{ A \ar[d] \ar[r] & \mathsf{Weq}(\U) \ar[d] \\
 B \ar[r] \ar@{.>}[ur]^{\exists ?} & \U 
 }\]
 
-Then because of proposition \ref{prop:Weq_classify_Weq} this corresponds exactly to a diagram as in the equivalence extention properpty (see \ref{Prop:Homotopy_ext_prop}): the map $A \rightarrow  \mathsf{Weq}(\U)$ gives us $X_0$ and $X_1$ over $A$ and the weak equivalence between them, and the map $B \rightarrow \U$ gives us the object $Y_1$ over $B$. The commutation of the square shows that $X_1$ is the pullback of $Y_1$, and the completion of this diagram claimed by proposition \ref{Prop:Homotopy_ext_prop} is exactly what one needs to produce a diagonal filling.
+Then because of  \cref{prop:Weq_classify_Weq} this corresponds exactly to a diagram as in the equivalence extension property in \cref{Prop:Homotopy_ext_prop}). Indeed, the map $A \rightarrow  \mathsf{Weq}(\U)$ gives us $X_0$ and $X_1$ over $A$ and the weak equivalence between them, and the map $B \rightarrow \U$ gives us the object $Y_1$ over $B$. The commutation of the square shows that $X_1$ is the pullback of $Y_1$, and the completion of this diagram claimed by \cref{Prop:Homotopy_ext_prop} is exactly what one needs to produce a diagonal filler.
 
-\item Given the first two part of the proposition, it is sufficient to show that $\U$ is fibrant.
-
-An interesting consequence of the fact that $\mathsf{Weq}(\U) \rightarrow \U \times \U$ is fibrant is that for any cofibrant object $X$, given two maps $f_1,f_2:X \rightrightarrows \U$ and a homotopy $h:\Delta[1] \times X \rightarrow \U$ from $f_1$ to $f_2$, them there is a weak equivalence in $\SSet_{/X}$ between the object classified by $f_1$ and $f_2$. Indeed, it is constructed as follows, one first take a lift:
+\item Given the first two part of the proposition, it is sufficient to show that $\U$ is fibrant. An interesting consequence of the fact that $\mathsf{Weq}(\U) \rightarrow \U \times \U$ is fibrant is that for any cofibrant object $X$, given two maps $f_1,f_2:X \rightrightarrows \U$ and a homotopy $h:\Delta[1] \times X \rightarrow \U$ from $f_1$ to $f_2$, them there is a weak equivalence in $\SSet_{/X}$ between the object classified by $f_1$ and $f_2$. Indeed, it is constructed as follows, one first take a lift:
 
 \[\xymatrix{ X \ar[r]^{i_1} \ar[d]^{\delta^0} & \mathsf{Weq}(\U) \ar@{->>}[d] \\
 \Delta[1] \times X \ar[r]^{(f_1,h)} \ar@{.>}[ur] & \U \times \U
@@ -1173,16 +1077,11 @@ An interesting consequence of the fact that $\mathsf{Weq}(\U) \rightarrow \U \ti
 Where $i_1$ denotes a map classyfing the identify of the object classified by $f_1$, and by $f_1$ in the first component of the bottom arrow we mean the composite $\Delta[1] \times X \rightarrow X \rightarrow \U$. Composing the dotted arrow with $\delta^1$ gives us a map $X \rightarrow  \mathsf{Weq}(\U)$ whose projection to $\U \times \U$ if $(f_1,f_2)$, i.e. it classifies a weak equivalence between the objects classified by $f_1$ and $f_2$. Note that one can do the exact same thing with $\delta^0$ and $\delta^1$ exchanged to get a weak equivalence in the other direction.
 
 
-We are now ready to prove that $\U$ is fibrant. Consider any map $\Lambda^k[n] \rightarrow \U $, it classifies a certain to a cofibrant object $V \twoheadrightarrow \Lambda^k[n]$.
-
-As mentioned in \ref{lemma:genTcof_strongHequiv}, all $\Lambda^k [n] \hookrightarrow \Delta[n]$ are strong $k$-oriented homotopy equivalence, i.e. this can be extended by the retract diagram (where the precise maps depends on if $k<n$ or $k>0$):
+We are now ready to prove that $\U$ is fibrant. Consider any map $\Lambda^k[n] \rightarrow \U $, it classifies a certain to a cofibrant object $V \twoheadrightarrow \Lambda^k[n]$. As mentioned in \cref{lemma:genTcof_strongHequiv}, all $\Lambda^k [n] \hookrightarrow \Delta[n]$ are strong $k$-oriented homotopy equivalence, i.e. this can be extended by the retract diagram (where the precise maps depends on if $k<n$ or $k>0$):
 
 \[\xymatrix{\Lambda^k[n] \ar[d] \ar[r] & \Delta[1] \times \Lambda^k[n] \cup \Delta[n] \ar[d] \ar[r] & \Lambda^k[n] \ar[d] \ar[r] & \U \\
 \Delta[n] \ar[r] & \Delta[1] \times \Delta[n] \ar[r] & \Delta[n] 
 }\]
-
-
-
 By the observation above, the map $\Delta[1] \times \Lambda^k[n] \cup \Delta[n] \rightarrow \U$ in the diagram gives a solid diagram as:
 
 \[ 
@@ -1215,6 +1114,99 @@ By the observation above, the map $\Delta[1] \times \Lambda^k[n] \cup \Delta[n] 
 So one can construct an object $W$ fibrant and cofibrant over $\Delta[n]$ whose pullback to $\lambda^k[n]$ is (isomorphic to) $V$. The map $\Delta[n] \rightarrow \U$ classying the object gives the lift we are looking for (more precisely, one can use $W$ to construct  a map $\Delta[n] \rightarrow \U$ which extend the one we started from and which classifies something isormophic to $W$). \qedhere
 \end{enumerate}
 \end{proof}
+
+
+
+\begin{corollary} The fibration $\pi \co \UU \to \U$ is univalent.
+\end{corollary}
+
+\begin{proof} Let $\delta \co \U \to \U \times \U$ be the diagonal map of $\U$ and consider its factorisation
+as a trivial cofibration $r \co \U \to \mathsf{Id}_\U$ followed by a fibration $(s,t) \co \mathsf{Id}_\U \to \U \times \U$. The evident solid diagram
+\[
+\xymatrix@C=1.5cm{
+\U \ar[r] \ar[d]_r & \Weq(\U) \ar[d]^{t} \\
+\mathsf{Id}_\U \ar[r]  \ar@{.>}[ur]_{j} &  \U \times \U }
+\]
+has a dotted diagonal filler $j$, since $r$ is a trivial cofibration and $t$ is a fibration by~\cref{thm:fibrancy-of-u}. The univalence of $\pi$ is the claim that $j$ is a weak equivalence. But by the 3-for-2 property applied to the diagram
+\[
+\text{TO BE ADDED}
+\]
+this happens if and only if $t$ is a weak equivalence. Since $\U$ is fibrant, this amounts to $t$ being a trivial
+fibration, which holds by part~(ii) of~\cref{thm:fibrancy-of-u}. 
+\end{proof} 
+
+
+\bigskip
+
+
+The simplicial sets $\U$ and $\UU$ do not appear to be cofibrant and therefore cannot be used to interpret the type universe according to our definition. However, we can consider a cofibrant replacement of $\U$, given by a cofibrant object $\U_c$ and a trivial cofibration
+\begin{equation}
+\label{equ:ucu}
+p \co \U_c \rightarrow \U
+\end{equation}
+We then define $\UU_c$ via the pullback
+\[
+\xymatrix{
+\UU_c \ar[d]_{\pi_c} \ar[r] \drpullback & \UU \ar[d]^{\pi}  \\
+\U_c \ar[r]_p & \U}
+\]
+We now prove that $\U_c$ and $\pi_c \co \UU_c \to \U_c$ have all the desired properies by showin that 
+they inherit them from $\U$ and $\pi \co \UU \to \U$.
+
+
+\begin{proposition} \label{thm:universe-uc} 
+\hfill 
+\begin{enumerate}[(i)] 
+\item $\pi_c \co \UU_c \to \U_c$ is a small fibration between fibrant objects. 
+\item The map $\pi_c \co \UU_c \to \U_c$ classifies small fibrations between cofibrant objects, \ie 
+for every small fibration $p \co A \to X$ with $X$ and $A$ cofibrant there exists a pullback diagram of the form
+\[
+\xymatrix{
+A \ar[r] \ar[d]_p & \UU_c \ar[d]^{\pi_c} \\
+X \ar[r]_a & \U_c }
+\]
+\item The object $\UU_c$ is cofibrant. \noten{Not sure we need this}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} \hfill
+\begin{enumerate}[(i)] 
+\item The claim follows from parts~(i) and~(ii) of~\cref{thm:universe-u}. 
+\item Let $p \co A \to X$ be a small fibration with $X$ cofibrant. Since $p$ is a
+small fibration, we know 
+from part~(iii) of \cref{thm:universe-u} that there is a pullback diagram of the form 
+\[
+\xymatrix{
+A \ar[r] \ar[d]_p \drpullback & \UU \ar[d]^{\pi} \\
+X \ar[r] & \U }
+\]
+Since $X$ is cofibrant, we have the lifting diagram
+\[
+\xymatrix{
+0 \ar[r] \ar[d] & \U_c \ar[d]^{} \\
+X \ar[r]_a \ar@{.>}[ur] & \U }
+\]
+which shows that the map $a \co X \to \U$ factors via $\U_c$.  We then obtain the diagram
+\[
+\xymatrix{
+A \ar[r] \ar[d]_p &  \UU_c \ar[r]  \ar[d]^{\pi_c} \drpullback & \UU \ar[d]^{\pi} \\
+X \ar[r]_{a_c} & \U_c \ar[r]_{a} &  \U }
+\]
+Here, the right-hand side square and the rectangle are pullbacks and therefore the left-hand
+side square is also a pullback, as required. 
+\item The claim follows from the fact that both $\U_c$ and
+$\UU$ are cofibrant, the latter holding by part (iii) of~\cref{thm:universe-u}, via \cref{lem:cofibrant_fiber_product}. \qedhere
+\end{enumerate} 
+\end{proof} 
+
+
+\notesh{
+% \item Fibrancy should follow directly from equivalence extension property, without using `composition vs filling' but rather retract property for horns (see notes).
+% \item Once we have established fibrancy of $U_c$, then one can prove univalence by showing that 
+% $t \co \mathsf{Weq}(U_c) \to U_c$ is a trivial fibration. 
+Question: do we need to know that $\mathsf{Weq}(\U_c)$ is a cofibrant object to get univalence?  I'm relatively sure $\mathsf{Weq}(\U_c)$ is not cofibrant. But all these property proved here will imediately pass to any cofibrant replacement. This is also why I'm working with  $\mathsf{Weq}(\U)$ instead: everything will be pulled back to the version for $\U_c$.
+}
+
 
 
 
