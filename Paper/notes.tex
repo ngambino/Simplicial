@@ -9,7 +9,10 @@
 \begin{document}
 
 \begin{abstract}
-Some notes on simplicial homotopy theory
+We provide a partial solution to the open problem of defining constructively a model of univalent foundations in a category that is homotopically equivalent to that of topological spaces.
+In particular, we prove constructive counterparts of all the main results on simplicial homotopy theory
+used in the definition of Voevodsky's simplicial model of univalent foundations. The key technical ingredient
+is the use of a cofibrant replacement functor to overcome the known issues regarding dependent products of fibrations.
 \end{abstract}
 
 \author{Nicola Gambino}
@@ -18,41 +21,35 @@ Some notes on simplicial homotopy theory
 
 
  \date{\today}
+ 
+ 
 
 \maketitle
 
-\section{Introduction}
 
-\newpage
-
-
-\section{Background}
+\section{Introduction} 
 
 
-\begin{itemize}
-\item Basics on $\SSet$ and notation. 
-\item We use $\Delta[n]$, $\partial \Delta[n]$ and $h^n_k$.
-\item Interval object is $\Delta[1]$. Endpoint inclusions $\kcyl \co \braces{ k} \to \Delta[1]$ are
-defined by $\kcyl \defeq h^1_k$.
-\end{itemize}
 
 
-\begin{definition} \hfill 
-\label{thm:small}
-\begin{enumerate}[(i)]
-\item We say that a simplicial set $X$ is \emph{small}  if $X_n$ is a small set for every $[n] \in \Delta$. 
-\item We say that a map $p \co A \to X$ of simplicial sets is \emph{small} if for every $x \co \Delta[n] 
-\to X$ the simplicial set~$A_x$ fitting in the pullback square
-\[
-\xymatrix{
-A_x \ar[r] \ar[d] \drpullback & A \ar[d]^{p} \\
-\Delta[n] \ar[r]_-{x} & X }
-\]
-is small.
-\end{enumerate}
-\end{definition} 
 
-\bigskip
+
+
+
+
+In order to motivate our development, we briefly outline how an interpretation of Martin-L\"of type theory 
+extended with the univalence axiom, written $\mathrm{ML(UA)}$ below, is to be defined. We shall not deal with several coherence issues, which we leave for future work. Let us begin by recalling that  $\mathrm{ML(UA)}$ has the following four forms of hypothetical judgement:
+\begin{gather*}
+ \Gamma \vdash A \co \type \, ,  \\ 
+ \Gamma \vdash a \co A \, , \\
+  \Gamma \vdash A  = B \co \type \, ,  \\
+ \Gamma \vdash a = b \co A \co \type \, .
+  \end{gather*}
+Here, $\Gamma  = (x_1 \co A_1, \ldots, x_n \co A_n)$ is a  context of variable declarations, possibly empty. Below, we shall often conflate a type and its interpretation to keep our presentation as simple as possible.
+
+
+
+
 
 We write $\FFib_{/X}$ for the full subcategory of $\SSet_{/X}$ spanned by fibrations and $\BFFib_{/X}$ for the full subcategory of  $\SSet_{/X}$ spanned by fibrations with cofibrant domain. We then have inclusion
 functors
@@ -64,17 +61,9 @@ functors
 \]
 
 
-\section{Outline of the interpretation} 
 
-In order to motivate our development, we briefly outline how an interpretation of Martin-L\"of type theory 
-extended with the univalence axiom, written $\mathrm{ML(UA)}$ below, is to be defined. We shall not deal with several coherence issues, which we leave for future work. Let us begin by recalling that  $\mathrm{ML(UA)}$ has the following four forms of hypothetical judgement:
-\begin{gather*}
- \Gamma \vdash A \co \type \, ,  \\ 
- \Gamma \vdash a \co A \, , \\
-  \Gamma \vdash A  = B \co \type \, ,  \\
- \Gamma \vdash a = b \co A \co \type \, .
-  \end{gather*}
-Here, $\Gamma  = (x_1 \co A_1, \ldots, x_n \co A_n)$ is a  context of variable declarations, possibly empty. Below, we shall often conflate a type and its interpretation to keep our presentation as simple as possible.
+
+
 
 \subsection*{Types}
 
@@ -236,103 +225,65 @@ structure rather than just two weak factorisation systems.
 
 
 
-\section{Review of the weak model structure on simplicial sets} 
+\section{Preliminaries} 
 
-\subsection*{Two weak factorisation systems}
 
-The aim of this section is to construct two weak factorisation systems on $\SSet$. These are the counterparts in our setting of the classical weak factorisation systems of cofibrations and trivial fibrations and of trivial cofibrations and fibrations, respectively. 
+\subsection*{Simplicial sets} 
 
-For this, we use a constructive version of the small object argument, discussed in~\cite{henry2018wms}. For completeness, we give a proof. 
 
-\begin{lemma} \label{thm:soa} Let $\mathcal{E}$ be a cocomplete category and $I$ a set of maps in $\mathcal{E}$ satisfying the following assumptions:
-\begin{enumerate}[$(i)$]
-\item For every $i \co A \to B$ in $I$, the functor $\mathrm{Hom}_\mathcal{E}(A, -) \co \mathcal{E} \to
-\mathbf{Set}$ commites with colimits of increasing $\omega$-chains.
-\item For any multiple pushout ... and any $i \co A \to B$ in $I$, the function
+\begin{itemize}
+\item Basics on $\SSet$ and notation. 
+\item We use $\Delta[n]$, $\partial \Delta[n]$ and $h^n_k$.
+\item Interval object is $\Delta[1]$. Endpoint inclusions $\kcyl \co \braces{ k} \to \Delta[1]$ are
+defined by $\kcyl \defeq h^1_k$.
+\end{itemize}
+
+
+
+\subsection*{Cofibrations and acyclic fibrations}
+
+
+
+For $n \geq 0$, we write $i^n \co  \partial \Delta[n] \to \Delta[n]$ for the \emph{boundary inclusion} into the $n$-simplex and let
 \[
-\mathrm{Hom}(A, X) \to \mathrm{Hom}(A, X_1)
+\cal{I} \defeq \{ i^n \co  \partial \Delta[n] \to \Delta[n] \ | \ n \geq 0 \} \, .
 \]
-is a complemented monomorphism.
-\end{enumerate}
-Then $(\mathrm{Sat}(I), I^\pitchfork)$ is a weak factorisation system on $\mathcal{E}$.
-\end{lemma}
-
-\begin{proof} TO BE ADDED.
-\end{proof}
+The maps in $\mathsf{Sat}(\cal{I})$ will be called \emph{cofibrations} and a simplicial set $X$ will be said to 
+be~\myemph{cofibrant} if the unique map $0 \to X$ is a cofibration. As shown in~\cite[Proposition 5.1.7]{henry2018wms}, a map~$f \co Y \to X$ is a cofibration if and only if it is a levelwise complemented monomorphism such that the degeneracy of simplices is decidable on the complement of the image of $f$. 
+Thus, a simplicial set is cofibrant if and only if degeneracy is decidable and cofibrations between cofibrant objects are the levelwise complemented monomorphisms. 
 
 
-\bigskip
+\begin{definition} A map $p \co A \to X$ in $\SSet$ is called an \myemph{acyclic fibration} if it has the right lifting property
+with respect to every cofibration with cofibrant domain.
+\end{definition} 
+
+\medskip
+
+By the constructive version of the small object argument, there is a weak factorisation system 
+\begin{equation}
+\label{equ:wfs1}
+\big( \mathsf{Sat}(\cal{I}) \, , \cal{I}^\pitchfork \big) \, .
+\end{equation}
+\noten{A sentence on why the assumptions of the constructive small object argument hold.}
+Since the domains of the boundary inclusions are cofibrant simplicial sets, acyclic fibrations have the right lifting property with respect to all cofibrations, not just those with cofibrant domain, and therefore they are
+exactly the maps in $\cal{I}^\pitchfork$. Thus, the weak factorisation system in~\eqref{equ:wfs1} has
+cofibrations as left maps and acyclic fibrations as right maps.
 
 
-
-
-We now apply \cref{thm:soa} to obtain two weak factorisation systems on $\SSet$. For the first, 
-we consider 
-\[
-\cal{I} \defeq \{ \inc{n} \co  \partial \Delt{n} \to \Delt{n} \ | \ n \geq 0 \}
-\]
-We refer to maps in $\mathcal{I}$ as boundary inclusions. 
-
-\begin{proposition} The category $\SSet$ admits a weak factorisation system $(\mathrm{Sat}(\mathcal{I}), 
-\mathcal{I}^\pitchfork)$.
-\end{proposition}
-
-\begin{proof} ONE NEEDS TO CHECK ASSUMPTIONS OF \cref{thm:soa} HOLD.
-\end{proof}
-
-
-
-Observe that  a map has the right lifting property with respect to all maps in $\mathcal{I}$
-if and only if it has the right lifting property with respect to all cofibrations between cofibrant
-objects. This holds since all the domains of maps in $\mathcal{I}$ are cofibrant.
-
-\bigskip
-
-
-For the second weak factorisation system, we consider 
-\[
-\cal{J} \defeq \{ h^k_n  \co \Lambda^n_k \to \Delt{n} \ | \ 0 \leq k \leq n \} \, .
-\]
-We refer to maps in $\mathcal{J}$ as horn inclusions.
-
-\begin{proposition} The category $\SSet$ admits a weak factorisation system $(\mathrm{Sat}(\mathcal{J}, 
-\mathcal{J}^\pitchfork)$.
-\end{proposition}
-
-\begin{proof} ONE NEEDS TO CHECK ASSUMPTIONS OF \cref{thm:soa} HOLD.
-\end{proof}
-
-
-
-
-We provide some additional information on the classes of cofibrations and fibrations. 
-
-\bigskip
-
-We begin with cofibrations and recall from  that the Eilenberg-Zilber lemma holds for cofibrant simplicial sets.
-
-\begin{lemma}
-\label{lem:EZ_cof}
-In a cofibrant simplicial set $X$, any cell $x \in X$ can be written uniquely as $p^*(y)$ where $y$ is a non-degenerate cell of $X$ and $p$ is a degeneracy.
-\end{lemma}
-
-
-As shown in~~\cite[Proposition 5.1.7]{henry2018wms}, a map $f \co S \to A$ is a cofibration if and only if it is a levelwise complemented monomorphism such that the degeneracy of simplices is decidable on the complement of the image of $f$. In particular, a simplicial set is cofibrant if and only if degeneracy is decidable and cofibrations between cofibrant objects are the levelwise complemented monomorphisms.
+\medskip 
 
 
 
 
 
 
- 
-
-
+Cofibrant simplicial sets are of particular importance for our development because of their decidability properties, which are important to establish counterparts of classical results valid for all simplicial sets. An example is the Eilenberg-Zilber lemma. As shown in~\cite{henry2018wms}, in a cofibrant simplicial set $X$, any cell $x \in X$ can be written uniquely as $p^*(y)$ where $y$ is a non-degenerate cell of $X$ and $p$ is a degeneracy.
 
 
 
 
 \begin{lemma}\label{lem:cofibrant_fiber_product}
-Let $A \, , B$ be cofibrant. Then for every pullback of the form
+Let $A \, , B$ be cofibrant simplicial sets. Then for every pullback of the form
 \[
 \xymatrix{
 A \times_X B \ar[r]^-{q} \ar[d]_-{p} & B \ar[d]^g \\
@@ -342,7 +293,7 @@ the simplicial set $A \times_{X} B$ is cofibrant.
 \end{lemma}
 
 \begin{proof}
-We check it first in the case $X = 1$, i.e. for the product $A \times B$. Let $x = (a,b) \in (A \times B)_n$, if $A$ and $B$ are cofibrant one can apply lemma \ref{lem:EZ_cof} and write $a = p^*(a')$ and $b = q^*(b')$ with $a'$ and $b'$ non-degenerate cells and $p \co [n] \twoheadrightarrow [m]$ and $q \co [n] \twoheadrightarrow [k]$ are two degeneracies. We claim that $(a,b)$ is degenerate if and only if the map $(a ,b )  \co [n] \rightarrow [m] \times [k]$ is not monic, which is a decidable condition since $(a,b)$ is a map between finite decidable sets.
+We check it first in the case $X = 1$, i.e. for the product $A \times B$. Let $x = (a,b) \in (A \times B)_n$, if $A$ and $B$ are cofibrant one can apply the Eilenberg-Zilber lemma and write $a = p^*(a')$ and $b = q^*(b')$ with $a'$ and $b'$ non-degenerate cells and $p \co [n] \twoheadrightarrow [m]$ and $q \co [n] \twoheadrightarrow [k]$ are two degeneracies. We claim that $(a,b)$ is degenerate if and only if the map $(a ,b )  \co [n] \rightarrow [m] \times [k]$ is not monic, which is a decidable condition since $(a,b)$ is a map between finite decidable sets.
 
 Indeed, the pair of map $(a,b)$ corresponding to a degenerate cell $x=r^*(x')$ for any non-trivial degeneracy $r \co [n] \twoheadrightarrow [n']$, is  $\big( p'(r),q'(r) \big)$ where $(p',q')$ are the maps corresponding to $x'$, and this is never monic as it factor into $r$, hence for a degenerate cell the condition above is always satisfied. Conversely, if $(p,q)\co [n] \rightarrow [m] \times [k]$ is not monic then as it is an increasing map there is some $i$ such that $p(i)=p(i+1)$ and $q(i)=q(i+1)$, hence $(p,q)$ can be factored into the $i$-th degeneracy map: $p=p' d_i$ and $q=q' d_i$ and in this case $x= d_i^* (p'^*(b'),q'^*(c'))$ is indeed a degenerate cell.
 
@@ -366,30 +317,156 @@ be a pullback diagram. Then $q \co A \times_X B \rightarrow B$ is a cofibration.
 
 
 
-% \begin{lemma} For $0 \leq k \leq n$, the horn inclusion $\horninc{k}{n} \co \Horn{k}{n} \to \Delt{n}$ is a retract of
-% the pushout product
-% \[
-% \horninc{k}{1} \hattimes i^n \co (\Delt{1} \times \Sphere{n} ) \cup (\braces{k} \times \Delt{n} ) \to \Delt{1} \times \Delt{n} 
-% \]
-% \end{lemma} 
+\subsection*{Fibrations and acyclic cofibrations} 
 
-\bigskip
+For $0 \leq k \leq n$, we write $h^k_n  \co \Lambda^k[n] \to \Delta[n]$ for the $k$-th \emph{horn inclusion}
+into the $n$-simplex and define 
+\[
+\cal{J} \defeq \{ h^k_n  \co \Lambda^k[n] \to \Delta[n]  \ | \ 0 \leq k \leq n \} \, .
+\]
+The maps in $\cal{J}^\pitchfork$ will be called~\emph{fibrations} and a simplicial set $A$ will be said to be \myemph{fibrant} if the unique map $A \to 1$ is a fibration. Thus, our notions of a fibration and of a fibrant
+simplicial set coincide exactly with the classical notions of a Kan fibration and of a Kan complex. 
 
-We now turn our attention to fibrations. The next proposition will be essential to combine our development with that in~\cite{gambino2017frobenius}.
+\begin{definition} A map $f \co Y \to X$ in $\SSet$ is an \myemph{acyclic cofibration}  if it has the 
+left lifting property with respect to all fibrations with fibrant codomain.
+\end{definition} 
+
+
+
+\medskip
+
+By another application of the  small object argument, there is a weak factorisation system 
+\begin{equation}
+\label{equ:wfs2}
+\big( \mathsf{Sat}(\cal{J}) \, , \cal{J}^\pitchfork \big) \, .
+\end{equation}
+The maps in $\mathsf{Sat}(\cal{J})$ will be called \myemph{anodyne extensions}.  It follows easily from the definitions that every anodyne extension is an acyclic cofibration. However, it is an open question whether the converse holds. 
+
+
+As we explain in more detail in~\cref{sec:conclusions}, answering
+this question positively is connected closely to establishing constructively the existence of a Quillen model structure on $\SSet$.  \noten{A sentence on why the assumptions of the constructive small object argument hold.} 
 
 
 
 
-\begin{proposition} A map $p \co A \to X$ is a fibration if and only if it has the right lifting property with respect to the pushout products $ \kcyl  \hattimes i$, for every cofibration $i$.
+
+
+\medskip
+
+
+The next proposition will be essential to combine our development with that in~\cite{gambino2017frobenius}.
+In order to state it, we need to recall some notation and terminology. For a map $i \co A \to B$, we define its
+pushout product with the endpoint inclusion $\kcyl \co \braces{ k } \to \Delta[1]$ to be the unique map
+\[
+\kcyl \hattimes i \co \big( \Delta[1] \times A ) \cup B \to \Delta[1] \times  B
+\]
+determined by the pushout diagram
+
+\[
+\xymatrix{
+\braces{ k } \times A \ar[r] \ar[d] &  \Delta[1]  \times A  \ar[d] \ar@/^1.5pc/[ddr] \\
+\braces{ k} \times B \ar[r]  \ar@/_1.5pc/[drr] & \big( \Delta[1] \times A ) \cup B \ar@{.>}[dr]  \\
+ & &\Delta[1] \times  B }
+ \]
+
+
+
+\begin{proposition} For a map $p \co A \to X$, the following conditions are equivalent.
+\begin{enumerate}[(i)] 
+\item The map $p$ is a fibration.
+\item The map $p$ has the right lifting property with respect to the pushout products $ \kcyl  \hattimes i$, for every cofibration $i \co S \to T$.
+\item The map $p$ has the right lifting property with respect to the pushout products $ \kcyl  \hattimes h^n_k$, for every  
+horn inclusion $h^n_k$. \noten{Need to fix indices to avoid clash of use of $k$}.
+\end{enumerate}
 \end{proposition} 
 
 \begin{proof}The proof of \cite[Theorem~3.2.3]{joyal-tierney:simplicial-homotopy-theory} is completely constructive and sufficient to imply this result.
-For more details see also the last claim of \cite[Corollary~5.3.2]{henry2018wms}, which follows from Proposition~5.2.6 therein. 
+For more details, readers may also refer to the last claim in \cite[Corollary~5.3.2]{henry2018wms}
+and \cite[Proposition~5.2.6]{henry2018wms}.
 \end{proof}
 
-\subsection*{Weak equivalences} 
 
-WE NEED TO CLARIFY THE DISTINCTION BETWEEN SATTLER WEAK EQUIVALENCES AND HENRY WEAK EQUIVALENCES. ALSO A GOOD PLACE TO RECALL THE EXISTENCE OF THE WEAK MODEL STRUCTURE.
+
+
+
+
+
+\subsection*{The weak model structure} 
+
+
+\noten{THIS SUBSECTION IS TO BE REVISED COMPLETELY. I JUST MOVED SOME MATERIAL FROM THE APPENDIX} 
+
+\bigskip
+
+Let $\cal{E}$ be a category with an initial object $0$. A {\bf class of cofibrations} in $\cal{E}$ is
+a class of maps $\Cof$ of $\cal{E}$ with the following properties:
+\begin{enumerate}[(C1)]
+\item $\Cof$ contains identities and is closed under composition;
+\item For all $i \co A \to B$ in $\Cof$, $A$ is cofibrant;
+\item For all $i \co A \to B$ in $\Cof$ and $f \co A \to A'$ with $A'$ cofibrant, there is a pushout
+\[
+\xymatrix{
+A \ar[r]^f \ar[d]_{i}  & A' \ar[d] \\
+B \ar[r] & \ulpullback B }
+\]
+with $A' \to B'$ in $\Cof$.
+\item Isomorphisms whose domain is cofibrant are in $\Cof$.
+\end{enumerate}
+There is a dual notion of a class of fibrations in a category with a terminal object, which we do
+not spell out.
+
+\medskip
+
+Let now $\cal{E}$ be a category with both an initial object $0$ and a terminal object $1$,
+a class of cofibrations $\Cof$ and a class of fibrations $\Fib$. We say that a map is a {\bf trivial fibration}
+if it is a fibration and it has the right lifting property with respect to all cofibrations. Dually, we say that
+a map is a {\bf trivial cofibration} if it is a cofibration and it has the left lifting property with respect to
+all fibrations. An object is said to be {\bf bifibrant} if it is both fibrant and cofibrant.
+
+
+\begin{definition} A {\bf weak model structure} on $\cal{E}$ consists of a class of cofibrations $\Cof$, a class of
+fibrations $\Fib$ such that
+\begin{enumerate}[(SM1)]
+\item Every map $f \co A \to X$, where $A$ is cofibrant and $X$ is fibrant, factors both as a
+cofibration followed by a trivial fibration and as a trivial cofibration followed by a trivial fibration.
+\item For every bifibrant object $X$, we have a factorisation of the codiagonal $\nabla_X \co 
+X + X \to X$ as a cofibration followed by a fibration 
+\[
+\xymatrix{X + X \ar[r] &  {\bf I}(X) \ar[r] & X}
+\]
+such that the composites 
+\[
+\xymatrix{X \ar[r]^-{\iota_k}  & X+X \ar[r] & {\bf I }(X)}
+\]
+are trivial cofibrations.
+\item For every bifibrant object $X$, we have a factorisation of the diagonal $\Delta_X \co X \to 
+X \times X$ as a cofibration followed by a fibration
+\[
+\xymatrix{X  \ar[r]  & {\bf P}(X) \ar[r] & X \times X }
+ \]
+ such that the composites
+\[
+\xymatrix{ {\bf P}(X) \ar[r] &  X \times X \ar[r]^-{\pi_k} &  X }
+\]
+are trivial fibrations.
+\end{enumerate}
+\end{definition}
+
+\bigskip
+
+
+
+\noten{
+It is important to note the similarities and differences between weak model structures and model
+structures. }
+
+
+\bigskip
+
+
+
+\noten{
+WE NEED TO CLARIFY THE DISTINCTION BETWEEN SATTLER WEAK EQUIVALENCES AND HENRY WEAK EQUIVALENCES. ALSO A GOOD PLACE TO RECALL THE EXISTENCE OF THE WEAK MODEL STRUCTURE.}
 
 
 \bigskip
@@ -437,7 +514,7 @@ Y \overset{\sim}{\hookrightarrow} P_X(Y) {\twoheadrightarrow} Y \times_{X} Y
 As $Y \twoheadrightarrow X$ is a fibration, the map $Y \times_X Y \twoheadrightarrow Y$ is also a fibration, hence the map $P_X Y \twoheadrightarrow Y$ is a fibration, and as it is a retraction of the trivial cofibration $Y \hookrightarrow P_X(Y)$ it is also a weak equivalence (note that the objec $Y \times_X Y$ if cofibrant because of \cref{lem:cofibrant_fiber_product}), hence it is a trivial fibration again by \cref{lemma:triv_fib_are_we}. This proves that every bifibrant object of $\SSet_{/X}$ also has a strong path object.
 \end{proof}
 
-\newpage
+
 
 \section{On the cofibrant replacement functor}
 
@@ -540,7 +617,7 @@ This proposition has some interesting corollaries:
 
 \newpage
 
-\section{Dependent products of fibrations}
+\section{Dependent products}
 
 This section is devoted to proving a counterpart of the classical result that, for a fibration $p \co A \rightarrow X$, the dependent product, or pushforward, functor $\Pi_p \co \SSet_{/A} \to \SSet_{/X}$ preserves fibrations. 
 
@@ -889,6 +966,24 @@ In order to do this, we shall modify  the construction of the weak classifier fo
 in~\cite{voevodsky-simplicial-model} and then consider a suitable cofibrant replacement. 
 We shall refer to $\U_c$ as the universe of small bifibrant objects and to $\pi_c$ as the 
 weakly universal small fibration between bifibrant objects.
+
+\begin{definition} \hfill 
+\label{thm:small}
+\begin{enumerate}[(i)]
+\item We say that a simplicial set $X$ is \emph{small}  if $X_n$ is a small set for every $[n] \in \Delta$. 
+\item We say that a map $p \co A \to X$ of simplicial sets is \emph{small} if for every $x \co \Delta[n] 
+\to X$ the simplicial set~$A_x$ fitting in the pullback square
+\[
+\xymatrix{
+A_x \ar[r] \ar[d] \drpullback & A \ar[d]^{p} \\
+\Delta[n] \ar[r]_-{x} & X }
+\]
+is small.
+\end{enumerate}
+\end{definition} 
+
+\bigskip
+
 
 
 \medskip
@@ -1248,71 +1343,13 @@ This will satisfy the $\beta$-rule but not the $\eta$-rule for $\Pi$-types [TO B
 \item This should be essentially straightforward, following Kapulkin and Lumsdaine, but we may need to modify the notion of a $\Pi$-structure to accommodate the cofibrant replacements that we take for $\Pi$.
 \end{itemize}
 
+\section{Conclusions} 
+\label{sec:conclusions}
+
+
 \appendix
 
 \section{Weak model structures} 
-
-Let $\cal{E}$ be a category with an initial object $0$. A {\bf class of cofibrations} in $\cal{E}$ is
-a class of maps $\Cof$ of $\cal{E}$ with the following properties:
-\begin{enumerate}[(C1)]
-\item $\Cof$ contains identities and is closed under composition;
-\item For all $i \co A \to B$ in $\Cof$, $A$ is cofibrant;
-\item For all $i \co A \to B$ in $\Cof$ and $f \co A \to A'$ with $A'$ cofibrant, there is a pushout
-\[
-\xymatrix{
-A \ar[r]^f \ar[d]_{i}  & A' \ar[d] \\
-B \ar[r] & \ulpullback B }
-\]
-with $A' \to B'$ in $\Cof$.
-\item Isomorphisms whose domain is cofibrant are in $\Cof$.
-\end{enumerate}
-There is a dual notion of a class of fibrations in a category with a terminal object, which we do
-not spell out.
-
-\medskip
-
-Let now $\cal{E}$ be a category with both an initial object $0$ and a terminal object $1$,
-a class of cofibrations $\Cof$ and a class of fibrations $\Fib$. We say that a map is a {\bf trivial fibration}
-if it is a fibration and it has the right lifting property with respect to all cofibrations. Dually, we say that
-a map is a {\bf trivial cofibration} if it is a cofibration and it has the left lifting property with respect to
-all fibrations. An object is said to be {\bf bifibrant} if it is both fibrant and cofibrant.
-
-
-\begin{definition} A {\bf semi-model structure} on $\cal{E}$ consists of a class of cofibrations $\Cof$, a class of
-fibrations $\Fib$ such that
-\begin{enumerate}[(SM1)]
-\item Every map $f \co A \to X$, where $A$ is cofibrant and $X$ is fibrant, factors both as a
-cofibration followed by a trivial fibration and as a trivial cofibration followed by a trivial fibration.
-\item For every bifibrant object $X$, we have a factorisation of the codiagonal $\nabla_X \co 
-X + X \to X$ as a cofibration followed by a fibration 
-\[
-\xymatrix{X + X \ar[r] &  {\bf I}(X) \ar[r] & X}
-\]
-such that the composites 
-\[
-\xymatrix{X \ar[r]^-{\iota_k}  & X+X \ar[r] & {\bf I }(X)}
-\]
-are trivial cofibrations.
-\item For every bifibrant object $X$, we have a factorisation of the diagonal $\Delta_X \co X \to 
-X \times X$ as a cofibration followed by a fibration
-\[
-\xymatrix{X  \ar[r]  & {\bf P}(X) \ar[r] & X \times X }
- \]
- such that the composites
-\[
-\xymatrix{ {\bf P}(X) \ar[r] &  X \times X \ar[r]^-{\pi_k} &  X }
-\]
-are trivial fibrations.
-\end{enumerate}
-\end{definition}
-
-\bigskip
-
-
-
-It is important to note the similarities and differences between semi-model structures and model
-structures. 
-
 
 
 \nocite{*}
