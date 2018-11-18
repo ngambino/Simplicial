@@ -229,7 +229,7 @@ structure rather than just two weak factorisation systems.
 
 
 We write $\Delta$ for the simplicial category. Its objects will be written as $[n]$, for $n \geq 0$. We denote
-the category of simplicial sets, \ie the presheaf category $[\Delta^{\op}, \Set]$ by $\SSet$. 
+the category of simplicial sets, \ie the presheaf category over $\Delta$, by $\SSet$. 
  For $n \geq 0$, we write $\Delta[n]$ for for the
 associated representable simplicial set. We write $i^n \co  \partial \Delta[n] \to \Delta[n]$ for the \emph{boundary inclusion} into the $n$-simplex and  $h^k_n  \co \Lambda^k[n] \to \Delta[n]$ for the $k$-th \emph{horn inclusion} into the $n$-simplex. The simplicial set $\Delta[1]$ provides an interval object in $\SSet$, with endpoint inclusions~$\kcyl \co \braces{ k} \to \Delta[1]$ defined by~$\kcyl \defeq h^1_k$.
 
@@ -250,9 +250,10 @@ Let us recall from~\cite{henry2018wms} the notions of a cofibration with which w
 
 \medskip
 
-Note that cofibrations between cofibrant objects are the levelwise complemented monomorphisms. 
-Cofibrant simplicial sets are of particular importance for our development because of their decidability properties, which can be used to establish counterparts of classical results valid for all simplicial sets. An example is the Eilenberg-Zilber lemma~\cite{henry2018wms}, asserting that in a cofibrant simplicial set~$X$, any cell $x \in X$ can be written uniquely as $p^*(y)$, where $y$ is a non-degenerate cell of $X$ and $p$ is a degeneracy. It is clear that, assuming the law of excluded middle, every monomorphism is a cofibration
-and thus our notion of a cofibration coincides with the classical one. 
+
+ Note that a map between cofibrant objects is a cofibration
+if and only if it is a levelwise complemented monomorphism. 
+Cofibrant simplicial sets are of particular importance for our development because of their decidability property, which can be used to establish counterparts of classical results valid for all simplicial sets. An example is the Eilenberg-Zilber lemma~\cite{henry2018wms}, asserting that in a cofibrant simplicial set~$X$, any cell $x \in X$ can be written uniquely as $p^*(y)$, where $y$ is a non-degenerate cell of $X$ and $p$ is a degeneracy. Clearly, if one assumes the law of excluded middle, then every monomorphism is a cofibration and our notion of a cofibration coincides with the usual one. 
 
 \medskip
 
@@ -270,25 +271,27 @@ Our notion of a fibration, instead, coincides with the classical one even withou
 
 \medskip
 
-
-Having defined cofibrations and fibrations, one could try to establish the existence of a Quillen model
-structure by defining a trivial fibration to be a map with the right lifting property with respect to all cofibrations,
-a trivial cofibration to be a map with the left lifting property with respect to all fibrations, and a weak equivalence to be a map that can be factored as a trivial cofibration followed by a trivial fibration. Indeed, 
+We write $\Cof$ for the class of cofibrations, $\Fib$ for the class of fibrations and say that a simplicial set is \myemph{bifibrant} if it is both fibrant and cofibrant. Having defined cofibrations and fibrations, one could try to establish the existence of a Quillen model structure by defining a trivial fibration~to be a map with the right lifting property with respect to all cofibrations, a trivial cofibration to~be a map with the left lifting property with respect to all fibrations, and a weak equivalence to be~a map that can be factored as a trivial cofibration followed by a trivial fibration. Indeed, 
 these definitions are forced upon us if a Quillen model category exists. While the existence of the weak
 factorisation systems is not an issue constructively (\cf comments further below), it seems  very difficult to verify the axioms for a Quillen model structure with these definitions, the key issue being  the  3-for-2 property for weak equivalences.  
 
 \medskip
 
 In order to overcome this issue, we shall work instead with weak model structure on $\SSet$ introduced  in \cite{henry2018wms}. This is useful since it will allow us to retain the 3-for-2 property for weak equivalences. 
-For this, let us define an \emph{acyclic fibration} to be a map with the right lifting property
-with respect to every cofibration with cofibrant domain and an \myemph{acyclic cofibration} to be 
-a map with left lifting property with respect to all fibrations with fibrant codomain.
-Note that, being defined by weak orthogonality conditions, the classes of acyclic fibrations
-and acyclic cofibrations have the usual closure properties. We also say that a simplicial set is \myemph{bifibrant} if it is both fibrant and cofibrant. 
+For this, let us introduce some auxiliary notions. 
 
-\bigskip
 
-As shown in~\cite{henry2018wms}, cofibrations and fibrations as defined above form a  a weak model structure on the category $\SSet$, in the sense that the following conditions hold.
+\begin{definition} \hfill
+\begin{enumerate}[(i)]
+\item We say that a map is an \emph{trivial fibration} if it is a fibration and it has the right lifting property
+with respect to every cofibration with cofibrant domain.
+\item We say that a map is an \myemph{trivial cofibration} if it is a cofibration and it has the left lifting property with respect to all fibrations with fibrant codomain.
+\end{enumerate}
+\end{definition}
+
+We write $\TrivCof$ and $\TrivFib$ for the classes of trivial fibrations and trivial cofibrations, respectively.
+Note that, being defined by weak orthogonality conditions, the classes of trivial fibrations
+and trivial cofibrations have the usual closure properties. As shown in~\cite{henry2018wms}, cofibrations and fibrations as defined above form a  a weak model structure on the category $\SSet$, in the sense that the following conditions hold.
 \begin{enumerate}[$(\mathrm{WM}1)$]
 \item Every map $f \co A \to X$, where $A$ is cofibrant and $X$ is fibrant, factors both as a
 cofibration followed by a trivial fibration and as a trivial cofibration followed by a trivial fibration,
@@ -316,8 +319,8 @@ are trivial fibrations.
 
 
 
-We refer the reader to~\cite{henry2018wms} for the details of the proof and limit ourselves to a few comments to illustrate in what ways the weak model structure on $\SSet$ relates to the Quillen model structure. 
-For this, let us define the set of boundary inclusions $\cal{I}$ and the set of horn inclusions $\cal{J}$ by letting
+We refer the reader to~\cite{henry2018wms} for the details of the proof and limit ourselves to some comments to illustrate in what ways this weak model structure on $\SSet$ relates to the classical Quillen model structure for Kan complexes. 
+For this, let $\cal{I}$ be the set of boundary inclusions and $\cal{J}$ be the set of horn inclusions, \ie
 \[
 \cal{I} \defeq \{ i^n \co  \partial \Delta[n] \to \Delta[n] \ | \ n \geq 0 \} \, , \quad 
 \cal{J} \defeq \{ h^k_n  \co \Lambda^k[n] \to \Delta[n]  \ | \ 0 \leq k \leq n \} \, .
@@ -327,16 +330,19 @@ maps in $\cal{I}$ and $\cal{J}$ satisfy all the finiteness and decidability assu
 in~\cite{henry2018wms}, there are two weak factorisation systems on $\SSet$: 
 \begin{equation}
 \label{equ:wfs}
-\big( \mathsf{Sat}(\cal{I}) \, , \cal{I}^\pitchfork \big) \, , \qquad 
+\big( \mathsf{Sat}(\cal{I}) \, , \cal{I}^\pitchfork \big) \, , \quad 
 \big( \mathsf{Sat}(\cal{J}) \, , \cal{J}^\pitchfork \big) \, .
 \end{equation}
-As shown in~\cite[Proposition 5.1.7]{henry2018wms} a map is a cofibration if and only if it is in $\mathsf{Sat}(\cal{I})$. Furthermore, since the domains of the boundary inclusions are cofibrant simplicial sets, acyclic fibrations have the right lifting property with respect to all cofibrations, not just those with cofibrant domain, and therefore they are exactly the maps in $\cal{I}^\pitchfork$. Thus, the first weak factorisation system in~\eqref{equ:wfs} has cofibrations as left maps and acyclic fibrations as right maps. It is clear how this 
-weak factorisation system is the counterpart of the classical weak factorisation system of monomorphisms
-and trivial Kan fibrations. 
+As shown in~\cite[Proposition 5.1.7]{henry2018wms} a map is a cofibration if and only if it is in $\mathsf{Sat}(\cal{I})$. Furthermore, since the domains of the boundary inclusions are cofibrant simplicial sets, acyclic fibrations have the right lifting property with respect to all cofibrations, not just those with cofibrant domain, and therefore they are exactly the maps in $\cal{I}^\pitchfork$. Thus, we have
+\[
+\big( \Cof, \TrivFib \big) = \big( \mathsf{Sat}(\cal{I}) \, , \cal{I}^\pitchfork \big) \, .
+\]
+It is then clear how this weak factorisation system is the counterpart of the classical weak factorisation system of monomorphisms and trivial Kan fibrations. 
 
-For the second weak factorisation system, the situation is slightly more subtle. In order to discuss it, it is
-convenient to introduce some additional terminology and refer to the maps in~$\mathsf{Sat}(\cal{J})$ as \myemph{anodyne extensions}. It follows easily from the definitions that every anodyne extension is an acyclic cofibration. 
-
+To continue our discussion, let us refer to the maps in~$\mathsf{Sat}(\cal{J})$ as \myemph{anodyne extensions}. It follows easily from the definitions that 
+\[
+  \mathsf{Sat}(\cal{J}) \subseteq \TrivCof \, , \quad \cal{J}^\pitchfork = \Fib \, .
+\]
 
 
 
@@ -359,6 +365,51 @@ WE NEED TO CLARIFY THE DISTINCTION BETWEEN SATTLER WEAK EQUIVALENCES AND HENRY W
 \bigskip
 
 
+Recall that in a weak model category, a  cofibration with cofibrant domain is a trivial cofibration if and only if it is a weak equivalence and, dually, a fibration with fibrant codomain is a trivial fibration if and only if it is a  weak equivalence~\cite[Proposition 2.2.9]{henry2018wms}. But in the special case of simplicial sets one can prove a bit more,
+thanks to the fact that every cofibrant object has a strong cylinder, given by~$A + A \rightarrowtail \Delta[1] \times A \rightarrow A$.
+ 
+
+
+\begin{lemma}\label{lemma:triv_fib_are_we}
+A fibration between cofibrant simplicial sets is a weak equivalence if and only if it is a trivial fibration.
+In particular, any weak equivalence between cofibrant simplicial set can be factored as a trivial cofibration followed by a trivial fibration.
+\end{lemma}
+
+\begin{proof}
+One first proves that any trivial fibration  $p \co A \to X$ between cofibrant object is a weak equivalence. More precisely, one shows that $p$ is invertible in the homotopy category by constructing first a section $i \co X \rightarrow A$ of $p$ and then a homotopy between $i  p \co A \to A$ and the identity $1_{A}$. They are obtained as diagonal filling in the following two squares:
+\[
+\xymatrix{0 \ar[r] \ar[d] & A \ar[d]^{p} \\ 
+X \ar@{.>}[ur]^{i} \ar@{=}[r] & X}
+\qquad
+\xymatrix{A + A \ar[rr]^{(1_{A} , i  p)} \ar[d] & &  A \ar[d] \\ \Delta[1] \times A \ar@{.>}[rru] \ar[r]& A \ar[r]^{p} & X  }
+\]
+It follows that if $p \co A \rightarrow X$ is a weak equivalences between two cofibrant objects then if one factors it as a cofibration followed by a trivial fibration, then the cofibration part is a trivial cofibration. 
+
+Finally, if $p \co A \to X$ is a fibration between cofibrant objects which is also a weak equivalence then one can factor it as a trivial cofibration $j$ followed by a trivial fibration $p'$, and using the lifting property of $j$ against $p$ one obtained that $p$ is a retract of $p'$, hence a trivial fibration as well.
+\end{proof}
+
+The previous lemma has a nice consequence.
+
+\begin{corollary}
+For any cofibrant simplicial set $X$, the category $\SSet_{/X}$ admits a weak model structure with cofibrations and fibrations  being those of $\SSet$.
+\end{corollary}
+
+\begin{proof}
+
+It is clear that one has two weak factorization systems on $\SSet_{/X}$ for every object $X$. So according to \cite[Definition~2.1.11]{henry2018wms} we only have to show that bifibrant objects admits cylinder objects and path objects. Let $Y$ be a cofibrant object of $\SSet_{/X}$. One forms a cofibration,trivial fibration factorization:
+\[ 
+Y +_X Y \hookrightarrow I_X(Y) \overset{\sim}{\twoheadrightarrow} Y 
+\]
+Since, by  \cref{lemma:triv_fib_are_we}, the trivial fibration above is a weak equivalence in $\SSet$, both legs $Y \hookrightarrow I_X(Y)$ are weak equivalences in $\SSet$ as well and hence they are trivial cofibrations. This shows that every cofibrant object admit a strong cylinder object. Similarly, let $Y$ be a bifibrant object of $\SSet_{/X}$, \ie $Y$ is cofibrant and $Y \twoheadrightarrow X$ is a fibration, then one can form a factorisation as a trivial cofibration followed by a fibration:
+\[ 
+Y \overset{\sim}{\hookrightarrow} P_X(Y) {\twoheadrightarrow} Y \times_{X} Y 
+\]
+As $Y \twoheadrightarrow X$ is a fibration, the map $Y \times_X Y \twoheadrightarrow Y$ is also a fibration, hence the map $P_X Y \twoheadrightarrow Y$ is a fibration, and as it is a retraction of the trivial cofibration $Y \hookrightarrow P_X(Y)$ it is also a weak equivalence (note that the objec $Y \times_X Y$ if cofibrant because of \cref{lem:cofibrant_fiber_product}), hence it is a trivial fibration again by \cref{lemma:triv_fib_are_we}. This proves that every bifibrant object of $\SSet_{/X}$ also has a strong path object.
+\end{proof}
+
+
+
+\bigskip
 
 
 \begin{lemma}\label{lem:cofibrant_fiber_product}
@@ -443,51 +494,12 @@ and \cite[Proposition~5.2.6]{henry2018wms}.
 
 
 
-
-In a general weak model category, one can only show that a map $p \co Y \to X$ is a trivial fibration
-if and only if $p$ is a fibration and a weak equivalence when $X$ is fibrant. But in the special case of simplicial sets one can prove that this holds also when $X$ and $Y$ are cofibrant. This is because every cofibrant object has a strong cylinder given by $X + X \rightarrowtail \Delta[1] \times X \rightarrow X$.
-
-\begin{lemma}\label{lemma:triv_fib_are_we}
-A fibration between cofibrant simplicial sets is a weak equivalence if and only if it is a trivial fibration.
-In particular, any weak equivalence between cofibrant simplicial set can be factored as a trivial cofibration followed by a trivial fibration.
-\end{lemma}
-
-\begin{proof}
-One first proves that any trivial fibration  $p \co A \to X$ between cofibrant object is a weak equivalence. More precisely, one shows that $p$ is invertible in the homotopy category by constructing first a section $i \co X \rightarrow A$ of $p$ and then a homotopy between $i  p \co A \to A$ and the identity $1_{A}$. They are obtained as diagonal filling in the following two squares:
-\[
-\xymatrix{0 \ar[r] \ar[d] & A \ar[d]^{p} \\ 
-X \ar@{.>}[ur]^{i} \ar@{=}[r] & X}
-\qquad
-\xymatrix{A + A \ar[rr]^{(1_{A} , i  p)} \ar[d] & &  A \ar[d] \\ \Delta[1] \times A \ar@{.>}[rru] \ar[r]& A \ar[r]^{p} & X  }
-\]
-It follows that if $p \co A \rightarrow X$ is a weak equivalences between two cofibrant objects then if one factors it as a cofibration followed by a trivial fibration, then the cofibration part is a trivial cofibration. 
-
-Finally, if $p \co A \to X$ is a fibration between cofibrant objects which is also a weak equivalence then one can factor it as a trivial cofibration $j$ followed by a trivial fibration $p'$, and using the lifting property of $j$ against $p$ one obtained that $p$ is a retract of $p'$, hence a trivial fibration as well.
-\end{proof}
-
-
 %The following is technically speaking not really needed, but it is a nice fact and it makes lots of formulation later nicer.
 
-\begin{corollary}
-For any cofibrant simplicial set $X$, the category $\SSet_{/X}$ admits a weak model structure with cofibrations and fibrations  being those of $\SSet$.
-\end{corollary}
-
-\begin{proof}
-
-It is clear that one has two weak factorization systems on $\SSet_{/X}$ for every object $X$. So according to \cite[Definition~2.1.11]{henry2018wms} we only have to show that bifibrant objects admits cylinder objects and path objects. Let $Y$ be a cofibrant object of $\SSet_{/X}$. One forms a cofibration,trivial fibration factorization:
-\[ 
-Y +_X Y \hookrightarrow I_X(Y) \overset{\sim}{\twoheadrightarrow} Y 
-\]
-Since, by  \cref{lemma:triv_fib_are_we}, the trivial fibration above is a weak equivalence in $\SSet$, both legs $Y \hookrightarrow I_X(Y)$ are weak equivalences in $\SSet$ as well and hence they are trivial cofibrations. This shows that every cofibrant object admit a strong cylinder object. Similarly, let $Y$ be a bifibrant object of $\SSet_{/X}$, \ie $Y$ is cofibrant and $Y \twoheadrightarrow X$ is a fibration, then one can form a factorisation as a trivial cofibration followed by a fibration:
-\[ 
-Y \overset{\sim}{\hookrightarrow} P_X(Y) {\twoheadrightarrow} Y \times_{X} Y 
-\]
-As $Y \twoheadrightarrow X$ is a fibration, the map $Y \times_X Y \twoheadrightarrow Y$ is also a fibration, hence the map $P_X Y \twoheadrightarrow Y$ is a fibration, and as it is a retraction of the trivial cofibration $Y \hookrightarrow P_X(Y)$ it is also a weak equivalence (note that the objec $Y \times_X Y$ if cofibrant because of \cref{lem:cofibrant_fiber_product}), hence it is a trivial fibration again by \cref{lemma:triv_fib_are_we}. This proves that every bifibrant object of $\SSet_{/X}$ also has a strong path object.
-\end{proof}
 
 
 
-\section{On the cofibrant replacement functor}
+\section{The cofibrant replacement functor}
 
 The goal of this section is to give a more explicit description of the cofibrant replacement functor on simplicial sets.
 
