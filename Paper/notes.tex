@@ -355,14 +355,15 @@ This proposition has some interesting corollaries:
 
 \newpage
 
-\section{Product types and function types}
+\section{Product types, function types and identity types}
 
 \noten{Here we can start discussing a bit the outline of the interpretation. We focus initially on basic types and observe that 0, 1, $\mathbb{N}$, etc are ok. We then move on to product types and function types.}
 
 
 
-\begin{lemma}\label{lem:cofibrant_fiber_product} \hfill 
+\begin{lemma}\label{lem:cofibrant_fiber_product}
 \begin{enumerate}[$(i)$] 
+\item[]
 \item Let $A \, , B$ be cofibrant simplicial sets. Then their product $A \times B$ is cofibrant.
 \item Let $f \co A \to X$ and $g \co B \to X$ be maps with $A$ and $B$ cofibrant. Then their
 fiber product $A \times_X B$, fitting in the pullback diagram
@@ -385,8 +386,221 @@ in~$A \times_X B$ is indeed decidable.
 \end{proof}
 
 
-\noten{We can add here the fact that for $B$ bifibrant, $B^A$ is fibrant for every $A$. Then discuss the idea of cofibrant replacement and the validity of judgemental $\beta$-rule and propositional $\eta$-rule. This is nice because the proofs are simpler, following from the pushout-product property, than for $\Pi$-types and illustrate the ideas.} 
+\noten{We can add here the fact that for $B$ bifibrant, $B^A$ is fibrant for every $A$. Then discuss the idea of cofibrant replacement and the validity of judgemental $\beta$-rule and propositional $\eta$-rule. This is nice because the proofs are simpler, following from the pushout-product property, than for $\Pi$-types and illustrate the ideas.
+} 
 
+
+An important feature of the two weak factorization systems on the category of simplicial sets is that they satisfies the pushout-product property. This plays a key role in the construction of the weak model structure on simplicial sets in \cite{henry2018wms}. More precisely, given two morphism $f: A \rightarrow X$ and $g: B \rightarrow Y $ one defines their pushout-product $f \hattimes g$ as the unique dotted map in:
+
+
+\[
+\xymatrix{
+A \times B \ar[r] \ar[d] &  X \times B \ar[d] \ar@/^1.5pc/[ddr] \\
+A \times Y \ar[r]  \ar@/_1.5pc/[drr] & \displaystyle \big( A \times Y ) \coprod_{A \times B} \big( X \times B ) \ar@{.>}[dr]  \\
+ & & X \times Y }
+ \]
+
+
+The pushout-product property is then the statement that:
+
+\begin{itemize}
+
+\item If $f$ and $g$ are cofibrations, then $f \hattimes g$ is a cofibration.
+
+\item If additionally one of them is either anodyne or acyclic then $f \hattimes g$ also is.
+
+\end{itemize}
+
+Note that when $f$ and $g$ are monomorphisms (in particular when they are cofibrations) the pushout in the definition is justs an union of subobject, and $f \hattimes g$ is justs the inclusion:
+
+\[  (A \times Y) \cup (X \times B) \rightarrow X \times Y \]
+
+
+In a similar way using the cartesian exponential instead of the product, when $f:A \rightarrow B$ and $g: X \rightarrow Y$ are morphisms one defines a morphisms $\langle f, g \rangle$ as the unique dotted arrow in the diagram:
+
+
+
+\[
+\xymatrix{
+ X^B \ar@{.>}[dr] \ar@/^1.5pc/[drr] \ar@/_1.5pc/[ddr] \\
+& X^A \underset{Y^A}{\times} Y^B \ar[r] \ar[d] &  Y^B \ar[d]  \\
+& X^A \ar[r] & Y^A  \\
+ }
+ \]
+
+It is a very classical observation that an arrow $f$ has the left lifting property agains $\langle g ,h \rangle$ if and only if $f \hattimes h$ has the left lifting property against $h$ (see for example the appendix of \cite{joyal-tierney-segal}). 
+
+In particular the pushout-property mentioned above immediately implies its dual version: if $i$ is a cofibration and $f$ a fibration then $\langle i ,f \rangle$ is a fibration: Indeed for any Horn inclusion $h^k_n: \Lambda^k[n] \rightarrow \Delta[n]$ one has, because of the pushout-product property, that $h^k_n \hattimes i$ is anodyne, hence has the left lifting property against $f$, and hence $k^k_n$ has the left lifting property against $\langle i, f \rangle$, i.e.  $\langle i, f \rangle$ is a fibration.
+
+
+By the exact same arguement, if one further assume either one of the following:
+
+\begin{itemize}
+
+\item $f$ is a trivial fibration.
+
+\item $i$ is anodyne.
+
+\item $i$ is an acyclic cofibration and the target of $f$ is fibrant.
+
+\end{itemize}
+
+Then $\langle i , f \rangle$ is a trivial fibration.
+
+
+The following lemma is a list of special cases of these observations that we will use latter:
+
+\begin{lemma}
+\label{lemma:dualPushoutProductSpecialCases}
+
+
+\begin{itemize}
+
+\item[]
+
+\item If $A$ is cofibrant and $X$ is fibrant then the cartesian exponential $X^A$ is fibrant.
+
+\item If $A \hookrightarrow B$ is a cofibration and $X$ is fibrant then the induced restriction map $X^B \rightarrow X^A$ is a fibration.
+
+\item If $A \hookrightarrow B$ is an acyclic cofibration and $X$ is fibrant then $X^B \rightarrow X^A$ is a trivial fibration.
+
+\item If $f: X \rightarrow Y$ is a (trivial) fibration and $X$ is cofibrant then the induced map $X^A \rightarrow Y^A$ is also a trivial fibration.
+
+\end{itemize}
+
+\end{lemma}
+
+If $X$ is a type, i.e. a bifibrant simplicial sets one wants to define the path object of $X$ as the exponential $X^{\Delta[1]}$. The lemma above implies that:
+
+
+\begin{lemma}
+
+Assuming only that $X$ is fibrant
+\begin{itemize}
+\item $X^{\Delta[1]}$ is fibrant.
+\item The map $X^{\Delta[1]} \rightarrow X \times X$ is a fibration.
+\item The composite with any of the two projection $X^{\Delta[1]} \rightarrow X \times X \rightarrow X$ is a trivial fibration.
+\item The map $X \rightarrow X^{\Delta[1]}$ induced by $\Delta[1] \rightarrow \Delta[0]$ is a weak equivalence.
+\end{itemize}
+\end{lemma} 
+
+\begin{proof}
+The first point follows from the first point of lemma \ref{lemma:dualPushoutProductSpecialCases}. The second point is the second point of lemma \ref{lemma:dualPushoutProductSpecialCases} applied to the cofibration $\partial \Delta[1] = \Delta[0] \coprod \Delta[0] \hookrightarrow \Delta[1]$, the third is the thrid point of this lemma applied to the anodyne maps $\lambda^i[1] = \Delta[0] \hookrightarrow \Delta[1]$.
+The Last point follows from the $2$-out-of-$3$ condition for weak equivalence between fibrant objects applied to $X \rightarrow X^{\Delta[1]} \rightarrow X$ whose composite is the identity, and the second map hhas just been proved to be a trivial fibration.
+\end{proof}
+
+
+But this is not quite enough. In order to have a path object, one needs $X^{\Delta[1]}$ to also be cofibrant (when $X$ is) and that the maps $X \rightarrow X^{\Delta[1]}$ is a (acyclic) cofibration. In general, this property are considerably less expected, but in this special case, this is achieved by the following proposition:
+
+\begin{proposition}\label{proposition:PathObjectCofibrant}
+Let $X$ be a cofibrant simplicial set. Then $X^{\Delta[1]}$ is cofibrant, and the map $X \rightarrow X^{\Delta[1]}$ is a cofibration.
+\end{proposition}
+
+We expect the cofibrancy of $X^{\Delta[1]}$ extend to the case of $X^{A}$ when $A$ is any finite decidable simplicial set. But this is definitely not going to holds for infinite $A$ in general. So the definition of exponential will have to use the cofibrant replacement construction.
+
+\begin{proof}
+An $n$-cell of $X^{\Delta[1]}$ is the same as morphism $\Delta[1] \times \Delta[n] \rightarrow X$. It is classical simplicial combinatorics that $\Delta[1] \times \Delta[n]$ is a simplicial set generated by $(n+1)$ distinct non-degenerate $(n+1)$-dimensional cell $\alpha_i: \Delta[n+1] \rightarrow \Delta[1] \times \Delta[n]$ for $0 \leqslant i \leqslant n$ which are defined as (the nerve of) the map $\alpha_i$ from $\{0,\dots,(n+1)\}$ to $\{0,1\} \times \{0,\dots,n\}$ such that $\alpha_i(k)=(0,k)$ if $k \leqslant i$ and $\alpha_i(k)=(1,k-1)$ if $k>i$. They satisfies only the relation $d_i^* \alpha_i = d_{i}^* \alpha_{i-1}$ for each $1 \leqslant i \leqslant n$.
+
+So an $n$-cell $\sigma$ of $X^{\Delta[1]}$ is the same as collection of $n+1$-cells $\sigma(\alpha_i) \in X([n])$ for $i=0,\dots,n$ subject to the relations $d_i^* \sigma \alpha_i = d_{i}^* \sigma \alpha_{i-1}$ for $i=1,\dots,n$.
+
+
+It can then be checked that:
+
+\begin{itemize}
+
+\item $\sigma$ is ``degenerate at $j$'', i.e. is of the form $s_j ^* \sigma'$ for $s_j : [n] \rightarrow [n-1]$ the map that repeat $j$ twice if and only if for each $i$, $\sigma \alpha_i $ is degenerate at $j+1$ for $i \leqslant j+1$ and at $j$ for $i \geqslant j$ (and at both if $i=j$ of $j+1$).
+
+\item $\sigma$ is in the image of $X \rightarrow X^{\Delta[1]}$ if and only if $\sigma(\alpha_i)$ is degenerate at $i$ for all $i$.
+
+\end{itemize}
+
+
+For example, for the second condition, if $\sigma$ is the image of an $n$-cell $t \in X[n]$ then $\sigma \alpha_i = s_i^* x$ for all $i$, and conversely, if $\sigma \alpha_i$ are all of the form $s_i^* x_i$ then the relation $d_i^* \sigma \alpha_i = d_{i}^* \sigma \alpha_{i-1}$ implies that $x_{i-1}=x_i$ for all $i$ and hence $\sigma$ is indeed the image of the cell $x=x_0= \dots = x_n$. The proof of the first claim is very similar.
+
+Now because $X$ is cofibrant for any given cell of $X$ one can decide whether it is degenerated or not, and by which degeneracy, so these the two question above are decidable as finite conjunction of decidable questions. As $\sigma$ is degenerated if and only if it is degenerated at $j$ for some $j$ this concludes the proof.
+\end{proof}
+
+
+More generally one needs to define the identity type of a dependent type, i.e. for a fibration $A \twoheadrightarrow \Gamma$ between bifibrant objects. One defines $Id_A$ as the pullback:
+
+\[
+\xymatrix{
+Id_A \ar[r] \ar[d] & A^{\Delta[1]} \ar[d] \\
+\Gamma \ar[r] & \Gamma^{\Delta[1]} \\
+}
+\]
+
+
+The structural maps $A \rightarrow Id_A \rightarrow A \times_{\Gamma} A$ are produced by the diagram:
+
+\[
+\xymatrix{
+& A \ar[rr] \ar[dd] & & A^{\Delta[1]} \ar[rr] \ar[dd] & & A \times A \ar[dd] \\
+A \ar[ur] \ar[rr] \ar[dd] & & Id_A \ar[ur] \ar[rr] \ar[dd] & & A \times_{\Gamma} A \ar[ur] \ar[dd] \\
+& \Gamma \ar[rr] & & \Gamma^{\Delta[1]} \ar[rr] & & \Gamma \times \Gamma \\
+\Gamma \ar[ur] \ar[rr] & & \Gamma \ar[rr] \ar[ur] & & \Gamma \ar[ur] \\ 
+}
+\]
+
+where the three square in the vertical/diagonal direction are pullbacks.
+
+
+\begin{proposition}
+\label{proposition:MainPathObject}
+Assuming that $A \rightarrow \Gamma$ is a fibration between bifibrant objects, one has:
+
+\begin{itemize}
+
+\item $Id_A$ is bifibrant and $Id_A \rightarrow \Gamma$ is a fibration.
+
+\item $Id_A \rightarrow A \times_{\Gamma} A$ is a fibration.
+
+\item $Id_A \rightarrow A \times_{\Gamma} A \rightarrow A$ obtained by composing with any of the two projection is a trivial fibration. 
+
+\item $A \rightarrow Id_A$ is an acyclic cofibration.
+
+\end{itemize}
+\end{proposition}
+
+\begin{proof}
+
+The map $Id_A \rightarrow \Gamma$ is a pullback of the maps $A^{\Delta[1]} \rightarrow \Gamma^{\Delta[1]}$ along $\Gamma \rightarrow \Gamma^{\Delta[1]}$. Hence as $A^{\Delta[1]} \rightarrow \Gamma^{\Delta[1]}$ is a fibration (by the last point of lemma \ref{lemma:dualPushoutProductSpecialCases}), the map $Id_A \rightarrow \Gamma$ is a fibration, in particular $Id_A$ is fibrant. As $\Gamma$ and $A^{\Delta[1]}$ are cofibrant (proposition \ref{proposition:PathObjectCofibrant}), this implies that $Id_A$ is also cofibrant by lemma \ref{lem:cofibrant_fiber_product}. 
+
+Because of the dual of the pushout-product property, the map $\langle (\partial \Delta[n] \hookrightarrow \Delta[n]) , ( A \rightarrow \Gamma) \rangle$ is a fibration. This map is the map:
+
+
+\[ A^{\Delta[1]} \rightarrow (A \times A) \underset{\Gamma \times \Gamma}{\times} \Gamma^{\Delta[1]} \] 
+
+Moreover in the diagram:
+
+\[
+\xymatrix{
+Id_A \ar[r] \ar[d] & A \times_{\Gamma} A \ar[d] \ar[r] & \Gamma \ar[d] \\
+A^{\Delta[1]} \ar[r] & \Gamma^{\Delta[1]} \underset{\Gamma \times \Gamma}{\times} A \times A \ar[r]  & \Gamma^{\Delta[1]}
+}
+ \]
+
+The right hand square is easily seen to be a pullback and the total rectangle is the pullback defining $Id_A$, hence the left hand square is also a pullback. As we just showed that the bottom left map is a fibration, this implies that $Id_A \rightarrow A \times_{\Gamma} A$ is a fibration as well.
+
+A very similar arguement gives that the map $\langle (\Lambda^k[n] \hookrightarrow \Delta[n]) , ( A \rightarrow \Gamma) \rangle$ (for $k=0$ or $1$) is a trivial fibration, this is a map:
+
+\[ A^{\Delta[1]} \rightarrow (A) \underset{\Gamma}{\times} \Gamma^{\Delta[1]} \] 
+
+Which one can fits into pullback diagrams:
+
+\[
+\xymatrix{
+Id_A \ar[r] \ar[d] & A  \ar[d] \ar[r] & \Gamma \ar[d] \\
+A^{\Delta[1]} \ar[r] & A \underset{\Gamma}{\times} \Gamma^{\Delta[1]} \ar[r]  & \Gamma^{\Delta[1]}
+}
+ \]
+
+which this times shows that any of the two (dependings if $k=0$ or $k=1$) canonical maps $Id_A \rightarrow A$ is a trivial fibration.
+
+
+The map $A \rightarrow Id_A$ is level wise complemented, because it fits into a factorization $A \rightarrow Id_A \rightarrow A^{\Delta[1]}$ of a maps which has been proved to be a levelwise complemented inclusion in proposition \ref{proposition:PathObjectCofibrant}, hence for any cell of $Id_A$ one can decide if it is in $A$ or not by considering it as a cell of $A^{\Delta[1]}$. As $A$ and $Id_A$ are cofibrant, this shows that $A \rightarrow Id_A$ is a cofibration. The $2$-out-of-$3$ property applied to $A \rightarrow Id_A \rightarrow A$ show that  $A \rightarrow Id_A$ is moreover a weak equivalence, hence an acyclic cofibration.
+
+\end{proof}
 
 \newpage 
 
