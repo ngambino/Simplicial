@@ -16,6 +16,9 @@ is the use of a cofibrant replacement functor to overcome the known issues regar
 \end{abstract}
 
 \author{Nicola Gambino}
+\address{School of Mathematics, University of Leeds, Leeds LS2 9JT, United Kingdom}
+\email{n.gambino@leeds.ac.uk}
+
 
 \author{Simon Henry}
 
@@ -31,7 +34,47 @@ is the use of a cofibrant replacement functor to overcome the known issues regar
 
 
 
+\begin{table}[htb]
+\begin{tabular}{|c|c|c|c|}
+\hline
+& $\SSet$ & $\SSet$ & $\mathbf{CSet}$   \\ 
+& \cite{voevodsky-simplicial-model} & \cite{gambino2017frobenius} & \cite{cohen-et-al:cubicaltt}   \\ \hline \hline 
+Dependent type & Kan fibration & Uniform Kan fibration & Uniform Kan fibration \\ 
+$\mathsf{Id}$-types & \checkmark & \checkmark  &  \checkmark  \\
+$\Pi$-types & \checkmark  & \checkmark  & \checkmark  \\
+Universe type & \checkmark  &  $\times$ & \checkmark  \\
+Univalence axiom & \checkmark  &   $\times$ & \checkmark  \\ 
+Constructive & $\times$ & \checkmark   & \checkmark  \\ 
+Equivalent to $\mathbf{Top}$ &  \checkmark  & \checkmark  & $\times$  \\
+Coherence & \checkmark   & \checkmark &  \checkmark  \\ 
+\hline
+\end{tabular}
+\medskip
+\caption{The univalent foundations whack-a-mole game.} 
+\label{tab:whack} 
+\end{table}
 
+
+This paper adds a new column to~\cref{tab:whack}.
+
+\begin{table}[htb]
+\begin{tabular}{|c|c|}
+\hline
+& $\SSet$ \\
+ \hline \hline 
+ Dependent type & Kan fibration with cofibrant domain \\
+ $\mathsf{Id}$-types &   \checkmark  \\
+$\Pi$-types  & \checkmark  \\
+Universe type & \checkmark  \\
+Univalence axiom & \checkmark  \\ 
+Constructive & \checkmark  \\ 
+Equivalent to $\mathbf{Top}$ & \checkmark  \\
+Coherence  &  ? \\ 
+\hline
+\end{tabular}
+\medskip
+\caption{The contributions of this paper.} 
+\end{table}
 
 
 
