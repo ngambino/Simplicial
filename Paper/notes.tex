@@ -29,6 +29,7 @@ is the use of a cofibrant replacement functor to overcome the known issues regar
 
 \maketitle
 
+\tableofcontents
 
 \section{Introduction} 
 
@@ -194,14 +195,14 @@ In particular, trivial fibrations have the right lifting property with respect t
 
 
 
-\begin{remark} Let $\cal{J}$ be the set of horn inclusions, $\cal{J} \defeq \{ h^k_n  \co \Lambda^k[n] \to \Delta[n]  \ | \ 0 \leq k \leq n \}$. By another application of the constructive version of the small object argument, we have another weak factorisation system $( \mathsf{Sat}(\cal{J}) \, , \cal{J}^\pitchfork)$ on $\SSet$ and, by the very definition of a fibration, we have $\cal{J}^\pitchfork = \Fib$. Following a long tradition going back at least to~\cite{gabriel-zisman:calculus-of-fractions}, we shall refer to the maps in~$\mathsf{Sat}(\cal{J})$ as~\myemph{anodyne extensions}. It follows easily from the definitions that 
+\begin{remark} Let $\cal{J}$ be the set of horn inclusions, \ie $\cal{J} \defeq \{ h^k_n  \co \Lambda^k[n] \to \Delta[n]  \ | \ 0 \leq k \leq n \}$. By another application of the constructive version of the small object argument, we have another weak factorisation system $( \mathsf{Sat}(\cal{J}) \, , \cal{J}^\pitchfork)$ on $\SSet$ and, by the very definition of a fibration, we have $\cal{J}^\pitchfork = \Fib$. Following a long tradition going back at least to~\cite{gabriel-zisman:calculus-of-fractions}, we shall refer to the maps in~$\mathsf{Sat}(\cal{J})$ as~\myemph{anodyne extensions}. It follows easily from the definitions that 
 \[
   \mathsf{Sat}(\cal{J}) \subseteq \TrivCof  \, .
 \]
 To the best of our knowledge, it is not known constructively whether $\TrivCof \subseteq \Sat(\cal{J})$. The question is intimately connected to that of whether it is possible to establish constructively the existence of a
 Quillen model structure on $\SSet$ with fibrations and cofibrations as above. We discuss this question further in~\cref{sec:conclusions}.
 
-The main reason for using the name `trivial fibration' for the the maps with the left lifting property with respect to the fibrations with fibrant domain, as we did in~\cref{def:trivfib-trivcof}, rather than for the anodyne extensions, which are the maps with the left lifting property with respect to all fibrations is that
+The main reason for using the name `trivial fibration' for the the maps with the left lifting property with respect to the cofibrations with cofibrant domain, as we did in~\cref{def:trivfib-trivcof}, rather than for the anodyne extensions, which are the maps with the left lifting property with respect to all fibrations is that
  trivial cofibrations as defined here interact well with that of a weak equivalence, in the sense that it
  possible to show that a  cofibration with cofibrant domain is a trivial cofibration if and only if it is a weak equivalence, while we do not not whether a cofibration with cofibrant domain is an anodyne extension if
  and only if it is a weak equivalence. Reassuringly, if it turns out that there is a Quillen model structure on $\SSet$ then the trivial cofibrations as defined here will have to coincide with the anodyne extensions, so no conflict of terminology would arise. 
@@ -225,7 +226,7 @@ structures.}
 \bigskip
 
 
-Recall from~\cite[Proposition 2.2.9]{henry2018wms} that in a weak model category  a  cofibration with cofibrant domain is a trivial cofibration if and only if it is a weak equivalence and, dually,  a fibration with fibrant codomain is a trivial fibration if and only if it is a  weak equivalence. In the special case of simplicial sets one can prove a bit more,
+Recall that in a weak model category  a  cofibration with cofibrant domain is a trivial cofibration if and only if it is a weak equivalence and, dually,  a fibration with fibrant codomain is a trivial fibration if and only if it is a  weak equivalence~\cite[Proposition 2.2.9]{henry2018wms}. In the special case of simplicial sets one can prove a bit more,
 thanks to the fact that every cofibrant object has a strong cylinder, given by~$A + A \rightarrowtail \Delta[1] \times A \rightarrow A$.
  
 
@@ -357,12 +358,12 @@ This proposition has some interesting corollaries:
 
 \newpage
 
-\section{Product types and substitution} 
+\section{First results} 
 
 \noten{This section should define the outline of the interpretation and some basic results. Some material
 should be moved here from the `Outline of the interpretation' section.}
 
-\subsection*{Product types}
+\subsection*{Products and pullbacks}
 
 
 
@@ -1366,8 +1367,10 @@ Question: do we need to know that $\mathsf{Weq}(\U_c)$ is a cofibrant object to 
 
 \newpage
 
-\section{Conclusions and outlook}
+\section{Coherence issues}
 \label{sec:conout}
+\label{sec:conclusions}
+
 
 We now discuss our second aim, namely showing how we can build on \cref{thm:restricted-frobenius} 
 to define sufficient structure to interpret $\Pi$-types. This is not immediate since the result of applying $\Pi_p$ to a 
@@ -1401,9 +1404,6 @@ This will satisfy the $\beta$-rule but not the $\eta$-rule for $\Pi$-types [TO B
 \begin{itemize}
 \item This should be essentially straightforward, following Kapulkin and Lumsdaine, but we may need to modify the notion of a $\Pi$-structure to accommodate the cofibrant replacements that we take for $\Pi$.
 \end{itemize}
-
-\section{Conclusions} 
-\label{sec:conclusions}
 
 
 \appendix
