@@ -360,8 +360,73 @@ This proposition has some interesting corollaries:
 
 \section{First results} 
 
-\noten{This section should define the outline of the interpretation and some basic results. Some material
-should be moved here from the `Outline of the interpretation' section.}
+In order to motivate our development, we briefly outline how an interpretation of Martin-L\"of type theory 
+extended with the univalence axiom, written $\mathrm{ML(UA)}$ below, is to be defined. We shall not deal with several coherence issues, which we leave for future work. Let us begin by recalling that  $\mathrm{ML(UA)}$ has the following four forms of hypothetical judgement:
+\begin{gather*}
+ \Gamma \vdash A \co \type \, ,  \\ 
+ \Gamma \vdash a \co A \, , \\
+  \Gamma \vdash A  = B \co \type \, ,  \\
+ \Gamma \vdash a = b \co A \co \type \, .
+  \end{gather*}
+Here, $\Gamma  = (x_1 \co A_1, \ldots, x_n \co A_n)$ is a  context of variable declarations, possibly empty. Below, we shall often conflate a type and its interpretation to keep our presentation as simple as possible.
+
+
+
+
+
+We write $\Fib_{/X}$ for the full subcategory of $\SSet_{/X}$ spanned by fibrations and $\BFFib_{/X}$ for the full subcategory of  $\SSet_{/X}$ spanned by fibrations with cofibrant domain. We then have inclusion
+functors
+\[
+\xymatrix{
+\BFFib_{/X} \ar@{>->}[r] &
+\Fib_{/X} \ar@{>->}[r] &
+\SSet_{/X} \, .}
+\]
+
+
+
+
+
+
+\subsection*{Types}
+
+Types, by which we mean types in the empty context, are interpreted as bifibrant objects in $\SSet$. For example, the unit type will be interpreted as the terminal object $1$, which is bifibrant. Elements, by which we mean elements of a type in the empty context, will be interpreted as global elements, \ie maps of the form $a \co 1 \to A$.
+
+
+\subsection*{Contexts}
+
+Contexts are interpreted as bifibrant objects in $\SSet$. In particular, we interpret the empty context as the terminal object $1 \in \SSet$. 
+
+\subsection*{Dependent types} 
+
+For a fixed a bifibrant object $\Gamma$, we will use the slice category~$\SSet_{/\Gamma}$
+to interpret types in context~$\Gamma$ and their elements. For this, we will use the fact that the slice category~$\SSet_{/\Gamma}$ admits a weak model structure in which fibrations and cofibrations are the maps that become fibrations and cofibrations in~$\SSet$ after application of the forgetful functor 
+\[
+U \co \SSet_{/\Gamma} \to \SSet \, .
+\] 
+Types in context $\Gamma$ will be interpreted as bifibrant objects in~$\SSet_{/\Gamma}$. Since the terminal object of~$\SSet_{/\Gamma}$ is the identity $1_\Gamma \co \Gamma \to \Gamma$, an object $p \co A \to \Gamma$ is fibrant in $\SSet_{/\Gamma}$ if $p$ is a fibration in~$\SSet$. Furthermore, since the initial object of~$\SSet_{/\Gamma}$ is the unique map
+$!_\Gamma \co 0 \to \Gamma$, an object~$p \co A \to \Gamma$ is cofibrant in~$\SSet_{/\Gamma}$ if $A$ is cofibrant in~$\SSet$.
+Thus, the bifibrant objects of~$\SSet_{/\Gamma}$ are exactly the fibrations with codomain $\Gamma$ and cofibrant domain.
+
+For a fixed bifibrant object $p \co A \to \Gamma$ of~$\SSet_{/\Gamma}$, sections of $p$ are used to interpret elements of the type $A$ in context $\Gamma$, as usual.
+
+\smallskip
+
+
+\subsection*{Substitution} 
+
+We use pullback functors to intepret substitution of terms into types. Given a map $f \co \Gamma' \to \Gamma$, we will show that the pullback functor $f^* \co \SSet_{/\Gamma} \to \SSet_{/\Gamma'}$ restricts to a functor
+\[
+f^* \co \BFFib_{/\Gamma}  \to \BFFib_{/\Gamma'} \, .
+\]
+It will be useful to have a special notation for the action of this functor. Given a fibration with cofibrant
+domain $p \co A \to \Gamma$, we write its pullback along $f \co \Gamma' \to \Gamma$ as diagram
+\[
+\xymatrix{
+A[f] \ar[r] \ar[d]_{p[f]} & A \ar[d]^p \\
+\Gamma' \ar[r]_f & \Gamma }
+\]
+
 
 \subsection*{Products and pullbacks}
 
@@ -425,11 +490,48 @@ A \ar[r]_{p} & X}
 Since $A$ is cofibrant, the claim is that $g \co B \rightarrow A$ is a levelwise complemented monomorphism. For $a \in A_n$, we have that $a \in B_n$ if and only if $p(a) \in Y_n$. Since $f \co Y \rightarrow X$ is a levelwise complemented monomorphism, this is decidable.
 \end{proof} 
 
+
+
+
+\subsection*{$\Sigma$-types} Recall that the formation and introduction rules for $\Sigma$-types are
+
+\[
+\begin{prooftree}
+\Gamma \vdash A \co \type \qquad
+\Gamma, x \co A \vdash B \co \type
+\justifies
+\Gamma \vdash (\Sigma x \co A) B 
+\end{prooftree}  \qquad
+\begin{prooftree}
+\Gamma \vdash a \co A  \qquad
+\Gamma \vdash b \co B[a/x] 
+\justifies
+\Gamma \vdash \mathsf{pair}(a,b) \co (\Sigma x \co A) B 
+\end{prooftree} \smallskip
+\]
+
+\noindent
+It will be easy  to show that, for a fibration with cofibrant domain $p \co A \to \Gamma$, the composition 
+functor~$\Sigma_p \co \SSet_{/A} \to \SSet_{/\Gamma}$, left adjoint to the pullback functor $p^*$, restricts to a functor
+\[
+\Sigma_p \co \BFFib_{/A}  \to \BFFib_{/\Gamma} \, .
+\]
+The result of applying this functor to a fibration with cofibrant domain $q \co B \to A$ will be written 
+\[
+\Sigma_p(q) \co \Sigma_p(B) \to \Gamma \, .
+\] 
+Following the usual pattern, one can interpret the introduction and elimination rules so that the
+computation rule and the $\eta$-rule hold as judgemental equalities. 
+
+
 \newpage 
 
 
-\section{Function types and identity types}
+\section{Function types and $\Id$-types}
 
+
+
+ 
 
 \subsection*{The pushout-product property}
 
@@ -501,6 +603,33 @@ The following lemma gives a list of special cases of these observations that we 
 
 \subsection*{Function types}
 
+\subsection*{$\Pi$-types} Recall that the formation and introduction rules for $\Pi$-types are
+
+\[
+\begin{prooftree}
+\Gamma \vdash A \co \type \qquad
+\Gamma, x \co A \vdash B \co \type
+\justifies
+\Gamma \vdash (\Pi x \co A) B 
+\end{prooftree} \qquad
+\begin{prooftree}
+\Gamma, x \co A \vdash b \co B
+\justifies
+\Gamma \vdash (\lambda x \co A) b \co (\Pi x \co A) B 
+\end{prooftree} \medskip
+\]
+We will show that given a fibration with cofibrant domain $p \co A \to \Gamma$, the pushforward functor~$\Pi_p \co \SSet_{/A} \to \SSet_{/\Gamma}$, the right adjoint to the pullback functor $f^*$, restricts to a functor
+\[
+\Pi_p \co \BFFib_{/A}  \to \Fib_{/\Gamma} \, .
+\]
+The result of applying $\Pi_p$ to a fibration with cofibrant domain $q \co B \to A$ will be written as 
+\[
+\Pi(q) \co \Pi_p(B) \to \Gamma \, .
+\] 
+The domain of this fibration is not necessarily cofibrant. To remedy this, we will consider a cofibrant replacement of $\Pi_p(B)$, given by a cofibrant object~$\mathbb{L}(\Pi_p(B))$ and a trivial fibration~$t \co \mathbb{L}(\Pi_p(B)) \to \Pi_p(B)$. The dependent product would then be interpreted as the fibration with cofibrant domain $t \circ \Pi(q) \co  \mathbb{L}(\Pi_p(B)) \to X$. The standard
+computation rule holds as a judgemental equality, while the $\eta$-rule holds as a propositional equality.
+
+
 
 An immediate consequence of~\cref{lemma:dualPushoutProductSpecialCases} is the following 
 proposition, which provides a first step towards the interpretation of function types. 
@@ -519,6 +648,36 @@ $\eta$-rule propositionally.}
 
 
 \subsection*{Identity types}
+
+
+Recall that the formation and introduction rule for $\Id$-types are
+
+\[
+\begin{prooftree}
+\Gamma \vdash A \co \type \qquad
+\Gamma \vdash a \co A \qquad
+\Gamma \vdash b \co A 
+\justifies
+\Gamma \vdash \mathsf{Id}_A(a,b) \co \type
+\end{prooftree} \qquad
+\begin{prooftree}
+a \co A 
+\justifies
+\mathsf{refl}(a) \co \mathsf{Id}_A(a,a)
+\end{prooftree} \medskip
+\]
+Given a fibration with cofibrant domain $p \co A \to \Gamma$, we will interpret identity types on $A$ via the factorisation of the diagonal map $\delta_p \co A \to A \times_\Gamma A$ as a trivial cofibration followed by
+a fibration in $\SSet_{\Gamma}$: 
+\[
+\xymatrix{
+A \ar[r]^{r} \ar[dr] & \mathsf{Id}_A \ar[r]^-{(s,t)} \ar[d]  & A \times_\Gamma A \ar[dl]  \\
+ & \Gamma &  }
+\]
+Note that $(s,t) \co  \mathsf{Id}_A  \to A \times_\Gamma A$ is a fibration and its domain $\Id_A$ is 
+cofibrant, since $A$ is so and $r \co A \to \Id_A$ is a cofibration. 
+
+
+\bigskip
 
 
 Let $A$ be a bifibrant simplicial set. We wish to the path object of $A$ as the exponential $A^{\Delta[1]}$,
@@ -647,9 +806,43 @@ of a map which has been proved to be a levelwise complemented inclusion in~\cref
 \end{proof}
 
 
-\section{Dependent products}
+\section{$\Pi$-types}
+
+
+
+
+\subsection*{$\Pi$-types} Recall that the formation and introduction rules for $\Pi$-types are
+
+\[
+\begin{prooftree}
+\Gamma \vdash A \co \type \qquad
+\Gamma, x \co A \vdash B \co \type
+\justifies
+\Gamma \vdash (\Pi x \co A) B 
+\end{prooftree} \qquad
+\begin{prooftree}
+\Gamma, x \co A \vdash b \co B
+\justifies
+\Gamma \vdash (\lambda x \co A) b \co (\Pi x \co A) B 
+\end{prooftree} \medskip
+\]
+We will show that given a fibration with cofibrant domain $p \co A \to \Gamma$, the pushforward functor~$\Pi_p \co \SSet_{/A} \to \SSet_{/\Gamma}$, the right adjoint to the pullback functor $f^*$, restricts to a functor
+\[
+\Pi_p \co \BFFib_{/A}  \to \Fib_{/\Gamma} \, .
+\]
+The result of applying $\Pi_p$ to a fibration with cofibrant domain $q \co B \to A$ will be written as 
+\[
+\Pi(q) \co \Pi_p(B) \to \Gamma \, .
+\] 
+The domain of this fibration is not necessarily cofibrant. To remedy this, we will consider a cofibrant replacement of $\Pi_p(B)$, given by a cofibrant object~$\mathbb{L}(\Pi_p(B))$ and a trivial fibration~$t \co \mathbb{L}(\Pi_p(B)) \to \Pi_p(B)$. The dependent product would then be interpreted as the fibration with cofibrant domain $t \circ \Pi(q) \co  \mathbb{L}(\Pi_p(B)) \to X$. The standard
+computation rule holds as a judgemental equality, while the $\eta$-rule holds as a propositional equality.
+
+
+\medskip
 
 This section is devoted to proving a counterpart of the classical result that, for a fibration $p \co A \rightarrow X$, the dependent product, or pushforward, functor $\Pi_p \co \SSet_{/A} \to \SSet_{/X}$ preserves fibrations. 
+
+
 
 \medskip
 
@@ -1014,7 +1207,37 @@ The fact that $\bar{B} \rightarrow A$ is a deformation retract show that it is i
 
 \newpage
 
-\section{The universe}
+\section{The universe type}
+
+
+
+
+
+Recall that the formation and elimination rule for the type universe are
+\[
+\U \co \type \qquad 
+\begin{prooftree}
+\Gamma \vdash a \co \U
+\justifies
+\Gamma \vdash \mathsf{El}(a) \co \type
+\end{prooftree}
+\]
+
+We will interpret this by defining a bifibrant object $\U_c$ and a small fibration with cofibrant domain  $\pi_c \co \UU_c \to \U_c$ that classifies small fibrations with cofibrant domain, in a sense that for every bifibrant object $X$ and every fibration with cofibrant domain $p \co A \to \Gamma$, there exists a map $a \co \Gamma \to \U_c$
+fitting into a pullback diagram of the form
+\[
+\xymatrix{
+A \ar[r] \ar[d]_p & \UU_c \ar[d]^{\pi_c} \\
+\Gamma \ar[r]_a & \U_c }
+\]
+In order to illuminate the connection with the syntaxt, it is convenient to introduce a special notation for pullbacks of this map. Given a bifibrant object $\Gamma$ and
+a map $a \co \Gamma \to \U_c$, the pullback of $\pi_c$ along $a$ will be written 
+\[
+\xymatrix{
+\mathsf{El}(a) \ar[r] \ar[d] & \UU_c \ar[d]^{\pi} \\
+\Gamma \ar[r]_a & \U_c \, .}
+\]
+
 
 Our next goal is to define a bifibrant simplicial set $\U_c$ and a small fibration $\pi_c \co \UU_c \to \U_c$ that weakly classifies small fibrations between cofibrant objects, in the sense that for every such fibration $p \co A \to X$ there exists a map $a \co X \to \U_c$ such that $p$ is a pullback of $\pi_c$ along $a$, \ie we have a pullback diagram of the form
 \[
@@ -1135,6 +1358,83 @@ Indeed as $y = w(e)$ then if $e$ is degenerate so $y$ is. Conversely, assume tha
 \end{proof} 
 
 
+
+The simplicial sets $\U$ and $\UU$ do not appear to be cofibrant and therefore cannot be used to interpret the type universe according to our definition. However, we can consider a cofibrant replacement of $\U$, given by a cofibrant object $\U_c$ and a trivial cofibration
+\begin{equation}
+\label{equ:ucu}
+p \co \U_c \rightarrow \U
+\end{equation}
+We then define $\UU_c$ via the pullback
+\[
+\xymatrix{
+\UU_c \ar[d]_{\pi_c} \ar[r] \drpullback & \UU \ar[d]^{\pi}  \\
+\U_c \ar[r]_p & \U}
+\]
+We now prove that $\U_c$ and $\pi_c \co \UU_c \to \U_c$ have all the desired properies by showin that 
+they inherit them from $\U$ and $\pi \co \UU \to \U$.
+
+
+\begin{proposition} \label{thm:universe-uc} 
+\hfill 
+\begin{enumerate}[(i)] 
+\item $\pi_c \co \UU_c \to \U_c$ is a small fibration between fibrant objects. 
+\item The map $\pi_c \co \UU_c \to \U_c$ classifies small fibrations between cofibrant objects, \ie 
+for every small fibration $p \co A \to X$ with $X$ and $A$ cofibrant there exists a pullback diagram of the form
+\[
+\xymatrix{
+A \ar[r] \ar[d]_p & \UU_c \ar[d]^{\pi_c} \\
+X \ar[r]_a & \U_c }
+\]
+\item The object $\UU_c$ is cofibrant. \noten{Not sure we need this}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} \hfill
+\begin{enumerate}[(i)] 
+\item The claim follows from parts~(i) and~(ii) of~\cref{thm:universe-u}. 
+\item Let $p \co A \to X$ be a small fibration with $X$ cofibrant. Since $p$ is a
+small fibration, we know 
+from part~(iii) of \cref{thm:universe-u} that there is a pullback diagram of the form 
+\[
+\xymatrix{
+A \ar[r] \ar[d]_p \drpullback & \UU \ar[d]^{\pi} \\
+X \ar[r] & \U }
+\]
+Since $X$ is cofibrant, we have the lifting diagram
+\[
+\xymatrix{
+0 \ar[r] \ar[d] & \U_c \ar[d]^{} \\
+X \ar[r]_a \ar@{.>}[ur] & \U }
+\]
+which shows that the map $a \co X \to \U$ factors via $\U_c$.  We then obtain the diagram
+\[
+\xymatrix{
+A \ar[r] \ar[d]_p &  \UU_c \ar[r]  \ar[d]^{\pi_c} \drpullback & \UU \ar[d]^{\pi} \\
+X \ar[r]_{a_c} & \U_c \ar[r]_{a} &  \U }
+\]
+Here, the right-hand side square and the rectangle are pullbacks and therefore the left-hand
+side square is also a pullback, as required. 
+\item The claim follows from the fact that both $\U_c$ and
+$\UU$ are cofibrant, the latter holding by part (iii) of~\cref{thm:universe-u}, via \cref{lem:cofibrant_fiber_product}. \qedhere
+\end{enumerate} 
+\end{proof} 
+
+
+\notesh{
+% \item Fibrancy should follow directly from equivalence extension property, without using `composition vs filling' but rather retract property for horns (see notes).
+% \item Once we have established fibrancy of $U_c$, then one can prove univalence by showing that 
+% $t \co \mathsf{Weq}(U_c) \to U_c$ is a trivial fibration. 
+Question: do we need to know that $\mathsf{Weq}(\U_c)$ is a cofibrant object to get univalence?  I'm relatively sure $\mathsf{Weq}(\U_c)$ is not cofibrant. But all these property proved here will imediately pass to any cofibrant replacement. This is also why I'm working with  $\mathsf{Weq}(\U)$ instead: everything will be pulled back to the version for $\U_c$.
+}
+
+
+
+
+\section{Univalence of the universe} 
+
+In order to validate the univalence axiom for the type universe $\U$, we shall prove that the small fibration 
+$\pi_c \co \UU_c \to \U_c$ is univalent. For this, we shall exploit crucially that we have a weak model
+structure rather than just two weak factorisation systems.
 
 
 
@@ -1294,75 +1594,6 @@ fibration, which holds by part~(ii) of~\cref{thm:fibrancy-of-u}.
 \bigskip
 
 
-The simplicial sets $\U$ and $\UU$ do not appear to be cofibrant and therefore cannot be used to interpret the type universe according to our definition. However, we can consider a cofibrant replacement of $\U$, given by a cofibrant object $\U_c$ and a trivial cofibration
-\begin{equation}
-\label{equ:ucu}
-p \co \U_c \rightarrow \U
-\end{equation}
-We then define $\UU_c$ via the pullback
-\[
-\xymatrix{
-\UU_c \ar[d]_{\pi_c} \ar[r] \drpullback & \UU \ar[d]^{\pi}  \\
-\U_c \ar[r]_p & \U}
-\]
-We now prove that $\U_c$ and $\pi_c \co \UU_c \to \U_c$ have all the desired properies by showin that 
-they inherit them from $\U$ and $\pi \co \UU \to \U$.
-
-
-\begin{proposition} \label{thm:universe-uc} 
-\hfill 
-\begin{enumerate}[(i)] 
-\item $\pi_c \co \UU_c \to \U_c$ is a small fibration between fibrant objects. 
-\item The map $\pi_c \co \UU_c \to \U_c$ classifies small fibrations between cofibrant objects, \ie 
-for every small fibration $p \co A \to X$ with $X$ and $A$ cofibrant there exists a pullback diagram of the form
-\[
-\xymatrix{
-A \ar[r] \ar[d]_p & \UU_c \ar[d]^{\pi_c} \\
-X \ar[r]_a & \U_c }
-\]
-\item The object $\UU_c$ is cofibrant. \noten{Not sure we need this}
-\end{enumerate}
-\end{proposition}
-
-\begin{proof} \hfill
-\begin{enumerate}[(i)] 
-\item The claim follows from parts~(i) and~(ii) of~\cref{thm:universe-u}. 
-\item Let $p \co A \to X$ be a small fibration with $X$ cofibrant. Since $p$ is a
-small fibration, we know 
-from part~(iii) of \cref{thm:universe-u} that there is a pullback diagram of the form 
-\[
-\xymatrix{
-A \ar[r] \ar[d]_p \drpullback & \UU \ar[d]^{\pi} \\
-X \ar[r] & \U }
-\]
-Since $X$ is cofibrant, we have the lifting diagram
-\[
-\xymatrix{
-0 \ar[r] \ar[d] & \U_c \ar[d]^{} \\
-X \ar[r]_a \ar@{.>}[ur] & \U }
-\]
-which shows that the map $a \co X \to \U$ factors via $\U_c$.  We then obtain the diagram
-\[
-\xymatrix{
-A \ar[r] \ar[d]_p &  \UU_c \ar[r]  \ar[d]^{\pi_c} \drpullback & \UU \ar[d]^{\pi} \\
-X \ar[r]_{a_c} & \U_c \ar[r]_{a} &  \U }
-\]
-Here, the right-hand side square and the rectangle are pullbacks and therefore the left-hand
-side square is also a pullback, as required. 
-\item The claim follows from the fact that both $\U_c$ and
-$\UU$ are cofibrant, the latter holding by part (iii) of~\cref{thm:universe-u}, via \cref{lem:cofibrant_fiber_product}. \qedhere
-\end{enumerate} 
-\end{proof} 
-
-
-\notesh{
-% \item Fibrancy should follow directly from equivalence extension property, without using `composition vs filling' but rather retract property for horns (see notes).
-% \item Once we have established fibrancy of $U_c$, then one can prove univalence by showing that 
-% $t \co \mathsf{Weq}(U_c) \to U_c$ is a trivial fibration. 
-Question: do we need to know that $\mathsf{Weq}(\U_c)$ is a cofibrant object to get univalence?  I'm relatively sure $\mathsf{Weq}(\U_c)$ is not cofibrant. But all these property proved here will imediately pass to any cofibrant replacement. This is also why I'm working with  $\mathsf{Weq}(\U)$ instead: everything will be pulled back to the version for $\U_c$.
-}
-
-
 
 
 \newpage
@@ -1405,195 +1636,6 @@ This will satisfy the $\beta$-rule but not the $\eta$-rule for $\Pi$-types [TO B
 \item This should be essentially straightforward, following Kapulkin and Lumsdaine, but we may need to modify the notion of a $\Pi$-structure to accommodate the cofibrant replacements that we take for $\Pi$.
 \end{itemize}
 
-
-\appendix
-
-
-\section{Outline of the interpretation}
-
-
-In order to motivate our development, we briefly outline how an interpretation of Martin-L\"of type theory 
-extended with the univalence axiom, written $\mathrm{ML(UA)}$ below, is to be defined. We shall not deal with several coherence issues, which we leave for future work. Let us begin by recalling that  $\mathrm{ML(UA)}$ has the following four forms of hypothetical judgement:
-\begin{gather*}
- \Gamma \vdash A \co \type \, ,  \\ 
- \Gamma \vdash a \co A \, , \\
-  \Gamma \vdash A  = B \co \type \, ,  \\
- \Gamma \vdash a = b \co A \co \type \, .
-  \end{gather*}
-Here, $\Gamma  = (x_1 \co A_1, \ldots, x_n \co A_n)$ is a  context of variable declarations, possibly empty. Below, we shall often conflate a type and its interpretation to keep our presentation as simple as possible.
-
-
-
-
-
-We write $\Fib_{/X}$ for the full subcategory of $\SSet_{/X}$ spanned by fibrations and $\BFFib_{/X}$ for the full subcategory of  $\SSet_{/X}$ spanned by fibrations with cofibrant domain. We then have inclusion
-functors
-\[
-\xymatrix{
-\BFFib_{/X} \ar@{>->}[r] &
-\Fib_{/X} \ar@{>->}[r] &
-\SSet_{/X} \, .}
-\]
-
-
-
-
-
-
-\subsection*{Types}
-
-Types, by which we mean types in the empty context, are interpreted as bifibrant objects in $\SSet$. For example, the unit type will be interpreted as the terminal object $1$, which is bifibrant. Elements, by which we mean elements of a type in the empty context, will be interpreted as global elements, \ie maps of the form $a \co 1 \to A$.
-
-
-\subsection*{Contexts}
-
-Contexts are interpreted as bifibrant objects in $\SSet$. In particular, we interpret the empty context as the terminal object $1 \in \SSet$. 
-
-\subsection*{Dependent types} 
-
-For a fixed a bifibrant object $\Gamma$, we will use the slice category~$\SSet_{/\Gamma}$
-to interpret types in context~$\Gamma$ and their elements. For this, we will use the fact that the slice category~$\SSet_{/\Gamma}$ admits a weak model structure in which fibrations and cofibrations are the maps that become fibrations and cofibrations in~$\SSet$ after application of the forgetful functor 
-\[
-U \co \SSet_{/\Gamma} \to \SSet \, .
-\] 
-Types in context $\Gamma$ will be interpreted as bifibrant objects in~$\SSet_{/\Gamma}$. Since the terminal object of~$\SSet_{/\Gamma}$ is the identity $1_\Gamma \co \Gamma \to \Gamma$, an object $p \co A \to \Gamma$ is fibrant in $\SSet_{/\Gamma}$ if $p$ is a fibration in~$\SSet$. Furthermore, since the initial object of~$\SSet_{/\Gamma}$ is the unique map
-$!_\Gamma \co 0 \to \Gamma$, an object~$p \co A \to \Gamma$ is cofibrant in~$\SSet_{/\Gamma}$ if $A$ is cofibrant in~$\SSet$.
-Thus, the bifibrant objects of~$\SSet_{/\Gamma}$ are exactly the fibrations with codomain $\Gamma$ and cofibrant domain.
-
-For a fixed bifibrant object $p \co A \to \Gamma$ of~$\SSet_{/\Gamma}$, sections of $p$ are used to interpret elements of the type $A$ in context $\Gamma$, as usual.
-
-\smallskip
-
-
-\subsection*{Substitution} 
-
-We use pullback functors to intepret substitution of terms into types. Given a map $f \co \Gamma' \to \Gamma$, we will show that the pullback functor $f^* \co \SSet_{/\Gamma} \to \SSet_{/\Gamma'}$ restricts to a functor
-\[
-f^* \co \BFFib_{/\Gamma}  \to \BFFib_{/\Gamma'} \, .
-\]
-It will be useful to have a special notation for the action of this functor. Given a fibration with cofibrant
-domain $p \co A \to \Gamma$, we write its pullback along $f \co \Gamma' \to \Gamma$ as diagram
-\[
-\xymatrix{
-A[f] \ar[r] \ar[d]_{p[f]} & A \ar[d]^p \\
-\Gamma' \ar[r]_f & \Gamma }
-\]
-
-\subsection*{$\mathbf{Id}$-types} Recall that the formation and introduction rule for $\Id$-types are
-
-\[
-\begin{prooftree}
-\Gamma \vdash A \co \type \qquad
-\Gamma \vdash a \co A \qquad
-\Gamma \vdash b \co A 
-\justifies
-\Gamma \vdash \mathsf{Id}_A(a,b) \co \type
-\end{prooftree} \qquad
-\begin{prooftree}
-a \co A 
-\justifies
-\mathsf{refl}(a) \co \mathsf{Id}_A(a,a)
-\end{prooftree} \medskip
-\]
-Given a fibration with cofibrant domain $p \co A \to \Gamma$, we will interpret identity types on $A$ via the factorisation of the diagonal map $\delta_p \co A \to A \times_\Gamma A$ as a trivial cofibration followed by
-a fibration in $\SSet_{\Gamma}$: 
-\[
-\xymatrix{
-A \ar[r]^{r} \ar[dr] & \mathsf{Id}_A \ar[r]^-{(s,t)} \ar[d]  & A \times_\Gamma A \ar[dl]  \\
- & \Gamma &  }
-\]
-Note that $(s,t) \co  \mathsf{Id}_A  \to A \times_\Gamma A$ is a fibration and its domain $\Id_A$ is 
-cofibrant, since $A$ is so and $r \co A \to \Id_A$ is a cofibration. 
-
-\subsection*{$\Sigma$-types} Recall that the formation and introduction rules for $\Sigma$-types are
-
-\[
-\begin{prooftree}
-\Gamma \vdash A \co \type \qquad
-\Gamma, x \co A \vdash B \co \type
-\justifies
-\Gamma \vdash (\Sigma x \co A) B 
-\end{prooftree}  \qquad
-\begin{prooftree}
-\Gamma \vdash a \co A  \qquad
-\Gamma \vdash b \co B[a/x] 
-\justifies
-\Gamma \vdash \mathsf{pair}(a,b) \co (\Sigma x \co A) B 
-\end{prooftree} \smallskip
-\]
-
-\noindent
-It will be easy  to show that, for a fibration with cofibrant domain $p \co A \to \Gamma$, the composition 
-functor~$\Sigma_p \co \SSet_{/A} \to \SSet_{/\Gamma}$, left adjoint to the pullback functor $p^*$, restricts to a functor
-\[
-\Sigma_p \co \BFFib_{/A}  \to \BFFib_{/\Gamma} \, .
-\]
-The result of applying this functor to a fibration with cofibrant domain $q \co B \to A$ will be written 
-\[
-\Sigma_p(q) \co \Sigma_p(B) \to \Gamma \, .
-\] 
-Following the usual pattern, one can interpret the introduction and elimination rules so that the
-computation rule and the $\eta$-rule hold as judgemental equalities. 
-
-
-\subsection*{$\Pi$-types} Recall that the formation and introduction rules for $\Pi$-types are
-
-\[
-\begin{prooftree}
-\Gamma \vdash A \co \type \qquad
-\Gamma, x \co A \vdash B \co \type
-\justifies
-\Gamma \vdash (\Pi x \co A) B 
-\end{prooftree} \qquad
-\begin{prooftree}
-\Gamma, x \co A \vdash b \co B
-\justifies
-\Gamma \vdash (\lambda x \co A) b \co (\Pi x \co A) B 
-\end{prooftree} \medskip
-\]
-We will show that given a fibration with cofibrant domain $p \co A \to \Gamma$, the pushforward functor~$\Pi_p \co \SSet_{/A} \to \SSet_{/\Gamma}$, the right adjoint to the pullback functor $f^*$, restricts to a functor
-\[
-\Pi_p \co \BFFib_{/A}  \to \Fib_{/\Gamma} \, .
-\]
-The result of applying $\Pi_p$ to a fibration with cofibrant domain $q \co B \to A$ will be written as 
-\[
-\Pi(q) \co \Pi_p(B) \to \Gamma \, .
-\] 
-The domain of this fibration is not necessarily cofibrant. To remedy this, we will consider a cofibrant replacement of $\Pi_p(B)$, given by a cofibrant object~$\mathbb{L}(\Pi_p(B))$ and a trivial fibration~$t \co \mathbb{L}(\Pi_p(B)) \to \Pi_p(B)$. The dependent product would then be interpreted as the fibration with cofibrant domain $t \circ \Pi(q) \co  \mathbb{L}(\Pi_p(B)) \to X$. The standard
-computation rule holds as a judgemental equality, while the $\eta$-rule holds as a propositional equality.
-
-\subsection*{The universe type}
-
-Recall that the formation and elimination rule for the type universe are
-\[
-\U \co \type \qquad 
-\begin{prooftree}
-\Gamma \vdash a \co \U
-\justifies
-\Gamma \vdash \mathsf{El}(a) \co \type
-\end{prooftree}
-\]
-
-We will interpret this by defining a bifibrant object $\U_c$ and a small fibration with cofibrant domain  $\pi_c \co \UU_c \to \U_c$ that classifies small fibrations with cofibrant domain, in a sense that for every bifibrant object $X$ and every fibration with cofibrant domain $p \co A \to \Gamma$, there exists a map $a \co \Gamma \to \U_c$
-fitting into a pullback diagram of the form
-\[
-\xymatrix{
-A \ar[r] \ar[d]_p & \UU_c \ar[d]^{\pi_c} \\
-\Gamma \ar[r]_a & \U_c }
-\]
-In order to illuminate the connection with the syntaxt, it is convenient to introduce a special notation for pullbacks of this map. Given a bifibrant object $\Gamma$ and
-a map $a \co \Gamma \to \U_c$, the pullback of $\pi_c$ along $a$ will be written 
-\[
-\xymatrix{
-\mathsf{El}(a) \ar[r] \ar[d] & \UU_c \ar[d]^{\pi} \\
-\Gamma \ar[r]_a & \U_c \, .}
-\]
-
-\subsection*{The univalence axiom} 
-
-In order to validate the univalence axiom for the type universe $\U$, we shall prove that the small fibration 
-$\pi_c \co \UU_c \to \U_c$ is univalent. For this, we shall exploit crucially that we have a weak model
-structure rather than just two weak factorisation systems.
 
 
 
