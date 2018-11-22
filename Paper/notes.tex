@@ -240,21 +240,19 @@ thanks to the fact that every cofibrant object has a strong cylinder, given by~$
 
 
 \begin{lemma}\label{lemma:triv_fib_are_we}
-A fibration between cofibrant simplicial sets is a weak equivalence if and only if it is a trivial fibration.
-In particular, any weak equivalence between cofibrant simplicial set can be factored as a trivial cofibration followed by a trivial fibration.
+A trivial fibration between cofibrant simplicial sets is a weak equivalence.
+In particular, any weak equivalence between cofibrant simplicial set can be factored as an acyclic cofibration followed by a trivial fibration.
 \end{lemma}
 
 \begin{proof}
-One first proves that any trivial fibration  $p \co A \to X$ between cofibrant object is a weak equivalence. More precisely, one shows that $p$ is invertible in the homotopy category by constructing first a section $i \co X \rightarrow A$ of $p$ and then a homotopy between $i  p \co A \to A$ and the identity $1_{A}$. They are obtained as diagonal filling in the following two squares:
+Let $p \co B \to A$ be a trivial fibration between cofibrant objects. One will show that $p$ is invertible in the homotopy category by constructing first a section $i \co X \rightarrow A$ of $p$ and then a homotopy between $i  p \co A \to A$ and the identity $1_{A}$. They are obtained as diagonal filling in the following two squares:
 \[
 \xymatrix{0 \ar[r] \ar[d] & A \ar[d]^{p} \\ 
 X \ar@{.>}[ur]^{i} \ar@{=}[r] & X}
 \qquad
 \xymatrix{A + A \ar[rr]^{(1_{A} , i  p)} \ar[d] & &  A \ar[d] \\ \Delta[1] \times A \ar@{.>}[rru] \ar[r]& A \ar[r]^{p} & X  }
 \]
-It follows that if $p \co A \rightarrow X$ is a weak equivalences between two cofibrant objects then if one factors it as a cofibration followed by a trivial fibration, then the cofibration part is a trivial cofibration. 
-
-Finally, if $p \co A \to X$ is a fibration between cofibrant objects which is also a weak equivalence then one can factor it as a trivial cofibration $j$ followed by a trivial fibration $p'$, and using the lifting property of $j$ against $p$ one obtained that $p$ is a retract of $p'$, hence a trivial fibration as well.
+It follows that if $f \co A \rightarrow B$ is a weak equivalences between two cofibrant objects then if one factors it as a cofibration followed by a trivial fibration, the cofibration part is also an acyclic cofibration by $2$-out-of-$3$.
 \end{proof}
 
 
