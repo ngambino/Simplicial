@@ -1,3 +1,37 @@
+We now discuss our second aim, namely showing how we can build on \cref{thm:restricted-frobenius} 
+to define sufficient structure to interpret $\Pi$-types. This is not immediate since the result of applying $\Pi_p$ to a 
+fibration with cofibrant domain need not have cofibrant domain.
+ Suppose that we have fibrations 
+$q \co B \to A$ and~$p \co A \to X$, with
+all objects both fibrant and cofibrant. 
+We begin by applying 
+\[
+\Pi_p  \co \SSet_{/A} \to \SSet_{/X}
+\]
+to $q \co B \to A$, so as to obtain $\Pi_p(q) \co \Pi_A(B) \to X$, which is
+a fibration by~\cref{thm:restricted-frobenius}. The domain of this map is fibrant but
+not necessarily cofibrant, so we consider its cofibrant replacement 
+\[
+\widetilde{\Pi}_A(B) \defeq \mathbb{L} \big( \Pi_A(B)  \big) \, ,
+\]
+which comes equipped with a trivial fibration $\varepsilon \co \widetilde{\Pi}_A(B) \to \Pi_A(B)$.
+Finally, we define the fibration $\widetilde{\Pi}_p(q) \co \widetilde{\Pi}_A(B) \to X$ as 
+ the composite
+ \[
+\xymatrix{
+\widetilde{\Pi}_A(B) \ar[rr]^{\varepsilon} \ar[dr]_{\widetilde{\Pi}_p(q) } & & \Pi_A(B) \ar[dl]^{\Pi_p(q)}  \\
+ & X &} 
+ \]
+This will satisfy the $\beta$-rule but not the $\eta$-rule for $\Pi$-types [TO BE ADDED].
+
+
+
+
+\begin{itemize}
+\item This should be essentially straightforward, following Kapulkin and Lumsdaine, but we may need to modify the notion of a $\Pi$-structure to accommodate the cofibrant replacements that we take for $\Pi$.
+\end{itemize}
+
+
 
 \begin{remark}[Function types] \label{rem:function-types}
 While the interpretation of general function types and~$\Pi$-types

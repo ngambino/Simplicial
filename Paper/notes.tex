@@ -33,6 +33,12 @@ is the use of a cofibrant replacement functor to overcome the known issues regar
 
 \section{Introduction} 
 
+We will interpret contexts as bifibrant simplicial sets. In particular,
+the empty context will be interpreted as the terminal simplicial set $1$.  Dependent types 
+will be interpreted as fibrations $p \co A \to X$ where $X$ is a bifibrant simplicial and $A$ is cofibrant. In particular, types in the empty context will be interpreted as bifibrant simplicial sets. 
+This choice is motivated by the fact that, for a bifibrant simplicial set $X$, the slice category~$\SSet_{/X}$ admits a weak model structure in which fibrations and cofibrations are the maps that become fibrations and cofibrations, respectively, in~$\SSet$. Then, bifibrant objects in $\SSet_{/X}$
+are exactly the fibrations with codomain $X$ and cofibrant domain.
+
 
 
 \begin{table}[htb]
@@ -95,19 +101,25 @@ factorisation systems is not an issue constructively (\cf comments further below
 
 \section{Preliminaries} 
 
-Let $\catE$  be a category. For $X \in \catE$ we write $\catE_{/X}$ for the slice category over
-$X$. Given a map $p \co A \to X$, we write $\Sigma_p \co \catE_{/A} \to \catE_{/X}$ for the composition
-functor and denote its action on an object $q \co B \to A$ as $\Sigma_p(q) \co \Sigma_A(B) \to X$. When
-$\catE$ has pullbacks, $\Sigma_p$ has a right adjoint, which we denote $p^* \co \catE_{/X} \to \catE_{/A}$,
-whose action will be written as follows
+Let $\catE$  be a locally cartesian closed category. For $X \in \catE$ we write $\catE_{/X}$ for the slice category over $X$. For a map $f \co Y \to X$ in $\catE$, he pullback functor as $f^* \co \catE_{/X} \to \catE_{/Y}$
+and denote is action on $p \co A \to X$ as 
 \[
 \xymatrix{
-A[f] \ar[r] \ar[d] & A \ar[d]^p \\
+A[f] \ar[r] \ar[d]_{p[f]} & A \ar[d]^p \\
 Y \ar[r]_f & X }
 \]
-When $\catE$ is locally cartesian closed, the pullback  $p^*$ has a further right adjoint, which we denote 
-$\Pi_p \co \catE_{/A} \to \catE_{/X}$. Its action on $q \co B \to A$ will be written $\Pi_p(q) \co 
-\Pi_A(B) \to X$. For $p \co A \to X$, the result of applying $\Pi_p$ to a fibration with cofibrant domain $q \co B \to A$ will be written as~$\Pi(q) \co \Pi_A(B) \to X$. 
+For a map $p \co A \to X$ in $\catE$, pullback along $p$ has both left adjoint, written $\Sigma_p \co \catE_{/A}
+\to \catE_{/X}$, and a right adjoint, written $\Pi_p \co \catE_{/A} \to \catE_{/X}$. Their action on a
+map $q \co B \to A$ will be written
+\[
+ \Sigma_p(q) \co \Sigma_A(B) \to X \, , \quad \Pi_p(q) \co \Pi_A(B) \to X \, ,
+ \]
+respectively. The left adjoint is defined by composition, so $\Sigma_A(B) \defeq B$ and $\Sigma_p(q) = qp$.
+
+
+\medskip
+
+
 
 \medskip
 
@@ -118,6 +130,14 @@ We write $\Delta$ for the simplicial category. Its objects will be written as $[
 the category of simplicial sets, \ie the presheaf category over $\Delta$, by $\SSet$. 
  For $n \geq 0$, we write $\Delta[n]$ for for the
 associated representable simplicial set. We write $i^n \co  \partial \Delta[n] \to \Delta[n]$ for the \emph{boundary inclusion} into the $n$-simplex and  $h^k_n  \co \Lambda^k[n] \to \Delta[n]$ for the $k$-th \emph{horn inclusion} into the $n$-simplex. The simplicial set $\Delta[1]$ provides an interval object in $\SSet$, with endpoint inclusions~$\kcyl \co \braces{ k} \to \Delta[1]$ defined by~$\kcyl \defeq h^1_k$.
+As a special case of a general result for presheaf categories, for every $[n] \in \Delta$, there is an equivalence of categories
+\begin{equation}
+\label{equ:pshslice}
+\SSet_{/\Delta[n]} \simeq \Psh \big( \Delta_{/[n]} \big )
+\end{equation}
+For $F \co {\Delta_{/[n]}}^{\op} \to \Set$, we write $\pi_1 \co \mathrm{el}(F) \to \Delta[n]$
+for the corresponding object of~$\SSet_{/\Delta[n]}$.
+
 
 \medskip
 
@@ -149,9 +169,8 @@ Cofibrant simplicial sets are of particular importance for our development becau
 \medskip
 
 
-We say that a simplicial set is \myemph{bifibrant} if it is both fibrant and cofibrant.  We write $\Fib_{/X}$ for the full subcategory of the slice category $\SSet_{/X}$ spanned by the fibrations with codomain $X$. Of key interest for us will be the full subcategory of  $\Fib_{/X}$ spanned by fibrations with cofibrant domain, which we denote by  $\BFFib_{/X}$.
-
-
+We say that a simplicial set is \myemph{bifibrant} if it is both fibrant and cofibrant.  We write $\Fib_{/X}$ for the full subcategory of the slice category $\SSet_{/X}$ spanned by the fibrations with codomain $X$
+and $\BFFib_{/X}$ for  the full subcategory of  $\Fib_{/X}$ spanned by fibrations with cofibrant domain.
 
 
 
@@ -368,25 +387,13 @@ This proposition has some interesting consequences.
 
  
 
-\section{Types as bifibrant simplicial sets} 
+\section{Pullbacks} 
 
-We briefly outline how we define an interpretation of Martin-L\"of type theory 
-extended with the univalence axiom, written $\mathrm{ML(UA)}$ below. For this, 
-we shall often conflate contexts and types with their interpretations in order to keep our presentation as simple as possible. For this, let us recall that for a  (possibly empty) context~$\Gamma = (x_1 \co A_1 \, , \ldots \, , x_n \co A_n)$ of variable declarations, the hypothetical judgement
-\begin{equation}
-\label{equ:typejudgement}
-\Gamma \vdash A \co \type 
- \end{equation} 
-expresses that $A$ is a type relative to $\Gamma$. We will interpret contexts as bifibrant simplicial sets. In particular,
-the empty context will be interpreted as the terminal simplicial set $1$.  Types in context $\Gamma$ as in~\eqref{equ:typejudgement} will be interpreted as fibrations $p \co A \to \Gamma$ with cofibrant domain. In particular, types in the empty context will be interpreted as
-bifibrant simplicial sets. 
 
-\medskip
+
+
+
  
-This choice is motivated by the fact that, for a bifibrant simplicial set $\Gamma$, the slice category~$\SSet_{/\Gamma}$ admits a weak model structure in which fibrations and cofibrations are the maps that become fibrations and cofibrations, respectively, in~$\SSet$. Then, bifibrant objects in $\SSet_{/\Gamma}$
-are exactly the fibrations with codomain $\Gamma$ and cofibrant domain.
-
-
 
 
 
@@ -480,17 +487,15 @@ $\Sigma$-types so that the computation rule and the $\eta$-rule hold as judgemen
 Let  $p \co A \to X$ be a fibration with cofibrant domain. The
 functor~$\Sigma_p \co \SSet_{/A} \to \SSet_{/X}$ defined by
 composition with $p$ restricts to a functor
-\[
-\Sigma_p \co \BFFib_{/A}  \to \BFFib_{/X} \, .
-\]
+$\Sigma_p \co \BFFib_{/A}  \to \BFFib_{/X}$
  Since fibrations are defined by a right lifting property, they are closed
 under composition. Therefore, if $q \co B \to A$ is a fibration with cofibrant domain, then
-the composite $\Sigma_p(q) \co \Sigma_A(B) \to X$ is again a fibration with cofibrant domain.
+$\Sigma_p(q) \co \Sigma_A(B) \to X$ is again a fibration with cofibrant domain.
 \end{remark} 
 
 
 
-\section{Identity types as path objects}
+\section{Identity types}
 
 Following~\cite{awodey-warren:homotopy-idtype}, in order to interpret these rules one we need to consider
 a fibration $p \co A \to X$ with cofibrant domain  and obtain a factorisation of the diagonal map $\delta_p \co A \to A \times_X A$ as a trivial cofibration $r \co A \to  \Id_A$ followed by a fibration
@@ -984,7 +989,13 @@ Since the functor $\Pi_f$ is the right adjoint to the pullback functor $f^*$ and
 
 \item As $f$ is a monomorphism, then the forgetful functor $\Sigma_{f} \co \SSet_{/X} \rightarrow \SSet_{/Y}$ is fully faithful and hence the unit $\eta \co 1_{\SSet_{/A}} \rightarrow f^* \Sigma_{f}$ is an isomorphism. By adjointness, the counit $\varepsilon \co 1_{\SSet_{/Y}} \rightarrow f^* \Pi_f$ is also an isomorphism.
 
-\item Let $v$ be a $n$-cell in $\Pi_i(X)$.
+\item \hfill 
+
+\begin{center}
+\noten{To be revised} 
+\end{center}
+
+Let $v$ be a $n$-cell in $\Pi_i(X)$.
 If the image of $v$ is in $A$ then $v$ is a cell of $X \subset \Pi_i(X)$, in which case it is decidable whether $v$ is degenerate or not.
 As $A$ is levelwise complemented in $B$, one can assume that $v$ is not in the image of $A$. In this case it is decidable if the image of $v$ in $B$ is degenerate or not.
 Infact, by the Eilenberg-Zilber lemma one can also decide for each given degeneracy if the image of $v$ is degenerate for this precise degeneracy or not. 
@@ -1067,8 +1078,8 @@ are pullbacks.
 
 \begin{proof} We define the required object $\bar{B}$ as the following pullback:
 \[\xymatrix{
-\bar{B} \ar[d] \ar[r] \drpullback & \Pi_f(B) \ar[d] \\
-A \ar[r]_-{\eta_{A}} & \Pi_f \big( A[f]  \big) \, ,
+\bar{B} \ar[d] \ar[r] \drpullback & \Pi_Y(B) \ar[d] \\
+A \ar[r]_-{\eta_{A}} & \Pi_Y \big( A[f]  \big) \, ,
 }\]
 where $\eta_{A}$ is  a component of the unit of adjunction  $f^* \dashv \Pi_f$. An application of the pullback functor $f^* \co \SSet_{/X} \to \SSet_{/Y}$ to this pullback square gives the commutative square
 \[\xymatrix{
@@ -1079,7 +1090,7 @@ This is a pullback since $f^* \Pi_f \iso 1$ by part~(ii) \cref{Lemma:ForTheExtPr
 $B \iso \bar{B}[f]$, as required.
 
 
-Since $B$ is cofibrant, we have that $X.\Pi_f(B)$ is cofibrant by part~(iii) of  \cref{Lemma:ForTheExtProperty}. Hence, the simplicial set~$\bar{B}$  is also cofibrant by \cref{lem:cofibrant_fiber_product}. Furthermore, the maps $B \rightarrow \bar{B}$ and~$A[f] \rightarrow A$ are cofibrations by~\cref{thm:cof-pbk}, as they are pullback of the cofibration~$f \co Y \rightarrow X$.
+Since $B$ is cofibrant, we have that $\Pi_Y(B)$ is cofibrant by part~(iii) of  \cref{Lemma:ForTheExtProperty}. Hence, the simplicial set~$\bar{B}$  is also cofibrant by \cref{lem:cofibrant_fiber_product}. Furthermore, the maps $B \rightarrow \bar{B}$ and~$A[f] \rightarrow A$ are cofibrations by~\cref{thm:cof-pbk}, as they are pullback of the cofibration~$f \co Y \rightarrow X$.
 
 
 
@@ -1117,7 +1128,7 @@ on $\Delta[0] \times \bar{B} $ (indeed they agree on $\Delta[1] \times B$) and i
 Such a diagonall filler exists since the map on the left-hand side is a trivial cofibration, being the 
  pushout-product of $Y_0 \co \Delta[0] \rightarrow \Delta[1]$ and the cofibration $\bar{B} \cup A[f] \rightarrow A$, and the map on the right-hand side is a fibration by assumption.
 
-It remains to see that the map $H_{1} \co A \rightarrow A$ is indeed a retraction of $\bar{B} \rightarrow A$. We already know that the restriction of $H_{1}$ to $\bar{B}$ is  the inclusion of $\bar{B}$ in $A$, so it is enough to show that $H_{1}$ has values in $\bar{B}$. We also know that $H_{1}$ restricted to $A[f]$ takes values in $B \subseteq \bar{B}$. By definition of $\bar{B}$, the map $H_1$ factor into $\bar{B}$ if and only if it takes values in $X.\Pi_f(B)$ when seen as a map to $X.\Pi_f(A[f])$, and by adjunction this is the case if and only if the map corresponding to $H_1$, $A[f]= f^*(A) \rightarrow A[f]$ takes values in $B$, but already mentioned above that this was indeed the case.
+It remains to see that the map $H_{1} \co A \rightarrow A$ is indeed a retraction of $\bar{B} \rightarrow A$. We already know that the restriction of $H_{1}$ to $\bar{B}$ is  the inclusion of $\bar{B}$ in $A$, so it is enough to show that $H_{1}$ has values in $\bar{B}$. We also know that $H_{1}$ restricted to $A[f]$ takes values in $B \subseteq \bar{B}$. By definition of $\bar{B}$, the map $H_1$ factor into $\bar{B}$ if and only if it takes values in $\Pi_Y(B)$ when seen as a map to $\Pi_Y(A[f])$, and by adjunction this is the case if and only if the map corresponding to $H_1$, $A[f]= f^*(A) \rightarrow A[f]$ takes values in $B$, but already mentioned above that this was indeed the case.
 
 The fact that $\bar{B} \rightarrow A$ is a deformation retract show that it is invertible in the homotopy category, in particular it is indeed a weak equivalence. The construction above also shows that~$\bar{B}$ is retract of $A$ in $\SSet_{/X}$ and hence $\bar{q} \co \bar{B} \rightarrow X$ is a fibration because $p \co A \rightarrow X$ is.
 \end{proof}
@@ -1164,13 +1175,7 @@ is small.
 
 We review the definition of the weakly universal small map of simplicial sets, which
 can be obtained as a special case of the results in~\cite{hofmann-streicher-universes} for arbitrary presheaf
-categories. Recall that, again as a special case of a general result for presheaf categories, for every $[n] \in \Delta$, there is an equivalence of categories
-\begin{equation}
-\label{equ:pshslice}
-\SSet_{/\Delta[n]} \simeq \Psh \big( \Delta_{/[n]} \big )
-\end{equation}
-For $F \co {\Delta_{/[n]}}^{\op} \to \Set$, we write $\pi_1 \co \mathrm{el}(F) \to \Delta[n]$
-for the corresponding object of~$\SSet_{/\Delta[n]}$. The simplicial set $\V$ is then defined by letting
+categories. The simplicial set $\V$ is then defined by letting
 \[
 \mathsf{V}_n \defeq \{ F \in \Psh(\Delta_{/[n]}) \ | \ \pi_1 \co \mathsf{el}(F) \to \Delta[n] \text{ is a small
 map} \}
@@ -1494,89 +1499,103 @@ fibration, which holds by part~(ii) of~\cref{thm:fibrancy-of-u}.
 \label{sec:conclusions}
 
 
-We now discuss our second aim, namely showing how we can build on \cref{thm:restricted-frobenius} 
-to define sufficient structure to interpret $\Pi$-types. This is not immediate since the result of applying $\Pi_p$ to a 
-fibration with cofibrant domain need not have cofibrant domain.
- Suppose that we have fibrations 
-$q \co B \to A$ and~$p \co A \to X$, with
-all objects both fibrant and cofibrant. 
-We begin by applying 
-\[
-\Pi_p  \co \SSet_{/A} \to \SSet_{/X}
-\]
-to $q \co B \to A$, so as to obtain $\Pi_p(q) \co \Pi_A(B) \to X$, which is
-a fibration by~\cref{thm:restricted-frobenius}. The domain of this map is fibrant but
-not necessarily cofibrant, so we consider its cofibrant replacement 
-\[
-\widetilde{\Pi}_A(B) \defeq \mathbb{L} \big( \Pi_A(B)  \big) \, ,
-\]
-which comes equipped with a trivial fibration $\varepsilon \co \widetilde{\Pi}_A(B) \to \Pi_A(B)$.
-Finally, we define the fibration $\widetilde{\Pi}_p(q) \co \widetilde{\Pi}_A(B) \to X$ as 
- the composite
- \[
-\xymatrix{
-\widetilde{\Pi}_A(B) \ar[rr]^{\varepsilon} \ar[dr]_{\widetilde{\Pi}_p(q) } & & \Pi_A(B) \ar[dl]^{\Pi_p(q)}  \\
- & X &} 
- \]
-This will satisfy the $\beta$-rule but not the $\eta$-rule for $\Pi$-types [TO BE ADDED].
 
-
-
-
-\begin{itemize}
-\item This should be essentially straightforward, following Kapulkin and Lumsdaine, but we may need to modify the notion of a $\Pi$-structure to accommodate the cofibrant replacements that we take for $\Pi$.
-\end{itemize}
-
-
-
-
-
-
-\nocite{*}
+\bigskip
 
 
 \appendix
 
 \section{Type-theoretic rules}
 
+\subsection*{Identity types}
 
-For this, recall that the formation and introduction rules for $\Sigma$-types are
 
 \[
-\begin{prooftree}
-\Gamma \vdash A \co \type \qquad
-\Gamma, x \co A \vdash B \co \type
-\justifies
-\Gamma \vdash (\Sigma x \co A) B 
-\end{prooftree}  \qquad
-\begin{prooftree}
-\Gamma \vdash a \co A  \qquad
-\Gamma \vdash b \co B[a/x] 
-\justifies
-\Gamma \vdash \mathsf{pair}(a,b) \co (\Sigma x \co A) B 
-\end{prooftree} \medskip
-\]
-
-
-Recall that the formation, introduction and elimination rule for identity types are
-\[
+\begin{gathered}
 \begin{prooftree}
 \Gamma \vdash A \co \type \qquad
 \Gamma \vdash a \co A \qquad
 \Gamma \vdash b \co A 
 \justifies
 \Gamma \vdash \mathsf{Id}_A(a,b) \co \type
-\end{prooftree} \qquad
+\end{prooftree} \\[2ex]
 \begin{prooftree}
 a \co A 
 \justifies
 \mathsf{refl}(a) \co \mathsf{Id}_A(a,a)
-\end{prooftree} \smallskip
+\end{prooftree} \\[2ex]
+\begin{prooftree}
+\Gamma \vdash p \co \Id_A(a,b) \qquad
+\Gamma, x, y \co A, z \co \Id_A(x,y) \vdash B \co \type \qquad
+\Gamma, x \co A \vdash d \co B[x/y, \mathsf{refl}(x)/z] 
+\justifies
+\Gamma \vdash \mathsf{J}(a,b,p,d) \co B[a/x, b/y, p/z]
+\end{prooftree} \\[2ex]
+\begin{prooftree}
+\Gamma \vdash a \co A \qquad
+\Gamma, x, y \co A, z \co \Id_A(x,y) \vdash B \co \type \qquad
+\Gamma, x \co A \vdash d \co B[x/y, \mathsf{refl}(x)/z] 
+\justifies
+\Gamma \vdash \mathsf{J}(a,a,\mathsf{refl}(a),d) = d[a/x] \co B[a/x, a/y, \mathsf{refl}(a)/z]
+\end{prooftree}
+\end{gathered}
 \]
 
 
 
- Recall that the formation and introduction rules for $\Pi$-types are 
+\subsection*{$\Sigma$-types}
+
+\[
+\begin{gathered}
+\begin{prooftree}
+\Gamma \vdash A \co \type \qquad
+\Gamma, x \co A \vdash B \co \type
+\justifies
+\Gamma \vdash (\Sigma x \co A) B 
+\end{prooftree}  \\[1ex]
+\begin{prooftree}
+\Gamma \vdash a \co A  \qquad
+\Gamma \vdash b \co B[a/x] 
+\justifies
+\Gamma \vdash \mathsf{pair}(a,b) \co (\Sigma x \co A) B 
+\end{prooftree}  \\[2ex]
+\begin{prooftree}
+\Gamma \vdash c \co (\Sigma x \co A) B 
+\justifies
+\Gamma \vdash  \pi_1(c) \co A 
+\end{prooftree} \qquad
+\begin{prooftree}
+\Gamma \vdash c \co (\Sigma x \co A) B 
+\justifies
+\Gamma \vdash \pi_2(c) \co B[ \pi_1(c)/x] 
+\end{prooftree} \\[2ex]
+\begin{prooftree}
+\Gamma \vdash a \co A  \qquad
+\Gamma \vdash b \co B[a/x] 
+\justifies
+\Gamma \vdash \pi_1 \big( \mathsf{pair}(a,b) \big)  = a \co A
+\end{prooftree}  \qquad
+\begin{prooftree}
+\Gamma \vdash a \co A  \qquad
+\Gamma \vdash b \co B[a/x] 
+\justifies
+\Gamma \vdash \pi_2\big( \mathsf{pair}(a,b) \big) = b \co B[a/x]
+\end{prooftree} \\[2ex]
+\begin{prooftree}
+\Gamma \vdash c \co (\Sigma x \co A) B 
+\justifies
+\Gamma \vdash  c = \mathsf{pair}(\pi_1(c), \pi_2(c))  \co   (\Sigma x \co A) B 
+\end{prooftree}
+\end{gathered}
+\]
+
+
+
+
+
+
+
+\subsection*{$\Pi$-types}
  
 \[ 
 \begin{gathered} 
@@ -1596,20 +1615,35 @@ a \co A
 \Gamma \vdash a \co A 
 \justifies
 \Gamma \vdash \mathsf{app}(f,a) \co B[a/x]
+\end{prooftree} \\[2ex]
+\begin{prooftree}
+\Gamma, x \co A \vdash b \co B \qquad
+\Gamma \vdash a \co A 
+\justifies
+\Gamma \vdash \mathsf{app}( (\lambda x \co A)b, a) = b[a/x] \co B[a/x] 
+\end{prooftree} \\[2ex]
+\begin{prooftree}
+\Gamma \vdash f \co (\Pi x \co A) B 
+\justifies
+\Gamma \vdash \eta_f \co \Id_{(\Pi x \co A)B} \big( f, (\lambda x \co A) \mathsf{app}(f,x)\big)
 \end{prooftree}
 \end{gathered}
- \medskip
 \]
 
 
 
-Recall that the formation and elimination rule for the type universe are
+
+
+
+\subsection*{Universe type}
+
+
 \[
 \U \co \type \qquad 
 \begin{prooftree}
 \Gamma \vdash a \co \U
 \justifies
-\Gamma \vdash \mathsf{El}(a) \co \type
+\Gamma \vdash \mathsf{T}(a) \co \type
 \end{prooftree}
 \]
 
