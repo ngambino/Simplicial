@@ -73,3 +73,20 @@ which is constructed as the diagonal filler in the following diagram
 \]
 where the bottom map is given by the equality in the $\eta$-rule in~\eqref{equ:betaeta}.
 \end{remark}
+
+
+
+We will interpret this by defining a bifibrant object $\U_c$ and a small fibration with cofibrant domain  $\pi_c \co \UU_c \to \U_c$ that classifies small fibrations with cofibrant domain, in a sense that for every bifibrant object $X$ and every fibration with cofibrant domain $p \co A \to \Gamma$, there exists a map $a \co \Gamma \to \U_c$
+fitting into a pullback diagram of the form
+\[
+\xymatrix{
+A \ar[r] \ar[d]_p & \UU_c \ar[d]^{\pi_c} \\
+\Gamma \ar[r]_a & \U_c }
+\]
+In order to illuminate the connection with the syntaxt, it is convenient to introduce a special notation for pullbacks of this map. Given a bifibrant object $\Gamma$ and
+a map $a \co \Gamma \to \U_c$, the pullback of $\pi_c$ along $a$ will be written 
+\[
+\xymatrix{
+\mathsf{El}(a) \ar[r] \ar[d] & \UU_c \ar[d]^{\pi} \\
+\Gamma \ar[r]_a & \U_c \, .}
+\]
