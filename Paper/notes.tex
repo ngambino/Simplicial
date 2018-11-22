@@ -470,6 +470,7 @@ Since $A$ is cofibrant, the claim is that $g \co B \rightarrow A$ is a levelwise
 \end{proof} 
 
 
+\begin{remark} 
 We conclude this section by observing that it is straightforward to define the interpretation of
 $\Sigma$-types so that the computation rule and the $\eta$-rule hold as judgemental equalities. 
 For this, recall that the formation and introduction rules for $\Sigma$-types are
@@ -488,30 +489,46 @@ For this, recall that the formation and introduction rules for $\Sigma$-types ar
 \Gamma \vdash \mathsf{pair}(a,b) \co (\Sigma x \co A) B 
 \end{prooftree} \medskip
 \]
-
-
-\begin{proposition} Let  $p \co A \to \Gamma$ be a fibration with cofibrant domain. Then, the composition 
+Let  $p \co A \to \Gamma$ be a fibration with cofibrant domain. Then, the composition 
 functor~$\Sigma_p \co \SSet_{/A} \to \SSet_{/\Gamma}$  restricts to a functor
 \[
 \Sigma_p \co \BFFib_{/A}  \to \BFFib_{/\Gamma} \, .
 \]
-\end{proposition}
-
-\begin{proof} Since fibrations are defined by a right lifting property, they are closed
+ Since fibrations are defined by a right lifting property, they are closed
 under composition. Therefore, if $q \co B \to A$ is a fibration with cofibrant domain, then
 the composite $q \circ p \co B \to \Gamma$ is again a fibration with cofibrant domain.
-\end{proof} 
+\end{remark} 
 
 
 
-\section{Exponentials and identity types}
+\section{Identity types as path objects}
 
+Recall that the formation, introduction and elimination rule for identity types are
+\[
+\begin{prooftree}
+\Gamma \vdash A \co \type \qquad
+\Gamma \vdash a \co A \qquad
+\Gamma \vdash b \co A 
+\justifies
+\Gamma \vdash \mathsf{Id}_A(a,b) \co \type
+\end{prooftree} \qquad
+\begin{prooftree}
+a \co A 
+\justifies
+\mathsf{refl}(a) \co \mathsf{Id}_A(a,a)
+\end{prooftree} \smallskip
+\]
+Following~\cite{awodey-warren:homotopy-idtype}, in order to interpret these rules one we need to consider
+a fibration $p \co A \to X$ with cofibrant domain  and obtain a factorisation of the diagonal map $\delta_p \co A \to A \times_X A$ as a trivial cofibration $r \co A \to  \Id_A$ followed by a fibration
+$(s,t) \co A \times_X A$. Note  $\Id_A$ is cofibrant, since $A$ is cofibrant and $r \co A \to \Id_A$ is a cofibration. While such a factorisation is guaranteed to exist by the axioms for a weak model category,
+it is possible to make a particularly appealing choice for this factorisation, given by taking $\Id_A$ to be
+the simplicial sets of paths in $A$. 
 
-\subsection*{Exponentials}
+\medskip
 
- 
-An important feature of the two weak factorization systems $(\Cof, \TrivFib)$ and $(\mathsf{Sat}(\cal{J}), \Fib)$
-is that they satisfy the pushout-product property~\cite{henry2018wms}. More precisely, given two maps $f \co Y \rightarrow X$ and $g \co B \rightarrow A$ their \emph{pushout-product} $f \hattimes g$ is defined as the unique dotted map in
+In order to show that this is the case, we need some preliminary results. First of all, recall that
+two weak factorization systems $(\Cof, \TrivFib)$ and $(\mathsf{Sat}(\cal{J}), \Fib)$
+satisfy the so-called pushout-product property~\cite{henry2018wms}. More precisely, given two maps $f \co Y \rightarrow X$ and $g \co B \rightarrow A$ their \emph{pushout-product} $f \hattimes g$ is defined as the unique dotted map in
 \[
 \xymatrix{
 Y \times B \ar[r] \ar[d] &  X \times B \ar[d] \ar@/^1.5pc/[ddr] \\
@@ -564,7 +581,7 @@ then $\langle f , p \rangle$ is a trivial fibration.  We then have the following
 
 
 
-\begin{proposition} \hfill 
+\begin{lemma} \hfill 
  \label{thm:exponentials}
 \begin{enumerate}[(i)] 
 \item Let $X$ be cofibrant and $A$ be fibrant.  Then $A^X$ is fibrant.
@@ -572,123 +589,28 @@ then $\langle f , p \rangle$ is a trivial fibration.  We then have the following
 \item Let $f \co Y \rightarrow X$ be a trivial cofibration and $A$ be fibrant.  Then $A^f \co A^X \rightarrow A^Y$ is a trivial fibration.
 \item Let $X$ be cofibrant and $p \co B \rightarrow A$ be a (trivial) fibration. Then $p^X \co B^X \rightarrow A^X$ is also a trivial fibration.
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 Part~(i) can also be established directly, by inspecting the classical proofs, exploiting the decidability of degeneracy in $X$ instead of appealing to the law of excluded middle.
 
 
 
-\begin{remark}[Function types] \label{rem:function-types}
-While the interpretation of general function types and~$\Pi$-types
-will require the results in~\cref{sec:Pi-types}, the interpretation of function types in the special
-case of two non-dependent types
-can be defined using~\cref{thm:exponentials}. In this case, the formation, introduction and elimination rules  are
-\[
-\begin{prooftree}
- A \co \type \qquad
- B \co \type
-\justifies
- A \to B \co \type
-\end{prooftree} \qquad
-\begin{prooftree}
-\Gamma, x \co A \vdash b \co B
-\justifies
-\Gamma \vdash (\lambda x \co A) b \co A \to B 
-\end{prooftree} \qquad
-\begin{prooftree}
-\Gamma \vdash f \co A \to B \quad
-\Gamma \vdash a \co A 
-\justifies
-\Gamma \vdash \mathsf{app}(f,a) \co B
-\end{prooftree}
- \medskip
-\]
-We shall interpret such rules via a cofibrant replacement of the exponential. In order to explain this, let
-us recall that, for simplicial sets $A$ and $B$,  the exponential $B^A$ is
-equipped with a map~$\mathsf{app} \co B^A \times A \to B$ which is universal in the sense that, for every simplicial set $X$, the function
-\[
-\begin{array}{rcl} 
- \SSet[ X , B^A] & \longrightarrow &  \SSet[X \times A, B]  \\
-  f & \longmapsto & \mathsf{app}(f \times 1_A) 
-  \end{array} 
- \]
- is a bijection. Writing $\lambda$ for the inverse function, we have that 
- \begin{equation}
- \label{equ:betaeta}
- \mathsf{app}(\lambda(b) \times 1_A) = b   \, , \quad
- \lambda( \mathsf{app}(f \times 1_A)) = f \, ,
- \end{equation}
- for every $b \co X \times A \to B$ and $f \co X \to B^A$.  These equations correspond to the
- well-known $\beta$-rule and $\eta$-rule for function types, respectively.
- 
- When $A$ and $B$ are bifibrant, the simplicial set $B^A$ is fibrant by part~(i) of~\cref{thm:exponentials} but it will not be cofibrant
- in general. Thus, we interpret the function type as the 
- cofibrant replacement $\mathbb{L}(B^A)$ of $B^A$, which comes equipped with
- a trivial fibration $t \co \mathbb{L}(B^A) \to B^A$. 
-We then define $\widetilde{\mathsf{app}} \co   \mathbb{L}(B^A) \times A \to B$ by letting
-\[
-\widetilde{\mathsf{app}}  = \mathsf{app} \circ (t \times A) \, .
-\]
-For a bifibrant simplicial set $X$ and a map $b \co X \times A \to B$, we define $\widetilde{\lambda}(b) \co X \to \mathbb{L}(B^A)$ to be the
-diagonal filler
-\[
-\xymatrix{
-0 \ar[r] \ar[d] & \mathbb{L}(B^A)  \ar[d]^t \\
-X \ar[r]_{\lambda(b)} \ar@{.>}[ur] & B^A }
-\]
-which exists since $X$ is cofibrant and $t$ is a trivial fibration. It follows immediately that
-\[
- \widetilde{\mathsf{app}}(\widetilde{\lambda}(b) \times 1_A) = b 
-\]
-so the $\beta$-rule holds as an equality. Instead, for $f \co X \to \mathbb{L}(B^A)$, we have a homotopy
-\[
-\eta_f  \co \widetilde{\lambda}( \widetilde{\mathsf{app}}(f \times 1_A)) \sim  f  \, ,
-\]
-which is constructed as the diagonal filler in the following diagram
-\[
-\xymatrix@C=2cm{
-\partial \Delta[1] \times X \ar[r]^-{[f, \widetilde{\lambda}(f \times 1_A)]} \ar[d] & \mathbb{L}(B^A) \ar[d]^t \\
-\Delta[1] \times X \ar[r] \ar@{.>}[ur] & B^A }
-\]
-where the bottom map is given by the equality in the $\eta$-rule in~\eqref{equ:betaeta}.
-\end{remark}
 
 
-\subsection*{Identity types}
-
-
-Recall that the formation, introduction and elimination rule for identity types are
-\[
-\begin{prooftree}
-\Gamma \vdash A \co \type \qquad
-\Gamma \vdash a \co A \qquad
-\Gamma \vdash b \co A 
-\justifies
-\Gamma \vdash \mathsf{Id}_A(a,b) \co \type
-\end{prooftree} \qquad
-\begin{prooftree}
-a \co A 
-\justifies
-\mathsf{refl}(a) \co \mathsf{Id}_A(a,a)
-\end{prooftree} \smallskip
-\]
-Following~\cite{awodey-warren:homotopy-idtype}, in order to interpret these rules one we need to consider
-a fibration $p \co A \to X$ with cofibrant domain  and obtain a factorisation of the diagonal map $\delta_p \co A \to A \times_X A$ as a trivial cofibration $r \co A \to  \Id_A$ followed by a fibration
-$(s,t) \co A \times_X A$. Note  $\Id_A$ is cofibrant, since $A$ is cofibrant and $r \co A \to \Id_A$ is a cofibration. 
 
 \medskip
 
-We begin by considering the case of $X = 1$. In this case, we  take $\Id_A$ to 
-be the exponential~$A^{\Delta[1]}$, which we already know to be fibrant by~\cref{thm:exponentials}.
 
 
-\begin{lemma} Assume that $A \in \SSet$ is fibrant. Then,
+\begin{proposition} \label{thm:id-types-for-types}
+Assume that $A \in \SSet$ is fibrant. Then,
 \begin{enumerate}[(i)] 
+\item $A^{\Delta[1]}$ is fibrant,
 \item the map $(s,t) \co A^{\Delta[1]} \rightarrow A \times A$ is a fibration.
 \item the composite of $(s, t) \co A^{\Delta[1]} \rightarrow A \times A$ with either projection is a trivial fibration,
 \item the map $r \co A \rightarrow A^{\Delta[1]}$ induced by $\Delta[1] \rightarrow \Delta[0]$ is a weak equivalence.
 \end{enumerate}
-\end{lemma} 
+\end{proposition} 
 
 \begin{proof}
 For part (i), apply part~(i) of \cref{thm:exponentials} to the cofibration $\partial \Delta[1]  \hookrightarrow \Delta[1]$. For part~(ii), apply part~(ii) of \cref{thm:exponentials} to the horn inclusions $\Lambda^k[1]  \rightarrow \Delta[1]$. Part~(iii) follows from the $2$-out-of-$3$ property for weak equivalence between fibrant objects applied to $A \rightarrow A^{\Delta[1]} \rightarrow A$. Indeed, the
@@ -736,8 +658,8 @@ We expect the cofibrancy of $A^{\Delta[1]}$ extend to the case of $A^{X}$ when $
 \bigskip
 
 
-In order to interpret the general version of the rules for identity types, we need to extend our results
-to the case of a fibration $p \co A \twoheadrightarrow X$ between bifibrant objects. We define $\Id_A$ 
+We now extend~\cref{thm:id-types-for-types} and~\cref{proposition:PathObjectCofibrant} 
+to the case of a fibration $p \co A \rightarrow X$ with cofibrant domain and bifibrant codomain. We define $\Id_A$ 
 via the pullback diagram
 \[
 \xymatrix{
@@ -761,7 +683,8 @@ where the three square in the vertical/diagonal direction are pullbacks.
 \label{proposition:MainPathObject}
 Assume $p \co A \rightarrow X $ is a fibration between bifibrant objects. Then,
 \begin{enumerate}[(i)] 
-\item the map $\Id_A \rightarrow X$ is a fibration and so $\Id_A$ is bifibrant, 
+\item $\Id_A$ is bifibrant, 
+\item the map $\Id_A \rightarrow X$ is a fibration
 \item the map $(s, t) \co \Id_A \rightarrow A \times_{X} A$ is a fibration,
 \item the composites of $s \, , t \co \Id_A \rightarrow A \times_{X} A$  with either of the two projections is a trivial fibration,
 \item the map $r \co A \rightarrow \Id_A$ is a trivial cofibration.
@@ -806,23 +729,9 @@ of a map which has been proved to be a levelwise complemented inclusion in~\cref
 \end{proof}
 
 
-\section{$\Pi$-types}
+\section{Dependent products}
 \label{sec:Pi-types}
 
- Recall that the formation and introduction rules for $\Pi$-types are
-\[
-\begin{prooftree}
-\Gamma \vdash A \co \type \qquad
-\Gamma, x \co A \vdash B \co \type
-\justifies
-\Gamma \vdash (\Pi x \co A) B 
-\end{prooftree} \qquad
-\begin{prooftree}
-\Gamma, x \co A \vdash b \co B
-\justifies
-\Gamma \vdash (\lambda x \co A) b \co (\Pi x \co A) B 
-\end{prooftree} \medskip
-\]
 
 
 This section is devoted to proving a counterpart of the classical result that, for a fibration $p \co A \rightarrow X$, the dependent product, or pushforward, functor $\Pi_p \co \SSet_{/A} \to \SSet_{/X}$ preserves fibrations. 
@@ -971,13 +880,16 @@ preserves cofibrations and trivial cofibrations.
 to~$X$ are also strong $k$-oriented homotopy equivalences. Since they are cofibrations, they are trivial cofibrations.
 \end{proof}
 
-The result of applying $\Pi_p$ to a fibration with cofibrant domain $q \co B \to A$ will be written as 
+For $p \co A \to X$, the result of applying $\Pi_p$ to a fibration with cofibrant domain $q \co B \to A$ will be written as 
 \[
-\Pi(q) \co \Pi_p(B) \to \Gamma \, .
+\Pi(q) \co \Pi_A(B) \to X \, .
 \] 
 
 \begin{corollary}\label{cor:Pi_types_are_fibrant}
-Let $p \co A \rightarrow X$ be a fibration with cofibrant domain and $q \co B \rightarrow A$ a fibration. Then $\Pi_p(q) \co \Pi_A(B) \rightarrow X$ is a fibration.
+Let $p \co A \rightarrow X$ be a fibration with cofibrant domain. The functor $\Pi_p \co \SSet_{/A} \to \SSet_{/X}$ restricts to a functor
+\[
+\Pi_p \co \BFFib_{/A}  \to \Fib_{/X} \, .
+\]
 \end{corollary}
 
 \begin{proof}
@@ -989,20 +901,6 @@ Given a cofibrant simplicial set $X$ and a fibrant simplicial set, the special c
 $\pi_2 \co A \times A \to A$, which is a fibration if~$A$ is a  fibrant, implies that $A^X$ is fibrant, as we already established in part~(i) 
 of~\cref{thm:exponentials}. 
 
-
-
-\begin{remark} For a fibration with cofibrant domain $p \co A \to X$, ~$\Pi_p \co \SSet_{/A} \to \SSet_{/X}$ restricts to a functor
-\[
-\Pi_p \co \BFFib_{/A}  \to \Fib_{/X} \, .
-\]
-For a fibration with cofibrant domain $q \co B \to A$, the domain of the fibration $\Pi_p(q) \co 
-\Pi_p(B) \to X$ is not necessarily cofibrant. To remedy this, we will consider a cofibrant replacement 
-of~$\Pi_p(B)$, given by a cofibrant object~$\mathbb{L}(\Pi_p(B))$ and a trivial fibration~$t \co \mathbb{L}(\Pi_p(B)) \to \Pi_p(B)$. The dependent product is then interpreted as the fibration with cofibrant domain $t \circ \Pi(q) \co  \mathbb{L}(\Pi_p(B)) \to X$. The standard
-computation rule holds as a judgemental equality, while the $\eta$-rule holds as a propositional equality,
-essentially by a reasoning similar to that in~\cref{rem:function-types}. 
-\end{remark}
-
-\medskip
 
 
 
@@ -1032,6 +930,87 @@ essentially by a reasoning similar to that in~\cref{rem:function-types}.
 
  
 
+
+\begin{remark}[$\Pi$-types] \label{rem:pi-types}
+ Recall that the formation and introduction rules for $\Pi$-types are 
+ 
+\[ 
+\begin{gathered} 
+\begin{prooftree}
+\Gamma \vdash A \co \type \qquad
+\Gamma, x \co A \vdash B \co \type
+\justifies
+\Gamma \vdash (\Pi x \co A) B 
+\end{prooftree}  \\[2ex]
+\begin{prooftree}
+\Gamma, x \co A \vdash b \co B
+\justifies
+\Gamma \vdash (\lambda x \co A) b \co (\Pi x \co A) B 
+\end{prooftree} \\[2ex]
+\begin{prooftree}
+\Gamma \vdash f \co (\Pi x \co A) B \quad
+\Gamma \vdash a \co A 
+\justifies
+\Gamma \vdash \mathsf{app}(f,a) \co B[a/x]
+\end{prooftree}
+\end{gathered}
+ \medskip
+\]
+We shall interpret $\Pi$-types via a cofibrant replacement of dependent product. In order to explain this, let
+us recall that, for maps $p \co A \to X$ and $q \co B \to A$,  the dependent product $\Pi_p(q) \co \Pi_A(B)
+\to X$ is equipped with a map
+\[
+\mathsf{app} \co \Pi_A(B) \times_A  A \to B
+\] 
+in $\SSet_{/A}$ which is universal in the sense that, for every  $Y \to X$, the function
+\[
+\begin{array}{rcl} 
+ \SSet_{/X}[ Y , \Pi_A(B)] & \longrightarrow &  \SSet_{/A}[Y \times_A A, B]  \\
+  f & \longmapsto & \mathsf{app}(f \times_A 1_A) 
+  \end{array} 
+ \]
+ is a bijection. This means that we have a function $\lambda$ in the opposite direction such that  
+ \begin{equation}
+ \label{equ:betaeta}
+ \mathsf{app}(\lambda(b) \times_A 1_A) = b   \, , \quad
+ \lambda( \mathsf{app}(f \times_A 1_A)) = f \, ,
+ \end{equation}
+ for every $b \co Y \times_A A \to B$ and $f \co Y \to \Pi_A(B)$.  These equations correspond to the
+ well-known $\beta$-rule and $\eta$-rule for $\Pi$-types, respectively.
+ 
+ When $p$ and $q$ are fibrations and $A$ is cofibrant, the map 
+ $\Pi_p(q) \co \Pi_A(B) \to X$ is a fibration by \cref{cor:Pi_types_are_fibrant} but $\Pi_A(B)$ is not cofibrant
+ in general. Thus, we interpret  $\Pi$-types as the 
+ cofibrant replacement  of $\Pi_A(B)$, which is given by a cofibrant simplicial set
+ $\mathbb{L}(\Pi_A(B)$  equipped with
+ a trivial fibration $t \co \mathbb{L}(\Pi_A(B)) \to \Pi_A(B)$. 
+We then define $\widetilde{\mathsf{app}} \co   \mathbb{L}(\Pi_A(B)) \times_A A \to B$ by letting
+\[
+\widetilde{\mathsf{app}}  = \mathsf{app} \circ (t \times_A 1_A) \, .
+\]
+For a bifibrant simplicial set $Y$ and maps $Y \to X$,  $b \co Y \times_A A \to B$, we define $\widetilde{\lambda}(b) \co Y \to \mathbb{L}(B^A)$ to be the
+diagonal filler
+\[
+\xymatrix{
+0 \ar[r] \ar[d] & \mathbb{L}(\Pi_A(B))  \ar[d]^t \\
+Y \ar[r]_{\lambda(b)} \ar@{.>}[ur] & \Pi_A(B)}
+\]
+which exists since $Y$ is cofibrant and $t$ is a trivial fibration. It follows immediately that
+\[
+ \widetilde{\mathsf{app}}(\widetilde{\lambda}(b) \times_A 1_A) = b \, ,
+\]
+so the $\beta$-rule holds as an equality. Instead, for $f \co X \to \mathbb{L}(\Pi_A(B))$, we have a homotopy
+\[
+\eta_f  \co \widetilde{\lambda}( \widetilde{\mathsf{app}}(f \times_A 1_A)) \sim  f  \, ,
+\]
+which is constructed as the diagonal filler in the following diagram
+\[
+\xymatrix@C=2cm{
+\partial \Delta[1] \times Y \ar[r]^-{[f, \widetilde{\lambda}(f \times 1_A)]} \ar[d] & \mathbb{L}(\Pi_A(B)) \ar[d]^t \\
+\Delta[1] \times Y \ar[r] \ar@{.>}[ur] & \Pi_A(B) }
+\]
+where the bottom map is given by the equality in the $\eta$-rule in~\eqref{equ:betaeta}.
+\end{remark}
 
 
 
@@ -1209,7 +1188,7 @@ The fact that $\bar{B} \rightarrow A$ is a deformation retract show that it is i
 
  
 
-\section{The universe type}
+\section{The universe}
 
 
 
@@ -1432,7 +1411,7 @@ Question: do we need to know that $\mathsf{Weq}(\U_c)$ is a cofibrant object to 
 
 
 
-\section{Univalence of the universe} 
+\section{Univalence} 
 
 In order to validate the univalence axiom for the type universe $\U$, we shall prove that the small fibration 
 $\pi_c \co \UU_c \to \U_c$ is univalent. For this, we shall exploit crucially that we have a weak model

@@ -1,0 +1,75 @@
+
+\begin{remark}[Function types] \label{rem:function-types}
+While the interpretation of general function types and~$\Pi$-types
+will require the results in~\cref{sec:Pi-types}, the interpretation of function types in the special
+case of two non-dependent types
+can be defined using~\cref{thm:exponentials}. In this case, the formation, introduction and elimination rules  are
+\[
+\begin{prooftree}
+ A \co \type \qquad
+ B \co \type
+\justifies
+ A \to B \co \type
+\end{prooftree} \qquad
+\begin{prooftree}
+\Gamma, x \co A \vdash b \co B
+\justifies
+\Gamma \vdash (\lambda x \co A) b \co A \to B 
+\end{prooftree} \qquad
+\begin{prooftree}
+\Gamma \vdash f \co A \to B \quad
+\Gamma \vdash a \co A 
+\justifies
+\Gamma \vdash \mathsf{app}(f,a) \co B
+\end{prooftree}
+ \medskip
+\]
+We shall interpret such rules via a cofibrant replacement of the exponential. In order to explain this, let
+us recall that, for simplicial sets $A$ and $B$,  the exponential $B^A$ is
+equipped with a map~$\mathsf{app} \co B^A \times A \to B$ which is universal in the sense that, for every simplicial set $X$, the function
+\[
+\begin{array}{rcl} 
+ \SSet[ X , B^A] & \longrightarrow &  \SSet[X \times A, B]  \\
+  f & \longmapsto & \mathsf{app}(f \times 1_A) 
+  \end{array} 
+ \]
+ is a bijection. Writing $\lambda$ for the inverse function, we have that 
+ \begin{equation}
+ \label{equ:betaeta}
+ \mathsf{app}(\lambda(b) \times 1_A) = b   \, , \quad
+ \lambda( \mathsf{app}(f \times 1_A)) = f \, ,
+ \end{equation}
+ for every $b \co X \times A \to B$ and $f \co X \to B^A$.  These equations correspond to the
+ well-known $\beta$-rule and $\eta$-rule for function types, respectively.
+ 
+ When $A$ and $B$ are bifibrant, the simplicial set $B^A$ is fibrant by part~(i) of~\cref{thm:exponentials} but it will not be cofibrant
+ in general. Thus, we interpret the function type as the 
+ cofibrant replacement $\mathbb{L}(B^A)$ of $B^A$, which comes equipped with
+ a trivial fibration $t \co \mathbb{L}(B^A) \to B^A$. 
+We then define $\widetilde{\mathsf{app}} \co   \mathbb{L}(B^A) \times A \to B$ by letting
+\[
+\widetilde{\mathsf{app}}  = \mathsf{app} \circ (t \times A) \, .
+\]
+For a bifibrant simplicial set $X$ and a map $b \co X \times A \to B$, we define $\widetilde{\lambda}(b) \co X \to \mathbb{L}(B^A)$ to be the
+diagonal filler
+\[
+\xymatrix{
+0 \ar[r] \ar[d] & \mathbb{L}(B^A)  \ar[d]^t \\
+X \ar[r]_{\lambda(b)} \ar@{.>}[ur] & B^A }
+\]
+which exists since $X$ is cofibrant and $t$ is a trivial fibration. It follows immediately that
+\[
+ \widetilde{\mathsf{app}}(\widetilde{\lambda}(b) \times 1_A) = b 
+\]
+so the $\beta$-rule holds as an equality. Instead, for $f \co X \to \mathbb{L}(B^A)$, we have a homotopy
+\[
+\eta_f  \co \widetilde{\lambda}( \widetilde{\mathsf{app}}(f \times 1_A)) \sim  f  \, ,
+\]
+which is constructed as the diagonal filler in the following diagram
+\[
+\xymatrix@C=2cm{
+\partial \Delta[1] \times X \ar[r]^-{[f, \widetilde{\lambda}(f \times 1_A)]} \ar[d] & \mathbb{L}(B^A) \ar[d]^t \\
+\Delta[1] \times X \ar[r] \ar@{.>}[ur] & B^A }
+\]
+where the bottom map is given by the equality in the $\eta$-rule in~\eqref{equ:betaeta}.
+\end{remark}
