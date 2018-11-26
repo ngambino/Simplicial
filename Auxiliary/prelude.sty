@@ -375,8 +375,15 @@
 % usage: \note[author]{color}{content}
 \newcommand{\note}[3][]{\def\auth{#1}\textcolor{#2}{{[\ifx\auth\empty\else\auth: \fi{#3}]}}}
 
-\newcommand{\notesh}{\note{Red}}
+\newcommand{\notesh}{\note{Green}}
 \newcommand{\noten}{\note{Blue}}
+
+
+\newcommand{\alert}[3][]{\def\auth{#1}\textcolor{#2}{{\ifx\auth\empty\else\auth: \fi{#3}}}}
+
+\newcommand{\caution}{\alert{Red}}
+
+
 
 \newcommand{\Psh}{\mathrm{Psh}}
 
