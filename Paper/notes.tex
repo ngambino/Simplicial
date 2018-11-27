@@ -887,7 +887,7 @@ To show that $p^*(f)$ is a strong $k$-oriented homotopy equivalence, we let $K \
 A \ar[d]_{\delta^{1-k}} \ar@{=}[rr] & & A \ar[d]^p \\ 
 \Delta[1] \times A \ar[r]_{\Delta[1] \times p}  & \Delta[1] \times X \ar[r]_H & X
 }\]
-Where the map on the left-hand side is a trivial cofibration because $A$ is a cofibrant.
+Where the map on the left-hand side is anodyne because $A$ is a cofibrant.
 It remains to construct a map $K_Y$  fitting into a retract diagram of the form
 \[
 \xymatrix@C=1.5cm{
@@ -918,12 +918,15 @@ to~$X$ are also strong $k$-oriented homotopy equivalences. Since they are cofibr
 \begin{corollary}\label{cor:Pi_types_are_fibrant}
 Let $p \co A \rightarrow X$ be a fibration with cofibrant domain. The functor $\Pi_p \co \SSet_{/A} \to \SSet_{/X}$ restricts to a functor
 \[
-\Pi_p \co \BFFib_{/A}  \to \Fib_{/X} \, .
+\Pi_p \co \Fib_{/A}  \to \Fib_{/X} \, .
 \]
+
+which preserves fibrations and trivial fibrations.
+
 \end{corollary}
 
 \begin{proof}
-Since $p^*$ preserves cofibrations and trivial cofibrations. its right adjoint $p_*$ preserves fibrations and trivial fibrations. In particular, it preserves fibrant objects.
+Since $p^*$ preserves cofibrations and anodyne morphisms. its right adjoint $p_*$ preserves fibrations and trivial fibrations. In particular, it preserves fibrant objects.
 \end{proof}
 
 
