@@ -1052,7 +1052,7 @@ cofibrant as well.
 
 Since the functor $\Pi_f$ is the right adjoint to the pullback functor $f^*$ and trivial fibrations are the maps with the the right lifting property with respect to cofibrations between cofibrant objects, $\Pi_f$ preserves trivial fibrations if and only if $f^*$ preserve cofibration between cofibrant objects. But this follows by~\cref{thm:cof-pbk}.
 
-\item As $f$ is a monomorphism, then the forgetful functor $\Sigma_{f} \co \SSet_{/X} \rightarrow \SSet_{/Y}$ is fully faithful and hence the unit $\eta \co 1_{\SSet_{/A}} \rightarrow f^* \Sigma_{f}$ is an isomorphism. By adjointness, the counit $\varepsilon \co 1_{\SSet_{/Y}} \rightarrow f^* \Pi_f$ is also an isomorphism.
+\item As $f$ is a monomorphism, then the forgetful functor $\Sigma_{f} \co \SSet_{/X} \rightarrow \SSet_{/Y}$ is fully faithful and hence the unit $\eta \co 1_{\SSet_{/A}} \rightarrow f^* \Sigma_{f}$ is an isomorphism. By adjointness, the counit $\varepsilon \co f^* \Pi_f \rightarrow 1_{\SSet_{/Y}}$ is also an isomorphism.
 
 \item \hfill 
 
@@ -1091,7 +1091,7 @@ $A$ follows from $(iii)$. \qedhere
 
 \begin{proposition}[Weak equivalence extension property]
 \label{Prop:Homotopy_ext_prop}
-Let $p \co A \to X$ and $q \co B \to Y$ be fibrations and let
+Let $p \co A \to X$ and $q \co B \to Y$ be fibrations with $Y$ fibrant and let
 \[
 \xymatrix{
 B \ar[r] \ar[d]_q & A \ar[d]^p \\
@@ -1169,7 +1169,7 @@ part~(i) of \cref{Lemma:ForTheExtProperty}. Since the map $\bar{B} \rightarrow A
 it is also a trivial fibration. This also implies that the composite $\bar{B} \rightarrow A \rightarrow X$ is a fibration.
 
 
-We now assume that $u \co B \rightarrow A[f]$ is a trivial cofibration. Using that the maps from $\bar{B}$ and $A[f]$ to $Y$ are fibrations, we can show that $u$ is a strong deformation retract over $Y$, \ie there is a retraction $r \co A[f] \rightarrow B$ of $u$ in $\SSet_{/Y}$ and a homotopy 
+We now assume that $u \co B \rightarrow A[f]$ is a trivial cofibration. Using that the maps from $\bar{B}$ and $A[f]$ to $Y$ are fibrations between fibrant objects, we can show that $u$ is a strong deformation retract over $Y$, \ie there is a retraction $r \co A[f] \rightarrow B$ of $u$ in $\SSet_{/Y}$ and a homotopy 
 \[
 H \co \Delta[1] \times A[f] \rightarrow A[f]
 \] 
