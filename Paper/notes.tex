@@ -348,7 +348,7 @@ X \ar@{.>}[ur]^{i} \ar@{=}[r] & X}
 \qquad
 \xymatrix{A + A \ar[rr]^{(1_{A} , i  p)} \ar[d] & &  A \ar[d] \\ \Delta[1] \times A \ar@{.>}[rru] \ar[r]& A \ar[r]^{p} & X  }
 \]
-It follows that if $f \co A \rightarrow B$ is a weak equivalences between two cofibrant objects then if one factors it as a cofibration followed by a trivial fibration, the cofibration part is also an acyclic cofibration by $2$-out-of-$3$.
+It follows that if $f \co A \rightarrow B$ is a weak equivalences between two cofibrant objects then if one factors it as a cofibration followed by a trivial fibration, the cofibration part is also an acyclic cofibration by $2$-out-of-$3$ for weak equivalences.
 \end{proof}
 
 
@@ -363,24 +363,37 @@ The goal of this section is to give a more explicit description of the cofibrant
 
 
 \begin{definition}
-If $x \in X([n])$ is an $n$-cell in a simplicial set $X$, the degeneracy type of $x$ is the set of of faces map $\delta:[i] \rightarrow [n]$ such that $\delta^* x$ is a degenerate cell. 
-By a ``degeneracy type'', or ``degeneracy $n$-type'' we mean a subset of faces of $\Delta[n]$ that can appear as the degeneracy type of an $n$-cell of a simplicial sets.
+
+\begin{enumerate}
+\item[]
+\item If $x \in X([n])$ is an $n$-cell in a simplicial set $X$, the \emph{degeneracy type} of $x$ is the set of face maps $\delta:[i] \rightarrow [n]$ such that $\delta^* x$ is a degenerate cell.
+
+\item By a ``degeneracy type'', or ``degeneracy $n$-type'' we mean a subset of faces of $\Delta[n]$ that can appear as the degeneracy type of an $n$-cell of a simplicial sets.
+
+\end{enumerate}
+
 \end{definition}
 
-We will construct a ``simplicial set of degeneracy type $D$''. We start with a simplicial set $D_0$ whose $n$-cell are all the subset of the faces of $\Delta[n]$, i.e. subsets of the set of finite subset of $[n]$. If $f : [m] \rightarrow [n]$ and $P \in D_0([n])$ one defines $f^* P$ as the set of faces  $[i] \rightarrow [m]$ such that the composite $[i] \rightarrow [m] \overset{f}{\rightarrow} [n]$ is either in $P$ or non-injective.
+We will construct a ``simplicial set of degeneracy type $D$''. We start with a simplicial set $D_0$ whose $n$-cells are all the subset of the faces of $\Delta[n]$, i.e. subsets of the set of finite subsets of $[n]$. If $f : [m] \rightarrow [n]$ and $P \in D_0([n])$ one defines $f^* P$ as the set of faces  $[i] \rightarrow [m]$ such that the composite $[i] \rightarrow [m] \overset{f}{\rightarrow} [n]$ is either in $P$ or non-injective.
 
 \begin{lemma}
 $D_0$ is a simplicial set, and for any simplicial set $X$, the map $X \rightarrow D_0$ sending each $n$ cell to its degeneracy type is a simplicial map preserving and detecting degeneracy.
 \end{lemma}
 
 \begin{proof}
-It is immediate to check that $D_0$ is a simplicial set. Let $x \in X([n])$ and $f:[m] \rightarrow [n]$, one need to check that the degeneracy type of $f^* x$ is indeed described from the degeneracy type of $x$ using the formula for the functoriality of $D_0$. But for face $[i] \rightarrow [m]$ the cell $i^* f^* x$ is degenerated as soon as $f \circ i$ is non injective, and if $f\circ i$ is injective, then it depends on whether $f \circ i$ is in the degeneracy type of $x$ or not.
+It is immediate to check that $D_0$ is a simplicial set. Let $x \in X([n])$ and $f:[m] \rightarrow [n]$, in order to check that the maps $X \rightarrow D_0$ sending each cell to its degeneracy type is simplicial, one need to check that the degeneracy type of $f^* x$ is indeed described from the degeneracy type of $x$ using the formula for the functoriality of $D_0$. For face maps $[i] \rightarrow [m]$ the cell $i^* f^* x$ is degenerated as soon as $f \circ i$ is non injective, and if $f\circ i$ is injective, then it depends on whether $f \circ i$ is in the degeneracy type of $x$ or not.
 
 If $f:[n] \rightarrow [m]$ is non-injective then for any $s \in D_0([m])$ the identity map $[n] \rightarrow [n]$ is in $f^* s$. So a degenerate cell of $D_0$ always contains the maximal face. In particular the map $X \rightarrow D_0$ constructed above send non-degenerate cell of $X$ to non-degenerate cells of $D_0$.
 
 \end{proof}
 
-In particular, the lemma construct a map from $D_0$ to itself sending any cell to its degeneracy type. As this map detects degeneracy, it preserves the degeneracy type and hence it is an idempotent endomorphisms of $D_0$. One immediately obtains:
+In particular, the lemma construct a map $P:D_0 \rightarrow D_0$ to itself sending any cell to its degeneracy type. As $P$ preserves and detects degeneracy, it preserves the degeneracy type and hence $P \circ P =P$.
+
+\begin{definition}
+The simplicial set $D$ is the set of fix point of the idempotent $P$ acting on $D_0$.
+\end{definition}
+
+Note that for any simplicial set $X$, the map $f:X \rightarrow D_0$ sending each cell to its degeneracy type preserves the degeneracy type, hence $P f = f$. In particular a cell of $D_0$ is in $D$ if and only if it is a degeneracy type. One deduces that:
 
 \begin{lemma}
 $n$-cells of $D$ are in bijection with degeneracy $n$-type. Each simplicial set $X$ has a unique map preserving non-degeneracy to $D$, which is the map sending a cell to its degeneracy type.
@@ -441,7 +454,7 @@ In $X^{(n)}_s$ there is exactly one such cell for each square as above. In $Y^{n
 
 \[ \xymatrix{\partial \Delta[n]  \ar[r] \ar@{^{(}->}[d] & Y^{n-1} \ar[d] \\ \Delta[n]  \ar[r] & X} \]
 
-Then the lemma above give a unique map to extend $\partial \Delta[n] \rightarrow D$ to a non-degenerate $n$-cell of $D$, and the image of $\Delta[n]$ in $X$ automatically have a larger degeneracy type that this extension so this gives a non-degenerate cell of $Y^{n}$ generating this square. This is unique way to get such a cell to be non-degenerate as a cell in $Y^n$ is non-degenerate if and only if its image in $D$ is non-degenerate.
+Then the lemma above give a unique map to extend $\partial \Delta[n] \rightarrow D$ to a non-degenerate $n$-cell of $D$, and the image of $\Delta[n]$ in $X$ automatically have a larger degeneracy type that this extension so this gives a non-degenerate cell of $Y^{n}$ generating this square. This is the unique way to get such a cell in $Y^n$ to be non-degenerate: indeed a cell in $Y^n$ is non-degenerate if and only if its image in $D$ is non-degenerate.
 \end{proof}
 
 
