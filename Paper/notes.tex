@@ -1392,9 +1392,75 @@ Question: do we need to know that $\mathsf{Weq}(\U_c)$ is a cofibrant object to 
 }
 
 
+\section{Univalence}
+
+\notesh{[Work in progress] I prefer to start again this section from scratch, but I'm leaving the old univalence section as long as this is not finished}
 
 
-\section{Univalence} 
+Let $p:E \twoheadrightarrow B$ be any fibration. We want to define what it means for $p$ to be a univalent fibration, and show that $\UU \twoheadrightarrow \U$ and $\UU_c \twoheadrightarrow \U_c$ are univalent fibrations.
+
+Using the ``$\Pi$-types'' that we have already defined, one can to construct a fibration $E^{\to} \twoheadrightarrow B \times B$ that classifies morphisms between two fibers of $p$. More precisely, $E^{\to}$ is defined as $\Pi_{p \times Id_B}(E \times E)$ in:
+
+\[
+\xymatrix{
+E \times E \ar[d]_{Id_E \times p } & \Pi_{p \times Id_B}(E \times E) \ar[d] \\
+E \times B \ar[r]_{p \times id_B} & B \times B \\
+}
+\]
+
+A morphisms from any object $A$ to $E^{\to}$ is the same as a morphism $A \overset{(f,g)}{\rightarrow} B \times B$ together with a morphism $E[f] \rightarrow E[g]$ over $A$. We now need to construct an object $Weq(p) \twoheadrightarrow E^{\to}$ that similarly classifies ``weak equivalences'' $E[f] \overset{\sim}{\rightarrow} E[g]$. we have not been able to show constructively that weak equivalences are stable under pullback along fibrations, so it is not clear if such an object $Weq(p)$ can be defined as a subobject od $E^{\to}$ or not. Instead we will follow Voevodsky's definition from type theory, see also section $4$ of \cite{shulman:reedy}, and hence one needs to start by discusing the type $\texttt{IsContr}_B(E)$
+
+\begin{definition}
+Given a fibration $p:E \twoheadrightarrow B$ one defines:
+
+\[ \texttt{IsContr}_B(E) = \Sigma_p \Pi_{\pi_2} \Id_E  \]
+
+
+With $Id_E \twoheadrightarrow E \times_B E$ and $\pi_2: E \times_B E \rightarrow E$.
+
+\end{definition}
+
+So $\texttt{IsContr}_B(E)$ is a fibration over $B$ which encodes the idea that the fiber of $p$ is contractible, in the sense that the data of an ``element'' of $\texttt{IsContr}_B(E)$ over a $b \in B$ is given by an element $e \in E(b)$ and for all $e' \in E(b)$ a path between $e$ and $e'$.
+
+We now need to use this to construct an object that classifies weak equivalences. Assume one has two fibrations $E_1,E_2 \twoheadrightarrow B$ and a morphism $f$:
+
+
+\[\xymatrix{
+E_1 \ar@{->>}[dr] \ar[rr]^f & & E_2 \ar@{->>}[dl] \\
+& B & 
+}\]
+
+We can then form the ``homotopy fiber'' of $f$ as the pullback:
+
+\[\xymatrix{
+P f \ar[d] \ar[r]  & \Id_{E_2} \ar@{->>}[d] \\
+E_1 \times_B E_2 \ar[r] & E_2 \times_B E_2 
+}\]
+
+Which as usual produces a factorization of $f$:
+
+\[E_1 \rightarrow Pf \twoheadrightarrow E_2 \]
+
+One can then define:
+
+\begin{definition}
+
+\[ \texttt{IsEquiv}_B(f) = \Pi_{p_2} \texttt{IsContr}_B(Pf) \]
+
+where $p_2$ is the fibration $E_2 \twoheadrightarrow B$.
+
+Given $p:E \twoheadrightarrow B$ be any fibration, one defines
+
+\[ Weq(E) = \texttt{IsEquiv}_{E^{\to}}(f) \]
+
+Where $f$ denotes the universal map over $E^{\to}$ corresponding to its universal property.
+
+\end{definition}
+
+The definition of $\texttt{IsEquiv}$ formalize the idea that $f$ is an equivalence if and only all its homotopy fiber are contractible.
+
+
+\section{Univalence (Obsolete)} 
 
 In order to validate the univalence axiom for the type universe $\U$, we shall prove that the small fibration 
 $\pi_c \co \UU_c \to \U_c$ is univalent. For this, we shall exploit crucially that we have a weak model
