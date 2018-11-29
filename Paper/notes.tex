@@ -1441,6 +1441,18 @@ Which as usual produces a factorization of $f$:
 
 \[E_1 \rightarrow Pf \twoheadrightarrow E_2 \]
 
+\begin{lemma}
+If $E_1$ and $E_2$ are cofibrant and $E_2 \rightarrow B$ is a fibration, then $E_1 \rightarrow Pf$ is a weak equivalence.
+\end{lemma}
+
+\begin{proof}
+The projections $\Id_{E_2} \twoheadrightarrow E_2$ are trivial fibrations because of point (iv) of \cref{proposition:MainPathObject:IdBifib} (the proof of this claims only uses that $A \twoheadrightarrow X$ is a fibration, and none of the other assumptions, so it applies here), so the pullback $Pf \rightarrow E_1$ is also a trivial fibration. $\Id_{E_2}$ is cofibrant because because of (i) of \cref{proposition:MainPathObject:IdBifib} (which only uses that $E_2$ is cofibrant) so $Pf$ is cofibrant by \ref{lem:cofibrant_fiber_product} as $E_1$ and $E_2$ are cofibrant.
+
+It follows by \cref{lemma:triv_fib_are_we} that $Pf \rightarrow E_1$ is a weak equivalence. By $2$-out-of-$3$ for weak equivalences, $E_1 \rightarrow Pf$ is a weak equivalence.
+
+\end{proof}
+
+
 One can then define:
 
 \begin{definition} For any morphisms $f$ in $\Fib/B$ one defines:
@@ -1474,12 +1486,15 @@ Admiting that the $\Pi$-types and identity types that we have defined so far are
 
 
 
-More precisely, (ii) $\Rightarrow$ (i) as soon as $B$ is fibrant, (i) $\Rightarrow$ (ii) when $B$ is cofibrant and $E$ is bifibrant.
+More precisely, (ii) implies that $p$ is a weak equivalence assuming either that $B$ is fibrant or that $E$ and $B$ are cofibrant, so (ii) $\Rightarrow$ (i) when $B$ is fibrant, (i) $\Rightarrow$ (ii) when $B$ is cofibrant and $E$ is bifibrant.
 (ii) $\Leftrightarrow$ (iii) holds without assumption on $E$ and $B$, (vi) $\Rightarrow$ (ii) holds as soon as $B$ is cofibrant. And finally (i) $\Rightarrow$ (vi) holds when $E$ is bifibrant. 
 
 \begin{proof}
 
-A section of $\texttt{isContr}_B (E) \twoheadrightarrow B$ is by definition of $\texttt{isContr}_B (E)$ the data of a section $s:B \rightarrow E$, and a map $h \co E \to \Id_E$ whose image by $\Id_E \twoheadrightarrow E \times_B E$ is $(s \circ p, id_E)$. Such a section $s$ and homotopy $h$ produces a homotopy invers to $p$ and hence implies that $p$ is a weak equivalences, and hence a trivial fibration as $B$ is assumed fibrant. This proves (ii) $\Rightarrow$ (i).
+A section of $\texttt{isContr}_B (E) \twoheadrightarrow B$ is by definition of $\texttt{isContr}_B (E)$ the data of a section $s:B \rightarrow E$, and a map $h \co E \to \Id_E$ whose image by $\Id_E \twoheadrightarrow E \times_B E$ is $(s \circ p, id_E)$. Such a section $s$ and homotopy $h$ produces a homotopy invers to $p$ and hence implies that $p$ is a weak equivalences, and hence a trivial fibration as $B$ is assumed fibrant.  This proves (ii) $\Rightarrow$ (i).
+
+Note that if one only assume that $E$ and $B$ are cofibrant and $p$ is a fibration, it is still the case that $\Id_E \twoheadrightarrow E$ is a trivial fibration between cofibrant objects, hence a weak equivalence. Which is hence sufficient to show that the map $h$ induce an equality in the homotopy category between $s \circ p $ and the identity of $E$.
+
 
 Conversely, assuming (i), one can construct a section $s$ as above using the lifting property of $B$ (cofibrant) against $p$. To construct the homotopy $h$ one needs to use a lifting property of $E$ against the map $Id_E \twoheadrightarrow E \times_B E$, which is a trivial fibrations because $\Id_E \twoheadrightarrow E$ and $E\times_B E \twoheadrightarrow E$ both are and trivial fibrations satisfies $2$-out-of-$3$ among fibrations between fibrant objects.
 
@@ -1530,11 +1545,15 @@ Similarly, one also has:
 \end{enumerate}
 \end{lemma}
 
+Note that the implication (ii) $\Rightarrow$ (i) holds without assuming that $B$ is bifibrant.
+
 \begin{proof}
 
 As $E_2$ is cofibrant, $Id_{E_2}$ is cofibrant as well because of point (\ref{proposition:MainPathObject:IdBifib}) of \cref{proposition:MainPathObject}. And \cref{lem:cofibrant_fiber_product} implies that as $E_1$ and $E_2$ are cofibrant, then $Pf$ is cofibrant as well. So as $\texttt{isEquiv}(f)$ is defined as $\Pi_{p_2}\texttt{isContr}(Pf)$ the equivalence above mostly follows from \cref{lem:IsContr1}. More precisely: 
 
-$f$ factors as $E_1 \overset{\sim}{\rightarrow} Pf \twoheadrightarrow E_2$ so $f$ is an equivalence if and only if $Pf \twoheadrightarrow E_2$ is a trivial fibration, which by \cref{lem:IsContr1} is equivalence to the fact that $\texttt{isContr}(Pf) \twoheadrightarrow E_2$ has a section, which by universal property of $\Pi$-types is equivalent to condition (ii). The equivalence between (ii) and (iii) is formal exactly as in the proof of \cref{lem:IsContr1}. One still has that (iv) implies (ii) simply because $B$ is cofibrant. Assuming (i) one has that $Pf \twoheadrightarrow E_2$ is a trivial fibration, hence $\texttt{isContr}(Pf) \twoheadrightarrow E_2$ is a trivial fibration by \cref{lem:IsContr1}, and \cref{cor:Pi_types_are_fibrant} implies that $\Pi_{p_2} \texttt{isContr}(Pf) = \texttt{isEquiv}(f) \twoheadrightarrow B$ is a trivial fibration.
+$f$ factors as $E_1 \overset{\sim}{\rightarrow} Pf \twoheadrightarrow E_2$ so $f$ is an equivalence if and only if $Pf \twoheadrightarrow E_2$ is an equivalence, which by \cref{lem:IsContr1} is equivalent to the fact that $\texttt{isContr}(Pf) \twoheadrightarrow E_2$ has a section, which by universal property of $\Pi$-types is equivalent to condition (ii). The equivalence between (ii) and (iii) is formal exactly as in the proof of \cref{lem:IsContr1}. One still has that (iv) implies (ii) simply because $B$ is cofibrant. Assuming (i) one has that $Pf \twoheadrightarrow E_2$ is a trivial fibration, hence $\texttt{isContr}(Pf) \twoheadrightarrow E_2$ is a trivial fibration by \cref{lem:IsContr1}, and \cref{cor:Pi_types_are_fibrant} implies that $\Pi_{p_2} \texttt{isContr}(Pf) = \texttt{isEquiv}(f) \twoheadrightarrow B$ is a trivial fibration.
+
+As observed below \cref{lem:IsContr1}, one has that a section of $\texttt{isEquiv}(f) \twoheadrightarrow B$ shows that $Pf \twoheadrightarrow E_1$ is an equivalence only assuming that $E_1$ and $E_2$ are cofibrant, so it is indeed the case that (ii) $\Rightarrow$ (i) holds without assuming $B$ is bifibrant.
 
 \end{proof}
 
@@ -2014,7 +2033,5 @@ a \co A
 \bibliography{../Auxiliary/bibliography}
 
 \end{document}
-
-
 
 
