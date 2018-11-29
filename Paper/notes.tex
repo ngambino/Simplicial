@@ -1560,20 +1560,21 @@ In particular, the following conditions are equivalent:
 
 
 
-Let $p:E \twoheadrightarrow B$ be any fibration with $E$ and $B$ bifibrant. There is a factorization of the diagonal map $B \rightarrow E^{\to} \twoheadrightarrow B \times B$ where $E^{\to} \twoheadrightarrow B \times B$ is the canonical map, which (by the universal property of $E^{to}$) corresponds to the identity of $E=E[id_B] \rightarrow E[id_B]$. As the identity is a weak equivalence, \cref{lem:isEquiv2} above implies that this maps factors into $B \rightarrow Weq(E) \twoheadrightarrow E \times E$.
+Let $p:E \twoheadrightarrow B$ be any fibration with $E$ and $B$ bifibrant. There is a factorization of the diagonal map $B \rightarrow E^{\to} \twoheadrightarrow B \times B$ where $E^{\to} \twoheadrightarrow B \times B$ is the canonical map, which (by the universal property of $E^{\to}$) corresponds to the identity of $E=E[id_B] \rightarrow E[id_B]$. As the identity is a weak equivalence, \cref{lem:isEquiv2} above implies that this maps factors into $B \rightarrow Weq(E) \twoheadrightarrow E \times E$.
 
 In particular, using the lifting:
 
 \[
 \xymatrix{
 B \ar@{^{(}->}[d]^{\sim} \ar[r] & Weq(E) \ar@{->>}[d] \\
-Id_B \ar@{->>}[r] \ar@{..>}[ur] & B \times B \\ 
+\Id_B \ar@{->>}[r] \ar@{..>}[ur] & B \times B \\ 
 }
 \]
 
+one obtains a map $\Id_B \rightarrow Weq(E)$.
 
 \begin{definition} \label{def:univalentFib}
-A Fibration $p:E \twoheadrightarrow B$ between bifibrant objects is said to be univalent if the map $Id_B \rightarrow Weq(E)$ is an equivalence.
+A Fibration $p:E \twoheadrightarrow B$ between bifibrant objects is said to be univalent if the map $\Id_B \rightarrow Weq(E)$ is an equivalence.
 \end{definition}
 
 This is clearly equivalent to the fact that the map $B \rightarrow Weq(E)$ is an equivalence, or to the fact that any of the two projection $Weq(E) \twoheadrightarrow B$ is a trivial fibration.
@@ -1601,12 +1602,12 @@ The fibration $\UU_C \twoheadrightarrow \U_c$ is univalent.
 As observed just after \cref{def:univalentFib} it is enough to show that the target projection $ Weq(\UU_c) \twoheadrightarrow \U_c$ is a weak equivalence. Consider a diagram:
 
 \[ \xymatrix{
-Y \ar[d]_{f} \ar[r]^{\beta} & Weq(\UU_c) \ar@{->>}[d] \\
+Y \ar@{^{(}->}[d]_{f} \ar[r]^{\beta} & Weq(\UU_c) \ar@{->>}[d] \\
 X \ar[r]^{\alpha} & \U_c
 }
 \]
 
-where $f$ is any arrow and $Y$ and $X$ are bi-fibrant. We will show that there exists a diagonal filling making the diagram commutes up to homotopies. This is sufficient to show $Weq(\UU_c) \rightarrow \U_c$ is invertible in the homotopy category, hence is a weak equivalence.
+where $f$ is any cofibrations between $Y$ and $X$ two bi-fibrants objects. We will show that there exists a diagonal filling making the diagram commutes up to homotopies. This is sufficient to show $Weq(\UU_c) \rightarrow \U_c$ is invertible in the homotopy category, hence is a weak equivalence.
 
 The map to $\alpha$ corresponds to a fibration $A \twoheadrightarrow X$ with $A$ cofibrant, and the map $\beta$ gives in particular a (solid) diagram as in \cref{Prop:Homotopy_ext_prop}:
 
