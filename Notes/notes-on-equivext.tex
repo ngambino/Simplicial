@@ -1,0 +1,410 @@
+\documentclass[reqno,a4paper,oneside]{amsart}
+
+\input{uniform-kan-prelude}
+\input{formatting-christian}
+\usepackage[parfill]{parskip} 
+\input{prooftree.tex}
+
+%\usepackage{lineno}
+% \linenumbers
+
+\usepackage{setspace}
+\doublespacing
+
+\setlength{\parskip}{0.7ex}
+
+\title[]{Revised notes on the equivalence extension property}
+
+\author{Nicola Gambino}
+
+\date{3rd December 2018}
+
+\newcommand{\C}{\mathsf{C}}
+\newcommand{\TC}{\mathsf{TC}}
+\newcommand{\F}{\mathsf{F}}
+\newcommand{\TF}{\mathsf{TF}}
+\newcommand{\W}{\mathsf{W}}
+
+\begin{document}
+
+\begin{abstract} These draft notes summarize discussions with Steve Awodey and Thierry Coquand during the Oberwolfach Seminar `Mathematical Logic: Proof Theory and Constructive Mathematics'
+in November 2015. The discussion tried to clarify some steps in Christian Sattler's proof of the Equivalence Extension Property. Revised for joint work with Simon Henry.
+\end{abstract} 
+
+
+\maketitle
+
+
+\section{Glueing} 
+
+We wish to define the glueing functors. We begin by introducing their domain and codomain categories. 
+For this, let us fix a cospan $(A, p, f)$, given by a pair of arrows with common codomain:
+\[
+\xymatrix{
+ & A \ar[d]^{p} \\
+Y \ar[r]_f & X \rlap{.}}
+\]
+In what follows, we write $(A, f)$ for such a cospan and consider $A$ as an object of $\cal{E}_{/X}$ leaving the map~$p$ implicit.  
+We define the category $\mathsf{Span}(A, f)$ of spans over $(A, f)$. Its objects $(B, q, g)$ are spans of the form
+\[
+\xymatrix{
+B \ar[r]^g \ar[d]_{q}   & A \\
+X & }
+\]
+such that the diagram 
+\begin{equation}
+\label{equ:sq-span}
+\begin{gathered}
+\xymatrix{
+B \ar[d]_{q} \ar[r]^{g}  & A \ar[d]^{p} \\
+X \ar[r]_f & Y }
+\end{gathered}
+\end{equation}
+commutes. In analogy with what we have done above, we write simply $(B,g)$ instead of~$(B,q,g)$ and consider $B$ as an object of $\cal{E}_{/Y}$ without mentioning the map $q$.  
+The maps of $\mathsf{Span}(Y_1, i)$ are defined in the evident way. Note that  $\mathsf{Span}(A, f)$ has a terminal object, given by the pullback
+\[
+\xymatrix{
+Y \times_X A \ar[r] \ar[d] & A \\
+Y & }
+\]
+
+Next, we define the category $\cal{E}_{/p}$ of maps into $p \co A \to X$. Its objects $(A', p', u)$ consist of an object $A'$, a map $p' \co A \to X$ and a map $u \co A' \to A$ in $\cal{E}_{/X}$. 
+Again, the maps of this category are evident. This category is canonically isomorphic to $\cal{E}_{/A}$, but the description given above will be useful later on, when we impose conditions
+on $p' \co A' \to X$.
+
+
+The glueing functor associated to the cospan $(A, f)$ has the form
+\[
+ \mathsf{Glue} \co \mathsf{Span}(A, f)  \to \cal{E}_{/p} \rlap{.}
+\]
+In what follows, we  denote the action of the glueing functor as
+\[
+\begin{gathered}
+\xymatrix{
+B \ar[d]_{q} \ar[r]^{g} & A \\
+Y & }
+\end{gathered} \quad
+\longmapsto \quad
+\begin{gathered}
+\xymatrix{
+\mathsf{Glue}(B, g) \ar[rr]^-{\mathsf{unglue}(B,g)}  \ar[dr] & &  A \ar[dl]^{p} \\
+ & X & }
+ \end{gathered}
+ \]
+
+
+\medskip
+
+As we will see \cref{thm:glueing-classifies-sections}, for an object $(B, g) \in \mathsf{Span}(A, f)$, the sections of the map  $\mathsf{Glue}(B,g)  \to X$ correspond bijectively to
+pairs of commuting sections of the square~\eqref{equ:sq-span}, \ie 
+maps $a \co X \to A$ and $b \co Y \to B$ that are sections of~$p$ and~$q$, respectively, and such that 
+$g b  = a f $. We represent this situation diagrammatically as follows:
+\[
+\xymatrix{ 
+B \ar[d]_{g} \ar[r]^{g}  & A \ar[d]^{p} \\
+\ar@/^2pc/@{.>}[u]^{b} Y \ar[r]_{f} & X  \ar@/_2pc/@{.>}[u]_{a} \rlap{.}}
+\]
+
+
+
+We now define the action of the glueing functor on objects. Let $(B,g) \in \mathsf{Span}(A, f)$. First, we consider the pullback of $p \co A \to X$ along $f \co Y \to X$ and the induced dotted map $\bar{g} \defeq 
+(q,g)$ in 
+\[
+\xymatrix{
+B \ar@/^1.5pc/[drr]^g \ar@/_1.5pc/[ddr]_{q} \ar@{.>}[dr]^{\bar{g}}  & & \\ 
+ &   f_* (A) \ar[d]_{f_*{p}}  \ar[r]^{j_1}   & A \ar[d]^{p} \\
+  & Y \ar[r]_{f}  & X \rlap{.}} 
+\]
+
+
+Next, we consider $\bar{g} \co B \to f^*(A)$ as a map in $\cal{E}_{/Y}$ and apply the functor 
+$f_* \co \cal{E}_{/Y} \to \cal{E}_{/X}$ to it, so as to obtain the 
+map $f^*(\bar{g}) \co  f_* (B)  \to f_* f^* (A)$ in $\cal{E}_{/X}$. 
+
+
+
+{\bf Notation:} 
+\begin{itemize}
+\item $A[f] = f^*(A) = Y \times_X A \, ,$
+\item $A^Y  = f_* f^*(A)$
+\end{itemize}
+
+\smallskip
+
+
+
+Finally, we take the pullback of the map $f^*(\bar{g}) \co  g_* \, (B)  \to f_* f^* \, A $ that we just constructed along the component of unit of the adjunction
+$f^* \dashv f_*$ at~$p \co A \to X$, which is a map $\eta \co A \to A^Y$ in~$\cal{E}_{/X}$. This gives us the diagram 
+
+\begin{equation}
+\label{equ:total-diagram}
+\begin{gathered}
+\xymatrix{
+ B \ar[dr]^{\bar{f}} \ar@/_1pc/[ddr]_{q} \ar@/^1pc/[drr]^g &         &       \eta^* f_* \, B \drpullback                \ar[d] \ar[rr]  & & f_* B \ar[d]^{f_{*}(\bar{g})}  \\ 
+      &             i_* \, A \ar[r]^{j_1}  \ar[d]  \drpullback &        A                \ar[dr]   \ar[rr]^\eta              &  & A^Y \ar[dl] \\
+      &                       Y \ar[rr]_f                &  			          & X	 \rlap{.} & }
+\end{gathered}
+\end{equation}
+This diagram contains all the constructions performed so far and we will refer to it frequently in what follows.  We then define the glueing functor by letting: 
+\[
+\begin{gathered}
+\xymatrix{
+\mathsf{Glue}(B,g) \ar[rr]^-{\mathsf{unglue}} \ar[dr]  & & A \ar[dl]^{p}   \\
+ & X & }
+ \end{gathered} \quad \defeq \quad
+ \begin{gathered}
+ \xymatrix{
+  \eta^* f_* \, B \ar[rr]^{\eta^* f_{*} \bar{g}} \ar[dr] & & A \ar[dl]^{p} \\
+   & X \rlap{.} & }
+   \end{gathered}
+ \]
+ As usual, we often consider $\mathsf{Glue}(B,g)$ as an object of $\cal{E}_{/X}$ leaving the map into $X$  implicit. 
+ 
+ 
+ \medskip
+
+
+\begin{proposition} \label{thm:glueing-classifies-sections} There is a bijection between 
+\begin{itemize}
+\item sections of $\mathsf{Glue}(B, g) \to X$,
+\item pairs of sections $a$ and $b$ of $p \co A \to X$ and $q \co B \to Y$, respectively, such that 
+$g b = a f$.
+\end{itemize}
+\end{proposition} 
+
+\begin{proof} To be added.
+\end{proof} 
+
+Note that, according to the bijection in \cref{thm:glueing-classifies-sections}, the map $\mathsf{unglue} \co \mathsf{Glue}(B, g) \to X$ corresponds to the second projection mapping
+a commuting pair of sections $(a, b)$ to $b$. Also note that \cref{thm:glueing-classifies-sections} expresses that the category-theoretic glueing construction considered here is analogous 
+to the type-theoretic construction, which has rules
+
+\[
+\begin{prooftree}
+X, f  \vdash A \quad
+X \vdash B \co \mathsf{type} \quad
+X , f  \vdash \bar{g} \co B \to f^*\, A \quad
+\justifies
+X \vdash \mathsf{Glue}(B,g) 
+\end{prooftree} \qquad
+\begin{prooftree}
+X \vdash a \co A \quad
+X, f  \vdash b \co B \quad
+X, f \vdash \bar{g}(b) = a \co f^* \, A
+\justifies
+X \vdash \mathsf{glue}(a,b) \co \mathsf{Glue}(B,g) 
+\end{prooftree}
+\]
+
+
+
+Just as the ordinary pushforward functors, which classify sections of maps, are right adjoint, so is the glueing functors. 
+
+\begin{proposition} Glueing functors are right adjoint. Hence, they preserve limits and in particular pullbacks.
+\end{proposition} 
+
+\begin{proof} This needs checking. 
+\end{proof} 
+
+The next proposition makes use of map $j_1 \co f^*(A) \to A$ that is part of the diagram in~\eqref{equ:total-diagram}. 
+
+\begin{proposition} The glueing functor is naturally isomorphic to the functor 
+\[
+\xymatrix{
+(j_1)_*(-,-) \co \mathsf{Span}(A, f) \ar[r] &  \cal{E}_{/A}}
+\]
+mapping $(B, g)$ to $(j_1)_*(g,q) \co {j_1}_*(B) \to A$. 
+\end{proposition}
+
+\begin{proof} By the definition of the glueing functors, it suffices to show that, for $t \co B \to f^*(A)$ in~$\cal{E}_{/A}$, $\eta^* f_*(t) \co \eta^* f_* \, B \to A$ in $\cal{E}_{/A}$ has the same universal property 
+of $(j_1)_*(t) \co j_*(B) \to A$. This is a straightforward 
+diagram-chasing proof.
+\end{proof} 
+
+\section{The equivalence extension property} 
+
+We continue to work with the fixed cospan $(A, f)$, but now assume that $p \co A \to X$ is a fibration and 
+$f \co A \to B$ is a cofibration. Let us consider $(B, g) \in \mathsf{Span}(A, f)$ such
+that $q \co B \to Y$ is a fibration and $\bar{g} \co B \to Y \times_X A$ is an equivalence, where, as before $\bar{g} \defeq (q,g)$. Note that this gives us the arrows in the diagram below: 
+\[
+\xymatrix{
+  B
+  % \ar@{.>}[rr]
+  \ar[dr]^{\bar{g}}
+  \ar[dd]_{q}
+%  \fancypullback{[dd]}{[rrr]}{[ddrrr]}[0.3cm][0.6]
+&&
+ %  \bullet
+  % \ar@{.>}[dr]
+ % \ar@{.>}[dd]|{\hole}
+&\\&
+  Y \times_X A 
+  \ar[rr]^(.45){j_1}
+  \ar[dl]
+%  \fancypullback{[dl]}{[rr]}{[dr]}[0.3cm][0.6]
+&&
+  A
+  \ar[dl]^{p}
+\\
+  Y
+  \ar[rr]_f
+&&
+  X \rlap{.} 
+&
+}
+\]
+
+Next, we factor $\bar{g} \co  B \to Y \times_X A$ in $\cal{E}_{/Y}$ via its mapping path object $M$, as follows:
+\[
+\xymatrix{ 
+ B \ar[r]^{s} & M \ar[r]^-t  &  Y \times_X A \rlap{.} }
+ \]
+ Here, $M$ is obtained by the diagram 
+ \begin{equation}
+ \label{equ:def-of-mapping-path}
+ \begin{gathered}
+\xymatrix{
+B \ar[r] \ar[d]_s \drpullback  \ar@/_2pc/[dd]_{1_B} & Y \times_X A \ar[d] \ar[r]^-{j_1} \drpullback & A \ar[d]  \ar@/^2pc/[dd]^{1_{Y_1}} \\
+M \ar[r] \ar[d] \drpullback & Y \times_X {A}^I \ar[d] \ar[r] \drpullback& A^I \ar[d] \\ 
+B \ar[r] \ar[d] & Y \times_X A \ar[r] \ar[d]  \drpullback & A \ar[d]^p  \\
+Y \ar@{=}[r] & Y \ar[r]_f & X \rlap{.}  }
+\end{gathered}
+\end{equation}
+ If we apply the glueing functor, we get 
+\[
+\xymatrix{
+  B \ar[dr]^{s} \ar@{.>}[rr] 
+  \ar[dddr]_{q} & & \mathsf{Glue}(B,g) \ar[dr]^{s'} & & \\
+  % \ar@{.>}[rr]
+%  \fancypullback{[dd]}{[rrr]}{[ddrrr]}[0.3cm][0.6]
+& M \ar[dr]^t \ar@{.>}[rr] & & \mathsf{Glue}(M) \ar[dr]^{\ell}
+ %  \bullet
+  % \ar@{.>}[dr]
+ % \ar@{.>}[dd]|{\hole}
+& \\& & 
+  Y \times_X A 
+  \ar[rr]^(.35){j_1}
+  \ar[dl]^{f^* p}
+%  \fancypullback{[dl]}{[rr]}{[dr]}[0.3cm][0.6]
+&&
+  A
+  \ar[dl]^{p}
+\\
+&   Y
+  \ar[rr]_f
+&&
+  X \rlap{.} 
+&
+}
+\]
+ 
+Here, we used that the glueing functor preserves limits and in particular the terminal object to deduce that 
+\begin{equation}
+\label{equ:usethis}
+\mathsf{Glue}(Y \times_X A) \cong A
+\end{equation}
+
+
+
+ \begin{center}
+\framebox{ 
+{\bf Notation:} \quad
+$\overline{B} = \mathsf{Glue}(B, g) \, , \qquad \ \overline{M} = \mathsf{Glue}(M)$ } 
+\end{center}
+
+\caution{Note: for the rest of the argument, we need to show
+\begin{itemize}
+\item $t$ is a trivial fibration, which should follow from $\bar{g}$ being an equivalence.
+\item  a counterpart of Sattler's Lemma 4.16, asserting that a map between fibrant objects is an equivalence if and only if it factors as a section of a trivial fibration followed
+by a trivial fibration.
+\end{itemize}}
+
+
+
+We need to show that~$s'$ factors as a section of a trivial fibration followed by a trivial fibration. 
+For this, one constructs a map $u$ as follows 
+\begin{equation}
+\label{equ:define-u}
+\begin{gathered}
+\xymatrix{
+A \ar@/_1pc/[ddr]_{u_1}  \ar@/^1pc/[drr]^{1_A} \ar@{.>}[dr]^{u} & & \\
+  & (A^I)^Y \times_{A^Y} A \ar[r]^(.6){v} \ar[d] & A \ar[d]^{\eta} \\ 
+ & (A^I)^Y \ar[r]_{\partial_1^Y} & A^Y }
+ \end{gathered}
+ \end{equation}
+ and then proves separately the following two claims:
+\begin{enumerate}
+\item[(a)] $s'$ is the pullback of the map $u$
+\item[(b)] $u$ factors as a section of a trivial fibration over $Y_1^A$ followed by a trivial fibration. 
+\end{enumerate} 
+
+ \begin{center}
+\framebox{ \medskip 
+{\bf Notation:} $P \defeq  (A^I)^Y \times_{A^Y} A$}
+\end{center} 
+
+\noindent 
+{\bf {Proof of claim (a)}.} Observe that  
+\begin{align*}
+P & = (A^I)^Y \times_{A^Y} A \\
+ & = \eta^* (A^I)^Y \\
+ & = \eta^* f_* f^* (A^I) \\
+ & = \eta^* f_* (Y \times_X A^I) \\
+ & =  \mathsf{Glue}(Y \times_X A^I)
+\end{align*}
+
+%\noten{The previous version of these notes contained a mistake, describing $P$ as 
+% $\mathsf{Glue}(Y_1^I)$ rather than $\mathsf{Glue}(A \times_B Y_1^A)$.}
+
+
+
+We wish to show that $s'$ fits into a pullback diagram of the form
+\begin{equation*}
+\label{equ:key}
+\begin{gathered}
+\xymatrix{
+\overline{B} \ar[d]_{s'}  \ar[r] &  A \ar[d]^{u} \\
+N \ar[r] & P \rlap{.} }
+\end{gathered} 
+\end{equation*}
+By definition of $\bar{B}$, $N$ and $P$ and the isomorphism in~\eqref{equ:usethis}, this diagram is given by 
+\begin{equation*}
+\label{equ:key-as-glueing}
+\begin{gathered}
+\xymatrix{
+\mathsf{Glue}(B) \ar[d]   \ar[r]   & \mathsf{Glue}(Y \times_X A) \ar[d]  \\
+\mathsf{Glue}(M) \ar[r]   & \mathsf{Glue}(Y \times_X A^I) }
+\end{gathered} 
+\end{equation*}
+Since the glueing functor preserves pullbacks, it suffices to show that 
+\[
+\xymatrix{
+B \ar[d]   \ar[r]   & Y \times_X A \ar[d]  \\
+M \ar[r]   & Y \times_X A^I \rlap{.}}
+\] 
+is a pullback. But this diagram is the top left  square in the diagram~\eqref{equ:def-of-mapping-path},
+which is a pullback by construction. 
+
+%\noten{Because of the incorrect description of the object $P$ in the previous draft mentioned above, the conclusion of the proof involved another step, asserting that composition preserved pullbacks. %But that seems incorrect as well.}
+
+
+
+\medskip
+
+{\bf Proof of claim (b).} Observe that $u$ factors as follows:
+\[
+\xymatrix{
+A \ar[rr]^-u  \ar[dr]_{r}  & &  (A^I)^Y \times_{A^Y} A \\
+ & A^I \ar[ur]_{t}  & }
+ \]
+Here $r$  the `constant path' map, which is a section to a trivial fibration. The map $t$ is the pullback exponential of the cofibration $f \co Y \to X$
+with the trivial fibration $A^I \to A$ and so it is a trivial fibration by the dual of the pushout-product property.
+
+
+%\noten{The definition of $u$ above seems to prove something stronger than what is stated in claim (b), namely that $u$ itself is a section of a trivial fibration. Indeed, consider the diagram 
+%in~\eqref{equ:define-u} and observe that $\delta_1$ is
+%a trivial fibration, that $(-)^A$ preserves trivial fibrations and that pullback preserves trivial fibrations. Hence, the map $v$ in~\eqref{equ:define-u}
+%is a trivial fibration and $u$ is a section of $v$ by definition. The paper by Christian suggests that being a section over $Y_1^A$ is important, but without any hint of where this is used. In any case, it % seems that also $u$ is a section of $v$ over $Y_1^A$.}
+
+
+\end{document}

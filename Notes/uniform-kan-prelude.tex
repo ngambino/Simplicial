@@ -1,0 +1,402 @@
+
+
+%% Math packages
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{enumerate}
+\usepackage[all,cmtip,2cell]{xy} % cmtip gives arrow heads like in Shulman's papers
+\usepackage{fouridx}
+\usepackage{bbm}
+\usepackage{scalerel}
+
+%% General packages
+\usepackage[utf8]{inputenc}
+%\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{geometry}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{xparse}
+\usepackage{xspace}
+\usepackage[draft=false]{hyperref}
+\usepackage{cleveref}
+\usepackage{xcolor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Adapted from the HoTT book sources.
+
+%% Theorem environments
+\def\defthm#1#2#3#4{
+  \newtheorem{#1}[theorem]{#3}
+  \newtheorem*{#1*}{#3}
+  \newtheorem{#2}[theorem]{#4}
+  \newtheorem*{#2*}{#4}
+  \crefname{#1}{#3}{#4}
+  \crefname{#2}{#4}{#4}  
+}
+
+%%% Lambda abstractions.
+% Each variable being abstracted over is a separate argument.  If
+% there is more than one such argument, they *must* be enclosed in
+% braces.  Arguments can be untyped, as in \lam{x}{y}, or typed with a
+% colon, as in \lam{x:A}{y:B}. In the latter case, the colons are
+% automatically noticed and (with current implementation) the space
+% around the colon is reduced.  You can even give more than one variable
+% the same type, as in \lam{x,y:A}.
+\makeatletter
+\def\lam#1{{\lambda}\@lamarg#1:\@endlamarg\@ifnextchar\bgroup{.\,\lam}{.\,}}
+\def\@lamarg#1:#2\@endlamarg{\if\relax\detokenize{#2}\relax #1\else\@lamvar{\@lameatcolon#2},#1\@endlamvar\fi}
+\def\@lamvar#1,#2\@endlamvar{(#2\,{:}\,#1)}
+% \def\@lamvar#1,#2{{#2}^{#1}\@ifnextchar,{.\,{\lambda}\@lamvar{#1}}{\let\@endlamvar\relax}}
+\def\@lameatcolon#1:{#1}
+\let\lamt\lam
+% This version silently eats any typing annotation.
+\def\lamu#1{{\lambda}\@lamuarg#1:\@endlamuarg\@ifnextchar\bgroup{.\,\lamu}{.\,}}
+\def\@lamuarg#1:#2\@endlamuarg{#1}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Fancy pullback corners
+
+\NewDocumentCommand\fancypullbackcore{m m}{
+  \POS{
+    % Setup coordinate system for left upper corner.
+    "c00";"c01":"c10"::
+    % Calculate axis offsets
+    "c00"+/v(1,0){#1}/="a",
+    "c00"+/v(0,1){#1}/="b",
+    % Find tip candidates as intercepts with diagonal.
+    "c00";"c11":
+    "a";p+"c11"-"c01";x="sa",
+    "b";p+"c11"-"c10";x="sb",
+    % Calculate tip as mean of candidates.
+    % FIXME: Should be geometric instead of arithmetic.
+    % FIXME: A better selection criterion might be the area enclosed
+    %        by the pullback symbol and the upper left corner.
+    "sa"+"sb"-"c00"="t",
+    % Setup coordinate system for left upper corner.
+    "c00";"c01":"c10"::
+    % Find intersections of pullback symbol with left and upper sides.
+    "t";p+"c01"-"c11";x="x",
+    "t";p+"c10"-"c11";y="y",
+    % Setup coordinate system for pullback symbol.
+    "t";"x":"y"::
+    % Draw pullback symbol.
+    (0,0);({#2},0)**\dir{-},
+    (0,0);(0,{#2})**\dir{-}}}
+
+% Pullback/pushout corners for arbitrary quadrangles.
+% The pullback symbol will be drawn at the upper left corner, given by the current position.
+% Use as \fancypullback{<x>}{<y>}{<z>}[<dist>][<size>] where:
+%   <x>    position of upper right corner of the pullback square;
+%   <y>    position of lower left corner of the pullback square;
+%   <z>    position of lower right corner of the pullback square,
+%          the quandrangle defaulting to a parallelogram if not specified.
+%   <dist> measure of distance of the pullback symbol from the upper left corner,
+%          defaulting to 0.2cm if not specified;
+%   <size> relative size of the pullback symbol ranging from 0 to 1,
+%          defaulting to 0.6 if not specified.
+%
+% Example:  \fancypullback{[dd]}{[dr]}{[ddr]}
+\NewDocumentCommand\fancypullback{m m g o o}{
+  \save{
+    p="c00",
+    {#1}="c01",
+    {#2}="c10"}
+  \IfValueTF{#3}
+    {\POS{{#3}="c11"}}
+    {\POS{"c01"+"c10"-"c00"="c11"}}
+  \fancypullbackcore
+    {\IfValueTF{#4}{#4}{0.2cm}}
+    {\IfValueTF{#5}{#5}{0.6}}
+  \restore}
+
+% Version of the previous command where the corners are specified using
+% the hops coordinate format from xymatrix excluding the square brackets.
+%
+% Example:  \fancypullbackhops{u}{ll}
+\NewDocumentCommand\fancypullbackhops{m m g o o}{
+  \IfValueTF{#3}
+    {\pullbackcorewrapper{[#1]}{[#2]}{[#3]}[#4][#5]}
+    {\pullbackcorewrapper{[#1]}{[#2]}[#4][#5]}}
+
+% for adjunctions
+% use as \ar@{}@<-0.24em>[..]|{\dir{_|_}}
+\newdir{_|_}{^\dir{|-}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Nicola's stuff
+
+\newdir{ >}{{}*!/-7pt/@{>}}
+\newdir{m}{->}
+%\newdir{m}{{}*!/-1pt/@{o}}
+\newcommand{\xycenter}[1]{\begin{gathered}\xymatrix{#1}\end{gathered}}
+%%% Pullback symbols
+\newcommand{\pullback}[1]{\save*!/#1-1.2pc/#1:(-1,1)@^{|-}\restore}
+\newcommand{\ulpullback}{\pullback{ul}}
+\newcommand{\dlpullback}{\pullback{dl}}
+\newcommand{\urpullback}{\pullback{ur}}
+\newcommand{\drpullback}{\pullback{dr}}
+
+\makeatletter
+\newcommand{\DeclareAbbrevation}[2]{\newcommand{#1}{\@ifnextchar{.}{#2}{#2.\@\xspace}}}
+\makeatother
+
+\DeclareAbbrevation{\ie}{i.e}
+\DeclareAbbrevation{\eg}{e.g}
+\DeclareAbbrevation{\cf}{cf}
+\DeclareAbbrevation{\etc}{etc}
+\DeclareAbbrevation{\resp}{resp}
+\DeclareAbbrevation{\etal}{et al}
+\DeclareAbbrevation{\ibid}{ibid}
+
+
+\newcommand{\defeq}{=_{\operatorname{def}}}
+\newcommand{\co}{\colon}
+\newcommand{\iso}{\cong} 
+\newcommand{\rev}{\mathit{\vee}}
+\newcommand{\op}{{\operatorname{op}}}
+\newcommand{\catequiv}{\simeq} 
+\newcommand{\cateq}{\simeq} 
+\newcommand{\coend}{\int}
+
+
+\newcommand{\cal}[1]{\mathcal{#1}}
+
+\newcommand{\cat}[1]{\mathbb{#1}}
+\newcommand{\catA}{\cat{A}}
+\newcommand{\catB}{\cat{B}}
+\newcommand{\catC}{\cat{C}}
+\newcommand{\catD}{\cat{D}}
+\newcommand{\catK}{\cat{K}}
+\newcommand{\catM}{\cat{M}}
+
+%% 
+
+\newcommand{\SSet}{\mathbf{SSet}}
+\newcommand{\CSet}{\mathbf{CSet}}
+\newcommand{\UU}{\overline{\mathsf{W}}}
+\newcommand{\U}{\mathsf{W}}
+\newcommand{\Weq}{\operatorname{Eq}}
+\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\SET}{\mathbf{SET}}
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\Ex}{\operatorname{Ex}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% My stuff
+
+\UseAllTwocells
+
+\DeclarePairedDelimiter\parens\lparen\rparen
+\DeclarePairedDelimiter\floors\lfloor\rfloor
+\DeclarePairedDelimiter\ceils\lceil\rceil
+\DeclarePairedDelimiter\bracks\lbrack\rbrack
+\DeclarePairedDelimiter\brackss\llbrack\rrbrack
+\DeclarePairedDelimiter\verts\lvert\rvert
+\DeclarePairedDelimiter\vertss\lVert\rVert
+\DeclarePairedDelimiter\angles\langle\rangle
+\DeclarePairedDelimiter\braces\lbrace\rbrace
+\DeclarePairedDelimiterX\set[2]\lbrace\rbrace{#1 \mathrel{\delimsize\vert} #2}
+\DeclarePairedDelimiter\ucorns\ulcorner\urcorner
+
+\newcommand{\arghole}{-}
+\newcommand{\brarghole}{(\arghole)}
+
+\newcommand{\cc}{\mathbin{\circ}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\const}{\operatorname{const}}
+\newcommand{\canonical}{\mathord{!}}
+\newcommand{\inl}{\operatorname{inl}}
+\newcommand{\inr}{\operatorname{inr}}
+
+\newcommand{\cod}{\operatorname{cod}}
+\newcommand{\dom}{\operatorname{dom}}
+\newcommand{\colim}{\operatorname{colim}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\Lan}{\operatorname{Lan}}
+\newcommand{\Ran}{\operatorname{Ran}}
+\newcommand{\alg}{\operatorname{alg}}
+\newcommand{\coalg}{\operatorname{coalg}}
+\newcommand{\Alg}{\operatorname{Alg}}
+\newcommand{\Coalg}{\operatorname{Coalg}}
+\newcommand{\Cat}{\mathbf{Cat}}
+\newcommand{\CAT}{\mathbf{CAT}}
+\newcommand{\MonCAT}{\mathbf{MonCAT}}
+\newcommand{\MonCat}{\mathbf{MonCat}}
+\newcommand{\Presheaf}{\operatorname{Presheaf}}
+\newcommand{\SSetCart}{\SSet_{\cart}^{\to}}
+\newcommand{\cart}{\text{\normalfont{cart}}}
+\newcommand{\PtdEndo}{\mathbf{PtdEndo}}
+\newcommand{\CoptdEndo}{\mathbf{CoptdEndo}}
+\newcommand{\Mnd}{\mathbf{Mnd}}
+\newcommand{\Cmd}{\mathbf{Cmd}}
+\newcommand{\Mon}{\mathbf{Mon}}
+\newcommand{\Comon}{\mathbf{Comon}}
+\newcommand{\Bialg}{\mathbf{Bialg}}
+\newcommand{\Adju}{\mathbf{Adj}}
+\newcommand{\Fun}{\mathbf{Fun}}
+\newcommand{\AWFS}{\mathbf{AWFS}}
+\newcommand{\LAWFS}{\mathbf{LAWFS}}
+\newcommand{\RAWFS}{\mathbf{RAWFS}}
+
+\newcommand{\join}{\mathbin{\star}}
+\newcommand{\hatjoin}{\mathbin{\hat{\star}}}
+\newcommand{\hattimes}{\mathbin{\hat{\times}}}
+\newcommand{\hatcirc}{\mathbin{\widehat{\circ}}}
+\newcommand{\hatexp}{\operatorname{\widehat{exp}}}
+\newcommand{\hathom}{\operatorname{\widehat{hom}}}
+
+\newcommand{\classcofib}{\mathcal{C}}
+\newcommand{\classfib}{\mathcal{F}}
+\newcommand{\classweq}{\mathcal{W}}
+\newcommand{\classleft}{\mathcal{L}}
+\newcommand{\classright}{\mathcal{R}}
+
+\newcommand{\ptA}{\mathbf{a}}
+\newcommand{\ptB}{\mathbf{b}}
+
+
+\newcommand{\ret}{\mathbf{R}}
+\newcommand{\retA}{\mathit{x}}
+\newcommand{\retB}{\mathit{y}}
+
+% Stolen from Mike Shulman.
+\newcommand{\xto}{\xrightarrow}
+
+
+\newcommand{\sql}{{}^L}
+\newcommand{\sqr}{{}^R}
+\newcommand{\squ}{{}^U}
+\newcommand{\sqd}{{}^D}
+
+\newcommand{\squl}{{}^{UL}}
+\newcommand{\squr}{{}^{UR}}
+\newcommand{\sqdl}{{}^{DL}}
+\newcommand{\sqdr}{{}^{DR}}
+
+\newcommand{\sqhori}{{}^{H}}
+\newcommand{\sqvert}{{}^{V}}
+
+\newcommand{\Slice}{\operatorname{Slice}}
+
+\newcommand{\initial}{\bot}
+\newcommand{\terminal}{\top}
+
+\newcommand{\liftl}[1]{{\fourIdx{\pitchfork}{}{}{}{\smash{#1}\vphantom{I}}}}
+\newcommand{\liftr}[1]{{\fourIdx{}{}{\pitchfork}{}{\smash{#1}\vphantom{I}}}}
+\newcommand{\rliftl}[2]{{\fourIdx{\pitchfork}{}{}{#1}{#2}}}
+\newcommand{\rliftr}[2]{{\fourIdx{}{}{\pitchfork}{#1}{#2}}}
+
+\newsavebox{\mybox}
+\newcommand{\scaledreflect}[1]{%
+  \ThisStyle{\ifmmode%
+    \savebox{\mybox}{$\SavedStyle#1$}%
+    \reflectbox{\usebox{\mybox}}%
+  \else%
+    \savebox{\mybox}{#1}%
+    \reflectbox{\usebox{\mybox}}%
+  \fi%
+}}
+
+\newcommand{\obackslash}{\mathbin{\scaledreflect{\oslash}}}
+
+\newcommand{\unit}{\top}
+\newcommand{\hatunit}{\hat{\unit}}
+\newcommand{\hatotimes}{\mathbin{\widehat{\otimes}}}
+\newcommand{\hatobackslash}{\mathbin{\widehat{\obackslash}}}
+
+\newcommand{\eval}{\operatorname{ev}}
+\newcommand{\hateval}{\widehat{\eval}}
+
+\newcommand{\cchat}{\mathbin{\widehat{\cc}}}
+
+\newcommand{\interval}{I}
+\newcommand{\intervall}{\ell}
+\newcommand{\intervalr}{r}
+
+\newcommand{\cyl}{C}
+\newcommand{\ccyl}{\varepsilon}
+
+
+\hyphenation{e-pi-mor-phism}
+\hyphenation{e-pi-mor-phisms}
+\hyphenation{mo-no-mor-phism}
+\hyphenation{mo-no-mor-phisms}
+
+
+\makeatletter
+\def\ignorespacesandallpars{%
+  \@ifnextchar\par
+    {\expandafter\ignorespacesandallpars\@gobble}%
+    {}%
+}
+\makeatother
+
+%\newcommand{\para}[1]{\smallskip\noindent\textbf{{#1}.\ }\ignorespacesandallpars}
+
+% usage: \note[author]{color}{content}
+\newcommand{\note}[3][]{\def\auth{#1}\textcolor{#2}{{[\ifx\auth\empty\else\auth: \fi{#3}]}}}
+
+\newcommand{\notesh}{\note{green}}
+\newcommand{\noten}{\note{blue}}
+
+
+
+\newcommand{\alert}[3][]{\def\auth{#1}\textcolor{#2}{{\ifx\auth\empty\else\auth: \fi{#3}}}}
+
+\newcommand{\caution}{\alert{red}}
+
+\newcommand{\Psh}{\mathrm{Psh}}
+
+\newcommand{\yon}{\mathrm{y}}
+
+% Reedy stuff
+
+\newcommand{\R}{\mathrm{R}}
+% \newcommand{\deg}{\operatorname{d}}
+\newcommand{\Rp}{\R^+}
+\newcommand{\Rm}{\R^-}
+\newcommand{\Sk}{\operatorname{Sk}}
+\newcommand{\Cosk}{\operatorname{Cosk}}
+\newcommand{\obj}{\operatorname{Obj}}
+\newcommand{\Rhat}{\operatorname{Psh}(\R)}
+
+\newcommand{\fakeslice}{\sslash}
+
+%\newcommand{\Join}{\operatorname*{\star}}
+\newcommand{\Hatjoin}{\operatorname*{\scalerel*{\hat{\star}}{\sum}}}
+
+\let\Otimes\bigotimes
+\newcommand{\Hatotimes}{\operatorname*{\scalerel*{\hat{\otimes}}{\sum}}}
+
+\newcommand{\isContr}{\operatorname{isContr}}
+\newcommand{\Lift}{\operatorname{Lift}}
+
+\newcommand{\triv}{\textup{triv}}
+
+\newcommand{\leftapp}[2]{{#1} \mathbin{\otimes} {#2}}
+\newcommand{\rightapp}[2]{{#1} \mathbin{\odot} {#2}}
+\newcommand{\hatleftapp}[2]{{#1} \mathbin{\widehat{\otimes}} {#2}}
+\newcommand{\hatrightapp}[2]{{#1} \mathbin{\widehat{\odot}} {#2}}
+
+\newcommand{\Adj}{\operatorname{Adj}}
+
+\newcommand{\Codensity}{\operatorname{Codensity}}
+
+\newcommand{\fib}{\twoheadrightarrow}
+\newcommand{\cof}{\rightarrowtail}
+\newcommand{\trivfib}{\mathrel{\mathrlap{\hspace{0pt}\raisebox{5pt}{$\scriptscriptstyle\triv$}}\mathord{\twoheadrightarrow}}}
+\newcommand{\trivcof}{\mathrel{\mathrlap{\hspace{0pt}\raisebox{5pt}{$\scriptscriptstyle\triv$}}\mathord{\rightarrowtail}}}
+\newcommand{\we}{\mathrel{\mathrlap{\hspace{1pt}\raisebox{4pt}{$\scriptscriptstyle\sim$}}\mathord{\rightarrow}}}
+\newcommand{\lwe}{\mathrel{\mathrlap{\hspace{4pt}\raisebox{4pt}{$\scriptscriptstyle\sim$}}\mathord{\leftarrow}}}
+
+\newcommand{\cofib}{\mathbf{C}}
+\newcommand{\trivcofib}{\mathbf{TC}}
+\newcommand{\fibcat}{\mathbf{F}}
+\newcommand{\trivfibcat}{\mathbf{TF}}
+\newcommand{\weakequiv}{\mathbf{W}}
+
+\setlist[enumerate]{label=(\roman*)}
