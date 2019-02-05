@@ -33,7 +33,7 @@ is the use of a cofibrant replacement functor to overcome the known issues regar
 
 \newpage
 
-\section{Introduction} 
+\section*{Introduction} 
 
 
 \subsection*{Context} 
@@ -357,123 +357,8 @@ It follows that if $f \co A \rightarrow B$ is a weak equivalences between two co
 
 
  
-\section{The cofibrant replacement functor}
 
-The goal of this section is to give a more explicit description of the cofibrant replacement functor on simplicial sets.
-
-
-\begin{definition}
-
-\begin{enumerate}
-\item[]
-\item If $x \in X([n])$ is an $n$-cell in a simplicial set $X$, the \emph{degeneracy type} of $x$ is the set of face maps $\delta:[i] \rightarrow [n]$ such that $\delta^* x$ is a degenerate cell.
-
-\item By a ``degeneracy type'', or ``degeneracy $n$-type'' we mean a subset of faces of $\Delta[n]$ that can appear as the degeneracy type of an $n$-cell of a simplicial sets.
-
-\end{enumerate}
-
-\end{definition}
-
-We will construct a ``simplicial set of degeneracy type $D$''. We start with a simplicial set $D_0$ whose $n$-cells are all the subset of the faces of $\Delta[n]$, i.e. subsets of the set of finite subsets of $[n]$. If $f : [m] \rightarrow [n]$ and $P \in D_0([n])$ one defines $f^* P$ as the set of faces  $[i] \rightarrow [m]$ such that the composite $[i] \rightarrow [m] \overset{f}{\rightarrow} [n]$ is either in $P$ or non-injective.
-
-\begin{lemma}
-$D_0$ is a simplicial set, and for any simplicial set $X$, the map $X \rightarrow D_0$ sending each $n$ cell to its degeneracy type is a simplicial map preserving and detecting degeneracy.
-\end{lemma}
-
-\begin{proof}
-It is immediate to check that $D_0$ is a simplicial set. Let $x \in X([n])$ and $f:[m] \rightarrow [n]$, in order to check that the maps $X \rightarrow D_0$ sending each cell to its degeneracy type is simplicial, one need to check that the degeneracy type of $f^* x$ is indeed described from the degeneracy type of $x$ using the formula for the functoriality of $D_0$. For face maps $[i] \rightarrow [m]$ the cell $i^* f^* x$ is degenerated as soon as $f \circ i$ is non injective, and if $f\circ i$ is injective, then it depends on whether $f \circ i$ is in the degeneracy type of $x$ or not.
-
-If $f:[n] \rightarrow [m]$ is non-injective then for any $s \in D_0([m])$ the identity map $[n] \rightarrow [n]$ is in $f^* s$. So a degenerate cell of $D_0$ always contains the maximal face. In particular the map $X \rightarrow D_0$ constructed above send non-degenerate cell of $X$ to non-degenerate cells of $D_0$.
-
-\end{proof}
-
-In particular, the lemma construct a map $P:D_0 \rightarrow D_0$ to itself sending any cell to its degeneracy type. As $P$ preserves and detects degeneracy, it preserves the degeneracy type and hence $P \circ P =P$.
-
-\begin{definition}
-The simplicial set $D$ is the set of fix point of the idempotent $P$ acting on $D_0$.
-\end{definition}
-
-Note that for any simplicial set $X$, the map $f:X \rightarrow D_0$ sending each cell to its degeneracy type preserves the degeneracy type, hence $P f = f$. In particular a cell of $D_0$ is in $D$ if and only if it is a degeneracy type. One deduces that:
-
-\begin{lemma}
-$n$-cells of $D$ are in bijection with degeneracy $n$-type. Each simplicial set $X$ has a unique map preserving non-degeneracy to $D$, which is the map sending a cell to its degeneracy type.
-\end{lemma}
-
-
-
-
-We are mostly interested in degeneracy type of cofibrant simplicial set, those can easily be identified.
-
-\begin{lemma}
-A degeneracy $n$-type $s \subset Faces(\Delta[n])$ appears as the degeneracy type of a cell in a cofibrant simplicial set if and only if it is decidable (complemented) as a subset of the set of face. Decidable degeneracy type form a sub-simplicial set of $D$ which is cofibrant.
-\end{lemma}
-
-\begin{proof}
-If $x$ is an $n$-cell of cofibrant simplicial set $X$, then the degeneracy type of $x$ is decidable as for each face $\delta:[i] \rightarrow [n]$ it is decidable if $\delta^* x $ is degenerated or not.
-Conversely, if $X$ is any simplicial set and $x \in X$ is an $n$-cell whose degeneracy type is decidable, then the image of the map $\Delta[n] \overset{x}{\rightarrow} X$ is a cofibrant sub-simplicial set of $x$. Indeed it only contains cells of the form $f^*x$ for $f:[k] \rightarrow [n]$. For each such cell, either $f$ is injective in which can it is decidable whether $f^*x$ is degenerated or not by assumption, or $f$ is not injective in which case $f^*x$ is always degenerated. And the degeneracy type of $x$ is the same whether one see as a cell of $X$ or as a cell of this cofibrant subobject.
-One immediately see that the subset of $D_0$ of decidable subset is stable under the functoriality of $D_0$ hence form decidable degeneracy types form a simplicial subobject of $D$. This sub-simplicial set has decidable equality and decidable degeneracies.
-\end{proof}
-
-\begin{lemma}
-
-Given a map $\partial \Delta[n] \rightarrow D$ there is a unique way to extend it into map $\Delta[n] \rightarrow D$ such that the non-degenerate $n$-cell of $\Delta[n]$ is send to a non-degenerate cell.
-\end{lemma}
-
-\begin{proof}
-If such an extension exists the $n$-cell $x$ corresponding to $\Delta[n] \rightarrow D$ has to be as follows: $x$ does not contains the face $[n] \rightarrow [n]$, and for all other face $\delta:[i] \rightarrow [n]$ it is in $x$ is and only the composite $[i] \rightarrow \partial \Delta[n] \rightarrow D$ is a degenerate cell. So the uniqueness is clear. We only need to show that this set is indeed a degeneracy type. But if one form $D \coprod_{\partial \Delta[n]} \Delta[n]$ then the new added $n$-cell has exactly this degeneracy type so this conclude the proof.
-\end{proof}
-
-Let $X_c \overset{\sim}{\twoheadrightarrow} X $ be the cofibrant replacement of a simplicial set $X$ constructed using Richard Garner version of the small object argument from \cite{garner:small-object-argument}.
-
-\begin{proposition}
-The map from $X_c \rightarrow D \times X$ sending an $n$-cell to its degeneracy type $s \in D$ and its image is $X$ induce a bijection between $X_c([n])$ and the set of pairs of a decidable degeneracy type $s$ and a cell of $x$ of degeneracy type larger than $s$.
-\end{proposition}
-
-\begin{proof}
-
-Due to the ``stratified'' nature of the simplicial generating cofibration, $X_c$ can be written as the colimit of a sequence:
-
-
- \[ X^{(0)}_c \hookrightarrow X^{(1)}_c \hookrightarrow \dots \hookrightarrow X^{(n)}_c \hookrightarrow \dots \]
-
-where $X^{(0)}_c$ is just the set of $0$-cell of $X$ and $X^{(n)}_c$ can be constructed from $X^{(n-1)}$ by taking a multiple pushout $\Delta[n] \coprod_{\partial \Delta[n]} X^{(n-1)}_c$ for each square of the form:
-
-\[ \xymatrix{\partial \Delta[n]  \ar[r] \ar@{^{(}->}[d] & X^{(n-1)}_c \ar[d] \\ \Delta[n]  \ar[r] & X} \]
-
-Indeed, the pushout of $\partial \Delta[n] \hookrightarrow \Delta[n]$ does not change the $k$-skeleton of $X$ for $k <n$ and the set of maps $\partial \Delta[k] \rightarrow X$ only depends on the $k$-skeleton of $X$, so one can always do all the necessary pushout by $\partial \Delta[k] \hookrightarrow \Delta[k]$ by for $k<n$ before those by $\partial \Delta[n] \hookrightarrow \Delta[n]$.
-
-
-We will prove by induction on $n$ that $X^{(n)}_c$ identifies with $n$-skeleton of the simplicial set mentioned in the proposition, i.e. the sub-simplicial set $Y^n$ of $D \times X$ of pairs $(s,x)$ such $s$ is decidable,  the degeneracy type of $x$ is at least $s$ and $(s,x)$ is of dimension at most $n$, or a degeneracy of a cell of dimension at most $n$.
-
-Note that as the degeneracy type of $x$ is larger than $s$, $s$ is the degeneracy type of the pair $(s,x)$, so the condition on $(s,x)$ being a degeneracy is equivalent to the same condition on $s$.
-
-In the case $n=0$, there is only one degeneracy type in dimension $0$, so both $X^{(0)}_c$ and $Y^0$ are the simplicial set of cells of $X$ that are degeneracy of $0$-cells.
-
-Assuming $Y^{n-1}$ and $X^{(n-1)}_c$ are isomorphic as claimed. One only need to check that the new non-degenerate $n$-cell that appears in $Y^{n}$ and $X^{(n)}_c$ are in bijection compatible to their boundary and their image in $X$.
-In $X^{(n)}_s$ there is exactly one such cell for each square as above. In $Y^{n}$, any non-degenerate $n$-cells does produce such a square, and conversely given a square:
-
-\[ \xymatrix{\partial \Delta[n]  \ar[r] \ar@{^{(}->}[d] & Y^{n-1} \ar[d] \\ \Delta[n]  \ar[r] & X} \]
-
-Then the lemma above give a unique map to extend $\partial \Delta[n] \rightarrow D$ to a non-degenerate $n$-cell of $D$, and the image of $\Delta[n]$ in $X$ automatically have a larger degeneracy type that this extension so this gives a non-degenerate cell of $Y^{n}$ generating this square. This is the unique way to get such a cell in $Y^n$ to be non-degenerate: indeed a cell in $Y^n$ is non-degenerate if and only if its image in $D$ is non-degenerate.
-\end{proof}
-
-
-\begin{remark} 
-This proposition has some interesting consequences.
-\begin{itemize}
-\item $1_c$ is exactly the sub-simplicial set of $D$ of decidable degeneracy type.
-\item Even if $X$ is a large simplicial set, its cofibrant replacement $X_c \rightarrow X$ has fiber controlled in size: indeed the fiber over an $n$-cell $x \in X$ is the set of decidable degeneracy $n$-type smaller than the degeneracy type of $x$. In particular it is a subset of the finite set of decidable degeneracy $n$-type. Not that in order to conclude in general that the fiber are small on need some sort of propositional resizing axiom saying that a subclass of a finite set is a small set.
-\end{itemize}
-\end{remark}
-
-
-
- 
-
-\section{Pullbacks} 
-
-
-
+\noten{What follows from here to the end of the section is the old material on pullbacks}
 
 
  
@@ -1393,301 +1278,7 @@ Question: do we need to know that $\mathsf{Weq}(\U_c)$ is a cofibrant object to 
 
 \section{Univalence}
 
-\notesh{[Work in progress] I prefer to start again this section from scratch, but I'm leaving the old univalence section as long as this is not finished}
 
-
-Let $p:E \twoheadrightarrow B$ be any fibration. We want to define what it means for $p$ to be a univalent fibration, and show that $\UU \twoheadrightarrow \U$ and $\UU_c \twoheadrightarrow \U_c$ are univalent fibrations.
-
-Using the ``$\Pi$-types'' that we have already defined, one can to construct a fibration $E^{\to} \twoheadrightarrow B \times B$ that classifies morphisms between two fibers of $p$. More precisely, $E^{\to}$ is defined as $\Pi_{p \times Id_B}(E \times E)$ in:
-
-\[
-\xymatrix{
-E \times E \ar[d]_{Id_E \times p } & \Pi_{p \times Id_B}(E \times E) \ar[d] \\
-E \times B \ar[r]_{p \times id_B} & B \times B \\
-}
-\]
-
-A morphisms from any object $A$ to $E^{\to}$ is the same as a morphism $A \overset{(f,g)}{\rightarrow} B \times B$ together with a morphism $E[f] \rightarrow E[g]$ over $A$. We now need to construct an object $Weq(p) \twoheadrightarrow E^{\to}$ that similarly classifies ``weak equivalences'' $E[f] \overset{\sim}{\rightarrow} E[g]$. we have not been able to show constructively that weak equivalences are stable under pullback along fibrations, so it is not clear if such an object $Weq(p)$ can be defined as a subobject od $E^{\to}$ or not. Instead we will follow Voevodsky's definition from type theory, see also section $4$ of \cite{shulman:reedy}, and hence one needs to start by discusing the type $\texttt{isContr}_B(E)$
-
-\begin{definition}
-
-Given a fibration $p:E \twoheadrightarrow B$ one defines:
-
-\[ \texttt{isContr}_B(E) = \Sigma_p \Pi_{\pi_2} \Id_E  \]
-
-
-With $Id_E \twoheadrightarrow E \times_B E$ and $\pi_2: E \times_B E \rightarrow E$.
-
-\end{definition}
-
-So $\texttt{isContr}_B(E)$ is a fibration over $B$ which encodes the idea that the fiber of $p$ is contractible, in the sense that the data of an ``element'' of $\texttt{isContr}_B(E)$ over a $b \in B$ is given by an element $e \in E(b)$ and for all $e' \in E(b)$ a path between $e$ and $e'$.
-
-We now need to use this to construct an object that classifies weak equivalences. Assume one has two fibrations $E_1,E_2 \twoheadrightarrow B$ and a morphism $f$:
-
-
-\[\xymatrix{
-E_1 \ar@{->>}[dr] \ar[rr]^f & & E_2 \ar@{->>}[dl] \\
-& B & 
-}\]
-
-We can then form the ``homotopy fiber'' of $f$ as the pullback:
-
-\[\xymatrix{
-P f \ar@{->>}[d] \ar[r]  & \Id_{E_2} \ar@{->>}[d] \\
-E_1 \times_B E_2 \ar[r] & E_2 \times_B E_2 
-}\]
-
-Which as usual produces a factorization of $f$:
-
-\[E_1 \rightarrow Pf \twoheadrightarrow E_2 \]
-
-\begin{lemma}
-If $E_1$ and $E_2$ are cofibrant and $E_2 \rightarrow B$ is a fibration, then $E_1 \rightarrow Pf$ is a weak equivalence.
-\end{lemma}
-
-\begin{proof}
-The projections $\Id_{E_2} \twoheadrightarrow E_2$ are trivial fibrations because of point (iv) of \cref{proposition:MainPathObject:IdBifib} (the proof of this claims only uses that $A \twoheadrightarrow X$ is a fibration, and none of the other assumptions, so it applies here), so the pullback $Pf \rightarrow E_1$ is also a trivial fibration. $\Id_{E_2}$ is cofibrant because because of (i) of \cref{proposition:MainPathObject:IdBifib} (which only uses that $E_2$ is cofibrant) so $Pf$ is cofibrant by \ref{lem:cofibrant_fiber_product} as $E_1$ and $E_2$ are cofibrant.
-
-It follows by \cref{lemma:triv_fib_are_we} that $Pf \rightarrow E_1$ is a weak equivalence. By $2$-out-of-$3$ for weak equivalences, $E_1 \rightarrow Pf$ is a weak equivalence.
-
-\end{proof}
-
-
-One can then define:
-
-\begin{definition} For any morphisms $f$ in $\Fib/B$ one defines:
-
-\[ \texttt{isEquiv}_B(f) = \Pi_{p_2} \texttt{isContr}_B(Pf) \]
-
-where $p_2$ is the fibration $E_2 \twoheadrightarrow B$.
-
-Given $p:E \twoheadrightarrow B$ be any fibration, one defines
-
-\[ Weq(E) = \texttt{isEquiv}_{E^{\to}}(f) \]
-
-Where $f$ denotes the universal map over $E^{\to}$ corresponding to its universal property.
-
-\end{definition}
-
-The definition of $\texttt{isEquiv}$ formalize the idea that $f$ is an equivalence if and only all its homotopy fiber are contractible.
-
-Admiting that the $\Pi$-types and identity types that we have defined so far are indeed part of an interpretation of type theory, i.e. that the coherence problems can be solved, these exactly corresponds to the usual definition of these notion in homotopy type theory. We now need some lemmas showing that these definitions indeed behave as expected in our model theoretic settings. These lemma mostly comes from section 4 of \cite{shulman:reedy}, though we need to reprove them to track where fibrancy/cofibrancy assumptions are needed for the proof to carry over.
-
-\begin{lemma}\label{lem:IsContr1}For a fibration $p:E \twoheadrightarrow B$ with $E$ and $B$ bifibrant, the following are equivalent:
-
-\begin{enumerate}[(i)]
-\item The map $p:E \twoheadrightarrow B$ is a trivial fibration.
-\item The map $\texttt{isContr}_B (E) \twoheadrightarrow B$ has a section.
-\item There is a map $ 1 \rightarrow \Pi_B  \texttt{isContr}_B (E) $.
-\item The map $\texttt{isContr}_B (E) \twoheadrightarrow B$ is a trivial fibration.
-\end{enumerate}
-
-\end{lemma}
-
-
-
-More precisely, (ii) implies that $p$ is a weak equivalence assuming either that $B$ is fibrant or that $E$ and $B$ are cofibrant, so (ii) $\Rightarrow$ (i) when $B$ is fibrant, (i) $\Rightarrow$ (ii) when $B$ is cofibrant and $E$ is bifibrant.
-(ii) $\Leftrightarrow$ (iii) holds without assumption on $E$ and $B$, (vi) $\Rightarrow$ (ii) holds as soon as $B$ is cofibrant. And finally (i) $\Rightarrow$ (vi) holds when $E$ is bifibrant. 
-
-\begin{proof}
-
-A section of $\texttt{isContr}_B (E) \twoheadrightarrow B$ is by definition of $\texttt{isContr}_B (E)$ the data of a section $s:B \rightarrow E$, and a map $h \co E \to \Id_E$ whose image by $\Id_E \twoheadrightarrow E \times_B E$ is $(s \circ p, id_E)$. Such a section $s$ and homotopy $h$ produces a homotopy invers to $p$ and hence implies that $p$ is a weak equivalences, and hence a trivial fibration as $B$ is assumed fibrant.  This proves (ii) $\Rightarrow$ (i).
-
-Note that if one only assume that $E$ and $B$ are cofibrant and $p$ is a fibration, it is still the case that $\Id_E \twoheadrightarrow E$ is a trivial fibration between cofibrant objects, hence a weak equivalence. Which is hence sufficient to show that the map $h$ induce an equality in the homotopy category between $s \circ p $ and the identity of $E$.
-
-
-Conversely, assuming (i), one can construct a section $s$ as above using the lifting property of $B$ (cofibrant) against $p$. To construct the homotopy $h$ one needs to use a lifting property of $E$ against the map $Id_E \twoheadrightarrow E \times_B E$, which is a trivial fibrations because $\Id_E \twoheadrightarrow E$ and $E\times_B E \twoheadrightarrow E$ both are and trivial fibrations satisfies $2$-out-of-$3$ among fibrations between fibrant objects.
-
-The equivalence between (ii) and (iii) follows from the universal property of $\Pi$-types.
-The implication (vi) $\Rightarrow$ (ii) is clear when $B$ is cofibrant. We conclude by showing (i) $\Rightarrow$ (vi) 
-
-As above, as $E$ is fibrant, one can deduce assuming (i) that $\Id_E \twoheadrightarrow E \times_B E$ is a trivial fibration. $\pi_2 : E \times_B E \twoheadrightarrow E$ is a fibration with cofibrant domain, hence $\Pi_{\pi_2} \Id_E \rightarrow E$ is a trivial fibration by \cref{cor:Pi_types_are_fibrant}, and finally, $\texttt{isContr}(E)_B \rightarrow B$ is just the composite $\Pi_{\pi_2} \Id_E \rightarrow E \rightarrow B$ so is also a trivial fibration.
-\end{proof}
-
-\begin{lemma} \label{lem:isContr2}
-Let $p: E \twoheadrightarrow B$ be a fibration, and $f:A \rightarrow B$ be a morphism. Then there is a natural isomorphisms
-
-\[ \texttt{isContr}_A(E[f]) \simeq \texttt{isContr}_B(E) [f] \]
-
-In particular, if $E$ is cofibrant and $A$ bifibrant, then the following conditions are equivalent: 
-
-\begin{enumerate}[(i)]
-
-\item $E[f] \twoheadrightarrow A$ is a trivial fibration.
-
-\item The maps $A \rightarrow B$ factors as $A \rightarrow \texttt{isContr}_B(E) \rightarrow B$.
-
-\end{enumerate}
-
-\end{lemma}
-
-\begin{proof}
-
-The stability of $\texttt{isContr}$ under pullback is a very formal property which follows from the similar stability property of $\Pi$-types, which in turn is automatic from their universal property (see for example lemma 4.2 in \cite{shulman:reedy}). The equivalence is an immediate consequence of this pullback stability and \cref{lem:IsContr1}.
-
-\end{proof}
-
-
-Similarly, one also has:
-
-\begin{lemma} \label{isEquiv1} Let $f :E_1 \rightarrow E_2$ be an arrow in $\BFFib/B$ for $B$ bifibrant, i.e. $p_i :E_i \twoheadrightarrow B$ are fibrations and the $E_i$ are cofibrant. The following are equivalent:
-
-\begin{enumerate}[(i)]
-
-\item $f$ is a weak equivalence.
-
-\item $\texttt{isEquiv}(f) \twoheadrightarrow B$ has a section.
-
-\item There is a map $1 \rightarrow \Pi_B \texttt{isEquiv}(f)$.
-
-\item The map $\texttt{isEquiv}(f) \twoheadrightarrow B$ is a trivial fibration.
-
-\end{enumerate}
-\end{lemma}
-
-Note that the implication (ii) $\Rightarrow$ (i) holds without assuming that $B$ is bifibrant.
-
-\begin{proof}
-
-As $E_2$ is cofibrant, $Id_{E_2}$ is cofibrant as well because of point (\ref{proposition:MainPathObject:IdBifib}) of \cref{proposition:MainPathObject}. And \cref{lem:cofibrant_fiber_product} implies that as $E_1$ and $E_2$ are cofibrant, then $Pf$ is cofibrant as well. So as $\texttt{isEquiv}(f)$ is defined as $\Pi_{p_2}\texttt{isContr}(Pf)$ the equivalence above mostly follows from \cref{lem:IsContr1}. More precisely: 
-
-$f$ factors as $E_1 \overset{\sim}{\rightarrow} Pf \twoheadrightarrow E_2$ so $f$ is an equivalence if and only if $Pf \twoheadrightarrow E_2$ is an equivalence, which by \cref{lem:IsContr1} is equivalent to the fact that $\texttt{isContr}(Pf) \twoheadrightarrow E_2$ has a section, which by universal property of $\Pi$-types is equivalent to condition (ii). The equivalence between (ii) and (iii) is formal exactly as in the proof of \cref{lem:IsContr1}. One still has that (iv) implies (ii) simply because $B$ is cofibrant. Assuming (i) one has that $Pf \twoheadrightarrow E_2$ is a trivial fibration, hence $\texttt{isContr}(Pf) \twoheadrightarrow E_2$ is a trivial fibration by \cref{lem:IsContr1}, and \cref{cor:Pi_types_are_fibrant} implies that $\Pi_{p_2} \texttt{isContr}(Pf) = \texttt{isEquiv}(f) \twoheadrightarrow B$ is a trivial fibration.
-
-As observed below \cref{lem:IsContr1}, one has that a section of $\texttt{isEquiv}(f) \twoheadrightarrow B$ shows that $Pf \twoheadrightarrow E_1$ is an equivalence only assuming that $E_1$ and $E_2$ are cofibrant, so it is indeed the case that (ii) $\Rightarrow$ (i) holds without assuming $B$ is bifibrant.
-
-\end{proof}
-
-
-Similarly to \cref{lem:isContr2}, one has:
-\begin{lemma} \label{lem:isEquiv2}
-
-Let $f: E_1 \rightarrow E_2$ is a morphism in $\BFFib/B$  and $g:A \rightarrow B$ a morphism with $A$ and $B$ bifibrant. Then there is a natural isomorphisms
-
-\[ \texttt{isEquiv}_A(f[g]) \simeq \texttt{isContr}_B(f) [g] \]
-
-Where $f[g]$ denotes the map $E_1[g] \rightarrow E_2[g]$ obtained by pullback of $f$ 
-In particular, the following conditions are equivalent: 
-
-\begin{enumerate}[(i)]
-
-\item $f[g]: E_1[g] \rightarrow E_2[g]$ is an equivalence.
-
-\item The maps $g$ factors as $A \rightarrow \texttt{isEquiv}_B(f) \rightarrow B$.
-
-\end{enumerate}
-\end{lemma}
-
-
-
-Let $p:E \twoheadrightarrow B$ be any fibration with $E$ and $B$ bifibrant. There is a factorization of the diagonal map $B \rightarrow E^{\to} \twoheadrightarrow B \times B$ where $E^{\to} \twoheadrightarrow B \times B$ is the canonical map, which (by the universal property of $E^{\to}$) corresponds to the identity of $E=E[id_B] \rightarrow E[id_B]$. As the identity is a weak equivalence, \cref{lem:isEquiv2} above implies that this maps factors into $B \rightarrow Weq(E) \twoheadrightarrow E \times E$.
-
-In particular, using the lifting:
-
-\[
-\xymatrix{
-B \ar@{^{(}->}[d]^{\sim} \ar[r] & Weq(E) \ar@{->>}[d] \\
-\Id_B \ar@{->>}[r] \ar@{..>}[ur] & B \times B \\ 
-}
-\]
-
-one obtains a map $\Id_B \rightarrow Weq(E)$.
-
-\begin{definition} \label{def:univalentFib}
-A Fibration $p:E \twoheadrightarrow B$ between bifibrant objects is said to be univalent if the map $\Id_B \rightarrow Weq(E)$ is an equivalence.
-\end{definition}
-
-This is clearly equivalent to the fact that the map $B \rightarrow Weq(E)$ is an equivalence, or to the fact that any of the two projection $Weq(E) \twoheadrightarrow B$ is a trivial fibration.
-
-In the case of the fibration $\UU_c \rightarrow \U_C$ this exactly corresponds to the usual formulation of univalence in type theory.
-
-
-\begin{proposition}
-$\U$ is fibrant.
-\end{proposition}
-
-\begin{proof}
-
-TODO
-\end{proof}
-
-\begin{proposition}
-The fibration $\UU_C \twoheadrightarrow \U_c$ is univalent.
-\end{proposition}
-
-\notesh{This assumes $\UU_c \twoheadrightarrow \U_c$ is a fibration between bifibrant objects.}
-
-\begin{proof}
-
-As observed just after \cref{def:univalentFib} it is enough to show that the target projection $ Weq(\UU_c) \twoheadrightarrow \U_c$ is a weak equivalence. Consider a diagram:
-
-\[ \xymatrix{
-Y \ar@{^{(}->}[d]_{f} \ar[r]^{\beta} & Weq(\UU_c) \ar@{->>}[d] \\
-X \ar[r]^{\alpha} & \U_c
-}
-\]
-
-where $f$ is any cofibrations between $Y$ and $X$ two bi-fibrants objects. We will show that there exists a diagonal filling making the diagram commutes up to homotopies. This is sufficient to show $Weq(\UU_c) \rightarrow \U_c$ is invertible in the homotopy category, hence is a weak equivalence.
-
-The map to $\alpha$ corresponds to a fibration $A \twoheadrightarrow X$ with $A$ cofibrant, and the map $\beta$ gives in particular a (solid) diagram as in \cref{Prop:Homotopy_ext_prop}:
-
-\[ 
-\xymatrix{
- B
-  \ar@{.>}[rr]
-  \ar[dr]^{u}
-  \ar[dd]_(.3){q}
-&&
-  \bar{B}
-  \ar@{.>}[dr]^{v}
-  \ar@{.>}[dd]_(.3){\bar{q}}|{\hole}
-&\\&
-  A[f] 
-  \ar[rr]
-  \ar[dl]
-&&
-  A
-  \ar[dl]^{p}
-\\
-  Y
-  \ar[rr]_{f}
-&&
-  X
-&
-}
-\]
-
-which hence (by \cref{Prop:Homotopy_ext_prop}) admit a dotted extention where both square are pullbacks.
-
-This filling in turn allows us to construct a map $X \rightarrow Weq(\UU_c)$ that makes the lower triangle commutes. The upper triangle does not quite commute though, one only have that the composite with $Weq(\UU_c) \twoheadrightarrow \UU^{\to}_c$ commutes ``up to isomorphisms'' in the sense that the two maps $Y \rightrightarrows \UU^{\to}_c$ classifies arrows in $\BFFib_{/Y}$ that are isomorphic.
-
-Hence the two maps $Y \rightrightarrows \UU^{\to}_c$ are homotopic.
-
-\notesh{This is probably not very hard to prove, but I'm not sure what is the best way to do that... In the worst case scenario one can construct a homotopy explicitely, though that sounds tedious. This has probably been delt with in previous work on the topics ? }
-
-
-Now, for $Y$ a bifibrant object two maps $Y \rightrightarrows Weq(\UU_c)$ whose image in $\UU^{\to}_c$ are homotopic are also homotopic which concludes the proof that one has a diagonal map making the two triangles commutes up to homotopy. To prove the last claim consider a bifibrant interval object $Y \coprod Y \hookrightarrow IY \overset{\sim}{\twoheadrightarrow} Y$. Given a diagram of the form:
-
-
-\[\xymatrix{Y \coprod Y \ar@{^{(}->}[d] \ar[r] & Weq(\UU_c) \ar@{->>}[d] \\
-I Y \ar[r] & \UU_c^{\to} \\
-}
-\]
-
-One needs to construct a diagonal lift. One forms the successible pullback $P_1$ and $P_2$:
-
-\[\xymatrix{P_2 \ar[r] \ar@{->>}[d] & P_1 \ar@{->>}[d] \ar[r] & Weq(\UU_c) \ar@{->>}[d] \\
-Y \ar[r]^{\sim} & I Y \ar[r] & \UU_c^{\to} \\
-}
-\]
-
-The map $P_2 \rightarrow Y$ is a trivial fibration, because it is of the form $\texttt{isEquiv}_Y( \_) \twoheadrightarrow Y$ and it has a section. The map $P_1 \rightarrow P_2$ is a weak equivalence as a pullback of a weak equivalence between fibrant objects along a fibrations. This implies that the map $P_1 \twoheadrightarrow IY$ is a trivial fibration, and this is sufficient to construct a diagonal lift in the initial diagram.
-
-
-\end{proof}
-
-
-
-\section{Univalence (Obsolete)} 
 
 In order to validate the univalence axiom for the type universe $\U$, we shall prove that the small fibration 
 $\pi_c \co \UU_c \to \U_c$ is univalent. For this, we shall exploit crucially that we have a weak model
@@ -1872,21 +1463,433 @@ fibration, which holds by part~(ii) of~\cref{thm:fibrancy-of-u}.
 
 
 
-
- 
-
-\section{Conclusions}
-\label{sec:conout}
-\label{sec:conclusions}
-
-
-
-\bigskip
-
-
 \appendix
 
+
+
+\section{The cofibrant replacement functor}
+
+The goal of this section is to give a more explicit description of the cofibrant replacement functor on simplicial sets.
+
+
+\begin{definition}
+
+\begin{enumerate}
+\item[]
+\item If $x \in X([n])$ is an $n$-cell in a simplicial set $X$, the \emph{degeneracy type} of $x$ is the set of face maps $\delta:[i] \rightarrow [n]$ such that $\delta^* x$ is a degenerate cell.
+
+\item By a ``degeneracy type'', or ``degeneracy $n$-type'' we mean a subset of faces of $\Delta[n]$ that can appear as the degeneracy type of an $n$-cell of a simplicial sets.
+
+\end{enumerate}
+
+\end{definition}
+
+We will construct a ``simplicial set of degeneracy type $D$''. We start with a simplicial set $D_0$ whose $n$-cells are all the subset of the faces of $\Delta[n]$, i.e. subsets of the set of finite subsets of $[n]$. If $f : [m] \rightarrow [n]$ and $P \in D_0([n])$ one defines $f^* P$ as the set of faces  $[i] \rightarrow [m]$ such that the composite $[i] \rightarrow [m] \overset{f}{\rightarrow} [n]$ is either in $P$ or non-injective.
+
+\begin{lemma}
+$D_0$ is a simplicial set, and for any simplicial set $X$, the map $X \rightarrow D_0$ sending each $n$ cell to its degeneracy type is a simplicial map preserving and detecting degeneracy.
+\end{lemma}
+
+\begin{proof}
+It is immediate to check that $D_0$ is a simplicial set. Let $x \in X([n])$ and $f:[m] \rightarrow [n]$, in order to check that the maps $X \rightarrow D_0$ sending each cell to its degeneracy type is simplicial, one need to check that the degeneracy type of $f^* x$ is indeed described from the degeneracy type of $x$ using the formula for the functoriality of $D_0$. For face maps $[i] \rightarrow [m]$ the cell $i^* f^* x$ is degenerated as soon as $f \circ i$ is non injective, and if $f\circ i$ is injective, then it depends on whether $f \circ i$ is in the degeneracy type of $x$ or not.
+
+If $f:[n] \rightarrow [m]$ is non-injective then for any $s \in D_0([m])$ the identity map $[n] \rightarrow [n]$ is in $f^* s$. So a degenerate cell of $D_0$ always contains the maximal face. In particular the map $X \rightarrow D_0$ constructed above send non-degenerate cell of $X$ to non-degenerate cells of $D_0$.
+
+\end{proof}
+
+In particular, the lemma construct a map $P:D_0 \rightarrow D_0$ to itself sending any cell to its degeneracy type. As $P$ preserves and detects degeneracy, it preserves the degeneracy type and hence $P \circ P =P$.
+
+\begin{definition}
+The simplicial set $D$ is the set of fix point of the idempotent $P$ acting on $D_0$.
+\end{definition}
+
+Note that for any simplicial set $X$, the map $f:X \rightarrow D_0$ sending each cell to its degeneracy type preserves the degeneracy type, hence $P f = f$. In particular a cell of $D_0$ is in $D$ if and only if it is a degeneracy type. One deduces that:
+
+\begin{lemma}
+$n$-cells of $D$ are in bijection with degeneracy $n$-type. Each simplicial set $X$ has a unique map preserving non-degeneracy to $D$, which is the map sending a cell to its degeneracy type.
+\end{lemma}
+
+
+
+
+We are mostly interested in degeneracy type of cofibrant simplicial set, those can easily be identified.
+
+\begin{lemma}
+A degeneracy $n$-type $s \subset Faces(\Delta[n])$ appears as the degeneracy type of a cell in a cofibrant simplicial set if and only if it is decidable (complemented) as a subset of the set of face. Decidable degeneracy type form a sub-simplicial set of $D$ which is cofibrant.
+\end{lemma}
+
+\begin{proof}
+If $x$ is an $n$-cell of cofibrant simplicial set $X$, then the degeneracy type of $x$ is decidable as for each face $\delta:[i] \rightarrow [n]$ it is decidable if $\delta^* x $ is degenerated or not.
+Conversely, if $X$ is any simplicial set and $x \in X$ is an $n$-cell whose degeneracy type is decidable, then the image of the map $\Delta[n] \overset{x}{\rightarrow} X$ is a cofibrant sub-simplicial set of $x$. Indeed it only contains cells of the form $f^*x$ for $f:[k] \rightarrow [n]$. For each such cell, either $f$ is injective in which can it is decidable whether $f^*x$ is degenerated or not by assumption, or $f$ is not injective in which case $f^*x$ is always degenerated. And the degeneracy type of $x$ is the same whether one see as a cell of $X$ or as a cell of this cofibrant subobject.
+One immediately see that the subset of $D_0$ of decidable subset is stable under the functoriality of $D_0$ hence form decidable degeneracy types form a simplicial subobject of $D$. This sub-simplicial set has decidable equality and decidable degeneracies.
+\end{proof}
+
+\begin{lemma}
+
+Given a map $\partial \Delta[n] \rightarrow D$ there is a unique way to extend it into map $\Delta[n] \rightarrow D$ such that the non-degenerate $n$-cell of $\Delta[n]$ is send to a non-degenerate cell.
+\end{lemma}
+
+\begin{proof}
+If such an extension exists the $n$-cell $x$ corresponding to $\Delta[n] \rightarrow D$ has to be as follows: $x$ does not contains the face $[n] \rightarrow [n]$, and for all other face $\delta:[i] \rightarrow [n]$ it is in $x$ is and only the composite $[i] \rightarrow \partial \Delta[n] \rightarrow D$ is a degenerate cell. So the uniqueness is clear. We only need to show that this set is indeed a degeneracy type. But if one form $D \coprod_{\partial \Delta[n]} \Delta[n]$ then the new added $n$-cell has exactly this degeneracy type so this conclude the proof.
+\end{proof}
+
+Let $X_c \overset{\sim}{\twoheadrightarrow} X $ be the cofibrant replacement of a simplicial set $X$ constructed using Richard Garner version of the small object argument from \cite{garner:small-object-argument}.
+
+\begin{proposition}
+The map from $X_c \rightarrow D \times X$ sending an $n$-cell to its degeneracy type $s \in D$ and its image is $X$ induce a bijection between $X_c([n])$ and the set of pairs of a decidable degeneracy type $s$ and a cell of $x$ of degeneracy type larger than $s$.
+\end{proposition}
+
+\begin{proof}
+
+Due to the ``stratified'' nature of the simplicial generating cofibration, $X_c$ can be written as the colimit of a sequence:
+
+
+ \[ X^{(0)}_c \hookrightarrow X^{(1)}_c \hookrightarrow \dots \hookrightarrow X^{(n)}_c \hookrightarrow \dots \]
+
+where $X^{(0)}_c$ is just the set of $0$-cell of $X$ and $X^{(n)}_c$ can be constructed from $X^{(n-1)}$ by taking a multiple pushout $\Delta[n] \coprod_{\partial \Delta[n]} X^{(n-1)}_c$ for each square of the form:
+
+\[ \xymatrix{\partial \Delta[n]  \ar[r] \ar@{^{(}->}[d] & X^{(n-1)}_c \ar[d] \\ \Delta[n]  \ar[r] & X} \]
+
+Indeed, the pushout of $\partial \Delta[n] \hookrightarrow \Delta[n]$ does not change the $k$-skeleton of $X$ for $k <n$ and the set of maps $\partial \Delta[k] \rightarrow X$ only depends on the $k$-skeleton of $X$, so one can always do all the necessary pushout by $\partial \Delta[k] \hookrightarrow \Delta[k]$ by for $k<n$ before those by $\partial \Delta[n] \hookrightarrow \Delta[n]$.
+
+
+We will prove by induction on $n$ that $X^{(n)}_c$ identifies with $n$-skeleton of the simplicial set mentioned in the proposition, i.e. the sub-simplicial set $Y^n$ of $D \times X$ of pairs $(s,x)$ such $s$ is decidable,  the degeneracy type of $x$ is at least $s$ and $(s,x)$ is of dimension at most $n$, or a degeneracy of a cell of dimension at most $n$.
+
+Note that as the degeneracy type of $x$ is larger than $s$, $s$ is the degeneracy type of the pair $(s,x)$, so the condition on $(s,x)$ being a degeneracy is equivalent to the same condition on $s$.
+
+In the case $n=0$, there is only one degeneracy type in dimension $0$, so both $X^{(0)}_c$ and $Y^0$ are the simplicial set of cells of $X$ that are degeneracy of $0$-cells.
+
+Assuming $Y^{n-1}$ and $X^{(n-1)}_c$ are isomorphic as claimed. One only need to check that the new non-degenerate $n$-cell that appears in $Y^{n}$ and $X^{(n)}_c$ are in bijection compatible to their boundary and their image in $X$.
+In $X^{(n)}_s$ there is exactly one such cell for each square as above. In $Y^{n}$, any non-degenerate $n$-cells does produce such a square, and conversely given a square:
+
+\[ \xymatrix{\partial \Delta[n]  \ar[r] \ar@{^{(}->}[d] & Y^{n-1} \ar[d] \\ \Delta[n]  \ar[r] & X} \]
+
+Then the lemma above give a unique map to extend $\partial \Delta[n] \rightarrow D$ to a non-degenerate $n$-cell of $D$, and the image of $\Delta[n]$ in $X$ automatically have a larger degeneracy type that this extension so this gives a non-degenerate cell of $Y^{n}$ generating this square. This is the unique way to get such a cell in $Y^n$ to be non-degenerate: indeed a cell in $Y^n$ is non-degenerate if and only if its image in $D$ is non-degenerate.
+\end{proof}
+
+
+\begin{remark} 
+This proposition has some interesting consequences.
+\begin{itemize}
+\item $1_c$ is exactly the sub-simplicial set of $D$ of decidable degeneracy type.
+\item Even if $X$ is a large simplicial set, its cofibrant replacement $X_c \rightarrow X$ has fiber controlled in size: indeed the fiber over an $n$-cell $x \in X$ is the set of decidable degeneracy $n$-type smaller than the degeneracy type of $x$. In particular it is a subset of the finite set of decidable degeneracy $n$-type. Not that in order to conclude in general that the fiber are small on need some sort of propositional resizing axiom saying that a subclass of a finite set is a small set.
+\end{itemize}
+\end{remark}
+
+
+
+
+
+
+\bibliographystyle{plain}
+\bibliography{../Auxiliary/bibliography}
+
+\end{document}
+
+
+
+
+\section{Univalence (Obsolete)}
+
+\notesh{[Work in progress] I prefer to start again this section from scratch, but I'm leaving the old univalence section as long as this is not finished}
+
+
+
+Let $p:E \twoheadrightarrow B$ be any fibration with $E$ and $B$ bifibrant. There is a factorization of the diagonal map $B \rightarrow E^{\to} \twoheadrightarrow B \times B$ where $E^{\to} \twoheadrightarrow B \times B$ is the canonical map, which (by the universal property of $E^{\to}$) corresponds to the identity of $E=E[id_B] \rightarrow E[id_B]$. As the identity is a weak equivalence, \cref{lem:isEquiv2} above implies that this maps factors into $B \rightarrow Weq(E) \twoheadrightarrow E \times E$.
+
+In particular, using the lifting:
+
+\[
+\xymatrix{
+B \ar@{^{(}->}[d]^{\sim} \ar[r] & Weq(E) \ar@{->>}[d] \\
+\Id_B \ar@{->>}[r] \ar@{..>}[ur] & B \times B \\ 
+}
+\]
+
+one obtains a map $\Id_B \rightarrow Weq(E)$.
+
+\begin{definition} \label{def:univalentFib}
+A Fibration $p:E \twoheadrightarrow B$ between bifibrant objects is said to be univalent if the map $\Id_B \rightarrow Weq(E)$ is an equivalence.
+\end{definition}
+
+This is clearly equivalent to the fact that the map $B \rightarrow Weq(E)$ is an equivalence, or to the fact that any of the two projection $Weq(E) \twoheadrightarrow B$ is a trivial fibration.
+
+In the case of the fibration $\UU_c \rightarrow \U_C$ this exactly corresponds to the usual formulation of univalence in type theory.
+
+
+\begin{proposition}
+$\U$ is fibrant.
+\end{proposition}
+
+\begin{proof}
+
+TODO
+\end{proof}
+
+\begin{proposition}
+The fibration $\UU_C \twoheadrightarrow \U_c$ is univalent.
+\end{proposition}
+
+\notesh{This assumes $\UU_c \twoheadrightarrow \U_c$ is a fibration between bifibrant objects.}
+
+\begin{proof}
+
+As observed just after \cref{def:univalentFib} it is enough to show that the target projection $ Weq(\UU_c) \twoheadrightarrow \U_c$ is a weak equivalence. Consider a diagram:
+
+\[ \xymatrix{
+Y \ar@{^{(}->}[d]_{f} \ar[r]^{\beta} & Weq(\UU_c) \ar@{->>}[d] \\
+X \ar[r]^{\alpha} & \U_c
+}
+\]
+
+where $f$ is any cofibrations between $Y$ and $X$ two bi-fibrants objects. We will show that there exists a diagonal filling making the diagram commutes up to homotopies. This is sufficient to show $Weq(\UU_c) \rightarrow \U_c$ is invertible in the homotopy category, hence is a weak equivalence.
+
+The map to $\alpha$ corresponds to a fibration $A \twoheadrightarrow X$ with $A$ cofibrant, and the map $\beta$ gives in particular a (solid) diagram as in \cref{Prop:Homotopy_ext_prop}:
+
+\[ 
+\xymatrix{
+ B
+  \ar@{.>}[rr]
+  \ar[dr]^{u}
+  \ar[dd]_(.3){q}
+&&
+  \bar{B}
+  \ar@{.>}[dr]^{v}
+  \ar@{.>}[dd]_(.3){\bar{q}}|{\hole}
+&\\&
+  A[f] 
+  \ar[rr]
+  \ar[dl]
+&&
+  A
+  \ar[dl]^{p}
+\\
+  Y
+  \ar[rr]_{f}
+&&
+  X
+&
+}
+\]
+
+which hence (by \cref{Prop:Homotopy_ext_prop}) admit a dotted extention where both square are pullbacks.
+
+This filling in turn allows us to construct a map $X \rightarrow Weq(\UU_c)$ that makes the lower triangle commutes. The upper triangle does not quite commute though, one only have that the composite with $Weq(\UU_c) \twoheadrightarrow \UU^{\to}_c$ commutes ``up to isomorphisms'' in the sense that the two maps $Y \rightrightarrows \UU^{\to}_c$ classifies arrows in $\BFFib_{/Y}$ that are isomorphic.
+
+Hence the two maps $Y \rightrightarrows \UU^{\to}_c$ are homotopic.
+
+\notesh{This is probably not very hard to prove, but I'm not sure what is the best way to do that... In the worst case scenario one can construct a homotopy explicitely, though that sounds tedious. This has probably been delt with in previous work on the topics ? }
+
+
+Now, for $Y$ a bifibrant object two maps $Y \rightrightarrows Weq(\UU_c)$ whose image in $\UU^{\to}_c$ are homotopic are also homotopic which concludes the proof that one has a diagonal map making the two triangles commutes up to homotopy. To prove the last claim consider a bifibrant interval object $Y \coprod Y \hookrightarrow IY \overset{\sim}{\twoheadrightarrow} Y$. Given a diagram of the form:
+
+
+\[\xymatrix{Y \coprod Y \ar@{^{(}->}[d] \ar[r] & Weq(\UU_c) \ar@{->>}[d] \\
+I Y \ar[r] & \UU_c^{\to} \\
+}
+\]
+
+One needs to construct a diagonal lift. One forms the successible pullback $P_1$ and $P_2$:
+
+\[\xymatrix{P_2 \ar[r] \ar@{->>}[d] & P_1 \ar@{->>}[d] \ar[r] & Weq(\UU_c) \ar@{->>}[d] \\
+Y \ar[r]^{\sim} & I Y \ar[r] & \UU_c^{\to} \\
+}
+\]
+
+The map $P_2 \rightarrow Y$ is a trivial fibration, because it is of the form $\texttt{isEquiv}_Y( \_) \twoheadrightarrow Y$ and it has a section. The map $P_1 \rightarrow P_2$ is a weak equivalence as a pullback of a weak equivalence between fibrant objects along a fibrations. This implies that the map $P_1 \twoheadrightarrow IY$ is a trivial fibration, and this is sufficient to construct a diagonal lift in the initial diagram.
+
+
+\end{proof}
+
+
+
+Let $p:E \twoheadrightarrow B$ be any fibration. We want to define what it means for $p$ to be a univalent fibration, and show that $\UU \twoheadrightarrow \U$ and $\UU_c \twoheadrightarrow \U_c$ are univalent fibrations.
+
+Using the ``$\Pi$-types'' that we have already defined, one can to construct a fibration $E^{\to} \twoheadrightarrow B \times B$ that classifies morphisms between two fibers of $p$. More precisely, $E^{\to}$ is defined as $\Pi_{p \times Id_B}(E \times E)$ in:
+
+\[
+\xymatrix{
+E \times E \ar[d]_{Id_E \times p } & \Pi_{p \times Id_B}(E \times E) \ar[d] \\
+E \times B \ar[r]_{p \times id_B} & B \times B \\
+}
+\]
+
+A morphisms from any object $A$ to $E^{\to}$ is the same as a morphism $A \overset{(f,g)}{\rightarrow} B \times B$ together with a morphism $E[f] \rightarrow E[g]$ over $A$. We now need to construct an object $Weq(p) \twoheadrightarrow E^{\to}$ that similarly classifies ``weak equivalences'' $E[f] \overset{\sim}{\rightarrow} E[g]$. we have not been able to show constructively that weak equivalences are stable under pullback along fibrations, so it is not clear if such an object $Weq(p)$ can be defined as a subobject od $E^{\to}$ or not. Instead we will follow Voevodsky's definition from type theory, see also section $4$ of \cite{shulman:reedy}, and hence one needs to start by discusing the type $\texttt{isContr}_B(E)$
+
+\begin{definition}
+
+Given a fibration $p:E \twoheadrightarrow B$ one defines:
+
+\[ \texttt{isContr}_B(E) = \Sigma_p \Pi_{\pi_2} \Id_E  \]
+
+
+With $Id_E \twoheadrightarrow E \times_B E$ and $\pi_2: E \times_B E \rightarrow E$.
+
+\end{definition}
+
+So $\texttt{isContr}_B(E)$ is a fibration over $B$ which encodes the idea that the fiber of $p$ is contractible, in the sense that the data of an ``element'' of $\texttt{isContr}_B(E)$ over a $b \in B$ is given by an element $e \in E(b)$ and for all $e' \in E(b)$ a path between $e$ and $e'$.
+
+We now need to use this to construct an object that classifies weak equivalences. Assume one has two fibrations $E_1,E_2 \twoheadrightarrow B$ and a morphism $f$:
+
+
+\[\xymatrix{
+E_1 \ar@{->>}[dr] \ar[rr]^f & & E_2 \ar@{->>}[dl] \\
+& B & 
+}\]
+
+We can then form the ``homotopy fiber'' of $f$ as the pullback:
+
+\[\xymatrix{
+P f \ar@{->>}[d] \ar[r]  & \Id_{E_2} \ar@{->>}[d] \\
+E_1 \times_B E_2 \ar[r] & E_2 \times_B E_2 
+}\]
+
+Which as usual produces a factorization of $f$:
+
+\[E_1 \rightarrow Pf \twoheadrightarrow E_2 \]
+
+\begin{lemma}
+If $E_1$ and $E_2$ are cofibrant and $E_2 \rightarrow B$ is a fibration, then $E_1 \rightarrow Pf$ is a weak equivalence.
+\end{lemma}
+
+\begin{proof}
+The projections $\Id_{E_2} \twoheadrightarrow E_2$ are trivial fibrations because of point (iv) of \cref{proposition:MainPathObject:IdBifib} (the proof of this claims only uses that $A \twoheadrightarrow X$ is a fibration, and none of the other assumptions, so it applies here), so the pullback $Pf \rightarrow E_1$ is also a trivial fibration. $\Id_{E_2}$ is cofibrant because because of (i) of \cref{proposition:MainPathObject:IdBifib} (which only uses that $E_2$ is cofibrant) so $Pf$ is cofibrant by \ref{lem:cofibrant_fiber_product} as $E_1$ and $E_2$ are cofibrant.
+
+It follows by \cref{lemma:triv_fib_are_we} that $Pf \rightarrow E_1$ is a weak equivalence. By $2$-out-of-$3$ for weak equivalences, $E_1 \rightarrow Pf$ is a weak equivalence.
+
+\end{proof}
+
+
+One can then define:
+
+\begin{definition} For any morphisms $f$ in $\Fib/B$ one defines:
+
+\[ \texttt{isEquiv}_B(f) = \Pi_{p_2} \texttt{isContr}_B(Pf) \]
+
+where $p_2$ is the fibration $E_2 \twoheadrightarrow B$.
+
+Given $p:E \twoheadrightarrow B$ be any fibration, one defines
+
+\[ Weq(E) = \texttt{isEquiv}_{E^{\to}}(f) \]
+
+Where $f$ denotes the universal map over $E^{\to}$ corresponding to its universal property.
+
+\end{definition}
+
+The definition of $\texttt{isEquiv}$ formalize the idea that $f$ is an equivalence if and only all its homotopy fiber are contractible.
+
+Admiting that the $\Pi$-types and identity types that we have defined so far are indeed part of an interpretation of type theory, i.e. that the coherence problems can be solved, these exactly corresponds to the usual definition of these notion in homotopy type theory. We now need some lemmas showing that these definitions indeed behave as expected in our model theoretic settings. These lemma mostly comes from section 4 of \cite{shulman:reedy}, though we need to reprove them to track where fibrancy/cofibrancy assumptions are needed for the proof to carry over.
+
+\begin{lemma}\label{lem:IsContr1}For a fibration $p:E \twoheadrightarrow B$ with $E$ and $B$ bifibrant, the following are equivalent:
+
+\begin{enumerate}[(i)]
+\item The map $p:E \twoheadrightarrow B$ is a trivial fibration.
+\item The map $\texttt{isContr}_B (E) \twoheadrightarrow B$ has a section.
+\item There is a map $ 1 \rightarrow \Pi_B  \texttt{isContr}_B (E) $.
+\item The map $\texttt{isContr}_B (E) \twoheadrightarrow B$ is a trivial fibration.
+\end{enumerate}
+
+\end{lemma}
+
+
+
+More precisely, (ii) implies that $p$ is a weak equivalence assuming either that $B$ is fibrant or that $E$ and $B$ are cofibrant, so (ii) $\Rightarrow$ (i) when $B$ is fibrant, (i) $\Rightarrow$ (ii) when $B$ is cofibrant and $E$ is bifibrant.
+(ii) $\Leftrightarrow$ (iii) holds without assumption on $E$ and $B$, (vi) $\Rightarrow$ (ii) holds as soon as $B$ is cofibrant. And finally (i) $\Rightarrow$ (vi) holds when $E$ is bifibrant. 
+
+\begin{proof}
+
+A section of $\texttt{isContr}_B (E) \twoheadrightarrow B$ is by definition of $\texttt{isContr}_B (E)$ the data of a section $s:B \rightarrow E$, and a map $h \co E \to \Id_E$ whose image by $\Id_E \twoheadrightarrow E \times_B E$ is $(s \circ p, id_E)$. Such a section $s$ and homotopy $h$ produces a homotopy invers to $p$ and hence implies that $p$ is a weak equivalences, and hence a trivial fibration as $B$ is assumed fibrant.  This proves (ii) $\Rightarrow$ (i).
+
+Note that if one only assume that $E$ and $B$ are cofibrant and $p$ is a fibration, it is still the case that $\Id_E \twoheadrightarrow E$ is a trivial fibration between cofibrant objects, hence a weak equivalence. Which is hence sufficient to show that the map $h$ induce an equality in the homotopy category between $s \circ p $ and the identity of $E$.
+
+
+Conversely, assuming (i), one can construct a section $s$ as above using the lifting property of $B$ (cofibrant) against $p$. To construct the homotopy $h$ one needs to use a lifting property of $E$ against the map $Id_E \twoheadrightarrow E \times_B E$, which is a trivial fibrations because $\Id_E \twoheadrightarrow E$ and $E\times_B E \twoheadrightarrow E$ both are and trivial fibrations satisfies $2$-out-of-$3$ among fibrations between fibrant objects.
+
+The equivalence between (ii) and (iii) follows from the universal property of $\Pi$-types.
+The implication (vi) $\Rightarrow$ (ii) is clear when $B$ is cofibrant. We conclude by showing (i) $\Rightarrow$ (vi) 
+
+As above, as $E$ is fibrant, one can deduce assuming (i) that $\Id_E \twoheadrightarrow E \times_B E$ is a trivial fibration. $\pi_2 : E \times_B E \twoheadrightarrow E$ is a fibration with cofibrant domain, hence $\Pi_{\pi_2} \Id_E \rightarrow E$ is a trivial fibration by \cref{cor:Pi_types_are_fibrant}, and finally, $\texttt{isContr}(E)_B \rightarrow B$ is just the composite $\Pi_{\pi_2} \Id_E \rightarrow E \rightarrow B$ so is also a trivial fibration.
+\end{proof}
+
+\begin{lemma} \label{lem:isContr2}
+Let $p: E \twoheadrightarrow B$ be a fibration, and $f:A \rightarrow B$ be a morphism. Then there is a natural isomorphisms
+
+\[ \texttt{isContr}_A(E[f]) \simeq \texttt{isContr}_B(E) [f] \]
+
+In particular, if $E$ is cofibrant and $A$ bifibrant, then the following conditions are equivalent: 
+
+\begin{enumerate}[(i)]
+
+\item $E[f] \twoheadrightarrow A$ is a trivial fibration.
+
+\item The maps $A \rightarrow B$ factors as $A \rightarrow \texttt{isContr}_B(E) \rightarrow B$.
+
+\end{enumerate}
+
+\end{lemma}
+
+\begin{proof}
+
+The stability of $\texttt{isContr}$ under pullback is a very formal property which follows from the similar stability property of $\Pi$-types, which in turn is automatic from their universal property (see for example lemma 4.2 in \cite{shulman:reedy}). The equivalence is an immediate consequence of this pullback stability and \cref{lem:IsContr1}.
+
+\end{proof}
+
+
+Similarly, one also has:
+
+\begin{lemma} \label{isEquiv1} Let $f :E_1 \rightarrow E_2$ be an arrow in $\BFFib/B$ for $B$ bifibrant, i.e. $p_i :E_i \twoheadrightarrow B$ are fibrations and the $E_i$ are cofibrant. The following are equivalent:
+
+\begin{enumerate}[(i)]
+
+\item $f$ is a weak equivalence.
+
+\item $\texttt{isEquiv}(f) \twoheadrightarrow B$ has a section.
+
+\item There is a map $1 \rightarrow \Pi_B \texttt{isEquiv}(f)$.
+
+\item The map $\texttt{isEquiv}(f) \twoheadrightarrow B$ is a trivial fibration.
+
+\end{enumerate}
+\end{lemma}
+
+Note that the implication (ii) $\Rightarrow$ (i) holds without assuming that $B$ is bifibrant.
+
+\begin{proof}
+
+As $E_2$ is cofibrant, $Id_{E_2}$ is cofibrant as well because of point (\ref{proposition:MainPathObject:IdBifib}) of \cref{proposition:MainPathObject}. And \cref{lem:cofibrant_fiber_product} implies that as $E_1$ and $E_2$ are cofibrant, then $Pf$ is cofibrant as well. So as $\texttt{isEquiv}(f)$ is defined as $\Pi_{p_2}\texttt{isContr}(Pf)$ the equivalence above mostly follows from \cref{lem:IsContr1}. More precisely: 
+
+$f$ factors as $E_1 \overset{\sim}{\rightarrow} Pf \twoheadrightarrow E_2$ so $f$ is an equivalence if and only if $Pf \twoheadrightarrow E_2$ is an equivalence, which by \cref{lem:IsContr1} is equivalent to the fact that $\texttt{isContr}(Pf) \twoheadrightarrow E_2$ has a section, which by universal property of $\Pi$-types is equivalent to condition (ii). The equivalence between (ii) and (iii) is formal exactly as in the proof of \cref{lem:IsContr1}. One still has that (iv) implies (ii) simply because $B$ is cofibrant. Assuming (i) one has that $Pf \twoheadrightarrow E_2$ is a trivial fibration, hence $\texttt{isContr}(Pf) \twoheadrightarrow E_2$ is a trivial fibration by \cref{lem:IsContr1}, and \cref{cor:Pi_types_are_fibrant} implies that $\Pi_{p_2} \texttt{isContr}(Pf) = \texttt{isEquiv}(f) \twoheadrightarrow B$ is a trivial fibration.
+
+As observed below \cref{lem:IsContr1}, one has that a section of $\texttt{isEquiv}(f) \twoheadrightarrow B$ shows that $Pf \twoheadrightarrow E_1$ is an equivalence only assuming that $E_1$ and $E_2$ are cofibrant, so it is indeed the case that (ii) $\Rightarrow$ (i) holds without assuming $B$ is bifibrant.
+
+\end{proof}
+
+
+Similarly to \cref{lem:isContr2}, one has:
+\begin{lemma} \label{lem:isEquiv2}
+
+Let $f: E_1 \rightarrow E_2$ is a morphism in $\BFFib/B$  and $g:A \rightarrow B$ a morphism with $A$ and $B$ bifibrant. Then there is a natural isomorphisms
+
+\[ \texttt{isEquiv}_A(f[g]) \simeq \texttt{isContr}_B(f) [g] \]
+
+Where $f[g]$ denotes the map $E_1[g] \rightarrow E_2[g]$ obtained by pullback of $f$ 
+In particular, the following conditions are equivalent: 
+
+\begin{enumerate}[(i)]
+
+\item $f[g]: E_1[g] \rightarrow E_2[g]$ is an equivalence.
+
+\item The maps $g$ factors as $A \rightarrow \texttt{isEquiv}_B(f) \rightarrow B$.
+
+\end{enumerate}
+\end{lemma}
+
+
+% Type theory rules
+
 \section{Type-theoretic rules}
+
+
 
 \subsection*{Identity types}
 
@@ -2028,10 +2031,6 @@ a \co A
 \end{prooftree}
 \]
 
-
-\bibliographystyle{plain}
-\bibliography{../Auxiliary/bibliography}
-
-\end{document}
+\appendix
 
 
