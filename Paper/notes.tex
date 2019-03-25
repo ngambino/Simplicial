@@ -4,15 +4,17 @@
 \input{../Auxiliary/prooftree}
 
 
-\title[]{Towards a constructive simplicial model \\ of univalent foundations}
+\title[]{Constructive aspects of simplicial homotopy theory}
 
 \begin{document}
 
 \begin{abstract}
-We provide a partial solution to the open problem of defining constructively a model of univalent foundations in a category that is homotopically equivalent to that of topological spaces.
-In particular, we prove constructive counterparts of all the main results on simplicial homotopy theory
-used in the definition of Voevodsky's simplicial model of univalent foundations. The key technical ingredient
-is the use of a cofibrant replacement functor to overcome the known issues regarding dependent products of fibrations.
+We establish constructive counterparts of all the main results of simplicial homotopy theory
+used in the definition of Voevodsky's simplicial model of univalent foundations. In particular, we
+show that the weak factorisation system of trivial cofibrations and Kan fibrations satisfies the 
+Frobenius property, that the model structure satisfies the weak equivalence extension property
+for weak equivalences between fibrations with cofibrant domain and that there exists a univalent 
+ fibration with fibrant base that classifies fibrations with cofibrant domain.
 \end{abstract}
 
 \author{Nicola Gambino}
@@ -21,6 +23,8 @@ is the use of a cofibrant replacement functor to overcome the known issues regar
 
 
 \author{Simon Henry}
+\address{Department of Mathematics and Statistics, Masaryk University, Brno, Czeck Republic}
+\email{henrys@math.muni.cz} 
 
 
  \date{\today}
@@ -146,14 +150,10 @@ When working constructively, fibrations as defined above maintain many of their 
 such as stability under pullbacks. However, other properties no longer hold. For example, it is not possible to prove constructively that
 for a Kan complex $B$, the simplicial set $B^A$ is a Kan complex for every simplicial set $A$. In order
 to remedy this in a constructive setting, one needs some additional decidabilty assumptions, which can be 
-conveniently encapsulated in the notion of a cofibration and of a cofibrant object introduced in~\cite[\S 5.1.7]{henry2018wms}, which we now recall. 
+conveniently encapsulated in the notion of a cofibration and of a cofibrant object introduced in~\cite[\S 5.1.7]{henry2018wms}. 
 
 
  \medskip
-
-Having defined cofibrations and fibrations, one could try to establish the existence of a Quillen model structure by defining a trivial fibration~to be a map with the right lifting property with respect to all cofibrations, a trivial cofibration to~be a map with the left lifting property with respect to all fibrations, and a weak equivalence to be~a map that can be factored as a trivial cofibration followed by a trivial fibration. Indeed, 
-these definitions are forced upon us if a Quillen model category exists. While the existence of the weak
-factorisation systems is not an issue constructively (\cf comments further below), it seems  very difficult to verify the axioms for a Quillen model structure with these definitions, the key issue being  the  3-for-2 property for weak equivalences.  
 
 
 
@@ -206,17 +206,11 @@ For $[n] \in \Delta$, we write $i^n \co  \partial \Delta[n] \to \Delta[n]$
 for the \emph{boundary inclusion} into the $n$-simplex and, for $1 \leq k \leq n$,  
 $h^k_n  \co \Lambda^k[n] \to \Delta[n]$ 
 for the $k$-th \emph{horn inclusion} into the $n$-simplex. 
-The simplicial set $\Delta[1]$ is an interval object in $\SSet$, with endpoint inclusions~$\kcyl \co \braces{ k} \to \Delta[1]$ defined by~$\kcyl \defeq h^1_k$.
-
-
+The simplicial set $\Delta[1]$ is an interval object in $\SSet$, with endpoint inclusions~$\kcyl \co \braces{ k} \to \Delta[1]$ defined by~$\kcyl \defeq h^1_k$. Throughout this paper, we shall work  with the model structure on $\SSet$ for Kan complexes defined in \cite[Section~5]{henry2018wms} using constructively valid arguments. For the convenience of the reader, we recall some
+of the main aspects of this model structure.
 
 
 \medskip
-
-We shall work  with the model structure on $\SSet$ introduced  in \cite[Section~5]{henry2018wms}, which we now recall. 
-
-\medskip
-
 
 Let $\cal{I}$ be the set of boundary inclusions, \ie $\cal{I} \defeq \{ i^n \co  \partial \Delta[n] \to \Delta[n] \ | \ n \geq 0 \}$.  By the constructive version of the small object argument, which can be applied in this context since the 
 maps in $\cal{I}$ satisfy all the finiteness and decidability assumptions discussed  in~\cite[\S 4.1.4]{henry2018wms}, the set~$\cal{I}$ generates a weak factorisation system
@@ -245,9 +239,9 @@ we write $\BFFib_{/X}$ for  the full subcategory of  $\Fib_{/X}$ spanned by fibr
 
 \medskip
 
-It was shown in~\cite{Henry2019} that two weak factorisation systems
+It was shown in~\cite{henry2019qms} that two weak factorisation systems
 $(\Cof, \TrivFib)$ and $(\TrivCof, \Fib)$ are part of a model structure on the category $\SSet$.
-Furthermore, it was also shown in~\cite{Henry2019} that the model structure is both 
+Furthermore, it was also shown in~\cite{henry2019qms} that the model structure is both 
 right proper, \ie pullbacks of weak equivalences along fibrations are again weak equivalences, and
 left proper, \ie pushouts of weak equivalences along cofibrations are again weak equivalences.
 Let us also recall that
@@ -365,14 +359,12 @@ $\Sigma_p(q) \co \Sigma_A(B) \to X$ is again a fibration with cofibrant domain.
 
 
 
-\section{Identity types}
+\section{Path spaces}
 
-Following~\cite{awodey-warren:homotopy-idtype}, in order to interpret the deduction rules 
-for $\Id$-types one we need to consider
-a fibration $p \co A \to X$ with cofibrant domain  and obtain a factorisation of the diagonal map $\delta_p \co A \to A \times_X A$ as a trivial cofibration $r \co A \to  \Id_A$ followed by a fibration
-$(s,t) \co A \times_X A$. Note that $\Id_A$ is cofibrant, since $A$ is cofibrant and $r \co A \to \Id_A$ is a cofibration. While such a factorisation is guaranteed to exist by the axioms for a  model category, we show
-that it is possible to make a particularly appealing choice for this factorisation, given by taking $\Id_A$ to be
-the simplicial sets of paths in $A$. 
+The existence of the weak factorisation system $(\TrivCof, \Fib)$ 
+implies that for every fibration with cofibrant domain $p \co A \to X$ the diagonal map $\delta_p \co A \to A \times_X A$ admits a factorisation as a trivial cofibration $i \co A \to P$ followed by a fibration $q \co P \to A \times_X A$. Here, we show that such a factorisation can be defined by taking a path object as the object $P$. 
+
+
 
 
 
@@ -530,24 +522,20 @@ of a map which has been proved to be a levelwise complemented inclusion in~\cref
 \end{proof}
 
 
-\section{Dependent products}
+\section{The Frobenius property}
 \label{sec:Pi-types}
 
 
 
 This section is devoted to proving a counterpart of the classical result that, for a fibration $p \co A \rightarrow X$, the dependent product functor $\Pi_p \co \SSet_{/A} \to \SSet_{/X}$ preserves fibrations. For this, we 
-shall concentrate on the weak factorisation system of fibrations and trivial cofibrations. 
-.  
-
-\medskip
-
-Our next proposition is essential to combine our development with that in~\cite{gambino2017frobenius}.
-We need to recall some notation and terminology. For an endpoint inclusion $\kcyl \co \braces{ k } \to \Delta[1]$ and a map~$f \co Y \to X$, their $\kcyl \hattimes f$ is defined as the unique dotted arrow  in the diagram:
+shall concentrate on the weak factorisation system of fibrations and trivial cofibrations. For this, we shall
+follow essentially~\cite{gambino2017frobenius}. In order to do so, however, we need the following 
+preliminary proposition, in which we use the pushout product $\kcyl \hattimes f$ of an endpoint inclusion $\kcyl \co \braces{ k } \to \Delta[1]$ and a map~$f \co Y \to X$, which is defined as the unique dotted arrow  in the diagram:
 \[
 \xymatrix{
 \braces{ k } \times Y \ar[r] \ar[d] &  \Delta[1]  \times X  \ar[d] \ar@/^1.5pc/[ddr] \\
 \braces{ k} \times X \ar[r]  \ar@/_1.5pc/[drr] & \big( \Delta[1] \times Y ) \cup X \ar@{.>}[dr]  \\
- & &\Delta[1] \times  X }
+ & &\Delta[1] \times  X \, .}
  \]
 
 
@@ -955,7 +943,7 @@ The fact that $\bar{B} \rightarrow A$ is a deformation retract show that it is i
 
  
 
-\section{The universe}
+\section{Universal fibrations}
 
 
 
@@ -1146,44 +1134,37 @@ Question: do we need to know that $\mathsf{Weq}(\U_c)$ is a cofibrant object to 
 
 
 
-In order to validate the univalence axiom for the type universe $\U$, we shall prove that the small fibration 
-$\pi_c \co \UU_c \to \U_c$ is univalent. 
-
-
-
-
-
-
- Let $\U^{\rightarrow}$ be the simplicial set whose $n$-cells are given by triples $(F_0, F_1, \phi)$ where
+We now prove that the small fibration $\pi_c \co \UU_c \to \U_c$ is univalent. 
+Let $\U_c^{\rightarrow}$ be the simplicial set whose $n$-cells are given by triples $(F_0, F_1, \phi)$ where
  $F_0$ and $F_1$ are $n$-cells of $\U$, \ie functors
  \[
 F_0, F_1 \co {\Delta_{/[n]}}^{\op} \rightarrow \Set
 \]
-and $\phi \co F_0 \Rightarrow F_1$ is a natural transformation. We define the subobject $\mathsf{Weq}(\U) \subseteq \U^{\rightarrow}$ as consisting of the 
-$n$-cells $(F_1, F_2, \phi) \co \Delta[n] \rightarrow \U^{\rightarrow}$ such that in the corresponding diagram:
+and $\phi \co F_0 \Rightarrow F_1$ is a natural transformation. We define the subobject $\mathsf{Weq}(\U_c) \subseteq \U_c^{\rightarrow}$ as consisting of the 
+$n$-cells $(F_1, F_2, \phi) \co \Delta[n] \rightarrow \U_c^{\rightarrow}$ such that in the corresponding diagram:
 \[
 \xymatrix{ 
 A_1 \ar[rr]^{w} \ar@{->>}[dr]_{p_1} & & A_2 \ar@{->>}[dl]^{p_2} \\
 & \Delta[n] & }
 \]
-the map $w$ is weak equivalence. The simplicial set $\mathsf{Weq}(\U)$ is well defined because for any map $f \co X \rightarrow Y$ is the pullback functor $f^* \co \SSet_{/Y} \rightarrow \SSet_{/X}$ is a right Quillen functor and therefore preserves weak equivalences. Hence, 
-$\mathsf{Weq}(\U)$ as defined here is indeed a subobject of $\U^{\rightarrow}$.
+the map $w$ is weak equivalence. The simplicial set $\mathsf{Weq}(\U_c)$ is well defined because for any map $f \co X \rightarrow Y$ is the pullback functor $f^* \co \SSet_{/Y} \rightarrow \SSet_{/X}$ is a right Quillen functor \cite{??} and therefore preserves weak equivalences. Hence, 
+$\mathsf{Weq}(\U_c)$ as defined here is indeed a subobject of $\U_c^{\rightarrow}$. \caution{To be checked again!}
 
 \begin{proposition}
 \label{prop:Weq_classify_Weq}
-For any cofibrant object $X$, a morphism $a \co X \rightarrow \U^{\rightarrow}$ factors via the 
-\caution{subobject} $\mathsf{Weq}(\U)$ if and only the map in $\SSet_{/X}$ classified by the map $a$ is a weak equivalence.
+For any cofibrant object $X$, a morphism $a \co X \rightarrow \U_c^{\rightarrow}$ factors via the 
+\caution{subobject} $\mathsf{Weq}(\U_c)$ if and only the map in $\SSet_{/X}$ classified by the map $a$ is a weak equivalence.
 
 \end{proposition}
 
-\begin{proof} Given $a \co X \rightarrow \U^{\rightarrow}$, let  
+\begin{proof} Given $a \co X \rightarrow \U_c^{\rightarrow}$, let  
 \[
 \xymatrix{
 A_1 \ar[rr]^w  \ar[dr]_{p_1} & & A_2 \ar[dl]^{p_2} \\
  & X & }
  \]
-be the diagram classified by $a$.  By definition of $\mathsf{Weq}(\U)$, $a$ factors via $\mathsf{Weq}(\U)$ if and only if the pullback of $w \co A_1 \to A_2$ along any simplex $x \co \Delta[n] \rightarrow X$  is a weak equivalence. \caution{As observed above, this is indeed the case if $w$ is a weak equivalence.} Conversely,
-we let $w \co A_1 \rightarrow A_2$ be a map between bifibrant objects of $\SSet_{/X}$, assume that the pullback of $w$ along every $x \co \Delta[n] \rightarrow X$ is a weak equivalence and show that $w$ is also equivalence.  We do so using  of \cite[Theorem 2.5.6]{henry2018wms} or, more precisely its reformulation in \cite[\S 2.5.7]{henry2018wms}, and show that $w$ has the weak right lifting property against all $i_n \co \partial \Delta[n] \rightarrow \Delta[n]$. Given a diagram:
+be the diagram classified by $a$.  By definition of $\mathsf{Weq}(\U_c)$, $a$ factors via $\mathsf{Weq}(\U_c)$ if and only if the pullback of $w \co A_1 \to A_2$ along any simplex $x \co \Delta[n] \rightarrow X$  is a weak equivalence. \caution{As observed above, this is indeed the case if $w$ is a weak equivalence.} Conversely,
+we let $w \co A_1 \rightarrow A_2$ be a map between bifibrant objects of $\SSet_{/X}$, assume that the pullback of $w$ along every $x \co \Delta[n] \rightarrow X$ is a weak equivalence and show that $w$ is also equivalence.  We do so using  of \cite[Theorem 2.5.6]{henry2018wms} or, more precisely its reformulation in \cite[\S 2.5.7]{henry2018wms}, and show that $w$ has the weak right lifting property against all $i_n \co \partial \Delta[n] \rightarrow \Delta[n]$. So let us consider the diagram
 \begin{equation}
 \label{equ:before-pullback}
 \begin{gathered}
@@ -1193,7 +1174,7 @@ we let $w \co A_1 \rightarrow A_2$ be a map between bifibrant objects of $\SSet_
 & X &}  
 \end{gathered}
 \end{equation}
-But one can then pullback everything to $\Delta[n]$:
+By pulling back everything to $\Delta[n]$ we obtain
 \begin{equation}
 \label{equ:after-pullback}
 \begin{gathered}
@@ -1210,9 +1191,9 @@ By assumption $x^*(w)$ is a weak equivalence between fibrant objects hence it ha
 
 \begin{proposition} \label{thm:fibrancy-of-u} \hfill 
 \begin{enumerate}[(i)]
-\item The map $(s, t) \co \mathsf{Weq}(\U) \rightarrow \U \times \U$ is a fibration.
-\item The map $t \co \mathsf{Weq}(\U) \rightarrow \U$ is a trivial fibration.
-\item The simplicial sets $\U$ and $\mathsf{Weq}(\U)$ are fibrant.
+\item The map $(s, t) \co \mathsf{Weq}(\U_c) \rightarrow \U_c \times \U_c$ is a fibration.
+\item The map $t \co \mathsf{Weq}(\U_c) \rightarrow \U_c$ is a trivial fibration.
+\item The simplicial sets $\U_c$ and $\mathsf{Weq}(\U_c)$ are fibrant.
 \end{enumerate}
 \end{proposition}
 
@@ -1312,14 +1293,16 @@ along~$h^k_n$ is isomorphic to $q \co B \to \Lambda^k_n$. The map $b \co \Delta[
 as a trivial cofibration $r \co \U \to \mathsf{Id}_\U$ followed by a fibration $(s,t) \co \mathsf{Id}_\U \to \U \times \U$. The evident solid diagram
 \[
 \xymatrix@C=1.5cm{
-\U \ar[r] \ar[d]_r & \Weq(\U) \ar[d]^{t} \\
+\U \ar[r] \ar[d]_r & \Weq(\U) \ar[d]^{(s,t)} \\
 \mathsf{Id}_\U \ar[r]  \ar@{.>}[ur]_{j} &  \U \times \U }
 \]
 has a dotted diagonal filler $j$, since $r$ is a trivial cofibration and $t$ is a fibration by~\cref{thm:fibrancy-of-u}. The univalence of $\pi$ is the claim that $j$ is a weak equivalence. But by the 3-for-2 property applied to the diagram
 \[
-\noten{\text{TO BE ADDED}}
+\xymatrix{
+\U  \ar[rr]^-{j} \ar[dr]_{1_\U} & &   \Weq(\U)  \ar[dl]^t \\
+ & \U & }
 \]
-this happens if and only if $t$ is a weak equivalence. Since $\U$ is fibrant, this amounts to $t$ being a trivial
+this happens if and only if $t$ is a weak equivalence. This amounts to $t$ being a trivial
 fibration, which holds by part~(ii) of~\cref{thm:fibrancy-of-u}. 
 \end{proof} 
 

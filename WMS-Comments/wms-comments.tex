@@ -1,0 +1,133 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{a4paper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb}
+
+%SetFonts
+
+%SetFonts
+
+
+\title{Comments on ``Weak model categories in classical and constructive mathematics''(ArXiv version)}
+\author{Nicola Gambino}
+\date{March 7th, 2019}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+\section{General comments}
+
+\begin{itemize}
+\item The paper is too long. Long papers tend to take longer to go through the review process and, sadly, to be read less. Please see below for some specific suggestions on how to shorten the paper.
+\item I would de-emphasise slightly the constructive aspects. I think the notion of a weak model category could be of independent interest, just as semi-model categories. But putting `constructive' already in the title is likely to limit your readership. I suggest to change the title as ``Weak model categories''. See below for some further comments on how to make the paper be more palatable to classical mathematicians.
+\item I am not a big fan of numbered subsections since their numbering either creates three-level numbering of theorems, which feels more appropriate for a book than for a paper. I prefer to have more shorter sections, with the idea that each section should present one key idea or result. Readers should be able to go through a single section in a short time, take a break, and find easily the point where they left off. It also makes it easier to skip parts of the text.
+\item I do not mind the numbering of paragraphs (I think Joachim Kock and I used in our paper on polynomial functors), but you should use a more compact formatting to save space: at the moment, there are big gaps between paragraphs, which you can easily reduce by creating a new `myparagraph' environment. 
+\item Also regarding formatting, I noticed that you use a lot the `itemize' environment. This certainly helps readability in places, but costs a lot in terms of space. I would suggest to use it less and avoid it when it runs across a large part of page or even more than one page. For example, see pages 2-3, 36, 39, 47-48, 66-67, 68-69.
+\item Another thing that creates extra space is your formatting of proofs. I would suggest to avoid the line break after  `{\bf Proof:}'. By the way, if you use the standard {\sc ams} packages, you have a nice pre-defined environment for proofs. I suggest you use that. 
+\item The formatting of theorems, definitions ... feels a bit odd, with a colon (`:') and extra space after `Theorem', `Definition' ... instead of a full stop as usual. Please free to take macros from the latex of our joint paper (based on an {\sc ams} package, I think). 
+\item I hope you use \texttt{cleverref} package to take care of referencing theorems, lemmas, etc. without having to remember the name of the environment. 
+\item You also use the \texttt{itemize} environment inside theorems, lemmas, etc. while I think it would be better to use \texttt{enumerate} using labels (i), (ii), ... This is because it allows you to give more precise references and say things like ``By part~(ii) of Lemma 3.5''. At the moment, you write instead ``By the second part of Lemma 3.5''.
+\end{itemize}
+
+
+\newpage
+
+
+\section{Organization of the paper}
+
+Both to address some of the comments above (about length and constructive issues) and to improve the flow of the paper, I suggest that it is reorganized as follows. 
+
+
+\begin{enumerate} 
+\item {\bf Introduction.}
+\item {\bf  Preliminaries}
+\item {\bf  Weak model categories.} 
+\begin{itemize}
+\item Definition of weak model category (as in current Section 2.1)
+\item First basic results (as in current Section 2.1)
+\end{itemize}
+\item {\bf The homotopy category.}
+\begin{itemize}
+\item Weak equivalences (as in current Section 2.2)
+\item Equivalent characterisations (as in current Section 2.4). This does not need to be put after the weak Quillen functors and it is logically connected to the material on weak equivalences. 
+\end{itemize}
+\item {\bf Weak Quillen functors.} As in current Section 2.3.
+\item {\bf Enriched weak model categories.} As in current Section 3.2. 
+\item {\bf The small object argument.} 
+\begin{itemize}
+\item Theory, as in current Section 4.1 
+\item Examples: setoids (as in current Section 4.2), chain complexes (as in current Section 4.3), but treated more briefly. 
+\end{itemize}
+\item {\bf Weak model structures for $(\infty, n)$-categories} 
+\begin{itemize}
+\item Preliminaries (as in Section 5.1)
+\item The weak model structure for complicial sets (as in Section 5.2)
+\item The weak model structure for $(\infty, n)$-categories (as in Section 5.3)
+\item The weak model structure for Kan complexes (carved out of Section 5.3).
+\item Semi-simplicial versions. 
+\end{itemize} 
+\item[]  \hspace{-5ex} {\bf Appendices} 
+\item[{\bf A.}]  {\bf Setoids.} 
+\begin{itemize}
+\item Constructive preliminaries (as in current Section 1.3)
+\item Setoids (as in current Section 1.4)
+\item $\pi$-setoids (as in current Section 2.5)
+\end{itemize} 
+\item[{\bf B.}] {\bf Joyal-Tierney calculus.} As in current Section 3.1.
+\item[] \hspace{-5ex} {\bf References.}
+\end{enumerate}
+
+\bigskip
+
+
+\noindent
+I think it should be clear what I am trying to achieve with this reorganization. Here are some explanations.
+\begin{itemize}
+\item Overall, the goal is for readers who are familiar with model categories will recognise counterparts of topics with which they are familiar and therefore have a clear path through the paper. 
+\item Regarding setoids, constructive readers are probably familiar with setoids so they can just skim the appendix and refer to it as needed. Other readers will probably ignore them. But putting the material on
+setoids early on in the paper risks to put these readers off. 
+\item The Joyal-Tierney calculus is essentially well-known, so I think it is wise to move it out of the way. Those who know it will skip it and those who don't will refer to the appendix on a need-to-know basis.
+\end{itemize}
+
+\newpage
+
+\section{A technical suggestion}
+
+\begin{itemize}
+\item I would avoid making the assumptions that cofibrations have always cofibrant domain and fibrations have always fibrant domain. This is because I feel it is better for the author to make the effort of recording these assumptions throughout the paper, rather than placing the burden on the readers to remember them.
+Also, there may be examples where the more general notion is of interest.
+\end{itemize}
+
+\newpage
+
+\section{Comments on individual sections}
+
+\subsection*{Abstract}
+
+Definitely too long.
+
+\subsection*{Introduction}
+
+Definitely too long. All you need is some context and motivation, statement of the main results, explanation of their relevance and potential future applications, outline of the paper. I cannot stress enough how important it is to state very clearly what the main theorems in the paper are. Unfortunately, people make a decision on whether to read a paper or not quite quickly, mainly based on how clear the introduction is. 
+
+You also need to make a choice about whether you want to refer to yourself as `we' or `I', at the moment you mix both. The most common choice is to use `We' since it sounds less personal. I recommend you use `we' also because otherwise it sounds as if the motivation for weak model categories comes very narrowly from your work only. 
+
+\subsection*{Small object argument} 
+
+I think this section is too long and there is a combination of expository and research material which is not helpful: your paper is very likely to be evaluated for the original research contributions it makes, not for the
+quality of the exposition of existing material.
+
+There is too much text with explanations and not quite enough details of proofs of new results.  I do not think it is your job to try and explain the small object argument from scratch (although it would be very nice if you were writing lecture notes or a textbook). My suggestion is that you focus on {\em one version} of the small object argument that works constructively (probably not the most general one, but the one that works for the examples you want), give the details of the proofs in that case, and 
+then comment briefly on possible variants. 
+
+\subsection*{The model structure for Kan complexes}
+
+I know I had suggested to include the details of this special case. But now I think that, to keep the length of paper within reasonable bounds, it would be best to leave the discussion more or less in its current format
+and instead include an expanded version of the argument in the paper where you prove the full model structure. This would have also the advantage of making that second paper more independent from the current one, thereby facilitating its review and publication. 
+
+
+\end{document}  
