@@ -160,61 +160,25 @@ conveniently encapsulated in the notion of a cofibration and of a cofibrant obje
 \section{Preliminaries} 
 \label{sec:preliminaries}
 
-Let $\catE$  be a locally cartesian closed category. For $X \in \catE$ we write $\catE_{/X}$ for the slice category over~$X$. For a map $f \co Y \to X$ in $\catE$, we write $f^* \co \catE_{/X} \to \catE_{/Y}$ 
-for the associated pullback functor and denote its action on $p \co A \to X$ as 
-\[
-\xymatrix{
-A[f] \ar[r] \ar[d]_{p[f]} & A \ar[d]^p \\
-Y \ar[r]_f & X }
-\]
-For a map $p \co A \to X$ in $\catE$, pullback along $p$ has both left adjoint, written $\Sigma_p \co \catE_{/A}
-\to \catE_{/X}$, and a right adjoint, written $\Pi_p \co \catE_{/A} \to \catE_{/X}$. We refer to these functors
-as the \emph{dependent sum} and \emph{dependent product} functors, respectively. Their action on a
-map $q \co B \to A$ will be written
-\[
- \Sigma_p(q) \co \Sigma_A(B) \to X \, , \quad \Pi_p(q) \co \Pi_A(B) \to X \, ,
- \]
-respectively. The left adjoint is defined by composition, so $\Sigma_A(B) \defeq B$ and $\Sigma_p(q) = qp$.
 
-\medskip
-For a small category $\mathbb{C}$, we write $\Psh(\mathbb{C})$ for the category of presheaves over $\mathbb{C}$ and $\yon_\mathbb{C} \co \mathbb{C} \to \Psh(\mathbb{C})$ for the Yoneda embedding. 
-Recall that, for $c \in \mathbb{C}$, there is an equivalence of categories
-\begin{equation}
-\label{equ:pshslice}
-\Psh(\mathbb{C})_{/ \yon(c)} \simeq \Psh \big(  \mathbb{C}_{/c}  \big )
-\end{equation}
-For $F \co {\mathbb{C}_{/c}}^{\op} \to \Set$, we write $\pi_1 \co \int F \to \yon(c)$
-for the corresponding object of~$\Psh(\mathbb{C})_{/ \yon(c)}$.
 
+
+We write $\Delta$ for the simplicial category. The objects of $\Delta$ will be written as $[n]$, for $n \geq 0$.
+We write $\SSet \defeq [\Delta^{\op}, \Set]$ for the category of simplicial sets. For $n \geq 0$, $\Delta[n] \in \SSet$ is the representable simplicial set associated to $[n] \in \Delta$. For $[n] \in \Delta$, we write $i^n \co  \partial \Delta[n] \to \Delta[n]$ for the boundary inclusion into the $n$-simplex and, for $1 \leq k \leq n$,  
+$h^k_n  \co \Lambda^k[n] \to \Delta[n]$  for the $k$-th horn inclusion into the $n$-simplex. The simplicial set $\Delta[1]$ is an interval object in $\SSet$, with endpoint inclusions~$\kcyl \co \braces{ k} \to \Delta[1]$ defined by~$\kcyl \defeq h^1_k$. 
 
 \medskip
 
 
-
-\medskip
-
-
-
-
-We write $\Delta$ for the simplicial category, the objects of which will be written as $[n]$, for $n \geq 0$,
-and $\SSet$ for the category of simplicial sets, defined as usual as the  presheaf category over $\Delta$.
-For $n \geq 0$, $\Delta[n] \in \SSet$ is the representable simplicial set associated to $[n] \in \Delta$. As a special case of the equivalence in~\eqref{equ:pshslice}, for every $[n] \in \Delta$ there is an equivalence of categories
-\begin{equation}
-\label{equ:psh-slice-sset}
-\SSet_{/\Delta[n]} \simeq \Psh \big( \Delta_{/[n]} \big ) \, .
-\end{equation}
-For $[n] \in \Delta$, we write $i^n \co  \partial \Delta[n] \to \Delta[n]$ 
-for the \emph{boundary inclusion} into the $n$-simplex and, for $1 \leq k \leq n$,  
-$h^k_n  \co \Lambda^k[n] \to \Delta[n]$ 
-for the $k$-th \emph{horn inclusion} into the $n$-simplex. 
-The simplicial set $\Delta[1]$ is an interval object in $\SSet$, with endpoint inclusions~$\kcyl \co \braces{ k} \to \Delta[1]$ defined by~$\kcyl \defeq h^1_k$. Throughout this paper, we shall work  with the model structure on $\SSet$ for Kan complexes defined in \cite[Section~5]{henry2018wms} using constructively valid arguments. For the convenience of the reader, we recall some
-of the main aspects of this model structure.
+Throughout this paper, we shall work  with the constructive version of the
+Kan-Quillen model structure on $\SSet$ defined in~\cite{henry2019qms} . 
+For the convenience of the reader, we recall some of the main aspects of this model structure.
 
 
 \medskip
 
-Let $\cal{I}$ be the set of boundary inclusions, \ie $\cal{I} \defeq \{ i^n \co  \partial \Delta[n] \to \Delta[n] \ | \ n \geq 0 \}$.  By the constructive version of the small object argument, which can be applied in this context since the 
-maps in $\cal{I}$ satisfy all the finiteness and decidability assumptions discussed  in~\cite[\S 4.1.4]{henry2018wms}, the set~$\cal{I}$ generates a weak factorisation system
+Let $\cal{I} \defeq \{ i^n \co  \partial \Delta[n] \to \Delta[n] \ | \ n \geq 0 \}$ be the set of boundary 
+inclusions.  By a constructive version of the small object argument, the set~$\cal{I}$ generates a weak factorisation system
 \[
 \big( \Cof, \TrivFib \big) \defeq ( \mathsf{Sat}(\cal{J}) \, , \cal{J}^\pitchfork)
 \]
@@ -229,36 +193,36 @@ Cofibrant simplicial sets are of particular importance for our development becau
 
 \medskip
 
-Let $\cal{J}$ be the set of horn inclusions, \ie $\cal{J} \defeq \{ h^k_n  \co \Lambda^k[n] \to \Delta[n]  \ | \ 0 \leq k \leq n \}$. By another application of the constructive version of the small object argument, the set $\cal{J}$
+Let $\cal{J} \defeq \{ h^k_n  \co \Lambda^k[n] \to \Delta[n]  \ | \ 0 \leq k \leq n \}$ be the set of horn 
+inclusions. By another application of the constructive version of the small object argument, the set $\cal{J}$
 generates a weak factorisation system 
 \[
 (\TrivCof, \Fib) = ( \mathsf{Sat}(\cal{J}) \, , \cal{J}^\pitchfork)
 \] 
-on $\SSet$. The maps in the right class will be called \emph{fibrations} and the maps in the left class will be called \emph{trivial cofibrations}. As usual, we say that a simplicial set~$A$ is \myemph{fibrant} if  \ie the unique map~$A \to 1$ is a fibration. For $X \in \SSet$, we write $\Fib_{/X}$ for the full subcategory of the slice category $\SSet_{/X}$ spanned by the fibrations with codomain $X$
+on $\SSet$. The maps in the right class will be called \emph{fibrations} and the maps in the left class will be called \emph{trivial cofibrations}. As usual, we say that a simplicial set~$A$ is \myemph{fibrant} if  \ie the unique map~$A \to 1$ is a fibration. For $X \in \SSet$, we write $\Fib_{/X}$ for the full subcategory of the slice category $\SSet_{/X}$ spanned by the fibrations with codomain $X$.
+
+\medskip
+
 We say that a simplicial set is \myemph{bifibrant} if it is both fibrant and cofibrant.  For $X \in \SSet$,
 we write $\BFFib_{/X}$ for  the full subcategory of  $\Fib_{/X}$ spanned by fibrations with cofibrant domain.
 
 \medskip
 
-It was shown in~\cite{henry2019qms} that two weak factorisation systems
-$(\Cof, \TrivFib)$ and $(\TrivCof, \Fib)$ are part of a model structure on the category $\SSet$.
-Furthermore, it was also shown in~\cite{henry2019qms} that the model structure is both 
-right proper, \ie pullbacks of weak equivalences along fibrations are again weak equivalences, and
-left proper, \ie pushouts of weak equivalences along cofibrations are again weak equivalences.
-Let us also recall that
-two weak factorization systems $(\Cof, \TrivFib)$ and $(\TrivCof, \Fib)$
-satisfy the so-called pushout product property~\cite{henry2018wms}. More precisely, given two maps $f \co Y \rightarrow X$ and $g \co B \rightarrow A$ their \emph{pushout product} $f \hattimes g$ is defined as the unique dotted map in the diagram
+As shown in~\cite{henry2019qms}, the two weak factorisation systems
+$(\Cof, \TrivFib)$ and $(\TrivCof, \Fib)$ are part of a proper model structure on the category $\SSet$.
+Furthermore,  the weak factorization systems $(\Cof, \TrivFib)$ and $(\TrivCof, \Fib)$
+satisfy the so-called pushout product property~\cite{henry2018wms}. Recall that, given two maps $f \co Y \rightarrow X$ and $g \co B \rightarrow A$ their \emph{pushout product} $f \hattimes g$ is defined as the unique dotted map in the diagram
 \[
 \xymatrix{
 Y \times B \ar[r] \ar[d] &  X \times B \ar[d] \ar@/^1.5pc/[ddr] \\
 Y \times A \ar[r]  \ar@/_1.5pc/[drr] & \displaystyle \big( Y \times A ) +_{Y \times B} \big( X \times B ) \ar@{.>}[dr]  \\
  & & X \times A }
  \]
-The pushout-product property is then the statement that:
+The pushout-product property is  the statement that:
 
 \begin{itemize}
-\item If $f$ and $g$ are cofibrations then so is $f \hattimes g$.
-\item If additionally one of $f$ and $g$ is a weak equivalence, then so is $f \hattimes g$.
+\item if $f$ and $g$ are cofibrations then so is $f \hattimes g$.
+\item if additionally either $f$ and $g$ is a weak equivalence, then so is $f \hattimes g$.
 \end{itemize}
 Note that when $f$ and $g$ are monomorphisms, so in particular when they are cofibrations, the pushout in the diagram above is just an union of subobjects and the pushout product of~$f$ and~$g$ is just the inclusion:
 \[  
@@ -272,16 +236,47 @@ Dually, using  exponentials instead of products and pullbacks instead of pushout
 & B^Y \ar[r] & A^Y  \\
  }
  \]
-It is a very classical observation that an arrow $f$ has the left lifting property agains $\langle p \, , q \rangle $ if and only if $f \hattimes p$ has the left lifting property against $q$:
+By adjointness (see~\cite{joyal-tierney-segal} for details), a map $f$ has the left lifting property agains $\langle p \, , q \rangle $ if and only if $f \hattimes p$ has the left lifting property against $q$:
 \[
 f \pitchfork \langle p \, , q \rangle \Leftrightarrow f \hattimes p \pitchfork q 
 \]
- For a proof, see the appendix of \cite{joyal-tierney-segal}, for example. The pushout-property immediately implies its dual version: 
+Therefore, the pushout-property  implies its dual version: 
 \begin{itemize}
 \item if $f \co Y \to X$ is a cofibration and $p \co B \to A$ a fibration then $\langle f \, , p \rangle$ is a fibration.
-\item if additionally $p$ or $f$ is a weak equivalence, then so so is $\langle f \, , p \rangle$.
+\item if additionally either $p$ or $f$ is a weak equivalence, then so so is $\langle f \, , p \rangle$.
 \end{itemize}
- Indeed for any Horn inclusion $h^k_n: \Lambda^k[n] \rightarrow \Delta[n]$ the map $h^k_n \hattimes f$ is a trivial cofibration by the pushout-product property. Therefore,  it has the left lifting property against $p$, and hence $h^k_n$ has the left lifting property against $\langle f \, , p  \rangle$, which means that   $\langle f, p \rangle$ is a fibration. 
+
+\medskip
+
+For  $X \in \SSet$ we write $\SSet_{/X}$ for the slice category over~$X$. For a map $f \co Y \to X$, we write 
+$f^* \co \SSet_{/X} \to \SSet_{/Y}$ for the associated pullback functor and denote its action on $p \co A \to X$ as 
+\[
+\xymatrix{
+f^*(A) \ar[r] \ar[d]_{f^*(p)} & A \ar[d]^p \\
+Y \ar[r]_f & X }
+\]
+This functor has both a left adjoint $\Sigma_f \co \SSet_{/Y} \to \SSet_{/X}$, defined by composition with $f$,
+and a right adjoint $\Pi_f \co \catE_{/Y} \to \catE_{/X}$. Their action on a
+map $q \co B \to Y$ will be written
+\[
+ \Sigma_f(q) \co \Sigma_Y(B) \to X \, , \quad \Pi_f(q) \co \Pi_Y(B) \to X \, ,
+ \]
+respectively. Since the left adjoint is defined by composition, $\Sigma_Y(B) \defeq B$ and $\Sigma_f(q) = qf$.
+
+
+ 
+
+\medskip
+
+Finally, let us recall that, as a special case of a general result for presheaf categories, for every $[n] \in \Delta$ there is an equivalence of categories
+\begin{equation}
+\label{equ:psh-slice-sset}
+\SSet_{/\Delta[n]} \simeq  [ {\Delta_{/[n]}}^{\op}, \Set]   \, .
+\end{equation}
+For $F \co {\Delta_{/[n]}}^{\op} \to \Set$, we write $\pi_1 \co \int F \to \Delta[n]$
+for the corresponding object of~$\SSet_{/ \Delta[n]}$.
+
+
 
 
 
