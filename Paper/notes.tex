@@ -248,20 +248,14 @@ Therefore, the pushout-property  implies its dual version:
 
 \medskip
 
-For  $X \in \SSet$ we write $\SSet_{/X}$ for the slice category over~$X$. For a map $f \co Y \to X$, we write 
-$f^* \co \SSet_{/X} \to \SSet_{/Y}$ for the associated pullback functor and denote its action on $p \co A \to X$ as 
+For  $X \in \SSet$ we write $\SSet_{/X}$ for the slice category over~$X$. For a map $f \co X \to Y$, we write 
+$f^* \co \SSet_{/Y} \to \SSet_{/X}$ for the associated pullback functor. This functor has both a left adjoint $\Sigma_f \co \SSet_{/Y} \to \SSet_{/X}$, defined by composition with $f$,
+and a right adjoint $\Pi_f \co \catE_{/Y} \to \catE_{/X}$. Their action of these functors on a
+map $g \co Z \to Y$ will be written
 \[
-\xymatrix{
-f^*(A) \ar[r] \ar[d]_{f^*(p)} & A \ar[d]^p \\
-Y \ar[r]_f & X }
-\]
-This functor has both a left adjoint $\Sigma_f \co \SSet_{/Y} \to \SSet_{/X}$, defined by composition with $f$,
-and a right adjoint $\Pi_f \co \catE_{/Y} \to \catE_{/X}$. Their action on a
-map $q \co B \to Y$ will be written
-\[
- \Sigma_f(q) \co \Sigma_Y(B) \to X \, , \quad \Pi_f(q) \co \Pi_Y(B) \to X \, ,
+ \Sigma_f(g) \co \Sigma_Y(Z) \to X \, , \quad \Pi_f(g) \co \Pi_Y(Z) \to X \, ,
  \]
-respectively. Since the left adjoint is defined by composition, $\Sigma_Y(B) \defeq B$ and $\Sigma_f(q) = qf$.
+respectively. Since the left adjoint is defined by composition, $\Sigma_Y(Z) \defeq Z$ and $\Sigma_f(g) = g f$.
 
 
  
@@ -273,8 +267,11 @@ Finally, let us recall that, as a special case of a general result for presheaf 
 \label{equ:psh-slice-sset}
 \SSet_{/\Delta[n]} \simeq  [ {\Delta_{/[n]}}^{\op}, \Set]   \, .
 \end{equation}
-For $F \co {\Delta_{/[n]}}^{\op} \to \Set$, we write $\pi_1 \co \int F \to \Delta[n]$
-for the corresponding object of~$\SSet_{/ \Delta[n]}$.
+For $F \co {\Delta_{/[n]}}^{\op} \to \Set$, we write $\pi_F \co \int F \to \Delta[n]$
+for the corresponding object of~$\SSet_{/ \Delta[n]}$. Here, $\int F$ is the
+simplicial set whose $m$-simplices are pairs $(\theta, x)$ where $\theta \co [m] \to [n]$
+is a map in~$\Delta$ and $x \in F(\theta)$. The component of $\pi_F$ at $[m]$
+is simply the first projection.
 
 
 
@@ -285,7 +282,8 @@ for the corresponding object of~$\SSet_{/ \Delta[n]}$.
 \section{Basic results on pullbacks}
 
 
-
+We begin our development with some elementary observations on pullbacks of cofibrant objects
+and cofibrations. 
 
 
 
@@ -334,7 +332,7 @@ Then the pullback functor $p^* \co \SSet_{/X} \to \SSet_{/A}$ preserves cofibrat
 \begin{proof} Let $f \co Y \to X$ be a cofibration and consider the pullback
 \[
 \xymatrix{
-B \ar[r]^-{q} \ar@{>->}[d]_-{g} &  Y \ar@{>->}[d]^{f} \\
+B \ar[r]^-{q} \ar[d]_-{g} &  Y \ar[d]^{f} \\
 A \ar[r]_{p} & X}
 \]
 Since $A$ is cofibrant, the claim is that $g \co B \rightarrow A$ is a levelwise complemented monomorphism. For $a \in A_n$, we have that $a \in B_n$ if and only if $p(a) \in Y_n$. Since $f \co Y \rightarrow X$ is a levelwise complemented monomorphism, this is decidable.
@@ -342,7 +340,7 @@ Since $A$ is cofibrant, the claim is that $g \co B \rightarrow A$ is a levelwise
 
 
 \begin{remark} 
-We conclude this section by observing that it is straightforward to define the interpretation of
+We conclude this section by observing that it is straightforward to define a naive interpretation of
 $\Sigma$-types so that the computation rule and the $\eta$-rule hold as judgemental equalities. 
 Let  $p \co A \to X$ be a fibration with cofibrant domain. The
 functor~$\Sigma_p \co \SSet_{/A} \to \SSet_{/X}$ defined by
@@ -358,7 +356,7 @@ $\Sigma_p(q) \co \Sigma_A(B) \to X$ is again a fibration with cofibrant domain.
 \section{Path spaces}
 
 The existence of the weak factorisation system $(\TrivCof, \Fib)$ 
-implies that for every fibration with cofibrant domain $p \co A \to X$ the diagonal map $\delta_p \co A \to A \times_X A$ admits a factorisation as a trivial cofibration $i \co A \to P$ followed by a fibration $q \co P \to A \times_X A$. Here, we show that such a factorisation can be defined by taking a path object as the object $P$. 
+implies that for every fibration with cofibrant domain $p \co A \to X$ the diagonal map $\delta_p \co A \to A \times_X A$ admits a factorisation as a trivial cofibration  followed by a fibration. Here, we show that such a factorisation can be defined via path objects. 
 
 
 
@@ -582,9 +580,11 @@ X  }
 \]
 \end{definition}
 
-This definition is equivalent to the one given in \cite{gambino2017frobenius} by Lemma~3.3 therein.
-With this definition, it is immediate to observe that a cofibration which is a strong $k$-oriented homotopy equivalence is a trivial cofibration. Indeed, if $f \co Y \to X$ is a cofibration then $\delta^k \times ' f$ is 
+\begin{remark} \label{rem:below-strhtpyequiv}
+The definition of strong $k$-oriented homotopy equivalence in~\cref{def:strhtpyequiv} is equivalent to the one given in \cite{gambino2017frobenius} by Lemma~3.3 therein.
+With the definition given here, it is immediate to observe that a cofibration which is a strong $k$-oriented homotopy equivalence is a trivial cofibration. Indeed, if $f \co Y \to X$ is a cofibration then $\delta^k \times ' f$ is 
 a weak equivalence by the pushout-product property and so $f$ is also a weak equivalence, since it is a retract of $\delta^k \times ' f$.
+\end{remark}
 
 \begin{lemma}\label{lemma:genTcof_strongHequiv} \hfill 
 \begin{enumerate}[$(i)$]
@@ -625,7 +625,7 @@ To show that $p^*(f)$ is a strong $k$-oriented homotopy equivalence, we let $K \
 A \ar[d]_{\delta^{1-k}} \ar@{=}[rr] & & A \ar[d]^p \\ 
 \Delta[1] \times A \ar[r]_{\Delta[1] \times p}  & \Delta[1] \times X \ar[r]_H & X
 }\]
-Where the map on the left-hand side is anodyne because $A$ is a cofibrant.
+Where the map on the left-hand side is a trivial cofibration because $A$ is a cofibrant.
 It remains to construct a map $K_Y$  fitting into a retract diagram of the form
 \[
 \xymatrix@C=1.5cm{
@@ -643,12 +643,13 @@ Let $p \co A \rightarrow X$ is a fibration with cofibrant domain. Then the pullb
 \[
 p^* : \SSet_{/X} \rightarrow \SSet_{/A}
 \] 
-preserves cofibrations and anodyne morphisms.
+preserves cofibrations and trivial cofibrations.
 \end{proposition}
 
 
-\begin{proof} Since the pullback functor $p^*$ has a right adjoint,  it is enough to check that pullbacks of generating cofibrations and generating anodyne are cofibrations and anodyne, respectively. For cofibrations, this is \cref{thm:cof-pbk}. For anodyne, the anodyne morphisms in $\SSet_{/Y}$ are generated by the horn inclusions $h^k_n \co \Lambda^{k}[n] \rightarrow \Delta[n]$ for all possible choices of $\Delta[n] \rightarrow A$. By \cref{lemma:genTcof_strongHequiv} they are all strong $k$-oriented homotopy equivalences. Moreover, their pullback to $X$ is also their pullback along the map $A \times_X \Delta[n] \rightarrow \Delta[n]$ which is again a fibration with cofibrant domain by \cref{lem:cofibrant_fiber_product}. Hence  \cref{lemma:pb_of_StrongHomotopyEq} implies that the pullback 
-to~$X$ are also strong $k$-oriented homotopy equivalences. Since they are cofibrations, they are anodyne by the remark just below \cref{def:strhtpyequiv}.
+\begin{proof} Since the pullback functor $p^*$ has a right adjoint,  it is enough to check that pullbacks of generating cofibrations and generating trivial cofibrations are cofibrations and trivial cofibrations, respectively. For cofibrations, this is \cref{thm:cof-pbk}. For trivial cofibrations, note that the trivial cofibrations in $\SSet_{/Y}$ are generated by the horn inclusions $h^k_n \co \Lambda^{k}[n] \rightarrow \Delta[n]$ for all possible choices of $\Delta[n] \rightarrow A$. By \cref{lemma:genTcof_strongHequiv} they are all strong $k$-oriented homotopy equivalences. Moreover, their pullback to $X$ is also their pullback along the map $A \times_X \Delta[n] \rightarrow \Delta[n]$ which is again a fibration with cofibrant domain by \cref{lem:cofibrant_fiber_product}. Hence  \cref{lemma:pb_of_StrongHomotopyEq} implies that the pullback 
+to~$X$ are also strong $k$-oriented homotopy equivalences. Since they are cofibrations, they are 
+trivial cofibrations by \cref{rem:below-strhtpyequiv}.
 \end{proof}
 
 
@@ -702,7 +703,7 @@ of~\cref{thm:exponentials}.
 
 
 \begin{remark}[$\Pi$-types] \label{rem:pi-types}
-We shall interpret $\Pi$-types via a cofibrant replacement of dependent product. In order to explain this, let
+We can define a naive interpretation of $\Pi$-types via a cofibrant replacement of dependent product. In order to explain this, let
 us recall that, for maps $p \co A \to X$ and $q \co B \to A$,  the dependent product $\Pi_p(q) \co \Pi_A(B)
 \to X$ is equipped with a map
 \[
@@ -954,21 +955,21 @@ As a preliminary step, let us recall that a simplicial set $A$ is \emph{small}  
 A[x] \ar[r] \ar[d] \drpullback & A \ar[d]^{p} \\
 \Delta[n] \ar[r]_-{x} & X }
 \]
-is small. Let us also recall the  construction of the weakly universal small map of simplicial sets $\rho \co \VV \to \V$, which is a special case of the results in~\cite{hofmann-streicher-universes} for arbitrary presheaf categories.  For this, we use the equivalence in~\eqref{equ:pshslice} and the notation associated to it, as introduced
-in~\cref{sec:preliminaries}. 
+is small. Let us also recall the  construction of the weakly universal small map of simplicial sets $\rho \co \VV \to \V$, which is a special case of the results in~\cite{hofmann-streicher-universes} for arbitrary presheaf categories.  For this, we use the equivalence in~\eqref{equ:psh-slice-sset} and the notation associated to it.
 The simplicial set $\V$ is defined by letting
 \[
-\mathsf{V}_n \defeq \{ F \in \Psh(\Delta_{/[n]}) \ | \ \pi_1 \co \mathsf{el}(F) \to \Delta[n] \text{ is a small
+\mathsf{V}_n \defeq \{ F \co {\Delta_{/[n]}}^{\op} \to \Set \ | \ \pi_F \co \textstyle{\int F} \to \Delta[n] \text{ is a small
 map} \}
 \]
-for $[n] \in \Delta$. The map $\rho \co \VV \to \V$ is then defined in an evident way. 
+for $[n] \in \Delta$. The object $\VV$ and the map $\rho \co \VV \to \V$ are then defined in an evident way. 
 
 
 \bigskip
 
-We now come to our first step, in which we define a small fibration $\pi \co \UU \to \U$ which weakly classifies  small fibrations between cofibrant objects. For this, we define $\U$ as a subobject $\U \rightarrowtail \V$ by letting, for $[n] \in \Delta$, 
+We now come to our first step, in which we define a small fibration $\pi \co \UU \to \U$ which weakly classifies  small fibrations between cofibrant objects. For this, we a subobject $\U \subseteq \V$ by letting, for $[n] \in \Delta$, 
 \[
-\U_n = \{ F \in \V_n \ | \ \pi_1 \co \mathsf{el}(F) \to \Delta[n] \text{ is a small Kan fibration and $\mathsf{el}(F)$ is cofibrant} \} \, .
+\U_n = \{ F \in \V_n \ | \ \pi_F \co \textstyle{\int F} \to \Delta[n] \text{ is a small fibration and 
+$ \textstyle{\int F}$ is cofibrant} \} \, .
 \]
 We then define the map $\pi \co \UU \to \U$ via the pullback 
 \[
@@ -983,7 +984,7 @@ We then define the map $\pi \co \UU \to \U$ via the pullback
 \begin{proposition} \label{thm:universe-u}  \hfill 
 \begin{enumerate}[(i)] 
 \item The map $\pi \co \UU \to \U$ is a small fibration.
-\item For any map $a \co X \rightarrow \U$ with $X$ cofibrant, the 
+\item Let $X$ be  a cofibrant simplicial set. For every map $a \co X \rightarrow \U$, the 
 simplicial set $A$ given by the pullback
 \[
 \xymatrix{
@@ -991,7 +992,8 @@ A \ar[r] \ar[d]_p & \UU \ar[d]^\pi \\
 X \ar[r]_a & \U }
 \]
 is cofibrant.
-\item The map $\pi \co \UU \to \U$ weakly classifies small fibrations between cofibrant objects, \ie 
+\item The map $\pi \co \UU \to \U$ weakly classifies small fibrations between cofibrant 
+simplicial sets, \ie 
 for every small fibration $p \co A \to X$ between cofibrant objects there exists a map 
 $a \co X \to \U$ and a pullback  of the form
 \[
@@ -1007,11 +1009,11 @@ X \ar[r]_{a} & \U }
 \item For any map $a \co \Delta[n] \rightarrow \U$, we can consider the following pullbacks
 \[
 \xymatrix{
-A \ar[r] \ar[d]_p  & \UU \ar[d] \ar[r]  & \VV \ar[d] \\
-\Delta[n] \ar[r]_{a} & \U \ar[r]_{i} & \V }
+A \ar[r] \ar[d]_p  & \UU \ar[d]^{\pi} \ar[r]  & \VV \ar[d]^{\rho} \\
+\Delta[n] \ar[r]_{a} & \U \ar@{>->}[r] & \V }
 \]
-This shows that $p \co A \rightarrow \Delta[n]$ is isomorphic to $\pi_1 \co \mathrm{el}(F) \rightarrow \Delta[n]$ in $\SSet_{/ \Delta[n]}$, where $F$ corresponds under the equivalence in~\eqref{equ:pshslice} to 
-$i a \co \Delta[n] \rightarrow \V$. Therefore, by definition of $\U$, $A$ is cofibrant and $p \co A \rightarrow \Delta[n]$ is a small fibration. This implies that $\pi \co \UU \rightarrow \U$ is a small map. Furthermore, $\pi$ is a fibration
+This shows that $p \co A \rightarrow \Delta[n]$ is isomorphic to $\pi_F \co \int F \rightarrow \Delta[n]$ in $\SSet_{/ \Delta[n]}$, where $F$ corresponds under the equivalence in~\eqref{equ:psh-slice-sset} to 
+$a \co \Delta[n] \rightarrow \V$. Therefore, by definition of $\U$, $A$ is cofibrant and $p \co A \rightarrow \Delta[n]$ is a small fibration. This implies that $\pi \co \UU \rightarrow \U$ is a small map. Furthermore, $\pi$ is a fibration
 since we can rewrite a general lifting problem against a horn inclusion $h^n_k \co \Lambda^k[n] \rightarrow \Delta[n]$ as follows:
 \[
 \xymatrix{
@@ -1047,7 +1049,7 @@ Let $\U^{\rightarrow}$ be the simplicial set whose $n$-simplices are triples of 
  \[
 F_0, F_1 \co {\Delta_{/[n]}}^{\op} \rightarrow \Set
 \]
-and $\phi \co F_0 \Rightarrow F_1$ is a natural transformation. By the equivalence in~\eqref{equ:pshslice},
+and $\phi \co F_0 \Rightarrow F_1$ is a natural transformation. By the equivalence in~\eqref{equ:psh-slice-sset},
 such triples correspond to commutative diagrams of the form
 \begin{equation}
 \label{equ:corresp}
@@ -1332,71 +1334,204 @@ same way as \cref{thm:univalence-of-u} follows from by part~(ii) of~\cref{thm:fi
 
 
 
-\bibliographystyle{plain}
-\bibliography{../Auxiliary/bibliography}
 
-\end{document}
-
-
+\newcommand{\iscontr}{\mathsf{iscontr}}
+\newcommand{\hfiber}{\mathsf{hfiber}}
+\newcommand{\isequiv}{\mathsf{isequiv}}
 
 
-\section{Univalence (Obsolete)}
+\section{Other approach to univalence}
+
 
 \notesh{[Work in progress] I prefer to start again this section from scratch, but I'm leaving the old univalence section as long as this is not finished}
 
-
-
-Let $p:E \twoheadrightarrow B$ be any fibration with $E$ and $B$ bifibrant. There is a factorization of the diagonal map $B \rightarrow E^{\to} \twoheadrightarrow B \times B$ where $E^{\to} \twoheadrightarrow B \times B$ is the canonical map, which (by the universal property of $E^{\to}$) corresponds to the identity of $E=E[id_B] \rightarrow E[id_B]$. As the identity is a weak equivalence, \cref{lem:isEquiv2} above implies that this maps factors into $B \rightarrow Weq(E) \twoheadrightarrow E \times E$.
-
-In particular, using the lifting:
+Let $p \co E \to B$ be a fibration. We want to define what it means for $p$ to be a univalent fibration. Using the $\Pi$-types that we have already defined, one can to construct a fibration $(s, t) \co E^{\to} \to B \times B$ that classifies morphisms between two fibers of $p$. More precisely, $E^{\to}$ is defined as $\Pi_{p \times 1_B}(E \times E)$ in:
 
 \[
 \xymatrix{
-B \ar@{^{(}->}[d]^{\sim} \ar[r] & Weq(E) \ar@{->>}[d] \\
-\Id_B \ar@{->>}[r] \ar@{..>}[ur] & B \times B \\ 
+E \times E \ar[d]_{1_E \times p } & \Pi_{p \times 1_B}(E \times E) \ar[d] \\
+E \times B \ar[r]_{p \times 1_B} & B \times B \\
 }
 \]
 
-one obtains a map $\Id_B \rightarrow Weq(E)$.
-
-\begin{definition} \label{def:univalentFib}
-A Fibration $p:E \twoheadrightarrow B$ between bifibrant objects is said to be univalent if the map $\Id_B \rightarrow Weq(E)$ is an equivalence.
-\end{definition}
-
-This is clearly equivalent to the fact that the map $B \rightarrow Weq(E)$ is an equivalence, or to the fact that any of the two projection $Weq(E) \twoheadrightarrow B$ is a trivial fibration.
-
-In the case of the fibration $\UU_c \rightarrow \U_C$ this exactly corresponds to the usual formulation of univalence in type theory.
+A morphisms $A \to E^{\to}$ is the same thing as a morphism $(f, g) \co A \to  B \times B$ together with a morphism $E[f] \rightarrow E[g]$ over $A$. We now need to construct an object $\Weq(p) \twoheadrightarrow E^{\to}$ that similarly classifies weak equivalences $w \co E[f] \to E[g]$. \caution{We have not been able to show constructively that weak equivalences are stable under pullback along fibrations, so it is not clear if such an object $\Weq(p)$ can be defined as a subobject od $E^{\to}$ or not}. Instead we will follow Voevodsky's definition from type theory, see also section $4$ of \cite{shulman:reedy}, and hence one needs to start by discusing the type $\iscontr_B(E)$
 
 
-\begin{proposition}
-$\U$ is fibrant.
-\end{proposition}
+
+Given a fibration $p:E \twoheadrightarrow B$ one defines:
+\[ 
+\iscontr_B(E) \defeq \Sigma_p \Pi_{\pi_2} \Id_E  
+\]
+where $\Id_E \twoheadrightarrow E \times_B E$ and $\pi_2: E \times_B E \rightarrow E$.
+Thus, $\iscontr_B(E) \to B$ is a fibration  which encodes the idea that the fiber of $p$ is contractible, in the sense that the data of an element of $\iscontr_B(E)$ over $b \in B$ is an element $e \in E(b)$ and
+a function mapping $e' \in E(b)$ to a path from~$e$ to $e'$.
+
+We now need to use this to construct an object that classifies weak equivalences. Assume one has two fibrations $p_1 \, , p_2 \co E_1 \, , E_2 \twoheadrightarrow B$ and a morphism $f$:
+\[
+\xymatrix{
+E_1 \ar[dr]_{p_1} \ar[rr]^f & & E_2 \ar[dl]^{p_2} \\
+& B & 
+}
+\]
+We can then form the ``homotopy fiber'' of $f$ as the pullback:
+\[
+\xymatrix{
+\hfiber(f) \ar@{->>}[d] \ar[r]  & \Id_{E_2} \ar@{->>}[d] \\
+E_1 \times_B E_2 \ar[r] & E_2 \times_B E_2 
+}
+\]
+which  produces a factorization of $f$,
+\[
+E_1 \rightarrow \hfiber(f) \twoheadrightarrow E_2  \, .
+\]
+
+\begin{lemma}
+If $E_1$ and $E_2$ are cofibrant and $E_2 \rightarrow B$ is a fibration, then $E_1 \rightarrow \hfiber(f)$ is a weak equivalence.
+\end{lemma}
 
 \begin{proof}
+The projections $\Id_{E_2} \twoheadrightarrow E_2$ are trivial fibrations because of point (iv) of \cref{proposition:MainPathObject:IdBifib} (the proof of this claims only uses that $A \twoheadrightarrow X$ is a fibration, and none of the other assumptions, so it applies here), so the pullback $\hfiber(f) \rightarrow E_1$ is also a trivial fibration. $\Id_{E_2}$ is cofibrant because because of (i) of \cref{proposition:MainPathObject:IdBifib} (which only uses that $E_2$ is cofibrant) so $\hfiber(f)$ is cofibrant by \ref{lem:cofibrant_fiber_product} as $E_1$ and $E_2$ are cofibrant.
 
-TODO
+It follows by \cref{lemma:triv_fib_are_we} that $\hfiber(f) \rightarrow E_1$ is a weak equivalence. By $2$-out-of-$3$ for weak equivalences, $E_1 \rightarrow \hfiber(f)$ is a weak equivalence.
 \end{proof}
 
+
+
+
+For any morphisms $f$ in $\Fib/B$ one defines:
+\[ 
+\isequiv_B(f) = \Pi_{p_2} \iscontr_B( \hfiber(f)) 
+\]
+where $p_2$ is the fibration $E_2 \twoheadrightarrow B$. Given $p \co E \twoheadrightarrow B$ be a fibration, one defines
+\[ 
+\Weq(E) = \isequiv_{E^{\to}}(f) 
+\]
+where $f$ denotes the universal map over $E^{\to}$ corresponding to its universal property. The definition of $\isequiv$ formalizes the idea that $f$ is an equivalence if and only all its homotopy fibers are contractible.
+
+Admiting that the $\Pi$-types and identity types that we have defined so far are indeed part of an interpretation of type theory, i.e. that the coherence problems can be solved, these exactly corresponds to the usual definition of these notion in homotopy type theory. We now need some lemmas showing that these definitions indeed behave as expected in our model theoretic settings. These lemma mostly comes from  \cite[Section 4]{shulman:reedy}, but we need to reprove them to track of the fibrancy and cofibrancy assumptions  needed for the proof to carry over.
+
+\begin{lemma}\label{lem:IsContr1}For a fibration $p:E \twoheadrightarrow B$ with $E$ and $B$ bifibrant, the following are equivalent:
+
+\begin{enumerate}[(i)]
+\item The map $p:E \twoheadrightarrow B$ is a trivial fibration.
+\item The map $\iscontr_B (E) \twoheadrightarrow B$ has a section.
+\item There is a map $ 1 \rightarrow \Pi_B  \iscontr_B (E) $.
+\item The map $\iscontr_B (E) \twoheadrightarrow B$ is a trivial fibration.
+\end{enumerate}
+\end{lemma}
+
+
+
+\begin{proof} A section of $\iscontr_B (E) \twoheadrightarrow B$ is by definition of $\iscontr_B (E)$ the data of a section $s \co B \rightarrow E$, and a map $h \co E \to \Id_E$ whose image by $\Id_E \twoheadrightarrow E \times_B E$ is $(s \circ p, id_E)$. Such a section $s$ and homotopy $h$ produces a homotopy invers to $p$ and hence implies that $p$ is a weak equivalences, and hence a trivial fibration as $B$ is assumed fibrant.  This proves (ii) $\Rightarrow$ (i).
+
+Note that if one only assume that $E$ and $B$ are cofibrant and $p$ is a fibration, it is still the case that $\Id_E \twoheadrightarrow E$ is a trivial fibration between cofibrant objects, hence a weak equivalence. Which is hence sufficient to show that the map $h$ induce an equality in the homotopy category between $s \circ p $ and the identity of $E$.
+
+
+Conversely, assuming (i), one can construct a section $s$ as above using the lifting property of $B$ (cofibrant) against $p$. To construct the homotopy $h$ one needs to use a lifting property of $E$ against the map $Id_E \twoheadrightarrow E \times_B E$, which is a trivial fibrations because $\Id_E \twoheadrightarrow E$ and $E\times_B E \twoheadrightarrow E$ both are and trivial fibrations satisfies $2$-out-of-$3$ among fibrations between fibrant objects.
+
+The equivalence between (ii) and (iii) follows from the universal property of $\Pi$-types.
+The implication (vi) $\Rightarrow$ (ii) is clear when $B$ is cofibrant. We conclude by showing (i) $\Rightarrow$ (vi) 
+
+As above, as $E$ is fibrant, one can deduce assuming (i) that $\Id_E \twoheadrightarrow E \times_B E$ is a trivial fibration. $\pi_2 : E \times_B E \twoheadrightarrow E$ is a fibration with cofibrant domain, hence $\Pi_{\pi_2} \Id_E \rightarrow E$ is a trivial fibration by \cref{cor:Pi_types_are_fibrant}, and finally, $\iscontr(E)_B \rightarrow B$ is just the composite $\Pi_{\pi_2} \Id_E \rightarrow E \rightarrow B$ so is also a trivial fibration.
+\end{proof}
+
+\begin{remark} \cref{lem:IsContr1} can be stated more sharply observing that (ii) implies that $p$ is a weak equivalence assuming either that $B$ is fibrant or that $E$ and $B$ are cofibrant, so (ii) $\Rightarrow$ (i) when $B$ is fibrant, (i) $\Rightarrow$ (ii) when $B$ is cofibrant and $E$ is bifibrant.
+(ii) $\Leftrightarrow$ (iii) holds without assumption on $E$ and $B$, (vi) $\Rightarrow$ (ii) holds as soon as $B$ is cofibrant. And finally (i) $\Rightarrow$ (vi) holds when $E$ is bifibrant. 
+\end{remark} 
+
+\begin{lemma} \label{lem:isContr2}
+Let $p: E \twoheadrightarrow B$ be a fibration, and $f:A \rightarrow B$ be a morphism. Then there is a natural isomorphisms
+\[ 
+\iscontr_A(E[f]) \simeq \iscontr_B(E) [f] 
+\]
+In particular, if $E$ is cofibrant and $A$ bifibrant, then the following conditions are equivalent: 
+\begin{enumerate}[(i)] 
+\item $E[f] \twoheadrightarrow A$ is a trivial fibration.
+\item The maps $A \rightarrow B$ factors as $A \rightarrow \iscontr_B(E) \rightarrow B$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} The stability of $\iscontr$ under pullback is a very formal property which follows from the similar stability property of $\Pi$-types, which in turn is automatic from their universal property (see for example lemma 4.2 in \cite{shulman:reedy}). The equivalence is an immediate consequence of this pullback stability and \cref{lem:IsContr1}.
+\end{proof}
+
+
+Similarly, one also has the following.
+
+\begin{lemma} \label{isEquiv1} Let $f :E_1 \rightarrow E_2$ be an arrow in $\BFFib/B$ for $B$ bifibrant, i.e. $p_i :E_i \twoheadrightarrow B$ are fibrations and the $E_i$ are cofibrant. The following are equivalent:
+\begin{enumerate}[(i)]
+\item $f$ is a weak equivalence.
+\item $\isequiv(f) \twoheadrightarrow B$ has a section.
+\item There is a map $1 \rightarrow \Pi_B \isequiv(f)$.
+\item The map $\isequiv(f) \twoheadrightarrow B$ is a trivial fibration.
+\end{enumerate}
+\end{lemma}
+
+
+
+\begin{proof} As $E_2$ is cofibrant, $Id_{E_2}$ is cofibrant as well because of point (\ref{proposition:MainPathObject:IdBifib}) of \cref{proposition:MainPathObject}. And \cref{lem:cofibrant_fiber_product} implies that as $E_1$ and $E_2$ are cofibrant, then $Pf$ is cofibrant as well. So as $\isequiv(f)$ is defined as $\Pi_{p_2}\iscontr(Pf)$ the equivalence above mostly follows from \cref{lem:IsContr1}. More precisely: 
+
+$f$ factors as $E_1 \overset{\sim}{\rightarrow} Pf \twoheadrightarrow E_2$ so $f$ is an equivalence if and only if $Pf \twoheadrightarrow E_2$ is an equivalence, which by \cref{lem:IsContr1} is equivalent to the fact that $\iscontr(Pf) \twoheadrightarrow E_2$ has a section, which by universal property of $\Pi$-types is equivalent to condition (ii). The equivalence between (ii) and (iii) is formal exactly as in the proof of \cref{lem:IsContr1}. One still has that (iv) implies (ii) simply because $B$ is cofibrant. Assuming (i) one has that $Pf \twoheadrightarrow E_2$ is a trivial fibration, hence $\iscontr(Pf) \twoheadrightarrow E_2$ is a trivial fibration by \cref{lem:IsContr1}, and \cref{cor:Pi_types_are_fibrant} implies that $\Pi_{p_2} \iscontr(Pf) = \isequiv(f) \twoheadrightarrow B$ is a trivial fibration.
+
+As observed below \cref{lem:IsContr1}, one has that a section of $\isequiv(f) \twoheadrightarrow B$ shows that $\hfiber(f) \twoheadrightarrow E_1$ is an equivalence only assuming that $E_1$ and $E_2$ are cofibrant, so it is indeed the case that (ii) $\Rightarrow$ (i) holds without assuming $B$ is bifibrant.
+\end{proof}
+
+Note that in~\cref{isEquiv1} the implication (ii) $\Rightarrow$ (i) holds without assuming that $B$ is bifibrant. Similarly to \cref{lem:isContr2}, one has the following.
+
+\begin{lemma} \label{lem:isEquiv2}
+Let $f: E_1 \rightarrow E_2$ is a morphism in $\BFFib/B$  and $g:A \rightarrow B$ a morphism with $A$ and $B$ bifibrant. Then there is a natural isomorphisms
+\[ 
+\isequiv_A(f[g]) \simeq \iscontr_B(f) [g] 
+\]
+where $f[g]$ denotes the map $E_1[g] \rightarrow E_2[g]$ obtained by pullback of $f$ 
+In particular, the following conditions are equivalent: 
+\begin{enumerate}[(i)]
+\item $f[g]: E_1[g] \rightarrow E_2[g]$ is an equivalence.
+\item The maps $g$ factors as $A \rightarrow \isequiv_B(f) \rightarrow B$.
+\end{enumerate}
+\end{lemma}
+
+
+
+
+
+Let $p:E \twoheadrightarrow B$ be a fibration with $E$ and $B$ bifibrant. There is a factorization of the diagonal map $B \rightarrow E^{\to} \twoheadrightarrow B \times B$ where $E^{\to} \twoheadrightarrow B \times B$ is the canonical map, which (by the universal property of $E^{\to}$) corresponds to the identity of $E=E[id_B] \rightarrow E[id_B]$. As the identity is a weak equivalence, \cref{lem:isEquiv2} above implies that this maps factors into $B \rightarrow \Weq(E) \twoheadrightarrow E \times E$.
+
+In particular, using the lifting:
+\[
+\xymatrix{
+B \ar@{^{(}->}[d]^{\sim} \ar[r] & \Weq(E) \ar@{->>}[d] \\
+\Id_B \ar@{->>}[r] \ar@{..>}[ur] & B \times B \\ 
+}
+\]
+one obtains a map $\Id_B \rightarrow \Weq(E)$.
+
+\begin{definition} \label{def:univalentFib}
+A fibration $p:E \twoheadrightarrow B$ between bifibrant objects is said to be univalent if the map $\Id_B \rightarrow \Weq(E)$ is an equivalence.
+\end{definition}
+
+This is clearly equivalent to the fact that the map $B \rightarrow \Weq(E)$ is an equivalence, or to the fact that any of the two projection $\Weq(E) \twoheadrightarrow B$ is a trivial fibration.
+
+
+
+
 \begin{proposition}
-The fibration $\UU_C \twoheadrightarrow \U_c$ is univalent.
+The fibration $\UU_c \twoheadrightarrow \U_c$ is univalent.
 \end{proposition}
 
 \notesh{This assumes $\UU_c \twoheadrightarrow \U_c$ is a fibration between bifibrant objects.}
 
 \begin{proof}
 
-As observed just after \cref{def:univalentFib} it is enough to show that the target projection $ Weq(\UU_c) \twoheadrightarrow \U_c$ is a weak equivalence. Consider a diagram:
-
-\[ \xymatrix{
-Y \ar@{^{(}->}[d]_{f} \ar[r]^{\beta} & Weq(\UU_c) \ar@{->>}[d] \\
+As observed just after \cref{def:univalentFib} it is enough to show that the target projection $\Weq(\UU_c) \twoheadrightarrow \U_c$ is a weak equivalence. Consider a diagram:
+\[ 
+\xymatrix{
+Y \ar@{^{(}->}[d]_{f} \ar[r]^{\beta} & \Weq(\UU_c) \ar@{->>}[d] \\
 X \ar[r]^{\alpha} & \U_c
 }
 \]
-
-where $f$ is any cofibrations between $Y$ and $X$ two bi-fibrants objects. We will show that there exists a diagonal filling making the diagram commutes up to homotopies. This is sufficient to show $Weq(\UU_c) \rightarrow \U_c$ is invertible in the homotopy category, hence is a weak equivalence.
+where $f$ is any cofibrations between $Y$ and $X$ two bi-fibrants objects. We will show that there exists a diagonal filling making the diagram commutes up to homotopies. This is sufficient to show $\Weq(\UU_c) \rightarrow \U_c$ is invertible in the homotopy category, hence is a weak equivalence.
 
 The map to $\alpha$ corresponds to a fibration $A \twoheadrightarrow X$ with $A$ cofibrant, and the map $\beta$ gives in particular a (solid) diagram as in \cref{Prop:Homotopy_ext_prop}:
-
 \[ 
 \xymatrix{
  B
@@ -1422,219 +1557,37 @@ The map to $\alpha$ corresponds to a fibration $A \twoheadrightarrow X$ with $A$
 &
 }
 \]
+which by \cref{Prop:Homotopy_ext_prop} admits a dotted extention where both square are pullbacks.
 
-which hence (by \cref{Prop:Homotopy_ext_prop}) admit a dotted extention where both square are pullbacks.
-
-This filling in turn allows us to construct a map $X \rightarrow Weq(\UU_c)$ that makes the lower triangle commutes. The upper triangle does not quite commute though, one only have that the composite with $Weq(\UU_c) \twoheadrightarrow \UU^{\to}_c$ commutes ``up to isomorphisms'' in the sense that the two maps $Y \rightrightarrows \UU^{\to}_c$ classifies arrows in $\BFFib_{/Y}$ that are isomorphic.
+This filling in turn allows us to construct a map $X \rightarrow \Weq(\UU_c)$ that makes the lower triangle commutes. The upper triangle does not quite commute though, one only have that the composite with $\Weq(\UU_c) \twoheadrightarrow \UU^{\to}_c$ commutes ``up to isomorphisms'' in the sense that the two maps $Y \rightrightarrows \UU^{\to}_c$ classifies arrows in $\BFFib_{/Y}$ that are isomorphic.
 
 Hence the two maps $Y \rightrightarrows \UU^{\to}_c$ are homotopic.
 
 \notesh{This is probably not very hard to prove, but I'm not sure what is the best way to do that... In the worst case scenario one can construct a homotopy explicitely, though that sounds tedious. This has probably been delt with in previous work on the topics ? }
 
 
-Now, for $Y$ a bifibrant object two maps $Y \rightrightarrows Weq(\UU_c)$ whose image in $\UU^{\to}_c$ are homotopic are also homotopic which concludes the proof that one has a diagonal map making the two triangles commutes up to homotopy. To prove the last claim consider a bifibrant interval object $Y \coprod Y \hookrightarrow IY \overset{\sim}{\twoheadrightarrow} Y$. Given a diagram of the form:
-
-
-\[\xymatrix{Y \coprod Y \ar@{^{(}->}[d] \ar[r] & Weq(\UU_c) \ar@{->>}[d] \\
-I Y \ar[r] & \UU_c^{\to} \\
-}
-\]
-
-One needs to construct a diagonal lift. One forms the successible pullback $P_1$ and $P_2$:
-
-\[\xymatrix{P_2 \ar[r] \ar@{->>}[d] & P_1 \ar@{->>}[d] \ar[r] & Weq(\UU_c) \ar@{->>}[d] \\
-Y \ar[r]^{\sim} & I Y \ar[r] & \UU_c^{\to} \\
-}
-\]
-
-The map $P_2 \rightarrow Y$ is a trivial fibration, because it is of the form $\texttt{isEquiv}_Y( \_) \twoheadrightarrow Y$ and it has a section. The map $P_1 \rightarrow P_2$ is a weak equivalence as a pullback of a weak equivalence between fibrant objects along a fibrations. This implies that the map $P_1 \twoheadrightarrow IY$ is a trivial fibration, and this is sufficient to construct a diagonal lift in the initial diagram.
-
-
-\end{proof}
-
-
-
-Let $p:E \twoheadrightarrow B$ be any fibration. We want to define what it means for $p$ to be a univalent fibration, and show that $\UU \twoheadrightarrow \U$ and $\UU_c \twoheadrightarrow \U_c$ are univalent fibrations.
-
-Using the ``$\Pi$-types'' that we have already defined, one can to construct a fibration $E^{\to} \twoheadrightarrow B \times B$ that classifies morphisms between two fibers of $p$. More precisely, $E^{\to}$ is defined as $\Pi_{p \times Id_B}(E \times E)$ in:
-
+Now, for $Y$ a bifibrant object two maps $Y \rightrightarrows \Weq(\UU_c)$ whose image in $\UU^{\to}_c$ are homotopic are also homotopic which concludes the proof that one has a diagonal map making the two triangles commutes up to homotopy. To prove the last claim consider a bifibrant interval object $Y \coprod Y \hookrightarrow IY \overset{\sim}{\twoheadrightarrow} Y$. Given a diagram of the form 
 \[
 \xymatrix{
-E \times E \ar[d]_{Id_E \times p } & \Pi_{p \times Id_B}(E \times E) \ar[d] \\
-E \times B \ar[r]_{p \times id_B} & B \times B \\
-}
+Y \coprod Y \ar@{^{(}->}[d] \ar[r] & Weq(\UU_c) \ar@{->>}[d] \\
+I Y \ar[r] & \UU_c^{\to} \\  }
 \]
-
-A morphisms from any object $A$ to $E^{\to}$ is the same as a morphism $A \overset{(f,g)}{\rightarrow} B \times B$ together with a morphism $E[f] \rightarrow E[g]$ over $A$. We now need to construct an object $Weq(p) \twoheadrightarrow E^{\to}$ that similarly classifies ``weak equivalences'' $E[f] \overset{\sim}{\rightarrow} E[g]$. we have not been able to show constructively that weak equivalences are stable under pullback along fibrations, so it is not clear if such an object $Weq(p)$ can be defined as a subobject od $E^{\to}$ or not. Instead we will follow Voevodsky's definition from type theory, see also section $4$ of \cite{shulman:reedy}, and hence one needs to start by discusing the type $\texttt{isContr}_B(E)$
-
-\begin{definition}
-
-Given a fibration $p:E \twoheadrightarrow B$ one defines:
-
-\[ \texttt{isContr}_B(E) = \Sigma_p \Pi_{\pi_2} \Id_E  \]
-
-
-With $Id_E \twoheadrightarrow E \times_B E$ and $\pi_2: E \times_B E \rightarrow E$.
-
-\end{definition}
-
-So $\texttt{isContr}_B(E)$ is a fibration over $B$ which encodes the idea that the fiber of $p$ is contractible, in the sense that the data of an ``element'' of $\texttt{isContr}_B(E)$ over a $b \in B$ is given by an element $e \in E(b)$ and for all $e' \in E(b)$ a path between $e$ and $e'$.
-
-We now need to use this to construct an object that classifies weak equivalences. Assume one has two fibrations $E_1,E_2 \twoheadrightarrow B$ and a morphism $f$:
-
-
-\[\xymatrix{
-E_1 \ar@{->>}[dr] \ar[rr]^f & & E_2 \ar@{->>}[dl] \\
-& B & 
-}\]
-
-We can then form the ``homotopy fiber'' of $f$ as the pullback:
-
-\[\xymatrix{
-P f \ar@{->>}[d] \ar[r]  & \Id_{E_2} \ar@{->>}[d] \\
-E_1 \times_B E_2 \ar[r] & E_2 \times_B E_2 
-}\]
-
-Which as usual produces a factorization of $f$:
-
-\[E_1 \rightarrow Pf \twoheadrightarrow E_2 \]
-
-\begin{lemma}
-If $E_1$ and $E_2$ are cofibrant and $E_2 \rightarrow B$ is a fibration, then $E_1 \rightarrow Pf$ is a weak equivalence.
-\end{lemma}
-
-\begin{proof}
-The projections $\Id_{E_2} \twoheadrightarrow E_2$ are trivial fibrations because of point (iv) of \cref{proposition:MainPathObject:IdBifib} (the proof of this claims only uses that $A \twoheadrightarrow X$ is a fibration, and none of the other assumptions, so it applies here), so the pullback $Pf \rightarrow E_1$ is also a trivial fibration. $\Id_{E_2}$ is cofibrant because because of (i) of \cref{proposition:MainPathObject:IdBifib} (which only uses that $E_2$ is cofibrant) so $Pf$ is cofibrant by \ref{lem:cofibrant_fiber_product} as $E_1$ and $E_2$ are cofibrant.
-
-It follows by \cref{lemma:triv_fib_are_we} that $Pf \rightarrow E_1$ is a weak equivalence. By $2$-out-of-$3$ for weak equivalences, $E_1 \rightarrow Pf$ is a weak equivalence.
-
+One needs to construct a diagonal lift. One forms the successible pullback $P_1$ and $P_2$:
+\[
+\xymatrix{P_2 \ar[r] \ar@{->>}[d] & P_1 \ar@{->>}[d] \ar[r] & Weq(\UU_c) \ar@{->>}[d] \\
+Y \ar[r]^{\sim} & I Y \ar[r] & \UU_c^{\to} \\ }
+\]
+The map $P_2 \rightarrow Y$ is a trivial fibration, because it is of the form $\isequiv_Y( \_) \twoheadrightarrow Y$ and it has a section. The map $P_1 \rightarrow P_2$ is a weak equivalence as a pullback of a weak equivalence between fibrant objects along a fibrations. This implies that the map $P_1 \twoheadrightarrow IY$ is a trivial fibration, and this is sufficient to construct a diagonal lift in the initial diagram.
 \end{proof}
 
 
-One can then define:
-
-\begin{definition} For any morphisms $f$ in $\Fib/B$ one defines:
-
-\[ \texttt{isEquiv}_B(f) = \Pi_{p_2} \texttt{isContr}_B(Pf) \]
-
-where $p_2$ is the fibration $E_2 \twoheadrightarrow B$.
-
-Given $p:E \twoheadrightarrow B$ be any fibration, one defines
-
-\[ Weq(E) = \texttt{isEquiv}_{E^{\to}}(f) \]
-
-Where $f$ denotes the universal map over $E^{\to}$ corresponding to its universal property.
-
-\end{definition}
-
-The definition of $\texttt{isEquiv}$ formalize the idea that $f$ is an equivalence if and only all its homotopy fiber are contractible.
-
-Admiting that the $\Pi$-types and identity types that we have defined so far are indeed part of an interpretation of type theory, i.e. that the coherence problems can be solved, these exactly corresponds to the usual definition of these notion in homotopy type theory. We now need some lemmas showing that these definitions indeed behave as expected in our model theoretic settings. These lemma mostly comes from section 4 of \cite{shulman:reedy}, though we need to reprove them to track where fibrancy/cofibrancy assumptions are needed for the proof to carry over.
-
-\begin{lemma}\label{lem:IsContr1}For a fibration $p:E \twoheadrightarrow B$ with $E$ and $B$ bifibrant, the following are equivalent:
-
-\begin{enumerate}[(i)]
-\item The map $p:E \twoheadrightarrow B$ is a trivial fibration.
-\item The map $\texttt{isContr}_B (E) \twoheadrightarrow B$ has a section.
-\item There is a map $ 1 \rightarrow \Pi_B  \texttt{isContr}_B (E) $.
-\item The map $\texttt{isContr}_B (E) \twoheadrightarrow B$ is a trivial fibration.
-\end{enumerate}
-
-\end{lemma}
+\bibliographystyle{plain}
+\bibliography{../Auxiliary/bibliography}
 
 
 
-More precisely, (ii) implies that $p$ is a weak equivalence assuming either that $B$ is fibrant or that $E$ and $B$ are cofibrant, so (ii) $\Rightarrow$ (i) when $B$ is fibrant, (i) $\Rightarrow$ (ii) when $B$ is cofibrant and $E$ is bifibrant.
-(ii) $\Leftrightarrow$ (iii) holds without assumption on $E$ and $B$, (vi) $\Rightarrow$ (ii) holds as soon as $B$ is cofibrant. And finally (i) $\Rightarrow$ (vi) holds when $E$ is bifibrant. 
 
-\begin{proof}
-
-A section of $\texttt{isContr}_B (E) \twoheadrightarrow B$ is by definition of $\texttt{isContr}_B (E)$ the data of a section $s:B \rightarrow E$, and a map $h \co E \to \Id_E$ whose image by $\Id_E \twoheadrightarrow E \times_B E$ is $(s \circ p, id_E)$. Such a section $s$ and homotopy $h$ produces a homotopy invers to $p$ and hence implies that $p$ is a weak equivalences, and hence a trivial fibration as $B$ is assumed fibrant.  This proves (ii) $\Rightarrow$ (i).
-
-Note that if one only assume that $E$ and $B$ are cofibrant and $p$ is a fibration, it is still the case that $\Id_E \twoheadrightarrow E$ is a trivial fibration between cofibrant objects, hence a weak equivalence. Which is hence sufficient to show that the map $h$ induce an equality in the homotopy category between $s \circ p $ and the identity of $E$.
-
-
-Conversely, assuming (i), one can construct a section $s$ as above using the lifting property of $B$ (cofibrant) against $p$. To construct the homotopy $h$ one needs to use a lifting property of $E$ against the map $Id_E \twoheadrightarrow E \times_B E$, which is a trivial fibrations because $\Id_E \twoheadrightarrow E$ and $E\times_B E \twoheadrightarrow E$ both are and trivial fibrations satisfies $2$-out-of-$3$ among fibrations between fibrant objects.
-
-The equivalence between (ii) and (iii) follows from the universal property of $\Pi$-types.
-The implication (vi) $\Rightarrow$ (ii) is clear when $B$ is cofibrant. We conclude by showing (i) $\Rightarrow$ (vi) 
-
-As above, as $E$ is fibrant, one can deduce assuming (i) that $\Id_E \twoheadrightarrow E \times_B E$ is a trivial fibration. $\pi_2 : E \times_B E \twoheadrightarrow E$ is a fibration with cofibrant domain, hence $\Pi_{\pi_2} \Id_E \rightarrow E$ is a trivial fibration by \cref{cor:Pi_types_are_fibrant}, and finally, $\texttt{isContr}(E)_B \rightarrow B$ is just the composite $\Pi_{\pi_2} \Id_E \rightarrow E \rightarrow B$ so is also a trivial fibration.
-\end{proof}
-
-\begin{lemma} \label{lem:isContr2}
-Let $p: E \twoheadrightarrow B$ be a fibration, and $f:A \rightarrow B$ be a morphism. Then there is a natural isomorphisms
-
-\[ \texttt{isContr}_A(E[f]) \simeq \texttt{isContr}_B(E) [f] \]
-
-In particular, if $E$ is cofibrant and $A$ bifibrant, then the following conditions are equivalent: 
-
-\begin{enumerate}[(i)]
-
-\item $E[f] \twoheadrightarrow A$ is a trivial fibration.
-
-\item The maps $A \rightarrow B$ factors as $A \rightarrow \texttt{isContr}_B(E) \rightarrow B$.
-
-\end{enumerate}
-
-\end{lemma}
-
-\begin{proof}
-
-The stability of $\texttt{isContr}$ under pullback is a very formal property which follows from the similar stability property of $\Pi$-types, which in turn is automatic from their universal property (see for example lemma 4.2 in \cite{shulman:reedy}). The equivalence is an immediate consequence of this pullback stability and \cref{lem:IsContr1}.
-
-\end{proof}
-
-
-Similarly, one also has:
-
-\begin{lemma} \label{isEquiv1} Let $f :E_1 \rightarrow E_2$ be an arrow in $\BFFib/B$ for $B$ bifibrant, i.e. $p_i :E_i \twoheadrightarrow B$ are fibrations and the $E_i$ are cofibrant. The following are equivalent:
-
-\begin{enumerate}[(i)]
-
-\item $f$ is a weak equivalence.
-
-\item $\texttt{isEquiv}(f) \twoheadrightarrow B$ has a section.
-
-\item There is a map $1 \rightarrow \Pi_B \texttt{isEquiv}(f)$.
-
-\item The map $\texttt{isEquiv}(f) \twoheadrightarrow B$ is a trivial fibration.
-
-\end{enumerate}
-\end{lemma}
-
-Note that the implication (ii) $\Rightarrow$ (i) holds without assuming that $B$ is bifibrant.
-
-\begin{proof}
-
-As $E_2$ is cofibrant, $Id_{E_2}$ is cofibrant as well because of point (\ref{proposition:MainPathObject:IdBifib}) of \cref{proposition:MainPathObject}. And \cref{lem:cofibrant_fiber_product} implies that as $E_1$ and $E_2$ are cofibrant, then $Pf$ is cofibrant as well. So as $\texttt{isEquiv}(f)$ is defined as $\Pi_{p_2}\texttt{isContr}(Pf)$ the equivalence above mostly follows from \cref{lem:IsContr1}. More precisely: 
-
-$f$ factors as $E_1 \overset{\sim}{\rightarrow} Pf \twoheadrightarrow E_2$ so $f$ is an equivalence if and only if $Pf \twoheadrightarrow E_2$ is an equivalence, which by \cref{lem:IsContr1} is equivalent to the fact that $\texttt{isContr}(Pf) \twoheadrightarrow E_2$ has a section, which by universal property of $\Pi$-types is equivalent to condition (ii). The equivalence between (ii) and (iii) is formal exactly as in the proof of \cref{lem:IsContr1}. One still has that (iv) implies (ii) simply because $B$ is cofibrant. Assuming (i) one has that $Pf \twoheadrightarrow E_2$ is a trivial fibration, hence $\texttt{isContr}(Pf) \twoheadrightarrow E_2$ is a trivial fibration by \cref{lem:IsContr1}, and \cref{cor:Pi_types_are_fibrant} implies that $\Pi_{p_2} \texttt{isContr}(Pf) = \texttt{isEquiv}(f) \twoheadrightarrow B$ is a trivial fibration.
-
-As observed below \cref{lem:IsContr1}, one has that a section of $\texttt{isEquiv}(f) \twoheadrightarrow B$ shows that $Pf \twoheadrightarrow E_1$ is an equivalence only assuming that $E_1$ and $E_2$ are cofibrant, so it is indeed the case that (ii) $\Rightarrow$ (i) holds without assuming $B$ is bifibrant.
-
-\end{proof}
-
-
-Similarly to \cref{lem:isContr2}, one has:
-\begin{lemma} \label{lem:isEquiv2}
-
-Let $f: E_1 \rightarrow E_2$ is a morphism in $\BFFib/B$  and $g:A \rightarrow B$ a morphism with $A$ and $B$ bifibrant. Then there is a natural isomorphisms
-
-\[ \texttt{isEquiv}_A(f[g]) \simeq \texttt{isContr}_B(f) [g] \]
-
-Where $f[g]$ denotes the map $E_1[g] \rightarrow E_2[g]$ obtained by pullback of $f$ 
-In particular, the following conditions are equivalent: 
-
-\begin{enumerate}[(i)]
-
-\item $f[g]: E_1[g] \rightarrow E_2[g]$ is an equivalence.
-
-\item The maps $g$ factors as $A \rightarrow \texttt{isEquiv}_B(f) \rightarrow B$.
-
-\end{enumerate}
-\end{lemma}
-
+\end{document}
 
 % Type theory rules
 
