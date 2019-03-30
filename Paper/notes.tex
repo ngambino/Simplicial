@@ -1213,10 +1213,21 @@ By assumption $x^*(w)$ is a weak equivalence between fibrant objects hence it ha
 \end{proof}
 
 
+\begin{lemma} $\U^{\rightarrow} \rightarrow \U \times \U$ is a fibration
+\end{lemma}
+
+\begin{proof} Observe that $\U^{\rightarrow}$ is exactly $\Pi_p(\UU \times \UU)$, 
+where $p \co \UU \times \U \rightarrow \U \times \U$ is the evident map. 
+It follows from \cref{cor:Pi_types_are_fibrant} that $\U^{\rightarrow} \rightarrow \U \times \U$ is a fibration.
+More precisely, \cref{cor:Pi_types_are_fibrant} implies that any pullback of  $\U^{\rightarrow} \rightarrow \U \times \U$ to a cofibrant
+$X \rightarrow \U \times \U$ is a fibration (due to the cofibrancy assumption of  \cref{cor:Pi_types_are_fibrant}),
+but this is sufficient to prove that $\U^{\rightarrow} \rightarrow \U \times \U$ is a fibration,
+as in the argument for part~(i) of  \cref{thm:universe-u}.
+\end{proof}
 
 \begin{lemma} \label{thm:lemma-for-u} \hfill 
 \begin{enumerate}[(i)]
-\item The map $(s, t) \co \mathsf{Weq}(\U) \rightarrow \U \times \U$ is a fibration.
+\item The map $\mathsf{Weq}(\U) \rightarrow \U^\to$ is a fibration.
 \item The map $t \co \mathsf{Weq}(\U) \rightarrow \U$ is a trivial fibration.
 \end{enumerate}
 \end{lemma}
@@ -1224,16 +1235,7 @@ By assumption $x^*(w)$ is a weak equivalence between fibrant objects hence it ha
 \begin{proof}
 \leavevmode
 \begin{enumerate}[(i)]
-\item First, we observe that $\U^{\rightarrow}$ is exactly $\Pi_p(\UU \times \UU)$, 
-where $p \co \UU \times \U \rightarrow \U \times \U$ is the evident map. 
-It follows from \cref{cor:Pi_types_are_fibrant} that $\U^{\rightarrow} \rightarrow \U \times \U$ is a fibration.
-More precisely, \cref{cor:Pi_types_are_fibrant} implies that any pullback of  $\U^{\rightarrow} \rightarrow \U \times \U$ to a cofibrant
-$X \rightarrow \U \times \U$ is a fibration (due to the cofibrancy assumption of  \cref{cor:Pi_types_are_fibrant}),
-but this is sufficient to prove that $\U^{\rightarrow} \rightarrow \U \times \U$ is a fibration,
-as in the argument for part~(i) of  \cref{thm:universe-u}.
-
-We can then prove the claim in part~(i) as follows. 
-Let $f \co Y \to X$ be a trivial cofibration between cofibrant objects and consider the diagram
+\item Let $f \co Y \to X$ be a trivial cofibration between cofibrant objects and consider the diagram
 \[ 
 \xymatrix@C=1.5cm{ Y \ar[d]_f \ar[r]^-{w} & \mathsf{Weq}(\U) \ar[d] \\
 X \ar[r]_-{a} & \U^{\rightarrow} }
@@ -1249,7 +1251,7 @@ Y \ar[r]_f & X }
 \caution{is a weak equivalence}.
 Since the maps $p_i \co A_i \rightarrow X$ (for $i = 1, 2$) are fibrations with cofibrant domain, \cref{prop:Frobenius} implies that pullbacks of trivial cofibration between cofibrant objects 
 \caution{along such 
-a map} are trivial cofibrations. This implies that all the horizontal maps of the diagram above are weak equivalence, and so the upper right map also is. This shows that~$\mathsf{Weq}(\U) \rightarrow \U^{\rightarrow} \rightarrow \U \times \U$ is a fibration.
+a map} are trivial cofibrations. This implies that all the horizontal maps of the diagram above are weak equivalence, and so the upper right map also is. This shows that~$\mathsf{Weq}(\U) \rightarrow \U^{\rightarrow}$ is a fibration.
 \item We prove that $t \co  \mathsf{Weq}(\U) \to \U$ has the right lifting property with respect
 to all cofibrations. So let $f \co Y \rightarrow X$ be a cofibration and consider the diagonal
 filling problem
@@ -1336,7 +1338,7 @@ by~\cref{thm:lemma-for-u}. The univalence of $\pi$ is the claim that $j$ is a we
  & \U & }
 \]
 this happens if and only if $t$ is a weak equivalence. This amounts to $t$ being a trivial
-fibration, which holds by part~(ii) of~\cref{thm:lemma-for-u}. 
+fibration, which holds by part~(ii) of~\cref{thm:lemma-for-u}. \qedhere
 \end{enumerate}
 \end{proof} 
 
@@ -1348,20 +1350,27 @@ fibration, which holds by part~(ii) of~\cref{thm:lemma-for-u}.
 
 \begin{lemma} \label{thm:lemma-for-uc} \hfill 
 \begin{enumerate}[(i)]
-\item The map $(s, t) \co \mathsf{Weq}(\U_c) \rightarrow \U_c \times \U_c$ is a fibration.
+\item The map $\mathsf{Weq}(\U_c) \rightarrow {\U_c}^\to$ is a fibration.
 \item The map $t \co \mathsf{Weq}(\U_c) \rightarrow \U_c$ is a trivial fibration.
 \end{enumerate}
 \end{lemma}
 
-\begin{proof} \noten{Maybe this helps?}
-
-\notesh{
- Fibrancy should follow directly from equivalence extension property, without using `composition vs filling' but rather retract property for horns (see notes).
-Once we have established fibrancy of $U_c$, then one can prove univalence by showing that 
- $t \co \mathsf{Weq}(U_c) \to U_c$ is a trivial fibration. 
-Question: do we need to know that $\mathsf{Weq}(\U_c)$ is a cofibrant object to get univalence?  I'm  relatively sure $\mathsf{Weq}(\U_c)$ is not cofibrant. But all these property proved here will imediately pass to any cofibrant replacement. This is also why I'm working with  $\mathsf{Weq}(\U)$ instead: everything will be pulled back to the version for $\U_c$.
-}
-
+\begin{proof}  \hfill 
+\begin{enumerate}[(i)] 
+\item SHOULD BE PROVED IN GENERAL.
+\item Observe that we have a diagram 
+\[
+\xymatrix@C=1.5cm{
+\Weq(\U_c) \ar[r]^{\sigma}  \ar[d]_{(s,t)} & \Weq(\U) \ar[d]^{(s,t)} \\
+\U_c \times \U_c \ar[r]^{\tau \times \tau} \ar[d]_{\pi_2} & \U \times \U \ar[d]^{\pi_2} \\
+\U_c \ar[r]_\tau & \U }
+\]
+The composite  on the left-hand side is the map $t$ that we wish to show to be a trivial cofibration.
+First, using part (i), observe that it is a fibration since it is the composite of two fibrations. Secondly,
+observe that the top square is a pullback and so $\sigma$ is a trivial fibration since $\tau \times \tau$ 
+is so. Thus, applying 3-for-2 to the outer square, we obtain that $t$ is a weak equivalence and hence
+a trivial fibration, as required.
+\end{enumerate}
 \end{proof}
 
 
@@ -1372,10 +1381,10 @@ Question: do we need to know that $\mathsf{Weq}(\U_c)$ is a cofibrant object to 
 \end{enumerate}
 \end{theorem}
 
-\begin{proof} Part (i) follows immediately as $\U_c$ is the cofibrant replacement of $\U$,
-which has been shown to be fibrant in part~(i) of~\cref{thm:fibrancy-and-univalence-of-u}.
+\begin{proof} Part (i) follows from the fact that $\U_c$ is a cofibrant replacement of $\U$
+and $\U$ is fibrant, as shown in part~(i) of~\cref{thm:fibrancy-and-univalence-of-u}.
 Part~(ii) follows from part (ii) of~\cref{thm:lemma-for-uc} exactly in the 
-same way as \cref{thm:fibrancy-and-univalence-of-u} follows from by part~(ii) of~\cref{thm:lemma-for-u}. 
+same way as part~(ii) of~\cref{thm:fibrancy-and-univalence-of-u} follows from part~(ii) of~\cref{thm:lemma-for-u}. 
 \end{proof}
 
 
