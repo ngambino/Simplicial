@@ -165,12 +165,7 @@ conveniently encapsulated in the notion of a cofibration and of a cofibrant obje
 
 We write $\Delta$ for the simplicial category. The objects of $\Delta$ will be written as $[n]$, for $n \geq 0$.
 We write $\SSet \defeq [\Delta^{\op}, \Set]$ for the category of simplicial sets. For $n \geq 0$, $\Delta[n] \in \SSet$ is the representable simplicial set associated to $[n] \in \Delta$. For $[n] \in \Delta$, we write $i^n \co  \partial \Delta[n] \to \Delta[n]$ for the boundary inclusion into the $n$-simplex and, for $1 \leq k \leq n$,  
-$h^k_n  \co \Lambda^k[n] \to \Delta[n]$  for the $k$-th horn inclusion into the $n$-simplex. The simplicial set $\Delta[1]$ is an interval object in $\SSet$, with endpoint inclusions~$\kcyl \co \braces{ k} \to \Delta[1]$ defined by~$\kcyl \defeq h^1_k$. 
-
-\medskip
-
-
-Throughout this paper, we shall work  with the constructive version of the
+$h^k_n  \co \Lambda^k[n] \to \Delta[n]$  for the $k$-th horn inclusion into the $n$-simplex. The simplicial set $\Delta[1]$ is an interval object in $\SSet$, with endpoint inclusions~$\kcyl \co \braces{ k} \to \Delta[1]$ defined by~$\kcyl \defeq h^1_k$. Throughout this paper, we shall work  with the constructive version of the
 Kan-Quillen model structure on $\SSet$ defined in~\cite{henry2019qms} . 
 For the convenience of the reader, we recall some of the main aspects of this model structure.
 
@@ -958,13 +953,9 @@ The fact that $\bar{B} \rightarrow A$ is a deformation retract show that it is i
 
  
 
-\section{A weakly universal fibration with cofibrant base}
+\section{A universal fibration with cofibrant base}
 
-\noten{I separated and put in this section the material that does not depend on
-the definition of $\Weq$ and the proof of univalence. It makes sense for
-this material to stay on its own.} 
 
-\bigskip
 
 
 
@@ -1149,15 +1140,10 @@ side square is also a pullback, as required. \qedhere
 \section{Fibrancy and univalence of the universe}
 \label{sec:fibrancy-and-univalence}
 
-\caution{Both approaches are still included in this section.} 
-
-\subsection*{First approach (\`a la Voevodsky)}
 
 
 
-
-We now prove that the fibration $\pi \co \UU \to \U$ is univalent in the sense of~\cite{voevodsky-simplicial-model}.
-Let $\U^{\rightarrow}$ be the simplicial set whose $n$-simplices are triples of the form $(F_0, F_1, \phi)$, where $F_0$ and $F_1$ are $n$-simplices of $\U$, \ie functors
+Let us return to consider the fibration $\pi \co \UU \to \U$. Let $\U^{\rightarrow}$ be the simplicial set whose $n$-simplices are triples of the form $(F_0, F_1, \phi)$, where $F_0$ and $F_1$ are $n$-simplices of $\U$, \ie functors
  \[
 F_0, F_1 \co {\Delta_{/[n]}}^{\op} \rightarrow \Set
 \]
@@ -1172,6 +1158,21 @@ A_1 \ar[rr]^{f} \ar[dr]_{p_1} & & A_2 \ar[dl]^{p_2} \\
 \end{gathered}
 \end{equation}
 where $p_1$ and $p_2$ are fibrations with cofibrant domain.
+
+
+\begin{lemma} $\U^{\rightarrow} \rightarrow \U \times \U$ is a fibration
+\end{lemma}
+
+\begin{proof} Observe that $\U^{\rightarrow}$ is exactly $\Pi_p(\UU \times \UU)$, 
+where $p \co \UU \times \U \rightarrow \U \times \U$ is the evident map. 
+It follows from \cref{cor:Pi_types_are_fibrant} that $\U^{\rightarrow} \rightarrow \U \times \U$ is a fibration.
+More precisely, \cref{cor:Pi_types_are_fibrant} implies that any pullback of  $\U^{\rightarrow} \rightarrow \U \times \U$ to a cofibrant
+$X \rightarrow \U \times \U$ is a fibration (due to the cofibrancy assumption of  \cref{cor:Pi_types_are_fibrant}),
+but this is sufficient to prove that $\U^{\rightarrow} \rightarrow \U \times \U$ is a fibration,
+as in the argument for part~(i) of  \cref{thm:universe-u}.
+\end{proof}
+
+
 We define $\mathsf{Weq}(\U)$ as the simplicial subset of $\U^\to$ whose $n$-simplices are the $n$-simplices $(F_1, F_2, \phi)$ of $\U^\to$ such that the corresponding map~$f$ in~\eqref{equ:corresp} is a weak equivalence.
 The simplicial set $\mathsf{Weq}(\U)$ is well defined because pullback functors are right Quillen functors \cite[???]{henry2019qms} and therefore preserve weak equivalences. Hence, 
 $\mathsf{Weq}(\U)$ as defined here is indeed a subobject of $\U^{\rightarrow}$. \caution{To be checked again!}
@@ -1213,17 +1214,7 @@ By assumption $x^*(w)$ is a weak equivalence between fibrant objects hence it ha
 \end{proof}
 
 
-\begin{lemma} $\U^{\rightarrow} \rightarrow \U \times \U$ is a fibration
-\end{lemma}
 
-\begin{proof} Observe that $\U^{\rightarrow}$ is exactly $\Pi_p(\UU \times \UU)$, 
-where $p \co \UU \times \U \rightarrow \U \times \U$ is the evident map. 
-It follows from \cref{cor:Pi_types_are_fibrant} that $\U^{\rightarrow} \rightarrow \U \times \U$ is a fibration.
-More precisely, \cref{cor:Pi_types_are_fibrant} implies that any pullback of  $\U^{\rightarrow} \rightarrow \U \times \U$ to a cofibrant
-$X \rightarrow \U \times \U$ is a fibration (due to the cofibrancy assumption of  \cref{cor:Pi_types_are_fibrant}),
-but this is sufficient to prove that $\U^{\rightarrow} \rightarrow \U \times \U$ is a fibration,
-as in the argument for part~(i) of  \cref{thm:universe-u}.
-\end{proof}
 
 \begin{lemma} \label{thm:lemma-for-u} \hfill 
 \begin{enumerate}[(i)]
@@ -1269,16 +1260,10 @@ gives us a weak equivalence $u$ between $B$ and $A[f]$ over~$X$. The completion 
 
 
 
-\begin{proposition} \label{thm:fibrancy-and-univalence-of-u} \hfill 
-\begin{enumerate}[(i)]
-\item The simplicial set $\U$ is fibrant. 
-\item The fibration $\pi \co \UU \to \U$ is univalent.
-\end{enumerate}
-\end{proposition}
+\begin{lemma} \label{thm:fibrancy-of-u} The simplicial set $\U$ is fibrant. 
+\end{lemma}
 
-\begin{proof} \hfill 
-\begin{enumerate}[(i)]
-\item Since
+\begin{proof}  Since
 $(s, t) \co \mathsf{Weq}(\U) \rightarrow \U \times \U$ is a fibration, for any cofibrant 
 simplicial set $X$,  maps $a_1 \, , a_2 \co X \rightrightarrows \U$ and homotopy $h \co \Delta[1] \times X \rightarrow \U$ from $a_1$ to $a_2$, there is a weak equivalence in $\SSet_{/X}$ between the objects classified by $a_1$ and $a_2$, constructed as follows. For this, we first consider a diagonal filler in the
 diagram
@@ -1323,42 +1308,55 @@ By the observation above, the composite map $\big( \Delta[1] \times \Lambda^k[n]
 So one can construct a fibration  $\bar{q} \co \bar{B} \to \Delta[n]$ with cofibrant domain whose pullback 
 along~$h^k_n$ is isomorphic to $q \co B \to \Lambda^k_n$. The map $b \co \Delta[n] \rightarrow \U$ classifying $\bar{q}$ gives the lift we are looking for. More precisely, one can use $q  \co \bar{B} \to
 \Delta[n]$ to construct  a map $b \co \Delta[n] \rightarrow \U$ which extend the one we started from and which classifies something isomorphic to $\bar{B}$.
-\item Let $\delta \co \U \to \U \times \U$ be the diagonal map of $\U$ and consider its factorisation
-as a trivial cofibration $r \co \U \to \mathsf{Id}_\U$ followed by a fibration $(s,t) \co \mathsf{Id}_\U \to \U \times \U$. The evident solid diagram
-\[
-\xymatrix@C=1.5cm{
-\U \ar[r] \ar[d]_r & \Weq(\U) \ar[d]^{(s,t)} \\
-\mathsf{Id}_\U \ar[r]  \ar@{.>}[ur]_{j} &  \U \times \U }
-\]
-has a dotted diagonal filler $j$, since $r$ is a trivial cofibration and $t$ is a fibration 
-by~\cref{thm:lemma-for-u}. The univalence of $\pi$ is the claim that $j$ is a weak equivalence. But by the 3-for-2 property applied to the diagram
-\[
-\xymatrix{
-\U  \ar[rr]^-{j} \ar[dr]_{1_\U} & &   \Weq(\U)  \ar[dl]^t \\
- & \U & }
-\]
-this happens if and only if $t$ is a weak equivalence. This amounts to $t$ being a trivial
-fibration, which holds by part~(ii) of~\cref{thm:lemma-for-u}. \qedhere
-\end{enumerate}
 \end{proof} 
 
+\begin{theorem} \label{thm:fibrancy-of-uc} The simplicial set $\U$ is fibrant. 
+\end{theorem}
+
+\begin{proof} Immediate from ~\cref{thm:fibrancy-of-u}, since $\tau \co \U_c \to \U$ is a trivial fibration.
+\end{proof}
+
+
+We now wish to define  what it means for a small fibration between cofibrant objects  be univalent. For this, we fix such a fibration $p \co A \to X$ and construct an object $\Weq(p) \to X \times X$ that represents weak
+equivalences between fibers of $p$, in the sense that maps $\sigma \co Y \to \Weq(p)$ in $\SSet_{/X \times X}$ are in bijective correspondence with maps $x_1 \, , x_2 \co Y \to X$ and weak equivalences $w \co A[x_1]
+\to A[x_2]$ in $\SSet_{/Y}$. The required object $\Weq(p)$ can be construted as the pullback
+\[
+\xymatrix{
+\Weq(p) \ar[r] \ar[d] & \Weq(\U) \ar[d]^{(s,t)} \\
+X \times X \ar[r]_{a \times a} & \U \times \U \, ,}
+\]
+where $a \co X \to \U$ is a classifying map for the small fibration $p \co A \to X$, which exists by our assumption
+that $A$ and $X$ are cofibrant and part~(iii) of~\cref{thm:universe-u}. The verification that $\Weq(p)$
+has the required universal property is an easy calculation, which we leave to the readers.
 
 
 
 
-
-
-\begin{lemma} \label{thm:lemma-for-uc} \hfill 
-\begin{enumerate}[(i)]
-\item The map $\mathsf{Weq}(\U_c) \rightarrow {\U_c}^\to$ is a fibration.
-\item The map $t \co \mathsf{Weq}(\U_c) \rightarrow \U_c$ is a trivial fibration.
-\end{enumerate}
-\end{lemma}
-
-\begin{proof}  \hfill 
+\begin{proposition}  \label{equ:characterisations-of-univalence} Let $p \co A \to X$ be a small fibration between cofibrant objects. Then following equivent conditions are equivalent.
 \begin{enumerate}[(i)] 
-\item SHOULD BE PROVED IN GENERAL.
-\item Observe that we have a diagram 
+\item The map $i \co X \to \Weq(p)$ is an equivalence. 
+\item The map $s \co \Weq(p) \to X$ is a trivial fibration. 
+\item The map $t \co \Weq(p) \to X$ is a trivial fibration. 
+\item The map $j \co \Id(X) \to \Weq(p)$ fitting in the diagram
+\[
+\xymatrix@C=1.5cm{
+X \ar[r]^i \ar[d]_r & \Weq(p) \ar[d]^{(s,t)} \\
+\Path(X) \ar[r]_{\partial_X}  \ar@{.>}[ur]_{j} &  X \times X }
+\]
+is a weak equivalence.
+\end{enumerate}
+\end{proposition} 
+
+\begin{proof} Immediate consequences of the  3-for-2 property.
+\end{proof}
+
+
+
+\begin{theorem} \label{thm:univalence-of-uc} The fibration $\pi_c \co \UU_c \to \U_c$ is univalent.
+\end{theorem}
+
+\begin{proof}  We prove that $t \co \Weq(\pi_c) \to \U_c$ is a trivial fibration. For this, let us
+observe that we have a diagram 
 \[
 \xymatrix@C=1.5cm{
 \Weq(\U_c) \ar[r]^{\sigma}  \ar[d]_{(s,t)} & \Weq(\U) \ar[d]^{(s,t)} \\
@@ -1370,271 +1368,14 @@ First, using part (i), observe that it is a fibration since it is the composite 
 observe that the top square is a pullback and so $\sigma$ is a trivial fibration since $\tau \times \tau$ 
 is so. Thus, applying 3-for-2 to the outer square, we obtain that $t$ is a weak equivalence and hence
 a trivial fibration, as required.
-\end{enumerate}
-\end{proof}
-
-
-\begin{theorem} \label{thm:fibrancy-and-univalence-of-uc} \hfill 
-\begin{enumerate}[(i)]
-\item The simplicial set $\U_c$ is bifibrant.
-\item The fibration $\pi_c \co \UU_c \to \U_c$ is univalent.
-\end{enumerate}
-\end{theorem}
-
-\begin{proof} Part (i) follows from the fact that $\U_c$ is a cofibrant replacement of $\U$
-and $\U$ is fibrant, as shown in part~(i) of~\cref{thm:fibrancy-and-univalence-of-u}.
-Part~(ii) follows from part (ii) of~\cref{thm:lemma-for-uc} exactly in the 
-same way as part~(ii) of~\cref{thm:fibrancy-and-univalence-of-u} follows from part~(ii) of~\cref{thm:lemma-for-u}. 
-\end{proof}
-
-
-
-\bigskip
-
-
-\bigskip
-
-
-
-
-\subsection*{Second approach (\`a la Shulman)}
-
-
-\notesh{[Work in progress] I prefer to start again this section from scratch, but I'm leaving the old univalence section as long as this is not finished}
-
-We recall what it means for a fibration $p \co A \to X$  to be a univalent fibration. Using the $\Pi$-types that we have already defined, one can to construct a fibration $(s, t) \co A^{\to} \to X \times X$ that classifies morphisms between two fibers of $p$. More precisely, $A^{\to} \to X \times X$ is the result of applying
-the functor
-\[
-\Pi_{p \times 1_X} \co \SSet_{/A \times X} \to \SSet_{X \times X}
-\]
-to $1_A \times X \co A \times A \to A \times X$. 
-A morphisms $Y \to A^{\to}$ in $\SSet_{/ X \times X}$ is the same thing as a morphism $(x_1, x_2) \co Y \to  X \times X$ together with a morphism $A[x_1] \rightarrow A[x_2]$ over $Y$. We now need to construct an object $\Weq(p) \to E^{\to}$ that similarly classifies weak equivalences $w \co E[f] \to E[g]$. \caution{We have not been able to show constructively that weak equivalences are stable under pullback along fibrations, so it is not clear if such an object $\Weq(p)$ can be defined as a subobject od $E^{\to}$ or not}. \noten{Hasn't right properness been proved now? If so, maybe some of what is below is not needed.}
-Instead we will follow Voevodsky's definition from type theory, see also section $4$ of \cite{shulman:reedy}, and hence one needs to start by discusing the type $\iscontr_B(E)$
-
-
-
-Given a fibration $p \co A \to X$ we define
-\[ 
-\iscontr_X(A) \defeq \Sigma_p \Pi_{\pi_2} \Id_A 
-\]
-where $\Id_A \to A \times_X A$ and $\pi_2 \co A \times_X A \rightarrow A$.
-Thus, $\iscontr_X(A) \to A$ is a fibration  which encodes the idea that the fibers of $p$ are contractible, in the sense that the data of an element of $\iscontr_X(A)$ over $x \in X$ is an element $a_0 \in A(x)$ and
-a function mapping $a \in A(x)$ to a path from~$a_0$ to $a$.
-
-We now need to use this to construct an object that classifies weak equivalences. 
-Let fibrations $p \co A \to X$ and $q \co B \to X$ be fibrations and $f \co A \to B$ be
-a map between them, 
-\[
-\xymatrix{
-A \ar[dr]_{p} \ar[rr]^f & & B \ar[dl]^{q} \\
-& X & 
-}
-\]
-We can then form the homotopy fiber of $f$ as the pullback:
-\[
-\xymatrix@C=1.5cm{
-\hfiber(f) \ar@{->>}[d] \ar[r]  & \Id_{B} \ar@{->>}[d] \\
-A \times_X B \ar[r]_{f \times_X 1_B} & B \times_X B 
-}
-\]
-which  produces a factorization of $f$,
-\[
-A \to \hfiber(f) \to B  \, .
-\]
-
-\begin{lemma}
-If $A$ and $B$ are cofibrant, then $A \rightarrow \hfiber(f)$ is a weak equivalence.
-\end{lemma}
-
-\begin{proof}
-The projections $\Id_{B} \to B$ are trivial fibrations because of part~(iv) of \cref{proposition:MainPathObject}, as the proof of this claim uses  only that $p \co A \to X$ is a fibration, and none of the other assumptions), so the pullback $\hfiber(f) \rightarrow B$ is also a trivial fibration. The simplicial set $\Id_{B}$ is cofibrant because  of part~(i) of \cref{proposition:MainPathObject}, which only uses that $B$ is cofibrant, so $\hfiber(f)$ is cofibrant by \cref{lem:cofibrant_fiber_product} as $A$ and $B$ are cofibrant. It follows that $\hfiber(f) \rightarrow B$ is a weak equivalence. By 3-for-2 for weak equivalences, $A \rightarrow \hfiber(f)$ is a weak equivalence.
 \end{proof}
 
 
 
 
-For any morphisms $f \co A \to B$ in $\Fib/X$, we define
-\[ 
-\isequiv_X(f) = \Pi_{q}  \, \iscontr_X( \hfiber(f)) 
-\]
-where $q \co B \to X$. The definition of $\isequiv$ formalizes the idea that $\eta$ is an equivalence if and only all its homotopy fibers are contractible. Given $p \co A \to X$ be a fibration, one defines
-\[ 
-\Weq(p) = \isequiv_{A^{\to}}(\eta) 
-\]
-where $\eta$ denotes the universal map over $A^{\to}$ corresponding to its universal property. 
-
-\medskip
-
-We now prove  that these definitions indeed behave as expected. These lemma mostly comes from  \cite[Section 4]{shulman:reedy}, but we need to reprove them to track of the  ecessary fibrancy and cofibrancy assumptions.
-
-\begin{lemma}\label{lem:IsContr1}For a fibration $p \co A \to X$ with $A$ and $X$ bifibrant, the following are equivalent:
-
-\begin{enumerate}[(i)]
-\item The map $p \co A \to X$ is a trivial fibration.
-\item The map $\iscontr_X (A) \to X$ has a section.
-\item There is a map $ 1 \rightarrow \Pi_X  \iscontr_X (A) $.
-\item The map $\iscontr_X (A) \to X$ is a trivial fibration.
-\end{enumerate}
-\end{lemma}
 
 
 
-\begin{proof} A section of $\iscontr_X (A) \to X$ is  the data of a section $s \co X \rightarrow A$, and a map $h \co A \to \Id_A$ whose image by $\Id_A \to A \times_X A$ is $(s \circ p, 1_A)$. Such a section $s$ and homotopy $h$ produces a homotopy inverse to $p$ and hence implies that $p$ is a weak equivalences, and hence a trivial fibration as $X$ is assumed fibrant.  This proves (ii) $\Rightarrow$ (i).
-Note that if we only assumes that $A$ and $X$ are cofibrant and $p$ is a fibration, it is still the case that $\Id_A \to A$ is a trivial fibration between cofibrant objects and hence a weak equivalence. This is then sufficient to show that the map $h$ induces an equality in the homotopy category between $s \circ p $ and the identity of $A$.
-
-
-Conversely, assuming (i), one can construct a section $s$ as above using the lifting property of $X$ (cofibrant) against $p$. To construct the homotopy $h$ one needs to use a lifting property of $A$ against the map $Id_A \to A \times_X A$, which is a trivial fibration because $\Id_A \to A$ and $A \times_X A \to A$ both are, and trivial fibrations satisfy 3-for-2 among fibrations.
-
-The equivalence between (ii) and (iii) follows from the universal property of $\Pi$-types.
-The implication (vi) $\Rightarrow$ (ii) is clear when $B$ is cofibrant. We conclude by showing (i) $\Rightarrow$ (vi).
-
-As above, as $X$ is fibrant, one can deduce assuming (i) that $\Id_A \to A \times_X A$ is a trivial fibration. $\pi_2 \co A \times_X A \to A$ is a fibration with cofibrant domain, hence $\Pi_{\pi_2} \Id_A \rightarrow A$ is a trivial fibration by \cref{cor:Pi_types_are_fibrant}, and finally, $\iscontr(A)_X \rightarrow X$ is just the composite $\Pi_{\pi_2} \Id_A \rightarrow A \rightarrow X$ and so it is  a trivial fibration.
-\end{proof}
-
-\begin{remark} \label{lem:IsContr1-sharp}
- \cref{lem:IsContr1} can be stated more sharply observing that (ii) implies that $p$ is a weak equivalence assuming either that $X$ is fibrant or that $A$ and $X$ are cofibrant, so (ii) $\Rightarrow$ (i) when $X$ is fibrant, (i) $\Rightarrow$ (ii) when $X$ is cofibrant and $A$ is bifibrant.
-(ii) $\Leftrightarrow$ (iii) holds without assumption on $A$ and $X$, (vi) $\Rightarrow$ (ii) holds as soon as $X$ is cofibrant. And finally (i) $\Rightarrow$ (vi) holds when $A$ is bifibrant. 
-\end{remark} 
-
-\begin{lemma} \label{lem:isContr2}
-Let $p \co A \to X$ be a fibration, and $f \co Y \rightarrow X$ be a morphism. Then there is a natural isomorphisms
-\[ 
- \iscontr_X(A) [f]  \cong \iscontr_Y(A[f])  \, .
-\]
-In particular, if $A$ is cofibrant and $Y$ bifibrant, then the following conditions are equivalent: 
-\begin{enumerate}[(i)] 
-\item $A[f] \to Y$ is a trivial fibration.
-\item The map $f \co Y \rightarrow X$ factors via $\iscontr_X(A)$.
-\end{enumerate}
-\end{lemma}
-
-\begin{proof} The stability of $\iscontr$ under pullback is a formal property which follows from the similar stability property of $\Pi$-types. The equivalence is an immediate consequence of this pullback stability and \cref{lem:IsContr1}.
-\end{proof}
-
-
-Similarly, one also has the following.
-
-\begin{lemma} \label{isEquiv1} Let $f \co A \rightarrow B$ be a map in $\BFFib/X$ for $X$ bifibrant, i.e. $p \co A \to X$ and $q \co B \to X$ are fibrations and $A$ and $B$ are cofibrant. The following are equivalent:
-\begin{enumerate}[(i)]
-\item $f$ is a weak equivalence.
-\item $\isequiv(f) \to X$ has a section.
-\item There is a map $1 \rightarrow \Pi_X \isequiv(f)$.
-\item The map $\isequiv(f) \to X$ is a trivial fibration.
-\end{enumerate}
-\end{lemma}
-
-
-
-\begin{proof} As $B$ is cofibrant, $\Id_{B}$ is cofibrant as well because of part~(\ref{proposition:MainPathObject:IdBifib}) of \cref{proposition:MainPathObject}. And \cref{lem:cofibrant_fiber_product} implies that as $A$ and $B$ are cofibrant, then $\hfiber(f)$ is cofibrant as well. So as $\isequiv(f)$ is defined as $\Pi_{p_2}\iscontr( \hfiber(f))$ the equivalence above mostly follows from \cref{lem:IsContr1}. More precisely, $f$ factors as $A \to \hfiber(f) \to B$ so $f$ is an equivalence if and only if $\hfiber(f) \to B$ is an equivalence, which by \cref{lem:IsContr1} is equivalent to the fact that $\iscontr( \hfiber(f)) \to B$ has a section, which by universal property of $\Pi$-types is equivalent to condition (ii). The equivalence between (ii) and (iii) is formal, exactly as in the proof of \cref{lem:IsContr1}. One still has that (iv) implies (ii) simply because $X$ is cofibrant. Assuming (i) one has that $\hfiber(f) \to B$ is a trivial fibration, hence $\iscontr( \hfiber(f)) \to E_2$ is a trivial fibration by \cref{lem:IsContr1}, and \cref{cor:Pi_types_are_fibrant} implies that $\Pi_{p_2} \iscontr( \hfiber(f)) = \isequiv(f) \to X$ is a trivial fibration.
-
-As observed in~\cref{lem:IsContr1-sharp}, one has that a section of $\isequiv(f) \to X$ shows that $\hfiber(f) \to A$ is an equivalence only assuming that $A$ and $B$ are cofibrant, so it is indeed the case that (ii) $\Rightarrow$ (i) holds without assuming $X$ is bifibrant.
-\end{proof}
-
-Note that in~\cref{isEquiv1} the implication (ii) $\Rightarrow$ (i) holds without assuming that $X$ is bifibrant. Similarly to \cref{lem:isContr2}, one has the following.
-
-\begin{lemma} \label{lem:isEquiv2}
-Let $f \co A \rightarrow B$ be a map in $\BFFib/X$  and $\sigma \co Y \rightarrow X$ a morphism with $Y$ and $X$ bifibrant. Then there is a natural isomorphisms
-\[ 
-\isequiv_Y(f[\sigma]) \cong \iscontr_X(f) [\sigma]
-\]
-where $f[\sigma] \co A[\sigma] \rightarrow B[\sigma]$ is pullback of $f$ along $\sigma$. 
-In particular, the following conditions are equivalent: 
-\begin{enumerate}[(i)]
-\item $f[\sigma] \co A[\sigma] \rightarrow B[\sigma]$ is an equivalence.
-\item The maps $\sigma$ factors via $\isequiv_X(f)$.
-\end{enumerate}
-\end{lemma}
-
-
-
-
-
-Let $p \co A \to X$ be a fibration with $A$ and $X$ bifibrant. By the universal property of $A^\to$, there
-is a map $A^{\to} \to X \times X$ corresponding to the identity $A[1_X] \rightarrow A[1_X]$. This map
-fits into a factorization of the diagonal map $X \rightarrow A^{\to} \to X \times X$. Since the identity
-$A[1_X] \rightarrow A[1_X]$ is a weak equivalence, \cref{lem:isEquiv2} implies that this maps factors into $X \rightarrow \Weq(p) \to X \times X$. Then, using the lifting
-\[
-\xymatrix{
-X \ar[d] \ar[r] & \Weq(p) \ar@{->>}[d] \\
-\Id_X \ar@{->>}[r] \ar@{..>}[ur] & X \times X \\ 
-}
-\]
-one obtains a map $j \co \Id_X \rightarrow \Weq(p)$.
-
-\begin{definition} \label{def:univalentFib}
-A fibration $p \co A \to X$  is said to be \emph{univalent} if the map $j \co \Id_X \rightarrow \Weq(p)$ is an equivalence.
-\end{definition}
-
-This is clearly equivalent to the fact that the map $X \rightarrow \Weq(p)$ is an equivalence, or to the fact that any of the two projection $\Weq(p) \to X$ is a trivial fibration.
-
-
-\bigskip
-
-\notesh{The next proposition assumes $\UU_c \to \U_c$ is a fibration between bifibrant objects.}
-
-\begin{proposition}
-The fibration $\pi_c \co \UU_c \to \U_c$ is univalent.
-\end{proposition}
-
-
-
-\begin{proof} It is enough to show that the target projection $\Weq(\UU_c) \to \U_c$ is a weak equivalence. Consider a diagram:
-\[ 
-\xymatrix{
-Y \ar[d]_{f} \ar[r]^-{\beta} & \Weq(\UU_c) \ar[d]^{\pi_c} \\
-X \ar[r]_-{\alpha} & \U_c
-}
-\]
-where $f$ is any cofibration between $Y$ and $X$ two bifibrant objects. We will show that there exists a diagonal filling making the diagram commutes up to homotopies. This is sufficient to show $\Weq(\UU_c) \rightarrow \U_c$ is invertible in the homotopy category, hence is a weak equivalence.
-
-The map to $\alpha$ corresponds to a fibration $A \to X$ with $A$ cofibrant, and the map $\beta$ gives in particular a (solid) diagram as in \cref{Prop:Homotopy_ext_prop}:
-\[ 
-\xymatrix{
- B
-  \ar@{.>}[rr]
-  \ar[dr]^{u}
-  \ar[dd]_(.3){q}
-&&
-  \bar{B}
-  \ar@{.>}[dr]^{v}
-  \ar@{.>}[dd]_(.3){\bar{q}}|{\hole}
-&\\&
-  A[f] 
-  \ar[rr]
-  \ar[dl]
-&&
-  A
-  \ar[dl]^{p}
-\\
-  Y
-  \ar[rr]_{f}
-&&
-  X
-&
-}
-\]
-which by \cref{Prop:Homotopy_ext_prop} admits a dotted extention where both square are pullbacks.
-
-This filling in turn allows us to construct a map $X \rightarrow \Weq(\UU_c)$ that makes the lower triangle commutes. The upper triangle does not quite commute though, one only have that the composite with $\Weq(\UU_c) \to \UU^{\to}_c$ commutes ``up to isomorphisms'' in the sense that the two maps $Y \rightrightarrows \UU^{\to}_c$ classifies arrows in $\BFFib_{/Y}$ that are isomorphic.
-
-Hence the two maps $Y \rightrightarrows \UU^{\to}_c$ are homotopic.
-
-\notesh{This is probably not very hard to prove, but I'm not sure what is the best way to do that... In the worst case scenario one can construct a homotopy explicitely, though that sounds tedious. This has probably been delt with in previous work on the topics ? }
-
-
-Now, for $Y$ a bifibrant object two maps $Y \rightrightarrows \Weq(\UU_c)$ whose image in $\UU^{\to}_c$ are homotopic are also homotopic which concludes the proof that one has a diagonal map making the two triangles commutes up to homotopy. To prove the last claim consider a bifibrant interval object $Y + Y \hookrightarrow IY \overset{\sim}{\to} Y$. Given a diagram of the form 
-\[
-\xymatrix{
-Y + Y \ar[d] \ar[r] & \Weq(\pi_c) \ar@{->>}[d] \\
-I Y \ar[r] & \UU_c^{\to} \\  }
-\]
-One needs to construct a diagonal lift. One forms the successible pullback $P_1$ and $P_2$:
-\[
-\xymatrix{P_2 \ar[r] \ar@{->>}[d] & P_1 \ar@{->>}[d] \ar[r] & \Weq(\pi_c) \ar@{->>}[d] \\
-Y \ar[r]^{\sim} & I Y \ar[r] & \UU_c^{\to} \\ }
-\]
-The map $P_2 \rightarrow Y$ is a trivial fibration, because it is of the form $\isequiv_Y( \_) \to Y$ and it has a section. The map $P_1 \rightarrow P_2$ is a weak equivalence as a pullback of a weak equivalence between fibrant objects along a fibrations. This implies that the map $P_1 \to IY$ is a trivial fibration, and this is sufficient to construct a diagonal lift in the initial diagram.
-\end{proof}
 
 
 \bibliographystyle{plain}
