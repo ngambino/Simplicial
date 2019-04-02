@@ -38,21 +38,18 @@ for weak equivalences between fibrations with cofibrant domain and that there ex
 
 \section*{Introduction} 
 
-The aim of this paper is to advance our understanding of the connections between type theory
-and homotopy theory that have given rise to the areas of Homotopy Type Theory~\cite{hottbook}
-and Univalent Foundations of Mathematics~\cite{voevodsky:library}. A cornerstone of these connections is Voevodsky's
-discovery that Martin-L\"of type theory admits a model in the category of simplicial sets~\cite{voevodsky-simplicial-model}. The
-study of this model suggested a new approach to the formalisation of mathematics in type
-theory, following the idea that types have homotopy levels, and the formulation of the Univalence Axiom, 
-which makes precise the idea that isomorphic structures
-should be considered as equal.
+The aim of this paper is to advance our understanding of the connections between Martin-L\"of type theory
+and homotopy theory that are at the heart of Homotopy Type Theory~\cite{hottbook}
+and Univalent Mathematics~\cite{voevodsky:library}. A cornerstone of these connections is Voevodsky's
+discovery that Martin-L\"of type theory admits a model in the category of simplicial sets~\cite{voevodsky-simplicial-model} in which identity types are interpreted as path spaces, \cf~\cite{awodey-warren:homotopy-idtype}. The definition of this model suggested a new approach to the formalisation of mathematics in type
+theory, informed by the possibility of defining the homotopy level of type, and the formulation of the Univalence Axiom, which makes precise the idea that isomorphic structures should be considered as equal.
 
 Voevodsky's definition of the simplicial model of type theory was carried out working within 
 classical Zermelo-Fraenkel
 set theory extended with two inaccessible cardinals. Here, the first cardinal is used to interpret a type-theoretic universe, while the other is used to address coherence issues of the interepretation. 
-Give that Martin-L\"of type theory is a constructive theory and its proof-theoretic strength is 
-much lower than that of Zermelo-Fraenkel set theory, it is natural to ask whether the simplicial model could be defined working in a constructive setting, such as 
-Martin-L\"of type theory itself or Constructive Zermelo-Fraenkel set theory~\cite{Aczel-Rathjen}. This
+Since Martin-L\"of type theory is a constructive theory and its proof-theoretic strength is 
+much lower than that of Zermelo-Fraenkel set theory~\cite{RathjenM:strsml}, it is natural to ask whether the simplicial model could be defined working in a constructive setting, such as 
+Martin-L\"of type theory itself or Constructive Zermelo-Fraenkel set theory~\cite{AczelP:typtic}. This
 question has a direct application of mathematical logic, by allowing to prove the consistency of
 the extension of Martin-L\"of type theory with the Univalence Axiom relative to Martin-L\"of type theory.
 
@@ -64,22 +61,25 @@ model structure whose fibrations are the Kan fibrations, which underpins a lot o
  the Frobenius property for the weak factorisation system of trivial cofibrations and fibrations, which
 implies that pushforward along fibrations preserves fibrations, 
  the existence of a small fibration $\pi \co \UU \to \U$ that classifies small fibrations, 
-the fibrancy of $\U$, and the univalence of $\pi$.
+the fibrancy of $\U$ and, finally, the univalence of the fibration $\pi$.
 
 A serious obstruction to a constructive development of the simplicial model was discovered by
 Bezem, Coquand and Parmann in~\cite{coquand-non-constructivity-kan}, where they showed that
-the exponentiability of Kan complexes is not provable constructively.
+the closure of Kan complexes under exponentiation is not provable constructively.
 Because of this, Coquand and several collaborators switched and considered the possibility of
 defining homotopy-theoretic models of type theory in categories of cubical sets~\cite{coquand-cubical-sets}, starting a very profitable line of enquiry, cf.~\cite{awodey-cubical,PittsAM:aximct}. On top of switching 
-from simplicial to cubical, they also switched from ordinary fibrations to uniform ones. While they
+from simplicial to cubical, they also switched from ordinary fibrations, defined by a right lifting property,
+to uniform fibrations, defined as maps equipped with additional algebraic structure which provides
+chosen fillers for lifting problems. While they
 succeeded in interpreting constructively type theory with univalence in cubical sets, none of the
 categories of cubical sets considered are known to be Quillen equivalent to topological spaces.
 
 As shown in~\cite{gambino2017frobenius}, it is possible to develop a theory of uniform Kan fibrations
-also in simplicial sets and prove the Frobenius property. However, the notion of a uniform Kan fibration
+also in simplicial sets and prove that they satisfy the Frobenius property, thus showing constructively
+that algebraic Kan complexes are closed under exponentiation. However, the notion of a uniform Kan fibration
 in simplicial sets is not as well-behaved as in cubical sets in that it does not admit a classifier, a fact that
 ultimately follows from the representables are closed under products in cubical sets, while they are not
-in simplicial sets. This situation, in which attempting to solve one problem immediately leads to problems with another problem, reminds closely of the game of `whack-a-mole', is summarised in~\cref{tab:whack}.
+in simplicial sets. This situation, in which solving one problem leads to opening another problem, reminds closely of the game of `whack-a-mole', is summarised in~\cref{tab:whack}.
 
 
 
@@ -99,7 +99,7 @@ Coherence & \checkmark   & \checkmark &  \checkmark  \\
 \hline
 \end{tabular}
 \medskip
-\caption{The univalent foundations whack-a-mole game.} 
+\caption{The whack-a-mole game of models of Homotopy Type Theory.} 
 \label{tab:whack} 
 \end{table}
 
@@ -110,7 +110,18 @@ shown constructively that the category of simplicial sets admits a Quillen model
 fibrations are the Kan fibrations. Crucially, the cofibrations in this constructive model structure are not
 all the monomorphisms, but rather the morphisms that are levelwise complemented with decidability of
 degeneracies on the completement of the image. In particular, the cofibrant objects are not all simplicial
-sets but only those with decidable degeneracies.
+sets but only those with decidable degeneracies. Another proof of the constructive existence of this
+model structure was obtained in~\cite{GambinoN:anocp}.
+
+This paper builds on this work to obtain constructive counterparts of all the main results of simplicial
+homotopy theory necessary to define the simplicial model of Martin-L\"of type theory extended with the
+Univalence Axiom. In particular, we prove:
+\begin{itemize}
+\item
+\item
+\item
+\item
+\end{itemize}
 
 
 
