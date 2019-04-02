@@ -4,7 +4,7 @@
 \input{../Auxiliary/prooftree}
 
 
-\title[]{Constructive aspects of the simplicial model of univalent foundations}
+\title[]{Towards a constructive  simplicial model \\ of univalent foundations}
 
 \begin{document}
 
@@ -47,14 +47,13 @@ theory, informed by the possibility of defining the homotopy level of type, and 
 Voevodsky's definition of the simplicial model of type theory was carried out working within 
 classical Zermelo-Fraenkel
 set theory extended with two inaccessible cardinals. Here, the first cardinal is used to interpret a type-theoretic universe, while the other is used to address coherence issues of the interepretation. 
-Since Martin-L\"of type theory is a constructive theory and its proof-theoretic strength is 
-much lower than that of Zermelo-Fraenkel set theory~\cite{RathjenM:strsml}, it is natural to ask whether the simplicial model could be defined working in a constructive setting, such as 
-Martin-L\"of type theory itself or Constructive Zermelo-Fraenkel set theory~\cite{AczelP:typtic}. This
-question has a direct application of mathematical logic, by allowing to prove the consistency of
-the extension of Martin-L\"of type theory with the Univalence Axiom relative to Martin-L\"of type theory.
+The question of whether simplicial model could be defined working constructively, \ie without
+the use of the law of excluded middle or the axiom of choice, arose almost immediately
+after Voevodsky's work and has been one of the leading questions in the area since then.
+
 
 The aim of this paper is to provide a partial answer to this long-standing open problem.  In order to
-explain our results, let us recall that the main results of simplicial homotopy theory necessary 
+explain our results, it is useful to recall that the main results of simplicial homotopy theory necessary 
 to define the simplicial model of Univalent Foundations are 
 the existence of a Quillen
 model structure whose fibrations are the Kan fibrations, which underpins a lot of the development, 
@@ -65,7 +64,8 @@ the fibrancy of $\U$ and, finally, the univalence of the fibration $\pi$.
 
 A serious obstruction to a constructive development of the simplicial model was discovered by
 Bezem, Coquand and Parmann in~\cite{coquand-non-constructivity-kan}, where they showed that
-the closure of Kan complexes under exponentiation is not provable constructively.
+it is not possible to prove constructively that
+for a Kan complex $B$, the simplicial set $B^A$ is a Kan complex for every simplicial set $A$.
 Because of this, Coquand and several collaborators switched and considered the possibility of
 defining homotopy-theoretic models of type theory in categories of cubical sets~\cite{coquand-cubical-sets}, starting a very profitable line of enquiry, cf.~\cite{awodey-cubical,PittsAM:aximct}. On top of switching 
 from simplicial to cubical, they also switched from ordinary fibrations, defined by a right lifting property,
@@ -94,9 +94,7 @@ $\Pi$-types & \checkmark  & \checkmark  & \checkmark  \\
 Universe type & \checkmark & \checkmark   &  $\times$  \\
 Univalence axiom & \checkmark  & \checkmark &   $\times$  \\ 
 Constructive & $\times$ & \checkmark   & \checkmark  \\ 
-Equivalent to $\mathbf{Top}$ &  \checkmark & $\times$  & \checkmark    \\
-Coherence & \checkmark   & \checkmark &  \checkmark  \\ 
-\hline
+Equivalent to $\mathbf{Top}$ &  \checkmark & $\times$  & \checkmark \\ \hline
 \end{tabular}
 \medskip
 \caption{The whack-a-mole game of models of Homotopy Type Theory.} 
@@ -105,95 +103,30 @@ Coherence & \checkmark   & \checkmark &  \checkmark  \\
 
 
 
-A breakthrough has been obtained in~\cite{henry2019qms}, in which the second-named author has
+A recent breakthrough has been obtained by the second-named author in~\cite{henry2019qms}, who has
 shown constructively that the category of simplicial sets admits a Quillen model structure in which the
-fibrations are the Kan fibrations. Crucially, the cofibrations in this constructive model structure are not
+fibrations are the Kan fibrations, building on the theory of weak model structures developed in~\cite{henry2018wms}. Crucially, the cofibrations in this constructive model structure are not
 all the monomorphisms, but rather the morphisms that are levelwise complemented with decidability of
 degeneracies on the completement of the image. In particular, the cofibrant objects are not all simplicial
-sets but only those with decidable degeneracies. Another proof of the constructive existence of this
-model structure was obtained in~\cite{GambinoN:anocp}.
+sets but only those with decidable degeneracies. Cofibrancy assumptions will be essential in our
+development here. Another proof of the constructive existence of this
+model structure was obtained in~\cite{GambinoN:anocp}, without relying on the results in~\cite{henry2018wms}. 
+
 
 This paper builds on this work to obtain constructive counterparts of all the main results of simplicial
 homotopy theory necessary to define the simplicial model of Martin-L\"of type theory extended with the
-Univalence Axiom. In particular, we prove:
+Univalence Axiom. In particular, our main results are the following:
 \begin{itemize}
-\item
-\item
-\item
-\item
+\item \cref{thm:MainPathObject}, asserting that, for a fibration with cofibrant domain $p \co A \to X$, the standard mapping path space factorisation provides a factorisation of the diagonal $\delta_p \co A \to A \times_X A$ as a trivial cofibration followed by a fibration;
+\item \cref{cor:Pi_types_are_fibrant}, asserting that, for a fibration $p \co A \to X$ with cofibrant
+domain, the dependent product functor $\Pi_p \co \SSet_{/A} \to \SSet_{/X}$ preserves fibrations;
+\item \cref{thm:universe-uc}, asserting the existence of a universal small fibration $\pi_c \co
+\UU_c \to \U_c$ that classifies fibrations between cofibrant objects;
+\item \cref{thm:fibrancy-of-u-and-uc}, asserting that $\UU_c$ is both fibrant and cofibrant;
+\item \cref{thm:univalence-of-u-and-uc}, asserting that the universal fibration $\pi_c$ is univalent.
 \end{itemize}
-
-
-
-
-\newpage
-
-\subsection*{Context} 
-\begin{itemize}
-\item The problem
-\item Obstructions:
-\begin{itemize}
-\item Minimal fibrations
-\item Exponentiability of Kan complexes
-\end{itemize}
-\item Progress so far:
-\begin{itemize}
-\item Coquand and others:  
-\begin{itemize}
-\item cubical sets
-\item uniform fibrations
-\item issues: de Morgan version is known not to be equivalent to $\mathbf{Top}$.
-\end{itemize}
-\item Gambino and Sattler
-\begin{itemize}
-\item General approach; uniform fibrations
-\item Gets $\Pi$-types
-\item Issue: if you work algebraically, notion of fibration does not support universe; if you work non-algebraically then assumptions are not known to be constructively valid.
-\end{itemize}
-\item Sattler: 
-\begin{itemize}
-\item gets a model structure
-\item same issues as Gambino-Sattler. 
-\end{itemize}
-\end{itemize}
-\end{itemize}
-
-
-\subsection*{Main results}
-
-\begin{itemize}
-\item We build on [Henry 2018]
-\item General approach
-\item The crucial role of cofibrancy
-\item We obtain 
-\begin{itemize}
-\item $\Pi$-types
-\item Universe
-\item Univalence
-\end{itemize}
-\item Coherence issues:
-\begin{itemize}
-\item We consider them seriously
-\item But they are a separate issue, left for future work
-\end{itemize}
-\end{itemize}
-
-
-
-
-
-
-We will interpret contexts as bifibrant simplicial sets. In particular,
-the empty context will be interpreted as the terminal simplicial set $1$.  Dependent types 
-will be interpreted as fibrations $p \co A \to X$ where $X$ is a bifibrant simplicial and $A$ is cofibrant. In particular, types in the empty context will be interpreted as bifibrant simplicial sets. 
-This choice is motivated by the fact that, for a bifibrant simplicial set $X$, the slice category~$\SSet_{/X}$ admits a weak model structure in which fibrations and cofibrations are the maps that become fibrations and cofibrations, respectively, in~$\SSet$. Then, bifibrant objects in $\SSet_{/X}$
-are exactly the fibrations with codomain $X$ and cofibrant domain.
-
-
-
-
-
-This paper adds a new column to~\cref{tab:whack}.
+These contributions provide a further column to~\cref{tab:whack}, which is displayed
+in~\cref{tab:contribs}.
 
 \begin{table}[htb]
 \begin{tabular}{|c|c|}
@@ -207,22 +140,102 @@ Universe type & \checkmark  \\
 Univalence axiom & \checkmark  \\ 
 Constructive & \checkmark  \\ 
 Equivalent to $\mathbf{Top}$ & \checkmark  \\
-Coherence  &  ? \\ 
 \hline
 \end{tabular}
 \medskip
-\caption{The contributions of this paper.} 
+\caption{The main contributions of this paper.} 
+\label{tab:contribs}
 \end{table}
 
+\bigskip
 
-When working constructively, fibrations as defined above maintain many of their usual classical properties,
-such as stability under pullbacks. However, other properties no longer hold. For example, it is not possible to prove constructively that
-for a Kan complex $B$, the simplicial set $B^A$ is a Kan complex for every simplicial set $A$. In order
-to remedy this in a constructive setting, one needs some additional decidabilty assumptions, which can be 
-conveniently encapsulated in the notion of a cofibration and of a cofibrant object introduced in~\cite[\S 5.1.7]{henry2018wms}. 
+SOME COMMENTS ON THE METHODS OF PROOF. THE WEAK EQUIVALENCE EXTENSION
+PROPERTY. 
+
+\bigskip
+
+Overall these results suggest the idea of defining a constructive version of the simplicial model
+of Martin-L\"of type theory as follows. Contexts are interpreted as bifibrant simplicial sets. In particular,
+the empty context will be interpreted as the terminal simplicial set $1$.  Dependent types 
+will be interpreted as fibrations $p \co A \to X$ where $X$ is a bifibrant simplicial and $A$ is cofibrant. In particular, types in the empty context will be interpreted as bifibrant simplicial sets. 
+This choice is justified by the fact that, for a bifibrant simplicial set $X$, the slice category~$\SSet_{/X}$ admits a model structure in which fibrations and cofibrations are the maps that become fibrations and cofibrations, respectively, in~$\SSet$. Then, the bifibrant objects in $\SSet_{/X}$
+are exactly the fibrations $p \co A \to X$ with cofibrant domain. This interpretation can be 
+contrasted with the way one can interpret type theory in simplicial sets is given in~\cref{tab:interpretations}.
+
+\bigskip
+
+SOME COMMENTS ON $\Pi$-TYPES AND COFIBRANCY AND $\eta$-RULE
+
+\bigskip
 
 
- \medskip
+\begin{table}[htb]
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline 
+{\em Type theory} & {\em Simplicial interpretation} & {\em Constructive simplicial interpretation} \\ \hline 
+ $\Gamma$ context  & $X$ Kan complex & $X$  cofibrant Kan complex \\[3ex]
+ $\Gamma \vdash A \co \text{type}$ & \begin{tabular}{c} $p \co A \to X$ Kan fibration  \\ with $X$ 
+Kan complex  \end{tabular}  & \begin{tabular}{c} $p \co A \to X$ Kan fibration with \\  $X$ cofibrant
+Kan complex, $A$ cofibrant  \end{tabular} \\[3ex] 
+  $\Gamma \vdash a \co A$ &  $\begin{gathered} \xymatrix{X \ar[rr]^a \ar[dr]_{1_X}  & & A  \ar[dl]^{p} \\
+ & X & }\end{gathered}$ & $\begin{gathered} \xymatrix{X \ar[rr]^a \ar[dr]_{1_X}  & & A  \ar[dl]^{p} \\
+ & X & }\end{gathered}$ \\ \hline
+\end{tabular}
+\end{center}
+\medskip
+\caption{Two naive interpretations.} 
+\label{tab:interpretations}
+\end{table}
+
+Both of the interpretations outlined in~\cref{tab:interpretations}, however, suffer from well-known 
+coherence issues, in that a genuine model of type theory requires strictness conditions that do
+not hold with these interpretations. For Voevodsky's simplicial model, this problem was addressed
+already in~\cite{voevodsky-simplicial-model} making use of a technique due to Voevodsky. This 
+could be applied using $\Pi$-types of fibrations, which we do not have.
+
+Thus, our results offer only a partial solution to the open problem of defining a constructive
+counterpart of Voevodsky's simplicial model of univalent foundations. However, the missing
+ingredient appears to be only a suitable strictification or coherence theorem for the structure
+that we produce in this paper, rather than additional work on simplicial homotopy theory. We
+leave the investigation of such a coherence result to future work. 
+
+
+
+
+
+
+\bigskip
+
+
+\noindent 
+\textbf{Outline of the paper.} \cref{sec:preliminaries} recalls the preliminaries necessary
+for the paper. In particular, we review from~\cite{henry2019qms}  the constructive version of the 
+Kan-Quillen model structure. \cref{sec:basrp} establishes some basic results on pullbacks that
+we will use throughout the paper. \cref{sec:pats} shows how path spaces fit into the (trivial cofibration,
+fibration) factorisation. \cref{sec:Pi-types} proves the restricted Frobenius property. \cref{sec:equep}
+establishes the weak equivalence extension property. \cref{sec:unifbb} introduces the universal
+fibration $\pi_c \co \UU_c \to \U_c$. \cref{sec:fibrancy-and-univalence} proves that $\U_c$ is bifibrant and that $\pi_c$ is univalent. 
+
+
+
+\smallskip
+
+
+
+
+
+\noindent 
+\textbf{Acknowledgements.} Nicola Gambino gratefully acknowledges the support of
+EPSRC (via grant) and the US Air Force Office for Scientific Research (via grant). 
+He is also grateful to Thierry Coquand, Karol Szumilo and Christian Sattler for useful
+conversations. 
+
+
+
+
+
+
 
 
 
@@ -372,6 +385,7 @@ is simply the first projection.
 
 
 \section{Basic results on pullbacks}
+\label{sec:basrp}
 
 
 We begin our development with some elementary observations on pullbacks of cofibrant objects
@@ -446,6 +460,7 @@ $\Sigma_p(q) \co \Sigma_A(B) \to X$ is again a fibration with cofibrant domain.
 
 
 \section{Path spaces}
+\label{sec:pats}
 
 The existence of the weak factorisation system $(\TrivCof, \Fib)$ 
 implies that for every fibration with cofibrant domain $p \co A \to X$ the diagonal map $\delta_p \co A \to A \times_X A$ admits a factorisation as a trivial cofibration  followed by a fibration. Here, we show that such a factorisation can be defined via path objects. 
@@ -560,17 +575,17 @@ X \ar[ur] \ar[rr] & & X \ar[rr] \ar[ur] & & X \ar[ur] \\
 where the three square in the vertical/diagonal direction are pullbacks.
 
 
-\begin{proposition}
-\label{proposition:MainPathObject}
+\begin{theorem}
+\label{thm:MainPathObject}
 Assume $p \co A \rightarrow X $ is a fibration between bifibrant objects. Then,
 \begin{enumerate}[(i)] 
-\item \label{proposition:MainPathObject:IdBifib} $\Path(p)$ is bifibrant, 
+\item \label{thm:MainPathObject:IdBifib} $\Path(p)$ is bifibrant, 
 \item the map $\Path(p) \rightarrow X$ is a fibration
 \item the map $\partial \co \Path(p) \rightarrow A \times_{X} A$ is a fibration,
 \item the composite of $s \, , t \co \Path(p) \rightarrow A \times_{X} A$  with either of the two projections is a trivial fibration,
 \item the map $r_p \co A \rightarrow \Path(p)$ is a trivial cofibration.
 \end{enumerate}
-\end{proposition}
+\end{theorem}
 
 \begin{proof}
 
@@ -732,13 +747,13 @@ We define it using the universal property of $A[f]$ as the unique map to $A[f]$ 
 
 
 
-\begin{proposition}\label{prop:Frobenius}
+\begin{lemma}\label{prop:Frobenius}
 Let $p \co A \rightarrow X$ is a fibration with cofibrant domain. Then the pullback functor 
 \[
 p^* : \SSet_{/X} \rightarrow \SSet_{/A}
 \] 
 preserves cofibrations and trivial cofibrations.
-\end{proposition}
+\end{lemma}
 
 
 \begin{proof} Since the pullback functor $p^*$ has a right adjoint,  it is enough to check that pullbacks of generating cofibrations and generating trivial cofibrations are cofibrations and trivial cofibrations, respectively. For cofibrations, this is \cref{thm:cof-pbk}. For trivial cofibrations, note that the trivial cofibrations in $\SSet_{/Y}$ are generated by the horn inclusions $h^k_n \co \Lambda^{k}[n] \rightarrow \Delta[n]$ for all possible choices of $\Delta[n] \rightarrow A$. By \cref{lemma:genTcof_strongHequiv} they are all strong $k$-oriented homotopy equivalences. Moreover, their pullback to $X$ is also their pullback along the map $A \times_X \Delta[n] \rightarrow \Delta[n]$ which is again a fibration with cofibrant domain by \cref{lem:cofibrant_fiber_product}. Hence  \cref{lemma:pb_of_StrongHomotopyEq} implies that the pullback 
@@ -748,14 +763,14 @@ trivial cofibrations by \cref{rem:below-strhtpyequiv}.
 
 
 
-\begin{corollary}\label{cor:Pi_types_are_fibrant}
+\begin{theorem}\label{cor:Pi_types_are_fibrant}
 Let $p \co A \rightarrow X$ be a fibration with cofibrant domain. The functor $\Pi_p \co \SSet_{/A} \to \SSet_{/X}$ restricts to a functor
 \[
 \Pi_p \co \Fib_{/A}  \to \Fib_{/X} \, .
 \]
 Furthermore, this restriction preserves  trivial fibrations.
 
-\end{corollary}
+\end{theorem}
 
 \begin{proof}
 Since $p^*$ preserves cofibrations and trivial cofibrations, its right adjoint $p_*$ preserves trivial fibrations and fibrations. In particular, it preserves fibrant objects.
@@ -1022,8 +1037,8 @@ The fact that $\bar{B} \rightarrow A$ is a deformation retract show that it is i
 
  
 
-\section{A universal fibration with cofibrant fibers}
-
+\section{A universal fibration betwen bifibrant objects}
+\label{sec:unifbb}
 
 
 
@@ -1217,7 +1232,6 @@ side square is also a pullback, as required. \qedhere
 
 \section{Fibrancy and univalence of the universe}
 \label{sec:fibrancy-and-univalence}
-
 
 
 
@@ -1415,7 +1429,7 @@ Then, $p$ is univalent if and only if $j$ is a weak equivalence.
 
 
 
-\begin{theorem}  \label{thm:fibrancy-of-u-and-uc} \hfill 
+\begin{theorem}  \label{thm:univalence-of-u-and-uc} \hfill 
 \begin{enumerate}[(i)]
 \item The fibration $\pi \co \UU \to \U$ is univalent.
 \item The fibration $\pi_c \co \UU_c \to \U_c$ is univalent.
