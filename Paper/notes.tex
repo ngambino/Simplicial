@@ -4,17 +4,18 @@
 \input{../Auxiliary/prooftree}
 
 
-\title[]{Constructive aspects of simplicial homotopy theory}
+\title[]{Constructive aspects of the simplicial model of univalent foundations}
 
 \begin{document}
 
 \begin{abstract}
-We establish constructive counterparts of all the main results of simplicial homotopy theory
-used in the definition of Voevodsky's simplicial model of univalent foundations. In particular, we
-show that the weak factorisation system of trivial cofibrations and Kan fibrations satisfies the 
-Frobenius property, that the model structure satisfies the weak equivalence extension property
+We establish constructive counterparts of the main results of simplicial homotopy theory
+used in the definition of Voevodsky's simplicial model of univalent foundations. In particular, 
+ we
+show constructively that the weak factorisation system of trivial cofibrations and Kan fibrations satisfies a
+restricted version of the Frobenius property, that the model structure satisfies the weak equivalence extension property
 for weak equivalences between fibrations with cofibrant domain and that there exists a univalent 
- fibration with fibrant base that classifies fibrations with cofibrant domain.
+ fibration with bifibrant base that classifies small fibrations between bifibrant objects.
 \end{abstract}
 
 \author{Nicola Gambino}
@@ -33,12 +34,88 @@ for weak equivalences between fibrations with cofibrant domain and that there ex
 
 \maketitle
 
-\tableofcontents
 
-\newpage
 
 \section*{Introduction} 
 
+The aim of this paper is to advance our understanding of the connections between type theory
+and homotopy theory that have given rise to the areas of Homotopy Type Theory~\cite{hottbook}
+and Univalent Foundations of Mathematics~\cite{voevodsky:library}. A cornerstone of these connections is Voevodsky's
+discovery that Martin-L\"of type theory admits a model in the category of simplicial sets~\cite{voevodsky-simplicial-model}. The
+study of this model suggested a new approach to the formalisation of mathematics in type
+theory, following the idea that types have homotopy levels, and the formulation of the Univalence Axiom, 
+which makes precise the idea that isomorphic structures
+should be considered as equal.
+
+Voevodsky's definition of the simplicial model of type theory was carried out working within 
+classical Zermelo-Fraenkel
+set theory extended with two inaccessible cardinals. Here, the first cardinal is used to interpret a type-theoretic universe, while the other is used to address coherence issues of the interepretation. 
+Give that Martin-L\"of type theory is a constructive theory and its proof-theoretic strength is 
+much lower than that of Zermelo-Fraenkel set theory, it is natural to ask whether the simplicial model could be defined working in a constructive setting, such as 
+Martin-L\"of type theory itself or Constructive Zermelo-Fraenkel set theory~\cite{Aczel-Rathjen}. This
+question has a direct application of mathematical logic, by allowing to prove the consistency of
+the extension of Martin-L\"of type theory with the Univalence Axiom relative to Martin-L\"of type theory.
+
+The aim of this paper is to provide a partial answer to this long-standing open problem.  In order to
+explain our results, let us recall that the main results of simplicial homotopy theory necessary 
+to define the simplicial model of Univalent Foundations are 
+the existence of a Quillen
+model structure whose fibrations are the Kan fibrations, which underpins a lot of the development, 
+ the Frobenius property for the weak factorisation system of trivial cofibrations and fibrations, which
+implies that pushforward along fibrations preserves fibrations, 
+ the existence of a small fibration $\pi \co \UU \to \U$ that classifies small fibrations, 
+the fibrancy of $\U$, and the univalence of $\pi$.
+
+A serious obstruction to a constructive development of the simplicial model was discovered by
+Bezem, Coquand and Parmann in~\cite{coquand-non-constructivity-kan}, where they showed that
+the exponentiability of Kan complexes is not provable constructively.
+Because of this, Coquand and several collaborators switched and considered the possibility of
+defining homotopy-theoretic models of type theory in categories of cubical sets~\cite{coquand-cubical-sets}, starting a very profitable line of enquiry, cf.~\cite{awodey-cubical,PittsAM:aximct}. On top of switching 
+from simplicial to cubical, they also switched from ordinary fibrations to uniform ones. While they
+succeeded in interpreting constructively type theory with univalence in cubical sets, none of the
+categories of cubical sets considered are known to be Quillen equivalent to topological spaces.
+
+As shown in~\cite{gambino2017frobenius}, it is possible to develop a theory of uniform Kan fibrations
+also in simplicial sets and prove the Frobenius property. However, the notion of a uniform Kan fibration
+in simplicial sets is not as well-behaved as in cubical sets in that it does not admit a classifier, a fact that
+ultimately follows from the representables are closed under products in cubical sets, while they are not
+in simplicial sets. This situation, in which attempting to solve one problem immediately leads to problems with another problem, reminds closely of the game of `whack-a-mole', is summarised in~\cref{tab:whack}.
+
+
+
+\begin{table}[htb]
+\begin{tabular}{|c|c|c|c|}
+\hline
+& $\SSet$ &  $\mathbf{CSet}$ & $\SSet$    \\ 
+& \cite{voevodsky-simplicial-model} & \cite{cohen-et-al:cubicaltt}  & \cite{gambino2017frobenius}   \\ \hline \hline 
+Dependent type & Kan fibration & Uniform Kan fibration & Uniform Kan fibration    \\ 
+$\mathsf{Id}$-types & \checkmark & \checkmark  &  \checkmark  \\
+$\Pi$-types & \checkmark  & \checkmark  & \checkmark  \\
+Universe type & \checkmark & \checkmark   &  $\times$  \\
+Univalence axiom & \checkmark  & \checkmark &   $\times$  \\ 
+Constructive & $\times$ & \checkmark   & \checkmark  \\ 
+Equivalent to $\mathbf{Top}$ &  \checkmark & $\times$  & \checkmark    \\
+Coherence & \checkmark   & \checkmark &  \checkmark  \\ 
+\hline
+\end{tabular}
+\medskip
+\caption{The univalent foundations whack-a-mole game.} 
+\label{tab:whack} 
+\end{table}
+
+
+
+A breakthrough has been obtained in~\cite{henry2019qms}, in which the second-named author has
+shown constructively that the category of simplicial sets admits a Quillen model structure in which the
+fibrations are the Kan fibrations. Crucially, the cofibrations in this constructive model structure are not
+all the monomorphisms, but rather the morphisms that are levelwise complemented with decidability of
+degeneracies on the completement of the image. In particular, the cofibrant objects are not all simplicial
+sets but only those with decidable degeneracies.
+
+
+
+
+\newpage
 
 \subsection*{Context} 
 \begin{itemize}
@@ -103,25 +180,6 @@ are exactly the fibrations with codomain $X$ and cofibrant domain.
 
 
 
-\begin{table}[htb]
-\begin{tabular}{|c|c|c|c|}
-\hline
-& $\SSet$ & $\SSet$ & $\mathbf{CSet}$   \\ 
-& \cite{voevodsky-simplicial-model} & \cite{gambino2017frobenius} & \cite{cohen-et-al:cubicaltt}   \\ \hline \hline 
-Dependent type & Kan fibration & Uniform Kan fibration & Uniform Kan fibration \\ 
-$\mathsf{Id}$-types & \checkmark & \checkmark  &  \checkmark  \\
-$\Pi$-types & \checkmark  & \checkmark  & \checkmark  \\
-Universe type & \checkmark  &  $\times$ & \checkmark  \\
-Univalence axiom & \checkmark  &   $\times$ & \checkmark  \\ 
-Constructive & $\times$ & \checkmark   & \checkmark  \\ 
-Equivalent to $\mathbf{Top}$ &  \checkmark  & \checkmark  & $\times$  \\
-Coherence & \checkmark   & \checkmark &  \checkmark  \\ 
-\hline
-\end{tabular}
-\medskip
-\caption{The univalent foundations whack-a-mole game.} 
-\label{tab:whack} 
-\end{table}
 
 
 This paper adds a new column to~\cref{tab:whack}.
@@ -1393,7 +1451,7 @@ a trivial fibration, as required.
 
 
 
-\bibliographystyle{plain}
+\bibliographystyle{alpha}
 \bibliography{../Auxiliary/bibliography}
 
 
