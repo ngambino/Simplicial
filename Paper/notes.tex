@@ -38,48 +38,43 @@ for weak equivalences between fibrations with cofibrant domain and that there ex
 
 \section*{Introduction} 
 
-The aim of this paper is to advance our understanding of the connections between Martin-L\"of type theory
-and homotopy theory that are at the heart of Homotopy Type Theory~\cite{hottbook}
-and Univalent Mathematics~\cite{voevodsky:library}. A cornerstone of these connections is Voevodsky's
-discovery that Martin-L\"of type theory admits a model in the category of simplicial sets~\cite{voevodsky-simplicial-model} in which identity types are interpreted as path spaces, \cf~\cite{awodey-warren:homotopy-idtype}. The definition of this model suggested a new approach to the formalisation of mathematics in type
-theory, informed by the possibility of defining the homotopy level of type, and the formulation of the Univalence Axiom, which makes precise the idea that isomorphic structures should be considered as equal.
+This paper investigates further Voevodsky's model of Martin-L\"of type theory in the category of simplicial sets~\cite{voevodsky-simplicial-model}.
+This model is of fundamental importance since it guided the the Univalent Foundations of Mathematics programme~\cite{voevodsky:library} and
+the more general area of Homotopy Type Theory~\cite{hottbook}. In particular, the simplicial model suggested a new approach to the formalisation of mathematics in type
+theory, informed by the possibility of defining the notion of the homotopy level of type, and the formulation of the Univalence Axiom, which makes precise the idea that isomorphic structures should be considered as equal. 
 
-Voevodsky's definition of the simplicial model of type theory was carried out working within 
-classical Zermelo-Fraenkel
-set theory extended with two inaccessible cardinals. Here, the first cardinal is used to interpret a type-theoretic universe, while the other is used to address coherence issues of the interepretation. 
-The question of whether simplicial model could be defined working constructively, \ie without
-the use of the law of excluded middle or the axiom of choice, arose almost immediately
-after Voevodsky's work and has been one of the leading questions in the area since then.
+The original definition of the simplicial model  was carried out working within classical Zermelo-Fraenkel set theory extended with the axiom of choice (ZFC) and two inaccessible cardinals. Here,~ZFC was used as the background theory to prove the results of simplicial homotopy theory
+necessary to set up the interpretation, one inaccessible cardinal  to interpret a type-theoretic universe and the other
+ to address coherence issues of the interepretation. The question of whether the simplicial model could be defined working constructively, \ie without the use of the law of excluded middle or the axiom of choice,  was one of the
+ central questions investigated during the thematic programme on Univalent Foundations at the Institute for Advanced Study in 2012/13
+and has remained one of the main open problems in the area since then.
 
-
-The aim of this paper is to provide a partial answer to this long-standing open problem.  In order to
-explain our results, it is useful to recall that the main results of simplicial homotopy theory necessary 
-to define the simplicial model of Univalent Foundations are 
+The aim of this paper is to provide a partial solution to this long-standing open problem.  In order to
+explain our results, let us recall from~\cite{voevodsky-simplicial-model} that the main results of simplicial homotopy theory necessary 
+to define the simplicial model of Martin-L\"of type theory extended with the Univalence Axiom are 
 the existence of a Quillen
-model structure whose fibrations are the Kan fibrations, which underpins a lot of the development, 
- the Frobenius property for the weak factorisation system of trivial cofibrations and fibrations, which
-implies that pushforward along fibrations preserves fibrations, 
- the existence of a small fibration $\pi \co \UU \to \U$ that classifies small fibrations, 
+model structure on the category of simplicial sets whose fibrations are the Kan fibrations, 
+ the fact that pushforward along fibrations preserves fibrations 
+ the existence of a  fibration $\pi \co \UU \to \U$ that classifies small fibrations, 
 the fibrancy of $\U$ and, finally, the univalence of the fibration $\pi$.
 
-A serious obstruction to a constructive development of the simplicial model was discovered by
-Bezem, Coquand and Parmann in~\cite{coquand-non-constructivity-kan}, where they showed that
-it is not possible to prove constructively that
-for a Kan complex $B$, the simplicial set $B^A$ is a Kan complex for every simplicial set $A$.
-Because of this, Coquand and several collaborators switched and considered the possibility of
-defining homotopy-theoretic models of type theory in categories of cubical sets~\cite{coquand-cubical-sets}, starting a very profitable line of enquiry, cf.~\cite{awodey-cubical,PittsAM:aximct}. On top of switching 
-from simplicial to cubical, they also switched from ordinary fibrations, defined by a right lifting property,
+A fundamental obstruction to the constructive development of a version of the simplicial model was discovered by
+Bezem, Coquand and Parmann in~\cite{coquand-non-constructivity-kan}, where it was shown that
+it is not possible to prove constructively that for all simplicial sets $A$ and 
+Kan complexes $B$, the exponential $B^A$ is again a Kan complex.
+Because of this, Coquand and several collaborators  developed homotopy-theoretic models of type theory in categories of cubical sets~\cite{coquand-cubical-sets}, starting a very profitable line of enquiry, cf.~\cite{awodey-cubical,PittsAM:aximct}. On top of switching 
+from simplicial sets to cubical sets, they also switched from ordinary fibrations, defined by a right lifting property,
 to uniform fibrations, defined as maps equipped with additional algebraic structure which provides
 chosen fillers for lifting problems. While they
 succeeded in interpreting constructively type theory with univalence in cubical sets, none of the
-categories of cubical sets considered are known to be Quillen equivalent to topological spaces.
+categories of cubical sets considered are known to be Quillen equivalent to simplicial sets or topological spaces.
 
-As shown in~\cite{gambino2017frobenius}, it is possible to develop a theory of uniform Kan fibrations
-also in simplicial sets and prove that they satisfy the Frobenius property, thus showing constructively
-that algebraic Kan complexes are closed under exponentiation. However, the notion of a uniform Kan fibration
-in simplicial sets is not as well-behaved as in cubical sets in that it does not admit a classifier, a fact that
-ultimately follows from the representables are closed under products in cubical sets, while they are not
-in simplicial sets. This situation, in which solving one problem leads to opening another problem, reminds closely of the game of `whack-a-mole', is summarised in~\cref{tab:whack}.
+As shown in~\cite{gambino2017frobenius}, it is possible to develop constructively a theory of uniform fibrations
+also in simplicial sets and prove that the dependent product functor along a uniform fibration preserves
+uniform fibrations, showing in particular that that for an algebraic Kan complex $B$, the simplicial set $B^A$ is an algebraic Kan complex for every simplicial set $A$. However, the notion of a uniform fibration
+in simplicial sets considered in~\cite{gambino2017frobenius} is not as well-behaved as the one in cubical sets,
+in that it does not admit a universal uniform fibration~\cite{SattlerC:unpublished}, which is ultimately
+due to the failure of representables to be closed under under products. This situation is summarised in~\cref{tab:whack}.
 
 
 
@@ -97,35 +92,36 @@ Constructive & $\times$ & \checkmark   & \checkmark  \\
 Equivalent to $\mathbf{Top}$ &  \checkmark & $\times$  & \checkmark \\ \hline
 \end{tabular}
 \medskip
-\caption{The whack-a-mole game of models of Homotopy Type Theory.} 
+\caption{Homotopy-theoretic models of type theory.} 
 \label{tab:whack} 
 \end{table}
 
 
 
-A recent breakthrough has been obtained by the second-named author in~\cite{henry2019qms}, who has
-shown constructively that the category of simplicial sets admits a Quillen model structure in which the
-fibrations are the Kan fibrations, building on the theory of weak model structures developed in~\cite{henry2018wms}. Crucially, the cofibrations in this constructive model structure are not
-all the monomorphisms, but rather the morphisms that are levelwise complemented with decidability of
-degeneracies on the completement of the image. In particular, the cofibrant objects are not all simplicial
-sets but only those with decidable degeneracies. Cofibrancy assumptions will be essential in our
-development here. Another proof of the constructive existence of this
-model structure was obtained in~\cite{GambinoN:anocp}, without relying on the results in~\cite{henry2018wms}. 
+A breakthrough has been obtained recently by the second-named author in~\cite{henry2019qms}, where, building on his previous work on weak model structures~\cite{henry2018wms},
+he has shown constructively that the category of simplicial sets admits a Quillen model structure in which the
+fibrations are the Kan fibrations.  Crucially, the cofibrations in this constructive model structure are not
+all the monomorphisms, but rather the monomorphisms $i \co A \to B$ that are levelwise complemented 
+and for which the degeneracy of $n$-simplices is decidable in $B_n \setminus A_n$, for every $[n] \in \Delta$. In particular, the cofibrant objects are in this model structure are not all simplicial sets, but only those with decidable degeneracies. Thus, this model structure coincides with
+the standard one as soon as the law of excluded middle is assumed. Another proof of the constructive existence of this
+model structure is obtained in~\cite{GambinoN:anocp}, without relying on the results in~\cite{henry2018wms}. 
 
 
 This paper builds on this work to obtain constructive counterparts of all the main results of simplicial
-homotopy theory necessary to define the simplicial model of Martin-L\"of type theory extended with the
+homotopy theory in~\cite{voevodsky-simplicial-model} necessary to define the simplicial model of Martin-L\"of type theory extended with the
 Univalence Axiom. In particular, our main results are the following:
 \begin{itemize}
-\item \cref{thm:MainPathObject}, asserting that, for a fibration with cofibrant domain $p \co A \to X$, the standard mapping path space factorisation provides a factorisation of the diagonal $\delta_p \co A \to A \times_X A$ as a trivial cofibration followed by a fibration;
-\item \cref{cor:Pi_types_are_fibrant}, asserting that, for a fibration $p \co A \to X$ with cofibrant
-domain, the dependent product functor $\Pi_p \co \SSet_{/A} \to \SSet_{/X}$ preserves fibrations;
+\item \cref{thm:MainPathObject}, asserting that, for a fibration with cofibrant domain $p \co A \to X$, the mapping path space 
+gives a factorisation of the diagonal $\delta_p \co A \to A \times_X A$ as a trivial cofibration followed by a fibration;
+\item \cref{cor:Pi_types_are_fibrant}, asserting that for a fibration $p \co A \to X$ with cofibrant
+domain the dependent product functor $\Pi_p \co \SSet_{/A} \to \SSet_{/X}$ preserves fibrations;
 \item \cref{thm:universe-uc}, asserting the existence of a universal small fibration $\pi_c \co
-\UU_c \to \U_c$ that classifies fibrations between cofibrant objects;
+\UU_c \to \U_c$ that classifies small fibrations between cofibrant objects;
 \item \cref{thm:fibrancy-of-u-and-uc}, asserting that $\UU_c$ is both fibrant and cofibrant;
-\item \cref{thm:univalence-of-u-and-uc}, asserting that the universal fibration $\pi_c$ is univalent.
+\item \cref{thm:univalence-of-u-and-uc}, asserting that the universal fibration $\pi_c  \co
+\UU_c \to \U_c$ is univalent.
 \end{itemize}
-These contributions provide a further column to~\cref{tab:whack}, which is displayed
+Overall, these contributions provide a further column to~\cref{tab:whack}, which is displayed
 in~\cref{tab:contribs}.
 
 \begin{table}[htb]
@@ -147,26 +143,17 @@ Equivalent to $\mathbf{Top}$ & \checkmark  \\
 \label{tab:contribs}
 \end{table}
 
-\bigskip
+The proofs of these results are inspired by similar results existing in the literature, especially~\cite{voevodsky-simplicial-model} and~\cite{gambino2017frobenius}, but require a systematic
+and careful analysis of the cofibrancy assumptions needed to carry over these proofs. This is especially important in the case of the results
+for universes, for which we are not interested in a small fibration that classifies small fibrations as in~\cite{voevodsky-simplicial-mode}, but
+rather a small fibration that classifies small fibrations between cofibrant objects. Cofibrancy issues will also play an important role in
+dependent products, as discussed further below.
 
-SOME COMMENTS ON THE METHODS OF PROOF. THE WEAK EQUIVALENCE EXTENSION
-PROPERTY. 
 
-\bigskip
+Our results allow us to define a new interpretation of Martin-L\"of type theory into the category of simplicial sets. The outline
+of this interpretation and its differences with the standard one are presented in~\cref{tab:interpretations}. In this interpretation, type-theoretic
+contexts are mapped into bifibrant simplicial sets. In particular, the empty context is interpreted as the terminal simplicial set $1$.  Dependent types are interpreted as fibrations $p \co A \to X$ where $X$ is  bifibrant and $A$ is cofibrant. This choice is informed by the fact that, for a bifibrant simplicial set $X$, the slice category~$\SSet_{/X}$ admits a model structure in which fibrations and cofibrations are the maps that become fibrations and cofibrations, respectively, in~$\SSet$. Then, the bifibrant objects in $\SSet_{/X}$ are exactly the fibrations $p \co A \to X$ with cofibrant domain. Then, a type in the empty context is interpreted as a bifibrant simplicial set. 
 
-Overall these results suggest the idea of defining a constructive version of the simplicial model
-of Martin-L\"of type theory as follows. Contexts are interpreted as bifibrant simplicial sets. In particular,
-the empty context will be interpreted as the terminal simplicial set $1$.  Dependent types 
-will be interpreted as fibrations $p \co A \to X$ where $X$ is a bifibrant simplicial and $A$ is cofibrant. In particular, types in the empty context will be interpreted as bifibrant simplicial sets. 
-This choice is justified by the fact that, for a bifibrant simplicial set $X$, the slice category~$\SSet_{/X}$ admits a model structure in which fibrations and cofibrations are the maps that become fibrations and cofibrations, respectively, in~$\SSet$. Then, the bifibrant objects in $\SSet_{/X}$
-are exactly the fibrations $p \co A \to X$ with cofibrant domain. This interpretation can be 
-contrasted with the way one can interpret type theory in simplicial sets is given in~\cref{tab:interpretations}.
-
-\bigskip
-
-SOME COMMENTS ON $\Pi$-TYPES AND COFIBRANCY AND $\eta$-RULE
-
-\bigskip
 
 
 \begin{table}[htb]
@@ -174,39 +161,50 @@ SOME COMMENTS ON $\Pi$-TYPES AND COFIBRANCY AND $\eta$-RULE
 \begin{tabular}{|c|c|c|}
 \hline 
 {\em Type theory} & {\em Simplicial interpretation} & {\em Constructive simplicial interpretation} \\ \hline 
- $\Gamma$ context  & $X$ Kan complex & $X$  cofibrant Kan complex \\[3ex]
- $\Gamma \vdash A \co \text{type}$ & \begin{tabular}{c} $p \co A \to X$ Kan fibration  \\ with $X$ 
+ $X$ context  & $X$ Kan complex & $X$  cofibrant Kan complex \\[3ex]
+ $X \vdash A \co \text{type}$ & \begin{tabular}{c} $p \co A \to X$ Kan fibration  \\ with $X$ 
 Kan complex  \end{tabular}  & \begin{tabular}{c} $p \co A \to X$ Kan fibration with \\  $X$ cofibrant
 Kan complex, $A$ cofibrant  \end{tabular} \\[3ex] 
-  $\Gamma \vdash a \co A$ &  $\begin{gathered} \xymatrix{X \ar[rr]^a \ar[dr]_{1_X}  & & A  \ar[dl]^{p} \\
+  $X \vdash a \co A$ &  $\begin{gathered} \xymatrix{X \ar[rr]^a \ar[dr]_{1_X}  & & A  \ar[dl]^{p} \\
  & X & }\end{gathered}$ & $\begin{gathered} \xymatrix{X \ar[rr]^a \ar[dr]_{1_X}  & & A  \ar[dl]^{p} \\
  & X & }\end{gathered}$ \\ \hline
 \end{tabular}
 \end{center}
 \medskip
-\caption{Two naive interpretations.} 
+\caption{Two simplicial interpretations of type theory.} 
 \label{tab:interpretations}
 \end{table}
 
-Both of the interpretations outlined in~\cref{tab:interpretations}, however, suffer from well-known 
-coherence issues, in that a genuine model of type theory requires strictness conditions that do
-not hold with these interpretations. For Voevodsky's simplicial model, this problem was addressed
-already in~\cite{voevodsky-simplicial-model} making use of a technique due to Voevodsky. This 
-could be applied using $\Pi$-types of fibrations, which we do not have.
 
-Thus, our results offer only a partial solution to the open problem of defining a constructive
-counterpart of Voevodsky's simplicial model of univalent foundations. However, the missing
-ingredient appears to be only a suitable strictification or coherence theorem for the structure
-that we produce in this paper, rather than additional work on simplicial homotopy theory. We
-leave the investigation of such a coherence result to future work. 
+Following this idea, identity types are interpreted as path spaces, as desired in Homotopy Type Theory. Indeed, for a fibration $p \co A \to X$ with cofibrant domain, \cref{thm:MainPathObject} shows that the factorisation of the diagonal $\delta_p \co A \to A \times_X A$ via the mapping path space
+\[
+\xymatrix{
+A \ar[rr]^{\mathrm{refl}_p}  \ar[dr]_{\delta_p} & & \Path(p) \ar[dl]^{\partial} \\
+  & A \times_X A &  \, ,}
+\]
+is a factorisation of $\delta_p$ as a trivial cofibration followed by a fibration.  A subtle issue arises when considering the interpretation of $\Pi$-types. Indeed, for a fibration $p \co A \to X$ with cofibrant domain and , the result of applying the dependent product functor $\Pi_p$ a fibration $q \co B \to A$ with cofibrant domain is a map $\Pi_p(q) \co \Pi_A(B) \to X$, which is a fibration by~\cref{cor:Pi_types_are_fibrant} but its domain
+is not necessarily cofibrant. In order to remedy this, we can define the interpretation of $\Pi$-types to be given by a cofibrant replacement of
+$\tilde{\Pi}_p(q) \co \tilde{\Pi}_A(B) \to X$, which is now a fibration with cofibrant domain. Interestingly, this definition validates 
+a judgemental $\beta$-rule and a propositional $\eta$-rule, a combination that arises naturally when  Martin-L\"of type theory is presented
+within the Logical Framework, as done in~\cite{nordstrom-petersson-smith:ml}. Furthermore, experience with formalisation of mathematics
+in type theory suggests that the absence of a judgemental $\eta$-rule is not too problematic: for example, Voevodsky's univalent foundations
+library~\cite{voevodsky:library}, including his proof that the Univalence Axiom implies the principle of Function Extensionality, was originally developed assuming only a propositional $\eta$-rule.
+
+For the interpretation of a univalent type universe, we shall proceed in two steps, using again a cofibrant replacement in the second step. 
+First, we construct a small fibration $\pi \co \UU \to \U$ that classifies small fibrations with cofibrant fibers and prove that $\U$ is fibrant. 
+Then, we consider a cofibrant replacement $\U_c$ of $\U$, which comes equipped with a trivial fibration $\varepsilon \co \U_c \to U$, so that 
+we obtain small fibration $\pi_c \co \UU_c \to \U_c$ with bifibrant codomain and cofibrant domain by pullback along $\varepsilon$. Our final result, \cref{thm:univalence-of-u-and-uc}, shows that
+$\pi \co \UU \to \U$ and hence $\pi_c \co \UU_c \to \U_c$ are univalent fibrations. 
+
+We refrain from claiming that our work provides a complete solution to a constructive version of the simplicial model of type theory
+in that the interpretation outlined does not validate strictly the rules of type theory for substitution. These rules come in two groups:
+one expressing associativity and unitality of substitution and another expressing commutation of substitution with pullbacks. While 
+there are well-known techniques to address this issues~\cite{voevodsky-simplicial-model}, they do not seem to apply in our context.
+However, the missing ingredient appears to be only a suitable coherence or strictification result for the structure defined in this paper, rather than additional results on simplicial homotopy theory. We therefore prefer to leave the investigation of such a coherence result to future work and 
+simply mention that a useful tool is the definition of a cofibrant replacement functor that commutes with pullbacks in~\cite{GambinoN:anocp}. 
 
 
-
-
-
-
-\bigskip
-
+\medskip
 
 \noindent 
 \textbf{Outline of the paper.} \cref{sec:preliminaries} recalls the preliminaries necessary
@@ -227,8 +225,9 @@ fibration $\pi_c \co \UU_c \to \U_c$. \cref{sec:fibrancy-and-univalence} proves 
 
 \noindent 
 \textbf{Acknowledgements.} Nicola Gambino gratefully acknowledges the support of
-EPSRC (via grant) and the US Air Force Office for Scientific Research (via grant). 
-He is also grateful to Thierry Coquand, Karol Szumilo and Christian Sattler for useful
+EPSRC under grant EP/M01729X/1 and the US Air Force Office for Scientific Research under 
+agreement FA8655-13-1-3038. 
+He is also grateful to Thierry Coquand, Karol Szumi{\l}o and Christian Sattler for useful
 conversations. 
 
 
