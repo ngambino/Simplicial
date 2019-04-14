@@ -78,7 +78,7 @@ model structure~\cite{SattlerC:equepu}, none of them
 As shown in~\cite{gambino2017frobenius}, it is possible to develop  a constructive theory of uniform fibrations
 also in simplicial sets and prove that pushforward along a uniform fibration preserves
 uniform fibrations, showing in particular that that for a simplicial set $A$ and an 
- algebraic Kan complex $B$, $B^A$ is an algebraic Kan complex. However,  uniform fibrations
+ algebraic Kan complex $B$, the simplicial set $B^A$ admits the structure of an algebraic Kan complex. However,  uniform fibrations
 are not as well-behaved in simplicial sets as in cubical sets,
 since they do not admit a universal small uniform fibration, essentially because 
 representables  in simplicial sets are not closed under under products while they are in cubical sets~\cite{SattlerC:faiaut}. 
@@ -106,7 +106,7 @@ gives a factorisation of the diagonal $\delta_p \co A \to A \times_X A$ as a tri
 domain preserves fibrations, which implies that, for a cofibrant simplicial set $A$ and a Kan complex $B$, the exponential $B^A$ is a Kan complex; 
 \item \cref{thm:universe-uc}, asserting the existence of a universal small fibration $\pi_c \co
 \UU_c \to \U_c$ that classifies small fibrations between cofibrant objects;
-\item \cref{thm:fibrancy-of-u-and-uc}, asserting that the simplicial set $\UU_c$ is a cofibrant Kan complex;
+\item \cref{thm:fibrancy-of-u-and-uc}, asserting that the simplicial set $\U_c$ is a cofibrant Kan complex;
 \item \cref{thm:univalence-of-u-and-uc}, asserting that the fibration $\pi_c  \co
 \UU_c \to \U_c$ is univalent.
 \end{itemize}
@@ -136,7 +136,8 @@ Kan complex, $A$ cofibrant  \end{tabular} \\[3ex]
 \label{tab:interpretations}
 \end{table}
 
-The key novelty of our constructive simplicial interpretation is the use of the cofibrant  replacement functor
+The key novelty of our approach is the use of the homotopy-theoretic notion of cofibrancy
+to handle the logical notion of decidability of degenacies, which is needed to develop constructively simplicial homotopy theory. In particular, we use of the cofibrant  replacement functor
 to interpret $\Pi$-types and the type-theoretic universe.  For $\Pi$-types, given a fibration $p \co A \to X$ with cofibrant domain, the result of applying the pushforward functor to a fibration $q \co B \to A$ with cofibrant domain produces a map  $\Pi_p(q) \co \Pi_A(B) \to X$, which is a fibration by~\cref{cor:Pi_types_are_fibrant}, but whose domain
 is not necessarily cofibrant. In order to remedy this, we define the interpretation of $\Pi$-types to be given by a cofibrant replacement of
 $\Pi_p(q) \co \Pi_A(B) \to X$, which is now a fibration with cofibrant domain. 
@@ -196,7 +197,7 @@ Throughout the paper, we adopt a slight abuse of language and say that a map has
 \textbf{Acknowledgements.} Nicola Gambino gratefully acknowledges the support of
 EPSRC under grant EP/M01729X/1 and the US Air Force Office for Scientific Research under 
 agreement FA8655-13-1-3038. 
-He is also grateful to Steve Awodey, Thierry Coquand, Andr\'e Joyal, Christian Sattler, Karol Szumi{\l}o  for useful conversations. The hospitality of the Centre for Advanced Study (Oslo), in occasion of the
+He is also grateful to Steve Awodey, Marc Bezem, Thierry Coquand, Andr\'e Joyal, Christian Sattler, Karol Szumi{\l}o  for useful conversations. The hospitality of the Centre for Advanced Study (Oslo), in occasion of the
 special programme on Homotopy Type Theory and Verification is gratefully acknowledged.
 
 
@@ -214,48 +215,44 @@ special programme on Homotopy Type Theory and Verification is gratefully acknowl
 
 
 We write $\Delta$ for the simplicial category. The objects of $\Delta$ will be written as $[n]$, for $n \geq 0$.
-We write $\SSet \defeq [\Delta^{\op}, \Set]$ for the category of simplicial sets. For $n \geq 0$, $\Delta[n] \in \SSet$ is the representable simplicial set associated to $[n] \in \Delta$. For $[n] \in \Delta$, we write $i^n \co  \partial \Delta[n] \to \Delta[n]$ for the boundary inclusion into the $n$-simplex and, for $1 \leq k \leq n$,  
-$h^k_n  \co \Lambda^k[n] \to \Delta[n]$  for the $k$-th horn inclusion into the $n$-simplex. The simplicial set $\Delta[1]$ is an interval object in $\SSet$, with endpoint inclusions~$\kcyl \co \braces{ k} \to \Delta[1]$ defined by~$\kcyl \defeq h^1_k$. Throughout this paper, we shall work  with the constructive version of the
-Kan-Quillen model structure on $\SSet$ defined in~\cite{henry2019qms}. 
-For the convenience of the reader, we recall some of the main aspects of this model structure.
+We write $\SSet \defeq [\Delta^{\op}, \Set]$ for the category of simplicial sets. For $n \geq 0$, $\Delta[n] \in \SSet$ is the representable simplicial set associated to $[n] \in \Delta$. For $[n] \in \Delta$, we write $i^n \co  \partial \Delta[n] \to \Delta[n]$ for the boundary inclusion into the $n$-simplex and, for $1 \leq i \leq n$,  
+$h^i_n  \co \Lambda^i[n] \to \Delta[n]$  for the $i$-th horn inclusion into the $n$-simplex. The simplicial set $\Delta[1]$ is an interval object in $\SSet$, with endpoint inclusions~$\kcyl \co \braces{ k} \to \Delta[1]$ defined by~$\kcyl \defeq h^1_k$. Throughout this paper, we shall work  with the constructive 
+Kan-Quillen model structure $(\Weq, \Cof, \Fib)$ on $\SSet$ defined in~\cite{henry2019qms}. 
+For the convenience of the reader, we recall the main aspects of this model structure.
 
 
 \medskip
 
-Let $\cal{I} \defeq \{ i^n \co  \partial \Delta[n] \to \Delta[n] \ | \ n \geq 0 \}$ be the set of boundary 
-inclusions.  By a constructive version of the small object argument, the set~$\cal{I}$ generates a weak factorisation system
+The weak factorisation system $(\Cof, \TrivFib)$ of cofibrations and trivial fibrations of the 
+model structure is cofibrantly generated by the set $\cal{I} \defeq \{ i^n \co  \partial \Delta[n] \to \Delta[n] \ | \ n \geq 0 \}$  of boundary 
+inclusions, \ie 
 \[
-\big( \Cof, \TrivFib \big) \defeq ( \mathsf{Sat}(\cal{J}) \, , \cal{J}^\pitchfork)
+\big( \Cof, \TrivFib \big) = ( \mathsf{Sat}(\cal{J}) \, , \cal{J}^\pitchfork)
 \]
-on $\SSet$. The maps in the left class will be called \myemph{cofibrations} and those in the right
-class will be called \myemph{trivial fibrations}. 
 As shown in \cite{henry2018wms} a map $f \co Y \to X$ is a cofibration if  and only if 
-it is a levelwise complemented monomorphism and the degeneracy of the simplices of $X~\setminus~\mathsf{Im}(f)$ is decidable. A simplicial set $X$ will be said to be~\myemph{cofibrant} if the unique map $0 \to X$ is a cofibration, 
-\ie degeneracy of the simplices of $X$ is decidable.
+it is a levelwise complemented monomorphism and the degeneracy of the simplices of $X_n ~\setminus~Y_n$ is decidable for every $[n] \in \Delta$. Thus, a simplicial set $X$ is
+cofibrant if  degeneracy of the simplices of $X$ is decidable.
 Note that a map between cofibrant objects is a cofibration
 if and only if it is a levelwise complemented monomorphism. 
-Cofibrant simplicial sets are of particular importance for our development because of their decidability property, which can be used to establish counterparts of classical results valid for all simplicial sets. An example is the Eilenberg-Zilber lemma~\cite{henry2018wms}, asserting that in a cofibrant simplicial set~$X$, any cell $x \in X$ can be written uniquely as $p^*(y)$, where $y$ is a non-degenerate cell of $X$ and $p$ is a degeneracy. Clearly, if one assumes the law of excluded middle, then every monomorphism is a cofibration and our notion of a cofibration coincides with the classical one. 
-
+Cofibrant simplicial sets are of particular importance for our development because of their decidability property, which can be used to establish counterparts of classical results valid for all simplicial sets. An example is the Eilenberg-Zilber lemma~\cite{henry2018wms}, asserting that in a cofibrant simplicial set~$X$, any cell $x \in X$ can be written uniquely as $p^*(y)$, where $y$ is a non-degenerate cell of $X$ and $p$ is a degeneracy. 
 \medskip
 
-Let $\cal{J} \defeq \{ h^k_n  \co \Lambda^k[n] \to \Delta[n]  \ | \ 0 \leq k \leq n \}$ be the set of horn 
-inclusions. By another application of the constructive version of the small object argument, the set $\cal{J}$
-generates a weak factorisation system 
+The weak factorisation system $(\TrivCof, \Fib)$ of  trivial cofibrations and fibrations is cofibrantly 
+generated by the set $\cal{J} \defeq \{ h^k_n  \co \Lambda^k[n] \to \Delta[n]  \ | \ 0 \leq k \leq n \}$ of horn 
+inclusions, \ie 
 \[
 (\TrivCof, \Fib) = ( \mathsf{Sat}(\cal{J}) \, , \cal{J}^\pitchfork)
 \] 
-on $\SSet$. The maps in the right class will be called \emph{fibrations} and the maps in the left class will be called \emph{trivial cofibrations}. As usual, we say that a simplicial set~$A$ is \myemph{fibrant} if  \ie the unique map~$A \to 1$ is a fibration. For $X \in \SSet$, we write $\Fib_{/X}$ for the full subcategory of the slice category $\SSet_{/X}$ spanned by the fibrations with codomain $X$. We say that a simplicial set is \myemph{bifibrant} if it is both fibrant and cofibrant.  For $X \in \SSet$, we write $\BFFib_{/X}$ for  the full subcategory of  $\Fib_{/X}$ spanned by fibrations with cofibrant domain.
+on $\SSet$. 
 
-\medskip
-For a simplicial set $X$, we write $\mathbb{L}(X)$ for its cofibrant replacement and $\mathbb{R}(X)$ for its
-fibrant replacement (as given by Kan's $\mathrm{Ex}^\infty$ functor, for example). These objects come equipped with a trivial fibration $\varepsilon_X \co \mathbb{L}(X) \to X$ and a trivial cofibration $\eta_X \co 
+For $X \in \SSet$, we write $\Fib_{/X}$ for the full subcategory of the slice category $\SSet_{/X}$ spanned by the fibrations with codomain $X$. For $X \in \SSet$, we write $\BFFib_{/X}$ for  the full subcategory of  $\Fib_{/X}$ spanned by fibrations with cofibrant domain. For a simplicial set $X$, we write $\mathbb{L}(X)$ for its cofibrant replacement and $\mathbb{R}(X)$ for its
+fibrant replacement. These objects come equipped with a trivial fibration $\varepsilon_X \co \mathbb{L}(X) \to X$ and a trivial cofibration $\eta_X \co 
 X \to \mathbb{R}(X)$, respectively.
 
 \medskip
 
-As shown in~\cite{henry2019qms}, the two weak factorisation systems
-$(\Cof, \TrivFib)$ and $(\TrivCof, \Fib)$ are part of a proper model structure on the category $\SSet$.
-Furthermore,  the weak factorization systems $(\Cof, \TrivFib)$ and $(\TrivCof, \Fib)$
+As shown in~\cite{henry2019qms}, the model structure $(\Weq, \Cof, \Fib)$ is proper, \ie both left
+and right proper, and the weak factorization systems $(\Cof, \TrivFib)$ and $(\TrivCof, \Fib)$
 satisfy the so-called pushout product property~\cite{henry2018wms}. Recall that, given two maps $f \co Y \rightarrow X$ and $g \co B \rightarrow A$ their \emph{pushout product} $f \hattimes g$ is defined as the unique dotted map in the diagram
 \[
 \xymatrix{
@@ -263,12 +260,8 @@ Y \times B \ar[r] \ar[d] &  X \times B \ar[d] \ar@/^1.5pc/[ddr] \\
 Y \times A \ar[r]  \ar@/_1.5pc/[drr] & \displaystyle \big( Y \times A ) +_{Y \times B} \big( X \times B ) \ar@{.>}[dr]  \\
  & & X \times A }
  \]
-The pushout-product property is  the statement that:
-
-\begin{itemize}
-\item if $f$ and $g$ are cofibrations then so is $f \hattimes g$.
-\item if additionally either $f$ and $g$ is a weak equivalence, then so is $f \hattimes g$.
-\end{itemize}
+The pushout-product property is  the statement that  if $f$ and $g$ are cofibrations then so is $f \hattimes g$
+and, if additionally either $f$ and $g$ is a weak equivalence, then so is $f \hattimes g$.
 Note that when $f$ and $g$ are monomorphisms, so in particular when they are cofibrations, the pushout in the diagram above is just an union of subobjects and the pushout product of~$f$ and~$g$ is just the inclusion:
 \[  
 f \hattimes g \co (Y \times A) \cup (X \times B) \rightarrow X \times A \, .
@@ -281,61 +274,31 @@ Dually, using  exponentials instead of products and pullbacks instead of pushout
 & B^Y \ar[r] & A^Y  \\
  }
  \]
-By adjointness (see~\cite{joyal-tierney-segal} for details), a map $f$ has the left lifting property agains $\langle p \, , q \rangle $ if and only if $f \hattimes p$ has the left lifting property against $q$:
-\[
-f \pitchfork \langle p \, , q \rangle \Leftrightarrow f \hattimes p \pitchfork q 
-\]
-Therefore, the pushout-property  implies its dual version: 
-\begin{itemize}
-\item if $f \co Y \to X$ is a cofibration and $p \co B \to A$ a fibration then $\langle f \, , p \rangle$ is a fibration.
-\item if additionally either $p$ or $f$ is a weak equivalence, then so so is $\langle f \, , p \rangle$.
-\end{itemize}
+By adjointness (see~\cite{joyal-tierney-segal} for details), a map $f$ has the left lifting property agains $\langle p \, , q \rangle $ if and only if $f \hattimes p$ has the left lifting property against $q$.
+Therefore, the pushout-property  implies its dual version, asserting that  if $f \co Y \to X$ is a cofibration and $p \co B \to A$ a fibration then $\langle f \, , p \rangle$ is a fibration and if, additionally,  either $p$ or $f$ is a weak equivalence, then so so is $\langle f \, , p \rangle$.
 
 \medskip
 
-Given a map $f \co Y \to X$ in $\SSet$, to be thought of as a context morphism, we write 
+Given a map $p \co Y \to X$ in $\SSet$, we write 
 \[
 f^* \co \SSet_{/X} \to \SSet_{/Y}
 \] 
-for the associated pullback functor and denote its action on a map $p \co A \to X$ (to be thought of as a dependent type in case it is a fibration with cofibrant domain and bifibrant codomain), as
+for the associated pullback functor. Since $\SSet$ is locally cartesian closed, the pullback functor 
+$f^*$ has both a  left and a right adjoint, written $\Sigma_{f} \co \SSet_{/Y} \to \SSet_{/X}$ and
+$\Pi_f \co \SSet_{/Y} \to \SSet_{/X}$, respectively.   We call these functors the \emph{dependent sum} and \emph{dependent
+product} functors, respectively. Their action  on a
+map $g \co Z \to Y$ will be written
+\[
+ \Sigma_f(g) \co \Sigma_Y(Z) \to X \, , \quad \Pi_f(g) \co \Pi_Y(Z) \to X \, ,
+ \]
+respectively. Since  $\Sigma_f$ is defined by composition, $\Sigma_Y(Z) \defeq Z$ and $\Sigma_f(g) = g f $. We denote the action of $f^*$ on Kan fibration $p \co A \to X$ as
 \[
 \xymatrix{
 A[f] \ar[r] \ar[d]_{p[f]} & A \ar[d]^{p} \\
 Y \ar[r]_f & X \, .}
 \]
-Here, one can think of $A[f]$ as the dependent type in context $Y$ obtained via the
-substitutions in $f$. Since $\SSet$ is locally cartesian closed, the pullback functor 
-$f^*$ has both a  left and a right adjoint, written $f_{!} \co \SSet_{/Y} \to \SSet_{/X}$ and
-$f_* \co \SSet_{/Y} \to \SSet_{/X}$, respectively. The former is defined by composition with
-$f$.
 
-\medskip
-
-Given a fibration $p \co A \to X$, the pullback functor $p^* \co \SSet_{/X} \to \SSet_{/A}$ is
-to be thought of as weakening, rather than substitution, operation. Because of this, we shall
-introduce special notation both to denote its action and for its adjoints. 
-The effect of $p^*$ on a fibration $p' \co A \to X$ is written
-\[
-\xymatrix{
-A \times_X A'  \ar[r] \ar[d] & A' \ar[d]^{p'} \\ 
-A \ar[r]_p  & X \, ,} 
-\]
-while the left and right adjoints of $p^* \co \SSet_{/X} \to \SSet_{/A}$ will be written
-\[
-\Sigma_p \co \SSet_{/A} \to \SSet_{/X} \,  , \quad  \Pi_p \co \SSet_{/A} \to \SSet_{/X} 
-\]
-respectively. We call these functors the \emph{dependent sum} and \emph{dependent
-product} functors, respectively. Their action  on a
-map $q \co B \to A$ will be written
-\[
- \Sigma_p(q) \co \Sigma_A(B) \to X \, , \quad \Pi_p(q) \co \Pi_A(B) \to X \, ,
- \]
-respectively. Since  $\Sigma_p$ is defined by composition, $\Sigma_A(B) \defeq B$ and $\Sigma_p(q) = q p$.
-
-
- 
-
-\medskip
+t
 
 Finally, let us recall that, as a special case of a general result for presheaf categories, for every $[n] \in \Delta$ there is an equivalence of categories
 \begin{equation}
@@ -358,8 +321,7 @@ is simply the first projection.
 \label{sec:basrp}
 
 
-We begin our development with some elementary observations on pullbacks of cofibrant objects
-and cofibrations. 
+We make some elementary observations on pullbacks of cofibrant objects and cofibrations. 
 
 
 
@@ -391,22 +353,22 @@ in~$A \times_X B$ is indeed decidable.
 
 
 
-\begin{proposition} \label{thm:cof-pbk}  Let $p \co A \to X$  be a map with cofibrant domain and codomain.
+\begin{proposition} \label{thm:cof-pbk}  Let $p \co A \to X$  be a map with cofibrant domain.
 Then the pullback functor $p^* \co \SSet_{/X} \to \SSet_{/A}$ preserves cofibrations. 
 \end{proposition}
 
 \begin{proof} Let $f \co Y \to X$ be a cofibration and consider the pullback
 \[
 \xymatrix{
-B \ar[r]^-{q} \ar[d]_-{g} &  Y \ar[d]^{f} \\
-A \ar[r]_{p} & X}
+A[f]  \ar[r] \ar@{>->}[d]_-{p[f]} &  A \ar[d]^{p} \\
+Y \ar@{>->}[r]_{f} \ & X}
 \]
-Since $A$ is cofibrant, the claim is that $g \co B \rightarrow A$ is a levelwise complemented monomorphism. For $a \in A_n$, we have that $a \in B_n$ if and only if $p(a) \in Y_n$. Since $f \co Y \rightarrow X$ is a levelwise complemented monomorphism, this is decidable.
+Since $A$ is cofibrant, the claim is that the monomorphism $A[f] \rightarrowtail A$ is a levelwise complemented. For $a \in A_n$, we have that $a \in A[f]_n$ if and only if $p(a) \in Y_n$. Since $f \co Y \rightarrowtail X$ is a levelwise complemented monomorphism, this is decidable.
 \end{proof} 
 
 
 \begin{remark}[Substitution and $\Sigma$-types] 
-In the interpretation of HoTT outlined in the introduction, substitution of terms into types 
+In the constructive simplicial interpretation of HoTT described in the introduction, substitution of terms into types 
 is interpreted by pullback of fibrations. Indeed, \cref{thm:cof-pbk} shows that, given a map $f \co Y \to X$,  the pullback functor $f^* \co \SSet_{/\Gamma} \to \SSet_{/\Gamma'}$ restricts to a functor $f^* \co \BFFib_{/\Gamma}  \to \BFFib_{/\Gamma'}$. The interpretation of $\Sigma$-types is straightforward. 
 Let  $p \co A \to X$ be a fibration with cofibrant domain. The
 functor~$\Sigma_p \co \SSet_{/A} \to \SSet_{/X}$ defined by
@@ -422,10 +384,9 @@ $\Sigma_p(q) \co \Sigma_A(B) \to X$ is again a fibration with cofibrant domain.
 \section{Path spaces}
 \label{sec:pats}
 
-The existence of the weak factorisation system $(\TrivCof, \Fib)$ 
-implies that for every fibration with cofibrant domain $p \co A \to X$ the diagonal map $\delta_p \co A \to A \times_X A$ admits a factorisation as a trivial cofibration  followed by a fibration. Here, we show that such a factorisation can be defined via path objects. 
-
-
+The aim of this section is to show that, for a  fibration $p \co A \to X$ with cofibrant domain, we can
+use path spaces to obtain a factorisation of the diagonal $\delta_p \co A \to A \times_X A$ as a trivial cofibration followed by a fibration. This allows us to show that identity types can be interpreted
+as path spaces, \cf~\cite{awodey-warren:homotopy-idtype}.
 
 
 
@@ -445,18 +406,17 @@ implies that for every fibration with cofibrant domain $p \co A \to X$ the diago
 \begin{proof} The claims follow easily from the pushout product property of the model structure.
 \end{proof}
 
-Part~(i) of~\cref{thm:exponentials} can also be established directly, by inspecting the classical proofs, exploiting the decidability of degeneracy in $X$ instead of appealing to the law of excluded middle.
+Interestingly, the cofibrancy assumptions of part~(i) of~\cref{thm:exponentials} allows
+us also to prove the claim constructively following the combinatorial proof in~\cite{MayJP:simoat}, exploiting the decidability of degeneracy in $X$ instead of appealing to the law of excluded middle.
 
 
 
 \medskip
 
-For a simplicial set $A$, we define its path object by letting
-\[
- \Path(A) \defeq A^{\Delta[1]} \, . 
-\]
-There are evident boundary maps $(\partial_0, \partial_1)  \co \Path(A) \to A \times A$, giving
-the endpoints of a path.
+For a simplicial set $A$, we define its path object by letting $\Path(A) \defeq A^{\Delta[1]}$. 
+There are evident boundary maps $\partial \co \Path(A) \to A \times A$, giving
+the endpoints of a path. We write $\partial_0$, $\partial_1$ for the compositions of $\partial$
+with the two projections.
 
 
 
@@ -476,8 +436,7 @@ composite is the identity and the second factor has just been proved to be a tri
 \end{proof}
 
 
-In order to have a path object, we need $\Path(A)$ to be cofibrant and the map $r \co A \rightarrow \Path(A)$ to be a trivial cofibration. In a general setting, these properties are not to be expected
-but in the special case of $\SSet$, this is achieved by the following proposition.
+In order to interpret identity types, we need $\Path(A)$ to be cofibrant and the map $r \co A \rightarrow \Path(A)$ to be a trivial cofibration. This is achieved by the following proposition.
 
 \begin{proposition}\label{proposition:PathObjectCofibrant}
 Let $A$ be a cofibrant simplicial set. Then the simplicial set $\Path(A)$ is cofibrant and the map~$r \co A \rightarrow \Path(A)$ is a cofibration.
@@ -488,17 +447,10 @@ Let $A$ be a cofibrant simplicial set. Then the simplicial set $\Path(A)$ is cof
 \begin{proof}
 An $n$-cell of $\Path(A) = A^{\Delta[1]}$ is the same as a morphism $\Delta[1] \times \Delta[n] \rightarrow A$. It is classical simplicial combinatorics that $\Delta[1] \times \Delta[n]$ is a simplicial set generated by $(n+1)$ distinct non-degenerate $(n+1)$-dimensional cell $\alpha_i: \Delta[n+1] \rightarrow \Delta[1] \times \Delta[n]$ for $0 \leqslant i \leqslant n$ which are defined as (the nerve of) the map $\alpha_i$ from $\{0,\dots,(n+1)\}$ to $\{0,1\} \times \{0,\dots,n\}$ such that $\alpha_i(k)=(0,k)$ if $k \leqslant i$ and $\alpha_i(k)=(1,k-1)$ if $k>i$. They satisfies only the relation $d_i^* \alpha_i = d_{i}^* \alpha_{i-1}$ for each $1 \leqslant i \leqslant n$.
 
-So an $n$-cell $\sigma$ of $A^{\Delta[1]}$ is the same as collection of $n+1$-cells $\sigma(\alpha_i) \in A([n])$ for $i=0,\dots,n$ subject to the relations $d_i^* \sigma \alpha_i = d_{i}^* \sigma \alpha_{i-1}$ for $i=1,\dots,n$.
-
-
-It can then be checked that:
-
+So an $n$-cell $\sigma$ of $A^{\Delta[1]}$ is the same as collection of $n+1$-cells $\sigma(\alpha_i) \in A([n])$ for $i=0,\dots,n$ subject to the relations $d_i^* \sigma \alpha_i = d_{i}^* \sigma \alpha_{i-1}$ for $i=1,\dots,n$. It can then be checked that:
 \begin{itemize}
-
-\item $\sigma$ is ``degenerate at $j$'', i.e. is of the form $s_j ^* \sigma'$ for $s_j : [n] \rightarrow [n-1]$ the map that repeat $j$ twice if and only if for each $i$, $\sigma \alpha_i $ is degenerate at $j+1$ for $i \leqslant j+1$ and at $j$ for $i \geqslant j$ (and at both if $i=j$ of $j+1$).
-
+\item $\sigma$ is ``degenerate at $j$'', \ie is of the form $s_j ^* \sigma'$ for $s_j : [n] \rightarrow [n-1]$ the map that repeat $j$ twice if and only if for each $i$, $\sigma \alpha_i $ is degenerate at $j+1$ for $i \leqslant j+1$ and at $j$ for $i \geqslant j$ (and at both if $i=j$ of $j+1$).
 \item $\sigma$ is in the image of $A \rightarrow A^{\Delta[1]}$ if and only if $\sigma(\alpha_i)$ is degenerate at $i$ for all $i$.
-
 \end{itemize}
 
 
@@ -508,12 +460,8 @@ Now because $A$ is cofibrant for any given cell of $A$ one can decide whether it
 \end{proof}
 
 
-\begin{remark}
-We expect the cofibrancy of $\Path(A)$ to extend to the case of $A^{X}$ when $X$ is any finite decidable simplicial set. But this is definitely not going to holds for infinite $X$ in general. For this reason, the definition of the interpretation of function types will involve a cofibrant replacement.
-\end{remark} 
 
 
-\bigskip
 
 
 We now define mapping path objects and  extend~\cref{thm:id-types-for-types} and~\cref{proposition:PathObjectCofibrant}. Given a map $p \co A \to X$, we define $\Path(p)$ 
@@ -537,19 +485,18 @@ where the three square in the vertical/diagonal direction are pullbacks.
 
 \begin{theorem}
 \label{thm:MainPathObject}
-Assume $p \co A \rightarrow X $ is a fibration between bifibrant objects. Then,
+Assume that $p \co A \rightarrow X $ is a fibration, with $A$ cofibrant and $X$  bifibrant. Then,
 \begin{enumerate}[(i)] 
 \item \label{thm:MainPathObject:IdBifib} $\Path(p)$ is bifibrant, 
 \item the map $\Path(p) \rightarrow X$ is a fibration
 \item the map $\partial \co \Path(p) \rightarrow A \times_{X} A$ is a fibration,
-\item the composite of $s \, , t \co \Path(p) \rightarrow A \times_{X} A$  with either of the two projections is a trivial fibration,
+\item the composite of $(s \, , t) \co \Path(p) \rightarrow A \times_{X} A$  with either of the two projections is a trivial fibration,
 \item the map $r_p \co A \rightarrow \Path(p)$ is a trivial cofibration.
 \end{enumerate}
 \end{theorem}
 
-\begin{proof}
-
-The map $\Path(p) \rightarrow X$ is a pullback of the maps $\Path(A) \rightarrow \Path(X)$ along $X \rightarrow \Path(X)$. Hence as $\Path(A) \rightarrow \Path(X)$ is a fibration (by the last point of lemma \ref{thm:exponentials}), the map $\Path(p) \rightarrow X$ is a fibration, in particular $\Path(p)$ is fibrant. Since $X$ is cofibrant by assumption and $\Path(A)$ is  cofibrant by \cref{proposition:PathObjectCofibrant}, we have that $\Path(p)$ is also cofibrant by~\cref{lem:cofibrant_fiber_product}. 
+\begin{proof} The map $\Path(p) \rightarrow X$ is a pullback of the maps $\Path(A) \rightarrow \Path(X)$ along $X \rightarrow \Path(X)$. Hence as $\Path(A) \rightarrow \Path(X)$ is a fibration (by part~(iv) 
+of~\cref{thm:exponentials}), the map $\Path(p) \rightarrow X$ is a fibration, in particular $\Path(p)$ is fibrant. Since $X$ is cofibrant by assumption and $\Path(A)$ is  cofibrant by \cref{proposition:PathObjectCofibrant}, we have that $\Path(p)$ is also cofibrant by~\cref{lem:cofibrant_fiber_product}. 
 
 Because of the dual of the pushout-product property, the map $\langle \partial \Delta[n] \hookrightarrow \Delta[n] ,  A \rightarrow X \rangle$ is a fibration. This map is 
 \[ 
@@ -562,9 +509,9 @@ Moreover, in the diagram
 \Path(p) \ar[r] & \Path(X) \times_{X \times X}  (A \times A) \ar[r]  & \Path(X)
 }
  \]
-the right hand square is easily seen to be a pullback and the total rectangle is the pullback defining $\Path(p)$, hence the left hand square is also a pullback. As we just showed that the bottom left map is a fibration, this implies that $\Path(p) \rightarrow A \times_{X} A$ is a fibration as well.
+the right hand square is easily seen to be a pullback and the total rectangle is the pullback defining $\Path(p)$, hence the left hand square is also a pullback. Since the bottom left map is a fibration,  $\Path(p) \rightarrow A \times_{X} A$ is a fibration as well.
 
-A very similar argument gives that for $k=0 \, , 1$, the map $\langle \Lambda^k[n] \hookrightarrow \Delta[n] ,  A \rightarrow X\rangle$ is a trivial fibration. Indeed, this is the map
+By a similar argument, for $k=0 \, , 1$, the map $\langle \Lambda^k[n] \hookrightarrow \Delta[n] \, , A \rightarrow X\rangle$ is a trivial fibration. Indeed, this is the map
 \[ 
 \Path(A) \rightarrow  A  \times_X \Path(X)
 \] 
@@ -585,16 +532,26 @@ of a map which has been proved to be a levelwise complemented inclusion in~\cref
 \end{proof}
 
 
-\section{The restricted Frobenius property}
+\section{$\Pi$-types}
 \label{sec:Pi-types}
 
 
+The main goal of this section is to show that a Kan fibration $p \co A \rightarrow X$ with cofibrant domain, the dependent product functor
+\[
+\Pi_p \co \SSet_{/A} \to \SSet_{/X}
+\]
+preserves Kan fibrations. As we will see, this result allows us to interpret $\Pi$-types via a cofibrant replacement. By adjointness, our goal is equivalent to showing that the pullback functor
+\[
+f^* \co \SSet_{/X} \to \SSet_{/A}
+\]
+preserves trivial cofibrations, which is restricted version of the Frobenius property~\cite{BergB:topsmi}.
+Here, the restriction amounts to the fact that we are considering pullbacks along Kan fibrations whose 
+domain is cofibrant, rather than general Kan fibrations.. As we will see, some of these assumptions are essential in our
+setting.  
 
-We wish to show that the weak factorisation system of fibrations and trivial cofibrations satisfies
-a restricted version of the Frobenius property, asserting that pullback along fibrations with cofibrant
-domains preserves trivial cofibrations. 
-As is well known, by adjointness this implies that, for a fibration $p \co A \rightarrow X$ with cofibrant
-domain, the dependent product functor $\Pi_p \co \SSet_{/A} \to \SSet_{/X}$ preserves fibrations. The proof of the restricted Frobenius property follows essentially~\cite{gambino2017frobenius}. In order to combine our development with that argument, however, we need the following preliminary proposition, in which we use the pushout product $\kcyl \hattimes f$ of an endpoint inclusion $\kcyl \co \braces{ k } \to \Delta[1]$ and a map~$f \co Y \to X$, which is defined as the unique dotted arrow  in the diagram:
+Our proof of the restricted Frobenius property follows essentially~\cite{gambino2017frobenius}. 
+In order to combine our development with that argument, however, we need to show that the notion of a Kan fibration considered here coincides with the one considered in~\cite{gambino2017frobenius}. For this, 
+we use the pushout product $\kcyl \hattimes f$ of an endpoint inclusion $\kcyl \co \braces{ k } \to \Delta[1]$ and a map~$f \co Y \to X$, which is defined as the unique dotted arrow  in the diagram:
 \[
 \xymatrix{
 \braces{ k } \times Y \ar[r] \ar[d] &  \Delta[1]  \times X  \ar[d] \ar@/^1.5pc/[ddr] \\
@@ -607,22 +564,22 @@ domain, the dependent product functor $\Pi_p \co \SSet_{/A} \to \SSet_{/X}$ pres
 \begin{proposition} For a map $p \co B \to A$, the following conditions are equivalent.
 \begin{enumerate}[(i)] 
 \item The map $p$ is a fibration.
-\item The map $p$ has the right lifting property with respect to the pushout products $ \kcyl  \hattimes f$, for every cofibration $i \co Y \to X$.
-\item The map $p$ has the right lifting property with respect to the pushout products $ \kcyl  \hattimes h^n_k$, for every  
-horn inclusion $h^n_k$. \noten{Need to fix indices to avoid clash of use of $k$}.
+\item The map $p$ has the right lifting property with respect to the pushout products 
+$\kcyl  \hattimes f$, where $k \in \braces{ 0 \, , 1 }$ and $f \co Y \to X$ is a cofibration.
+\item The map $p$ has the right lifting property with respect to the pushout products $\kcyl  \hattimes h^n_i$, 
+where $k \in \braces{ 0 \, , 1 }$ and $h^n_i \co \Lambda^i[n] \to \Delta[n]$  is a horn inclusion.
 \end{enumerate}
 \end{proposition} 
 
 \begin{proof}The proof of \cite[Theorem~3.2.3]{joyal-tierney:simplicial-homotopy-theory} is completely constructive and sufficient to imply this result.
-For more details, readers may also refer to the last claim in \cite[Corollary~5.3.2]{henry2018wms}
+For more details, readers may also refer to~\cite[Corollary~5.3.2]{henry2018wms}
 and \cite[Proposition~5.2.6]{henry2018wms}.
 \end{proof}
 
 
 
-Let $p \co A \rightarrow X$ be a fibration. By adjointness, $\Pi_p \co \SSet_{/A} \to \SSet_{/X}$  preserves fibrations if and only if the pullback functor $p^* \co \SSet_{/X} \to \SSet_{/A}$ preserves trivial cofibrations. Let us now assume that  $A$ is cofibrant. 
-In this case $p^*$ preserves cofibrations by \cref{thm:cof-pbk}, so we only need to show that it preserves
-trivial cofibrations. We achieve this by following closely \cite[Section~3]{gambino2017frobenius}. Note that we cannot apply directly the result therein since 
+Let $p \co A \rightarrow X$ be a fibration with cofibrant domain. In order show that $p^* \co \SSet_{/X} \to \SSet_{/A}$ preserves 
+trivial cofibrations, as required,  we follow closely \cite[Section~3]{gambino2017frobenius}. Note that we cannot apply directly the result therein since 
 the assumption that every object is cofibrant does not hold in our setting. However, only minor modifications are sufficient.
 
 
@@ -663,7 +620,7 @@ a weak equivalence by the pushout-product property and so $f$ is also a weak equ
 \end{lemma}
 
 \begin{proof}
-This is shown as part of~\cite[Theorem 3.2.3]{joyal-tierney:simplicial-homotopy-theory}. The proof given there can be easily checked to be constructive. This argument as also been reproduced (in the context of complicial sets) in the first part of the proof of \cite[Proposition~5.2.6]{henry2018wms} which is developed in constructive settings.
+This is shown as part of~\cite[Theorem 3.2.3]{joyal-tierney:simplicial-homotopy-theory}. The proof given there can be easily checked to be constructive. 
 \end{proof}
 
 %I've only added the reference to my paper to avoid having Joyal and Tierney's notes as unique reference for this. But If you think it is fine, you can remove it.
@@ -681,7 +638,7 @@ the pullback functor $p^* \co \SSet_{/X} \to \SSet_{/A}$ preserves strong $k$-or
 \begin{proof} This is essentially \cite[Lemma~3.7]{gambino2017frobenius}, but we provide some details
 for the convenience of the reader.
 Let $f \co Y \rightarrow X$ be a strong $k$-oriented homotopy equivalence. Let $H$ and $H_X$  maps 
-as in~\cref{def:strhtpyequiv}. Let $p \co A \rightarrow X$ be a fibration with cofibrant domain and consider the pullback
+as in~\cref{def:strhtpyequiv}. Let us consider the pullback
 \[
 \xymatrix@C=1.5cm{
 A[f] \ar[r]^-{p^*(f)}  \ar[d]_{p_{A[f]}} & A \ar[d]^{p} \\
@@ -702,7 +659,7 @@ A[f]  \ar[d]_{p^*(f)} \ar[r] &  (\Delta[1] \times A[f])  \cup Y \ar[d]^{\delta^k
 A \ar[r] & \Delta[1]  \times A \ar[r]_-{K} & A
 }
 \]
-We define it using the universal property of $A[f]$ as the unique map to $A[f]$ such that the image in $X$ is the one specified by the diagram above, and the value in $Y$ is the one given by $H_X$ composed with the map $(\Delta[1] \times A[f]) \cup Y$ to $(\Delta[1] \times A[f]) \cup X$. These indeed have the same image in $X$ exactly because of the commutation of lower triangle in the filler diagram defining~$H'$. The commutation of the diagram and the fact that the upper line is a retract are immediate with this definition.
+We define it using the universal property of $A[f]$ as the unique map to $A[f]$ such that the image in $X$ is the one specified by the diagram above, and the value in $Y$ is the one given by $H_X$ composed with the map $(\Delta[1] \times A[f]) \cup Y$ to $(\Delta[1] \times A[f]) \cup X$. These indeed have the same image in $X$ exactly because of the commutation of lower triangle in the filler diagram defining~$H'$. With this definition, the commutation of the diagram and the fact that the upper line is a retract are immediate.
 \end{proof}
 
 
@@ -712,34 +669,25 @@ Let $p \co A \rightarrow X$ is a fibration with cofibrant domain. Then the pullb
 \[
 p^* : \SSet_{/X} \rightarrow \SSet_{/A}
 \] 
-preserves cofibrations and trivial cofibrations.
+preserves  trivial cofibrations.
 \end{lemma}
 
 
-\begin{proof} Since the pullback functor $p^*$ has a right adjoint,  it is enough to check that pullbacks of generating cofibrations and generating trivial cofibrations are cofibrations and trivial cofibrations, respectively. For cofibrations, this is \cref{thm:cof-pbk}. For trivial cofibrations, note that the trivial cofibrations in $\SSet_{/Y}$ are generated by the horn inclusions $h^k_n \co \Lambda^{k}[n] \rightarrow \Delta[n]$ for all possible choices of $\Delta[n] \rightarrow A$. By \cref{lemma:genTcof_strongHequiv} they are all strong $k$-oriented homotopy equivalences. Moreover, their pullback to $X$ is also their pullback along the map $A \times_X \Delta[n] \rightarrow \Delta[n]$ which is again a fibration with cofibrant domain by \cref{lem:cofibrant_fiber_product}. Hence  \cref{lemma:pb_of_StrongHomotopyEq} implies that the pullback 
-to~$X$ are also strong $k$-oriented homotopy equivalences. Since they are cofibrations, they are 
+\begin{proof} Since the pullback functor $p^*$ has a right adjoint,  it is enough to check that pullbacks of generating trivial cofibrations are trivial cofibrations, respectively. For trivial cofibrations, note that the trivial cofibrations in $\SSet_{/X}$ are generated by the horn inclusions $h^k_n \co \Lambda^{k}[n] \rightarrow \Delta[n]$ for all possible choices of $x \co \Delta[n] \rightarrow X$. By \cref{lemma:genTcof_strongHequiv} they are all strong $k$-oriented homotopy equivalences. Moreover, their pullback to $A$ is also their pullback along the map $A \times_X \Delta[n] \rightarrow \Delta[n]$ which is again a fibration with cofibrant domain by \cref{lem:cofibrant_fiber_product}. Hence  \cref{lemma:pb_of_StrongHomotopyEq} implies that the pullback 
+to~$A$ are also strong $k$-oriented homotopy equivalences. Since they are cofibrations, they are 
 trivial cofibrations by \cref{rem:below-strhtpyequiv}.
 \end{proof}
 
 
 
 \begin{theorem}\label{cor:Pi_types_are_fibrant}
-Let $p \co A \rightarrow X$ be a fibration with cofibrant domain. The functor $\Pi_p \co \SSet_{/A} \to \SSet_{/X}$ restricts to a functor
-\[
-\Pi_p \co \Fib_{/A}  \to \Fib_{/X} \, .
-\]
-Furthermore, this restriction preserves  trivial fibrations.
-
+Let $p \co A \rightarrow X$ be a fibration with cofibrant domain. The functor $\Pi_p \co \SSet_{/A} \to \SSet_{/X}$ preserves  fibrations.
 \end{theorem}
 
 \begin{proof}
-Since $p^*$ preserves cofibrations and trivial cofibrations, its right adjoint $p_*$ preserves trivial fibrations and fibrations. In particular, it preserves fibrant objects.
+Since $p^*$ preserves  trivial cofibrations, its right adjoint $\Pi_p$ preserves fibrations.
 \end{proof}
 
-
-Given a cofibrant simplicial set $X$ and a fibrant simplicial set, the special case of \cref{cor:Pi_types_are_fibrant} with $p$   the unique map $A \to 1$ and $q$ the second projection 
-$\pi_2 \co A \times A \to A$, which is a fibration if~$A$ is a  fibrant, implies that $A^X$ is fibrant, as we already established in part~(i) 
-of~\cref{thm:exponentials}. 
 
 
 
@@ -772,8 +720,8 @@ of~\cref{thm:exponentials}.
 
 
 \begin{remark}[$\Pi$-types] \label{rem:pi-types}
-We can define a naive interpretation of $\Pi$-types via a cofibrant replacement of dependent product. In order to explain this, let
-us recall that, for maps $p \co A \to X$ and $q \co B \to A$,  the dependent product $\Pi_p(q) \co \Pi_A(B)
+We can define the interpretation of $\Pi$-types using~\cref{cor:Pi_types_are_fibrant} and a cofibrant replacement, as follows. 
+Recall that, for maps $p \co A \to X$ and $q \co B \to A$,  the dependent product $\Pi_p(q) \co \Pi_A(B)
 \to X$ is equipped with a map
 \[
 \mathsf{app} \co \Pi_A(B) \times_A  A \to B
@@ -792,26 +740,26 @@ in $\SSet_{/A}$ which is universal in the sense that, for every  $Y \to X$, the 
  \lambda( \mathsf{app}(f \times_A 1_A)) = f \, ,
  \end{equation}
  for every $b \co Y \times_A A \to B$ and $f \co Y \to \Pi_A(B)$.  These equations correspond to the
- well-known $\beta$-rule and $\eta$-rule for $\Pi$-types, respectively.
+ well-known judgemental $\beta$-rule and $\eta$-rule for $\Pi$-types, respectively.
  
  When $p$ and $q$ are fibrations and $A$ is cofibrant, the map 
  $\Pi_p(q) \co \Pi_A(B) \to X$ is a fibration by \cref{cor:Pi_types_are_fibrant} but $\Pi_A(B)$ is not cofibrant
  in general. Thus, we interpret  $\Pi$-types as the 
  cofibrant replacement  of $\Pi_A(B)$, which is given by a cofibrant simplicial set
  $\mathbb{L}(\Pi_A(B)$  equipped with
- a trivial fibration $t \co \mathbb{L}(\Pi_A(B)) \to \Pi_A(B)$. 
+ a trivial fibration $\varepsilon \co \mathbb{L}(\Pi_A(B)) \to \Pi_A(B)$. 
 We then define $\widetilde{\mathsf{app}} \co   \mathbb{L}(\Pi_A(B)) \times_A A \to B$ by letting
 \[
-\widetilde{\mathsf{app}}  = \mathsf{app} \circ (t \times_A 1_A) \, .
+\widetilde{\mathsf{app}}  \defeq \mathsf{app} \circ (\varepsilon \times_A 1_A) \, .
 \]
 For a bifibrant simplicial set $Y$ and maps $Y \to X$,  $b \co Y \times_A A \to B$, we define $\widetilde{\lambda}(b) \co Y \to \mathbb{L}(B^A)$ to be the
 diagonal filler
 \[
 \xymatrix{
-0 \ar[r] \ar[d] & \mathbb{L}(\Pi_A(B))  \ar[d]^t \\
+0 \ar[r] \ar[d] & \mathbb{L}(\Pi_A(B))  \ar[d]^\varepsilon \\
 Y \ar[r]_{\lambda(b)} \ar@{.>}[ur] & \Pi_A(B)}
 \]
-which exists since $Y$ is cofibrant and $t$ is a trivial fibration. It follows immediately that
+which exists since $Y$ is cofibrant and $\varepsilon$ is a trivial fibration. It follows immediately that
 \[
  \widetilde{\mathsf{app}}(\widetilde{\lambda}(b) \times_A 1_A) = b \, ,
 \]
@@ -822,7 +770,7 @@ so the $\beta$-rule holds as an equality. Instead, for $f \co X \to \mathbb{L}(\
 which is constructed as the diagonal filler in the following diagram
 \[
 \xymatrix@C=2cm{
-\partial \Delta[1] \times Y \ar[r]^-{[f, \widetilde{\lambda}(f \times 1_A)]} \ar[d] & \mathbb{L}(\Pi_A(B)) \ar[d]^t \\
+\partial \Delta[1] \times Y \ar[r]^-{[f, \widetilde{\lambda}(f \times 1_A)]} \ar[d] & \mathbb{L}(\Pi_A(B)) \ar[d]^\varepsilon \\
 \Delta[1] \times Y \ar[r] \ar@{.>}[ur] & \Pi_A(B) }
 \]
 where the bottom map is given by the equality in the $\eta$-rule in~\eqref{equ:betaeta}.
@@ -837,54 +785,52 @@ The main goal of this section is to prove the so-called weak equivalence extensi
 
 
 
-\begin{lemma}\label{Lemma:ForTheExtProperty} Let $f \co Y \rightarrow X$ be a cofibration with $Y$ cofibrant. 
+\begin{lemma}\label{Lemma:ForTheExtProperty} Let  $f \co Y \rightarrow X$ be a cofibration between
+cofibrant objects. 
 \begin{enumerate}[$(i)$]
-\item The functor $f_* \co \SSet_{/Y} \rightarrow \SSet_{/X}$ preserves trivial fibrations.
-\item The counit of the adjunction $f^* \dashv f_*$ is a natural isomorphism.
-\item If $g \co Z \to Y$  is cofibrant in $\SSet_{/Y}$, then $f_*(g) \co f_*(Z) \to X$  is cofibrant in~$\SSet_{/X}$.
-\item Trivial fibrations extend along cofibrations with cofibrant domain, \ie given a trivial fibration $q
- \co B \to Y$  as in the solid diagram:
+\item The dependent product functor $\Pi_f \co \SSet_{/Y} \rightarrow \SSet_{/X}$ preserves trivial fibrations.
+\item The counit of the adjunction $f^* \dashv \Pi_f$ is a natural isomorphism.
+\item If $p \co A \to Y$  is cofibrant in $\SSet_{/Y}$, then $\Pi_f(p) \co \Pi_Y(A) \to X$  is cofibrant 
+in~$\SSet_{/X}$.
+\item Trivial fibrations extend along $f$, \ie given a trivial fibration $p
+ \co A \to Y$  as in the solid diagram
 \[
 \xymatrix{
-B \ar@{.>}[r]^{g} \ar[d]_{q} \drpullback  & A \ar@{.>}[d]^{p} \\
-Y \ar[r]_f &  X \, ,}
+A \ar@{.>}[r]^{g} \ar[d]_{p} \drpullback  & B \ar@{.>}[d]^{q} \\
+Y \ar[r]_-f &  X \, ,}
 \]
-then there exists a trivial fibration $p \co A \rightarrow X$ which fits in the dotted pullback square above. Moreover if $B$ is cofibrant  then 
-$A$ can be chosen to be 
+then there exists a trivial fibration $q \co B \rightarrow X$ which fits in the dotted pullback square above. Moreover if $A$ is cofibrant  then 
+$B$ can be chosen to be 
 cofibrant as well.
 \end{enumerate}
 \end{lemma}
 
  
 \begin{proof} We prove the different parts separately. 
-\begin{enumerate}[$(i)$] 
-\item 
 
-Since the functor $f_*$ is the right adjoint to the pullback functor $f^*$ and trivial fibrations are the maps with the the right lifting property with respect to cofibrations, $f_*$ preserves trivial fibrations if and only if $f^*$ preserve cofibrations. But this follows by~\cref{thm:cof-pbk}.
+For part~(i), since the dependent product functor $\Pi_f$ is right adjoint to the pullback functor~$f^*$ and trivial fibrations are the maps with the the right lifting property with respect to cofibrations, $\Pi_f$ preserves trivial fibrations if and only if $f^*$ preserves cofibrations. But this follows by~\cref{thm:cof-pbk}.
 
-\item \noten{To be revised}  As $f$ is a monomorphism, then the forgetful functor $f_{!} \co \SSet_{/X} \rightarrow \SSet_{/Y}$ is fully faithful and hence the unit $\eta \co 1_{\SSet_{/A}} \rightarrow f^* f_{!}$ is an isomorphism. By adjointness, the counit $\varepsilon \co f^* f_* \rightarrow 1_{\SSet_{/Y}}$ is also an isomorphism. Let $v$ be a $n$-cell in $i_*(X)$.
-If the image of $v$ is in $A$ then $v$ is a cell of $X \subset i_*(X)$, in which case it is decidable whether $v$ is degenerate or not.
-As $A$ is levelwise complemented in $B$, one can assume that $v$ is not in the image of $A$. In this case it is decidable if the image of $v$ in $B$ is degenerate or not.
-Infact, by the Eilenberg-Zilber lemma one can also decide for each given degeneracy if the image of $v$ is degenerate for this precise degeneracy or not. 
+For part~(ii),  since $f$ is a monomorphism,  $\Sigma_f \co \SSet_{/X} \rightarrow \SSet_{/Y}$ is fully faithful and hence the unit $\eta \co 1 \rightarrow f^*  \Sigma_{f}$ is an isomorphism. By adjointness, the counit $\varepsilon \co f^* \Pi_f \rightarrow 1$ is also an isomorphism. 
 
-Let $\sigma \co [n] \to [k]$ be any degeneracy, we will show that it is decidable whether $v$ is ``$\sigma$-degenerate, i.e. if $v =\sigma^* v'$ for some $v'$. Note that if $v$ is $\sigma$-degenerate then its image in $B$ is as well. As this is a decidable question, one can freely assume that the image of $v$ in $B$ is $\sigma$-degenerate, i.e. for the form $\sigma^* b$ for some $b \in B$ (and not in $A$).
+\caution{[To be checked or simplified]} For part (iii),   let $v$ be a $n$-cell in $\Pi_Y(A)$.
+If the image of $v$ is in $Y$ then $v$ is a cell of $A \subseteq \Pi_Y(A)$, in which case it is decidable whether $v$ is degenerate or not.
+Since $Y$ is levelwise complemented in $X$, one can assume that $v$ is not in the image of $Y$. In this case it is decidable if the image of $v$ in $X$ is degenerate or not.
+In fact, by the Eilenberg-Zilber lemma one can also decide for each given degeneracy if the image of $v$ is degenerate for this precise degeneracy or not. 
 
-One can form the pullback squares
+Let $\sigma \co [n] \to [k]$ be any degeneracy, we will show that it is decidable whether $v$ is $\sigma$-degenerate, \ie if $v =\sigma^*(v')$ for some $v'$. Note that if $v$ is $\sigma$-degenerate then its image in $Y$ is as well. As this is a decidable question, one can freely assume that the image of $v$ in $Y$ is $\sigma$-degenerate, i.e. for the form $\sigma^* x$ for some $x \in X$ (and not in $Y$). One can form the pullback squares
 \[
 \xymatrix{
 V \ar@{>->}[r] \drpullback \ar[d] & \Delta[n] \ar@{->}[d]^{\sigma} \\
-V_{\sigma} \ar@{>->}[r] \drpullback \ar[d] & \Delta[k] \ar@{->}[d]^b \\
-A \ar@{>->}[r] &  B }
+V_{\sigma} \ar@{>->}[r] \drpullback \ar[d] & \Delta[k] \ar@{->}[d]^x \\
+Y \ar@{>->}[r]_{f} &  X }
 \]
-Given its image in $B$, the cell $v: \Delta[n] \rightarrow i_* X$ is uniquely determined by the data of a morphism $\lambda: V\rightarrow X$. The cell $v$ is $\sigma$-degenerate if and only if $\lambda$ factors in $V_{\sigma}$ (such a factorization being unique if it exists). For any $J \subset [n]$, the $J$-face of a cell is said to be $\sigma$-degenerate if and only if it is degenerate for the (potentially trivial) degeneracy: $\sigma_{|J} : J \rightarrow \sigma(J)$. We claim that $\lambda$ factor into $V_{\sigma}$ if and only for all $i:[f] \hookrightarrow [n]$ that belong to $V$ (and $V$ is decidable so there is only a finite cardinal of them), $i^* \lambda$ is $\sigma$-degenerate (which is dediable). Indeed $V$ is the gluing of all the $\sigma \circ i$ for such faces, for each individual face $i$ one has a factorization into its image in $V_{\sigma}$ if and only if $i^* \lambda$ is $\sigma$-degenerate, and as such factorization are unique they patch together on $V_{\sigma}$ is they all exists.
+Given its image in $X$, the cell $v \co \Delta[n] \rightarrow \Pi_Y(A)$ is uniquely determined by the data of a morphism $\lambda \co V\rightarrow Y$. The cell $v$ is $\sigma$-degenerate if and only if $\lambda$ factors in $V_{\sigma}$ (such a factorization being unique if it exists). For any $J \subset [n]$, the $J$-face of a cell is said to be $\sigma$-degenerate if and only if it is degenerate for the (potentially trivial) degeneracy: 
+$\sigma_{|J} \co J \rightarrow \sigma(J)$. We claim that $\lambda$ factor into $V_{\sigma}$ if and only for all $i \co [f] \hookrightarrow [n]$ that belong to $V$ (and $V$ is decidable so there is only a finite cardinal of them), $i^* \lambda$ is $\sigma$-degenerate (which is dediable). Indeed $V$ is the gluing of all the $\sigma \circ i$ for such faces, for each individual face $i$ one has a factorization into its image in $V_{\sigma}$ if and only if $i^* \lambda$ is $\sigma$-degenerate, and as such factorization are unique they patch together on $V_{\sigma}$ is they all exists.
 
-\item One can simply take $p \co A \to X$ to be $f_*(q) \co f_*(B) \to X$. Indeed, it is a trivial fibration by part~$(i)$ and the square is a pullback by part $(ii)$. The final remark about the cofibrancy of 
-$A$ follows from $(iii)$. \qedhere
-\end{enumerate}
+For part~(iv), given a trivial fibration $p \co A \to Y$, define $q \co B \to X$ to  be $\Pi_f(p) \co \Pi_Y(A) \to Y$. This map is a trivial fibration by part~(i) and the square is a pullback by part (ii). The final remark about the cofibrancy of $B$ follows from part~(iii). \qedhere
 \end{proof}
 
 
-\notesh{I remember we proved $(iii)$ explicitly as this was something I was worried about. But the proof above is a lot harder than in my memories. Do you have any notes about this claims ? If not just erase this note.}
 
 
 
