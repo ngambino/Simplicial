@@ -279,28 +279,23 @@ Therefore, the pushout-property  implies its dual version, asserting that  if $f
 
 \medskip
 
-Given a map $p \co Y \to X$ in $\SSet$, we write 
-\[
-f^* \co \SSet_{/X} \to \SSet_{/Y}
-\] 
-for the associated pullback functor. Since $\SSet$ is locally cartesian closed, the pullback functor 
-$f^*$ has both a  left and a right adjoint, written $\Sigma_{f} \co \SSet_{/Y} \to \SSet_{/X}$ and
-$\Pi_f \co \SSet_{/Y} \to \SSet_{/X}$, respectively.   We call these functors the \emph{dependent sum} and \emph{dependent
-product} functors, respectively. Their action  on a
-map $g \co Z \to Y$ will be written
-\[
- \Sigma_f(g) \co \Sigma_Y(Z) \to X \, , \quad \Pi_f(g) \co \Pi_Y(Z) \to X \, ,
- \]
-respectively. Since  $\Sigma_f$ is defined by composition, $\Sigma_Y(Z) \defeq Z$ and $\Sigma_f(g) = g f $. We denote the action of $f^*$ on Kan fibration $p \co A \to X$ as
+Given a map $f \co Y \to X$ in $\SSet$, we write $f^* \co \SSet_{/X} \to \SSet_{/Y}$
+for the associated pullback functor. The functor $f^*$ has a left adjoint, defined
+by composition, which we write $\Sigma_{f} \co \SSet_{/Y} \to \SSet_{/X}$ and refer
+to as the \emph{dependent sum} along $f$. Since $\SSet$ is locally cartesian closed, the pullback functor 
+$f^*$ has also a right adjoint, which we write 
+$\Pi_f \co \SSet_{/Y} \to \SSet_{/X}$ and refer to as the \emph{dependent
+product}  along $f$. The action of these functors on a
+map $g \co Z \to Y$ will be written $\Sigma_f(g) \co \Sigma_Y(Z) \to X$ and 
+$\Pi_f(g) \co \Pi_Y(Z) \to X$, respectively. Since  $\Sigma_f$ is defined by composition,~$\Sigma_Y(Z) \defeq Z$ and~$\Sigma_f(g) = g f $. We denote the action of $f^*$ on a Kan fibration~$p \co A \to X$ as
 \[
 \xymatrix{
 A[f] \ar[r] \ar[d]_{p[f]} & A \ar[d]^{p} \\
 Y \ar[r]_f & X \, .}
 \]
 
-t
 
-Finally, let us recall that, as a special case of a general result for presheaf categories, for every $[n] \in \Delta$ there is an equivalence of categories
+Finally, let us recall that, as a special case of a general result for presheaf categories, for every~$[n] \in \Delta$ there is an equivalence of categories
 \begin{equation}
 \label{equ:psh-slice-sset}
 \SSet_{/\Delta[n]} \simeq  [ {\Delta_{/[n]}}^{\op}, \Set]   \, .
@@ -381,7 +376,7 @@ $\Sigma_p(q) \co \Sigma_A(B) \to X$ is again a fibration with cofibrant domain.
 
 
 
-\section{Path spaces}
+\section{Identity types as path spaces}
 \label{sec:pats}
 
 The aim of this section is to show that, for a  fibration $p \co A \to X$ with cofibrant domain, we can
@@ -532,7 +527,7 @@ of a map which has been proved to be a levelwise complemented inclusion in~\cref
 \end{proof}
 
 
-\section{$\Pi$-types}
+\section{$\Pi$-types via cofibrant replacements}
 \label{sec:Pi-types}
 
 
