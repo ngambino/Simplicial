@@ -52,7 +52,7 @@ explain our results, let us recall from~\cite{voevodsky-simplicial-model} that t
 to define the simplicial model of HoTT are 
 the existence of a Quillen
 model structure on the category of simplicial sets whose fibrations are the Kan fibrations, 
- the fact that pushforward along fibrations preserves fibrations 
+ the fact that dependent product along fibrations preserves fibrations 
  the existence of a  fibration $\pi \co \UU \to \U$ that classifies small fibrations, 
 the fibrancy of $\U$ and, finally, the univalence of the fibration $\pi$. These results
 allow us to define an interpretation of type theory in simplicial sets by mapping type-theoretic contexts
@@ -76,11 +76,11 @@ model structure~\cite{SattlerC:equepu}, none of them
  is known to be Quillen equivalent to simplicial sets or topological spaces.
 
 As shown in~\cite{gambino2017frobenius}, it is possible to develop  a constructive theory of uniform fibrations
-also in simplicial sets and prove that pushforward along a uniform fibration preserves
+also in simplicial sets and prove that dependent product along a uniform fibration preserves
 uniform fibrations, showing in particular that that for a simplicial set $A$ and an 
  algebraic Kan complex $B$, the simplicial set $B^A$ admits the structure of an algebraic Kan complex. However,  uniform fibrations
 are not as well-behaved in simplicial sets as in cubical sets,
-since they do not admit a universal small uniform fibration, essentially because 
+since they do not admit a classifier, essentially because 
 representables  in simplicial sets are not closed under under products while they are in cubical sets~\cite{SattlerC:faiaut}. 
 
 
@@ -102,9 +102,9 @@ homotopy theory necessary to define a constructive simplicial interpretation of 
 \begin{itemize}
 \item \cref{thm:MainPathObject}, asserting that, for a fibration with cofibrant domain $p \co A \to X$, the mapping path space 
 gives a factorisation of the diagonal $\delta_p \co A \to A \times_X A$ as a trivial cofibration followed by a fibration;
-\item \cref{cor:Pi_types_are_fibrant}, asserting that pushforward along fibrations with cofibrant
+\item \cref{cor:Pi_types_are_fibrant}, asserting that dependent product along fibrations with cofibrant
 domain preserves fibrations, which implies that, for a cofibrant simplicial set $A$ and a Kan complex $B$, the exponential $B^A$ is a Kan complex; 
-\item \cref{thm:universe-uc}, asserting the existence of a universal small fibration $\pi_c \co
+\item \cref{thm:universe-uc}, asserting the existence of a small fibration $\pi_c \co
 \UU_c \to \U_c$ that classifies small fibrations between cofibrant objects;
 \item \cref{thm:fibrancy-of-u-and-uc}, asserting that the simplicial set $\U_c$ is a cofibrant Kan complex;
 \item \cref{thm:univalence-of-u-and-uc}, asserting that the fibration $\pi_c  \co
@@ -138,7 +138,7 @@ Kan complex, $A$ cofibrant  \end{tabular} \\[3ex]
 
 The key novelty of our approach is the use of the homotopy-theoretic notion of cofibrancy
 to handle the logical notion of decidability of degenacies, which is needed to develop constructively simplicial homotopy theory. In particular, we use of the cofibrant  replacement functor
-to interpret $\Pi$-types and the type-theoretic universe.  For $\Pi$-types, given a fibration $p \co A \to X$ with cofibrant domain, the result of applying the pushforward functor to a fibration $q \co B \to A$ with cofibrant domain produces a map  $\Pi_p(q) \co \Pi_A(B) \to X$, which is a fibration by~\cref{cor:Pi_types_are_fibrant}, but whose domain
+to interpret $\Pi$-types and the type-theoretic universe.  For $\Pi$-types, given a fibration $p \co A \to X$ with cofibrant domain, the result of applying the dependent product functor to a fibration $q \co B \to A$ with cofibrant domain produces a map  $\Pi_p(q) \co \Pi_A(B) \to X$, which is a fibration by~\cref{cor:Pi_types_are_fibrant}, but whose domain
 is not necessarily cofibrant. In order to remedy this, we define the interpretation of $\Pi$-types to be given by a cofibrant replacement of
 $\Pi_p(q) \co \Pi_A(B) \to X$, which is now a fibration with cofibrant domain. 
 Interestingly, this definition validates 
@@ -173,11 +173,11 @@ rather a small fibration that classifies small fibrations between cofibrant obje
 
 \noindent 
 \textbf{Outline of the paper.} \cref{sec:preliminaries} recalls the constructive version of the 
-Kan-Quillen model structure from~\cite{henry2019qms}  . \cref{sec:basrp} establishes some basic results on pullbacks. \cref{sec:pats} shows how path spaces provide factorisations
+Kan-Quillen model structure from~\cite{henry2019qms}. \cref{sec:basrp} establishes some basic results on pullbacks. \cref{sec:pats} shows how path spaces provide factorisations
 as trivial cofibration followed by fibration. \cref{sec:Pi-types} proves the restricted Frobenius property. \cref{sec:equep}
-establishes the weak equivalence extension property, which we use to prove univalence.
-\cref{sec:unifbb} introduces the universal
-fibration $\pi_c \co \UU_c \to \U_c$. \cref{sec:fibrancy-and-univalence} proves that $\U_c$ is bifibrant and that $\pi_c \co \UU_c \to \U_c$ is univalent. 
+establishes the weak equivalence extension property.
+\cref{sec:unifbb} introduces a fibration $\pi_c \co \UU_c \to \U_c$ that classifies small fibrations
+between cofibrant Kan complexes. \cref{sec:fibrancy-and-univalence} proves that $\U_c$ is bifibrant and that $\pi_c \co \UU_c \to \U_c$ is univalent, using the weak equivalence extension property.
 
 
 \smallskip
@@ -885,14 +885,14 @@ where the bottom map is given by the equality in the $\eta$-rule in~\eqref{equ:b
 \section{The weak equivalence extension property}
 \label{sec:equep}
 
-The main goal of this section is to prove the so-called weak equivalence extension property, which will be the key to prove the existence and univalence of a weakly universal fibration.  For this, we follow closely the approach in \cite{voevodsky-simplicial-model}, but exploiting crucially the cofibrancy requirements that are part of our set-up.
+The main goal of this section is to prove the so-called weak equivalence extension property, which will be the key to prove the univalence of the classifying fibrations considered in~\cref{sec:unifbb,sec:fibrancy-and-univalence}.  For this, we follow closely the approach in \cite{voevodsky-simplicial-model}, but exploiting crucially the cofibrancy requirements that are part of our set-up.
 
 
 
 \begin{lemma}\label{Lemma:ForTheExtProperty} Let  $f \co Y \rightarrow X$ be a cofibration between
 cofibrant objects. 
 \begin{enumerate}[$(i)$]
-\item The dependent product functor $\Pi_f \co \SSet_{/Y} \rightarrow \SSet_{/X}$ preserves trivial fibrations.
+\item The dependent product along $f$, $\Pi_f \co \SSet_{/Y} \rightarrow \SSet_{/X}$, preserves trivial fibrations.
 \item The counit of the adjunction $f^* \dashv \Pi_f$ is a natural isomorphism.
 \item If $p \co A \to Y$  is cofibrant in $\SSet_{/Y}$, then $\Pi_f(p) \co \Pi_Y(A) \to X$  is cofibrant 
 in~$\SSet_{/X}$.
@@ -1036,7 +1036,7 @@ The fact that $\bar{B} \rightarrow A$ is a deformation retract show that it is i
 
  
 
-\section{A versal fibration for small fibrations between bifibrant objects}
+\section{A fibration classifying small fibrations between bifibrant objects}
 \label{sec:unifbb}
 
 
@@ -1076,22 +1076,22 @@ X \ar[r]_a & \U_c}
 Furthermore, the closure of of the type-theoretic universe under various type-formation operations
 corresponds to the closure of the class of maps arising as pullbacks of $\pi_c$ under the 
 operations necessary to intepret the corresponding types. For this, it is convenient to consider
-$\pi_c$ to be a fibration that is versal for the class of small fibrations between cofibrant simplicial
+$\pi_c$ to be a fibration that classifies small fibrations between cofibrant simplicial
 sets, \ie such that for every such fibration $p \co A \to X$ there exists a map $a \co X \to \U_c$ fitting in a pullback diagram of the form
 \[
 \xymatrix{
 A \ar[r] \ar[d]_p   & \UU_c \ar[d]^{\pi_c} \\
 X \ar[r]_-a &  \U_c \, .}
 \]
-Here, we speak of a versal rather than universal fibration since we make no requirement for
+Here, note that we make no requirement for
 the map $a$ to be unique, in contrast for example with the situation of the subobject classifier
 in an elementary topos. Indeed, the map $a$ is not unique, but only unique  up to a contractible space
 of choices, a fact that will be expressed by showing that $\pi_c$ is univalent. 
 
 In this section, we limit ourselves to define $\pi_c \co \UU_c \to \U_c$ and prove that it
-is versal for small fibrations between cofibrant simplicial sets and leave the proofs
+classifies small fibrations between cofibrant simplicial sets and leave the proofs
 that $\U_c$ is a cofibrant Kan complex, that $\UU_c$ is cofibrant  and that $\pi_c$ is univalent 
- to~\cref{sec:fibrancy-and-univalence}. For the goal of this section, we proceed in two steps. First, we modify  the construction of the weak classifier for small fibrations in~\cite{voevodsky-simplicial-model} to obtain a small fibration $\pi \co \UU \to \U$ which weakly classifies  small fibrations between cofibrant objects. Since the base of this fibration does not appear to be cofibrant,
+ to~\cref{sec:fibrancy-and-univalence}. For the goal of this section, we proceed in two steps. First, we modify  the construction of the weak classifier for small fibrations in~\cite{voevodsky-simplicial-model} to obtain a small fibration $\pi \co \UU \to \U$ which classifies small fibrations between cofibrant objects. Since the base of this fibration does not appear to be cofibrant,
 we then consider a suitable cofibrant replacement  of~$\U$ and obtain the required fibration $\pi_c \co \UU_c \to \U_c$ via a pullback. 
 
 \medskip
@@ -1103,7 +1103,8 @@ As a preliminary step, let us recall that a simplicial set $A$ is \emph{small}  
 A[x] \ar[r] \ar[d] \drpullback & A \ar[d]^{p} \\
 \Delta[n] \ar[r]_-{x} & X }
 \]
-is small. Let us also recall the  construction of the weakly universal small map of simplicial sets $\rho \co \VV \to \V$, which is a special case of the results in~\cite{hofmann-streicher-universes} for arbitrary presheaf categories.  For this, we use the equivalence in~\eqref{equ:psh-slice-sset} and the notation associated to it.
+is small. Let us also recall the  construction of a map of simplicial sets $\rho \co \VV \to \V$ that classifies
+small maps of simplicial sets, which is a special case of the results in~\cite{hofmann-streicher-universes} for arbitrary presheaf categories.  For this, we use the equivalence in~\eqref{equ:psh-slice-sset} and the notation associated to it.
 The simplicial set $\V$ is defined by letting
 \[
 \mathsf{V}_n \defeq \{ F \co {\Delta_{/[n]}}^{\op} \to \Set \ | \ \pi_F \co \textstyle{\int F} \to \Delta[n] \text{ is a small
@@ -1114,7 +1115,8 @@ for $[n] \in \Delta$. The object $\VV$ and the map $\rho \co \VV \to \V$ are the
 
 \bigskip
 
-We now come to our first step, in which we define a small fibration $\pi \co \UU \to \U$ which weakly classifies  small fibrations with cofibrant fibers. 
+We now come to our first step, in which we define a small fibration $\pi \co \UU \to \U$ which 
+classifies the class of small fibrations with cofibrant fibers. 
 
 \begin{definition} We say that a fibration $p \co A \to X$ has cofibrant fibers if for every $x \co \Delta[n] 
 \to X$ the simplicial set~$A[x]$ given by the pullback square
