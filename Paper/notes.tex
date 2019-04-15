@@ -379,11 +379,63 @@ $\Sigma_p(q) \co \Sigma_A(B) \to X$ is again a fibration with cofibrant domain.
 \section{Identity types as path spaces}
 \label{sec:pats}
 
-The aim of this section is to show that, for a  fibration $p \co A \to X$ with cofibrant domain, we can
-use path spaces to obtain a factorisation of the diagonal $\delta_p \co A \to A \times_X A$ as a trivial cofibration followed by a fibration. This allows us to show that identity types can be interpreted
-as path spaces, \cf~\cite{awodey-warren:homotopy-idtype}.
+The aim of this section is to show that identity types can be intepreted as path spaces. Adapting
+the results in~\cite{awodey-warren:homotopy-idtype} to our setting, it is easy to see that 
+ in order to interpret the rules for $\Id$-types (recalled in~\cref{tab:Id-types}) we need show that, given a  cofibrant Kan complex $X$ and a Kan fibration with cofibrant domain $p \co A \to X$,
+we have a Kan fibration with cofibrant domain~$\partial \co \Id_A \to A \times_X A$ and a trivial cofibration
+$\mathsf{refl}_A \co A \to \Id_A$ that provide a factorisation of the diagonal map $\delta_p \co A \to A \times_X A$. Here, we will show that such a factorisation can be obtained by letting $\Id_A$ be a suitable mapping path space. 
 
 
+
+
+
+\begin{table}[htb]
+\fbox{\begin{minipage}{14cm}  \smallskip
+\[
+\begin{gathered}
+\begin{prooftree}
+\Gamma \vdash A \co \type \qquad
+\Gamma \vdash a \co A \quad
+\Gamma \vdash b \co A
+\justifies
+\Gamma \vdash \Id_A(a,b) \co \type
+\end{prooftree} 
+\end{gathered} \qquad 
+\begin{gathered}
+\begin{prooftree}
+\Gamma \vdash a \co A
+\justifies
+\Gamma\vdash \mathsf{refl}(a) \co \Id_A(a,a) 
+\end{prooftree}
+\end{gathered}
+\]  \bigskip
+\[
+\begin{prooftree}
+\Gamma \vdash p \co \Id_A(a,b) \quad
+\Gamma, x, y \co A, u \co \Id_A(x,y) \vdash E(x,y,u) \co \type \quad
+\Gamma, x \co X \vdash e \co E(x,x, \mathsf{refl}(x)) 
+\justifies
+\Gamma \vdash \mathsf{J}(a,b,p, e) \co E(a,b,p) 
+\end{prooftree}
+\]
+\medskip
+\[
+\begin{prooftree}
+\Gamma \vdash a \co A \quad
+\Gamma, x, y \co A, u \co \Id_A(x,y) \vdash E(x,y,u) \co \type \quad
+\Gamma, x \co X \vdash e \co E(x,x, \mathsf{refl}(x)) 
+\justifies
+\Gamma \vdash \mathsf{J}(a,a,\mathsf{refl}(a), e) = e(a) \co E(a,a,\mathsf{refl}(a)) 
+\end{prooftree}
+\] \medskip
+\end{minipage} }
+\medskip
+\caption{Rules for $\Id$-types.} 
+\label{tab:Id-types}
+\end{table}
+
+
+We begin with some simple observations.
 
 
 
@@ -400,13 +452,12 @@ as path spaces, \cf~\cite{awodey-warren:homotopy-idtype}.
 
 \begin{proof} The claims follow easily from the pushout product property of the model structure.
 \end{proof}
-
+ 
 Interestingly, the cofibrancy assumptions of part~(i) of~\cref{thm:exponentials} allows
 us also to prove the claim constructively following the combinatorial proof in~\cite{MayJP:simoat}, exploiting the decidability of degeneracy in $X$ instead of appealing to the law of excluded middle.
 
 
 
-\medskip
 
 For a simplicial set $A$, we define its path object by letting $\Path(A) \defeq A^{\Delta[1]}$. 
 There are evident boundary maps $\partial \co \Path(A) \to A \times A$, giving
@@ -527,21 +578,79 @@ of a map which has been proved to be a levelwise complemented inclusion in~\cref
 \end{proof}
 
 
+
+
 \section{$\Pi$-types via cofibrant replacements}
 \label{sec:Pi-types}
 
+The aim of this section is to prove the results of simplicial homotopy theory necessary to interpret
+the rule for $\Pi$-types in~\cref{tab:Pi-types}. 
 
-The main goal of this section is to show that a Kan fibration $p \co A \rightarrow X$ with cofibrant domain, the dependent product functor
+\begin{table}[htb]
+\fbox{\begin{minipage}{14cm}  \smallskip
 \[
-\Pi_p \co \SSet_{/A} \to \SSet_{/X}
-\]
-preserves Kan fibrations. As we will see, this result allows us to interpret $\Pi$-types via a cofibrant replacement. By adjointness, our goal is equivalent to showing that the pullback functor
+\begin{prooftree}
+\Gamma \vdash A \co \type \qquad
+\Gamma, x \co A \vdash B \co \type
+\justifies
+\Gamma \vdash (\Pi x \co A) B \co \type
+\end{prooftree} 
+\] 
+\medskip
 \[
-f^* \co \SSet_{/X} \to \SSet_{/A}
+\begin{gathered}
+\begin{prooftree}
+\Gamma, x \co A \vdash b \co B
+\justifies
+\Gamma\vdash (\lambda x \co A) b \co (\Pi x \co A) B
+\end{prooftree}
+\end{gathered} \qquad
+\begin{gathered}
+\begin{prooftree}
+\Gamma \vdash f \co (\Pi x \co A) B \quad
+\Gamma \vdash a \co A 
+\justifies
+\Gamma \vdash \mathsf{app}(f,a) \co B[a/x]
+\end{prooftree}
+\end{gathered}
 \]
-preserves trivial cofibrations, which is restricted version of the Frobenius property~\cite{BergB:topsmi}.
-Here, the restriction amounts to the fact that we are considering pullbacks along Kan fibrations whose 
-domain is cofibrant, rather than general Kan fibrations.. As we will see, some of these assumptions are essential in our
+\medskip
+\[
+\begin{gathered}
+\begin{prooftree}
+\Gamma, x \co A \vdash b \co B \quad
+\Gamma \vdash a \co A 
+\justifies
+\Gamma \vdash \mathsf{app}((\lambda x \co A) b, a) = b[a/x] \co B[a/x]
+\end{prooftree}
+\end{gathered}
+\qquad
+\begin{gathered}
+\begin{prooftree}
+\Gamma \vdash f \co (\Pi x \co A) B \quad
+\justifies
+\Gamma \vdash \eta_f \co \Id(f \, , (\lambda x \co A) \mathsf{app}(f, x) )
+\end{prooftree}
+\end{gathered}
+\] \medskip
+\end{minipage} }
+\medskip
+\caption{Rules for $\Pi$-types.} 
+\label{tab:Pi-types}
+\end{table}
+
+In order to interpret the formation rule, we should consider a fixed cofibrant Kan complex~$X$ and a Kan fibration with cofibrant domain $p \co A \to X$  and define an operation mapping a Kan fibration with cofibrant domain $q \co B \to A$  to a new Kan fibration with cofibrant domain~$\widetilde{\Pi}_p(q) \co \widetilde{\Pi}_A(B) \to X$. For this, we proceed
+in two steps. Given a map $q \co B \to A$ as above, we first apply the dependent product functor along $p$, 
+\[
+\Pi_p \co \SSet_{/A} \to \SSet_{/X} \, , 
+\]
+to $q \co B \to A$ and obtain a map $\Pi_p(q) \co \Pi_A(B) \to X$, which we will show to be again a Kan fibration. Since this Kan fibration does not seem to have  cofibrant domain in general, we then apply a
+cofibrant replacement in $\SSet_{/X}$ to $\Pi_p(q) \co \Pi_A(B) \to X$ so a map with all the desired
+properties. 
+
+Below, we will show that, for a Kan fibration $p \co A \rightarrow X$ with cofibrant domain, the dependent product functor $\Pi_p$ preserves Kan fibrations, without assuming $X$ to be a cofibrant Kan complex. By adjointness, our goal is equivalent to showing that its left adjoint, \ie 
+the pullback functor $f^*$, preserves trivial cofibrations. This amounts to proving a restricted version of the Frobenius property~\cite{BergB:topsmi}, obtained by considering pullbacks along Kan fibrations with
+cofibrant domain rather than general Kan fibrations. As we will see, some of these assumptions are essential in our
 setting.  
 
 Our proof of the restricted Frobenius property follows essentially~\cite{gambino2017frobenius}. 
@@ -927,25 +1036,62 @@ The fact that $\bar{B} \rightarrow A$ is a deformation retract show that it is i
 
  
 
-\section{A universal fibration betwen bifibrant objects}
+\section{A versal fibration for small fibrations between bifibrant objects}
 \label{sec:unifbb}
 
 
+The aim of this section is to begin establishing the results necessary to interpret a type-theoretic universe
+\`a la Tarski satisfying the univalence axiom. \cref{tab:U-type} gives the basic rules for the type-theoretic universe,
+while we refer to~\cite{hottbook} for the statement of the univalence axiom. 
 
+\begin{table}[htb]
+\fbox{\begin{minipage}{8cm}  \smallskip
+\[
+\begin{gathered}
+\U \co \type
+\end{gathered}  \qquad  \qquad 
+\begin{gathered}
+\begin{prooftree}
+\Gamma \vdash a \co \U
+\justifies
+\Gamma  \vdash \mathsf{T}(a) \co \type
+\end{prooftree}
+\end{gathered} 
+\]
+\end{minipage} }
+\smallskip
+\caption{Rules for the type-theoretic universe.} 
+\label{tab:U-type}
+\end{table}
 
-The goal of this section is to define a small fibration $\pi_c \co \UU_c \to \U_c$ between
-cofibrant simplicial sets that weakly classifies small fibrations between cofibrant simplicial sets, in the sense that for every such fibration $p \co A \to X$ there exists a map $a \co X \to \U_c$ fitting in a pullback diagram of the form
+In order to interpret these rules, we need to define a cofibrant Kan complex $\U_c$ and a Kan 
+fibration with cofibrant domain $\pi_c \co \UU_c \to \U_c$. With these, the elimination rule of the
+type theoretic universe will correspond to taking a pullback of $\pi_c$ along a map $a \co X
+\to \U_c$ with cofibrant domain:
+\[
+\xymatrix{
+\mathsf{T}(a) \ar[d] \ar[r] & \UU_c \ar[d]^{\pi_c} \\
+X \ar[r]_a & \U_c}
+\]
+Furthermore, the closure of of the type-theoretic universe under various type-formation operations
+corresponds to the closure of the class of maps arising as pullbacks of $\pi_c$ under the 
+operations necessary to intepret the corresponding types. For this, it is convenient to consider
+$\pi_c$ to be a fibration that is versal for the class of small fibrations between cofibrant simplicial
+sets, \ie such that for every such fibration $p \co A \to X$ there exists a map $a \co X \to \U_c$ fitting in a pullback diagram of the form
 \[
 \xymatrix{
 A \ar[r] \ar[d]_p   & \UU_c \ar[d]^{\pi_c} \\
-X \ar[r]_a &  \U_c \, .}
+X \ar[r]_-a &  \U_c \, .}
 \]
-We will show in~\cref{sec:fibrancy-and-univalence} that $\U_c$ is actually bifibrant and $\pi_c$ is
-univalent.
+Here, we speak of a versal rather than universal fibration since we make no requirement for
+the map $a$ to be unique, in contrast for example with the situation of the subobject classifier
+in an elementary topos. Indeed, the map $a$ is not unique, but only unique  up to a contractible space
+of choices, a fact that will be expressed by showing that $\pi_c$ is univalent. 
 
-\bigskip
-
-For the goal of this section, we proceed in two steps. First, we modify  the construction of the weak classifier for small fibrations in~\cite{voevodsky-simplicial-model} to obtain a small fibration $\pi \co \UU \to \U$ which weakly classifies  small fibrations between cofibrant objects. Since the base of this fibration does not appear to be cofibrant,
+In this section, we limit ourselves to define $\pi_c \co \UU_c \to \U_c$ and prove that it
+is versal for small fibrations between cofibrant simplicial sets and leave the proofs
+that $\U_c$ is a cofibrant Kan complex, that $\UU_c$ is cofibrant  and that $\pi_c$ is univalent 
+ to~\cref{sec:fibrancy-and-univalence}. For the goal of this section, we proceed in two steps. First, we modify  the construction of the weak classifier for small fibrations in~\cite{voevodsky-simplicial-model} to obtain a small fibration $\pi \co \UU \to \U$ which weakly classifies  small fibrations between cofibrant objects. Since the base of this fibration does not appear to be cofibrant,
 we then consider a suitable cofibrant replacement  of~$\U$ and obtain the required fibration $\pi_c \co \UU_c \to \U_c$ via a pullback. 
 
 \medskip
