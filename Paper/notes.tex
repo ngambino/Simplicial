@@ -661,176 +661,25 @@ Below, we will show that, for a Kan fibration $p \co A \rightarrow X$ with cofib
 cofibrant domain rather than general Kan fibrations. As we will see, some of these assumptions are essential in our
 setting.  
 
-Our proof of the restricted Frobenius property follows essentially~\cite{gambino2017frobenius}. 
-In order to combine our development with that argument, however, we need to know that the notion of a Kan fibration considered here coincides with the one considered in~\cite[Definition~4.1]{gambino2017frobenius}. For this, 
-we use the pushout product $\kcyl \hattimes f$ of an endpoint inclusion $\kcyl \co \braces{ k } \to \Delta[1]$ and a map~$f \co Y \to X$, which is defined as the unique dotted arrow  in the diagram:
-\[
-\xymatrix{
-\braces{ k } \times Y \ar[r] \ar[d] &  \Delta[1]  \times X  \ar[d] \ar@/^1.5pc/[ddr] \\
-\braces{ k} \times X \ar[r]  \ar@/_1.5pc/[drr] & \big( \Delta[1] \times Y ) \cup X \ar@{.>}[dr]  \\
- & &\Delta[1] \times  X \, .}
- \]
-
-
-
-\begin{proposition} For a map $p \co B \to A$, the following conditions are equivalent.
-\begin{enumerate}[(i)] 
-\item The map $p$ is a fibration.
-\item The map $p$ has the right lifting property with respect to the pushout products 
-$\kcyl  \hattimes f$, where $k \in \braces{ 0 \, , 1 }$ and $f \co Y \to X$ is a cofibration.
-\item The map $p$ has the right lifting property with respect to the pushout products $\kcyl  \hattimes h_n^i$, 
-where $k \in \braces{ 0 \, , 1 }$ and $h_n^i \co \Lambda^i[n] \to \Delta[n]$  is a horn inclusion.
-\end{enumerate}
-\end{proposition} 
-
-\begin{proof}The proof of \cite[Theorem~3.2.3]{joyal-tierney:simplicial-homotopy-theory} is completely constructive and sufficient to imply this result.
-For more details, readers may also refer to~\cite[Corollary~5.3.2]{henry2018wms}
-and \cite[Proposition~5.2.6]{henry2018wms}.
-\end{proof}
-
-
-
-Let $p \co A \rightarrow X$ be a fibration with cofibrant domain. In order show that $p^* \co \SSet_{/X} \to \SSet_{/A}$ preserves 
-trivial cofibrations, as required,  we follow closely \cite[Section~3]{gambino2017frobenius}. Note that we cannot apply directly the result therein since 
-the assumption that every object is cofibrant does not hold in our setting. However, only minor modifications are sufficient.
-
-
-% \begin{lemma} \label{thm:missing-1}
-% \hfill 
-% \begin{enumerate}[(i)] 
-% \item $\mathcal{J} \subset \Cof \cap \mathcal{S}$.
-% \item $\Cof \cap \mathcal{S} \subseteq \TrivCof$.
-% \end{enumerate}
-% \end{lemma} 
-
-
-\begin{definition} \label{def:strhtpyequiv} Let $k \in \braces{0 \, , 1 }$.
-A map $f \co Y \rightarrow X$ in $\SSet$ is a \myemph{strong $k$-oriented homotopy equivalence} if there are maps $H$ and $H_X$ which exhibit $f$ as a retract of $\delta^k \times ' f$ as follows:
-
-\[
-\xymatrix@C=2cm{
-Y \ar[d]_{f} \ar[r]^-{\delta^{1-k} \times Y} & 
-( \Delta[1] \times Y ) \cup X \ar[d]^{\delta^k \times' f} \ar[r]^-{H_X} & 
-Y \ar[d]^{f} \\
-X \ar[r]_-{\delta^{1-k} \times X}  & 
-\Delta[1] \times X \ar[r]_{H} &
-X  }
-\]
-\end{definition}
-
-\begin{remark} \label{rem:below-strhtpyequiv}
-The definition of strong $k$-oriented homotopy equivalence in~\cref{def:strhtpyequiv} is equivalent to the one given in \cite{gambino2017frobenius} by Lemma~3.3 therein.
-With the definition given here, it is immediate to observe that a cofibration which is a strong $k$-oriented homotopy equivalence is a trivial cofibration. Indeed, if $f \co Y \to X$ is a cofibration then $\delta^k \times ' f$ is 
-a weak equivalence by the pushout-product property and so $f$ is also a weak equivalence, since it is a retract of $\delta^k \times ' f$.
-\end{remark}
-
-\begin{lemma}\label{lemma:genTcof_strongHequiv} \hfill 
-\begin{enumerate}[$(i)$]
-\item For $k < n$, the horn inclusions $h_n^k \co \Lambda^k[n] \rightarrow \Delta[n]$ are strong $0$-oriented homotopy equivalences,
-\item For $0 < k$, the horn inclusions $h_n^k \co \Lambda^k[n] \rightarrow \Delta[n]$ are strong $1$-oriented homotopy equivalences.
-\end{enumerate}
-\end{lemma}
-
-\begin{proof}
-This is shown as part of~\cite[Theorem 3.2.3]{joyal-tierney:simplicial-homotopy-theory}. The proof given there can be easily checked to be constructive. 
-\end{proof}
-
-%I've only added the reference to my paper to avoid having Joyal and Tierney's notes as unique reference for this. But If you think it is fine, you can remove it.
-
-
-
-\begin{lemma} 
-\label{lemma:pb_of_StrongHomotopyEq}
-Let $p \co A \rightarrow X$ be a fibration with cofibrant domain. Then, for $k \in \{0,1\}$, 
-$p^* \co \SSet_{/X} \to \SSet_{/A}$ preserves strong $k$-oriented homotopy equivalences.
-\end{lemma}
-
-
-
-\begin{proof} This is essentially \cite[Lemma~3.7]{gambino2017frobenius}, but we provide some details
-for the convenience of our readers.
-Let $f \co Y \rightarrow X$ be a strong $k$-oriented homotopy equivalence. Let $H$ and $H_X$  maps 
-as in~\cref{def:strhtpyequiv}. Let us consider the pullback
-\[
-\xymatrix@C=1.5cm{
-A[f] \ar[r]^-{p^*(f)}  \ar[d]_{p_{A[f]}} & A \ar[d]^{p} \\
-Y \ar[r]_{f} & X \, .\\
-}
-\] 
-To show that $p^*(f)$ is a strong $k$-oriented homotopy equivalence, we let $K \co \Delta[1] \times A \rightarrow A$ be a diagonal filler in the square:
-\[
-\xymatrix@C=1.5cm{
-A \ar[d]_{\delta^{1-k}} \ar@{=}[rr] & & A \ar[d]^p \\ 
-\Delta[1] \times A \ar[r]_{\Delta[1] \times p}  & \Delta[1] \times X \ar[r]_H & X
-}\]
-Where the map on the left-hand side is a trivial cofibration because $A$ is a cofibrant.
-It remains to construct a map $K_Y$  fitting into a retract diagram of the form
-\[
-\xymatrix@C=1.5cm{
-A[f]  \ar[d]_{p^*(f)} \ar[r] &  (\Delta[1] \times A[f])  \cup Y \ar[d]^{\delta^k \times' p^*(f)} \ar[r]^-{K_Y} & A[f] \ar[d]^{p^*(f)} \\
-A \ar[r] & \Delta[1]  \times A \ar[r]_-{K} & A
-}
-\]
-We define it using the universal property of $A[f]$ as the unique map to $A[f]$ such that the image in $X$ is the one specified by the diagram above, and the value in $Y$ is the one given by $H_X$ composed with the map $(\Delta[1] \times A[f]) \cup Y$ to $(\Delta[1] \times A[f]) \cup X$. These indeed have the same image in $X$ exactly because of the commutation of lower triangle in the filler diagram defining~$H'$. With this definition, the commutation of the diagram and the fact that the upper line is a retract are immediate.
-\end{proof}
-
-
-
-\begin{lemma}\label{prop:Frobenius}
-Let $p \co A \rightarrow X$ is a fibration with cofibrant domain. Then the pullback functor 
-\[
-p^* : \SSet_{/X} \rightarrow \SSet_{/A}
-\] 
-preserves  trivial cofibrations.
-\end{lemma}
-
-
-\begin{proof} Since the pullback functor $p^*$ has a right adjoint,  it is enough to check that the pullback of a generating trivial cofibration is a  trivial cofibration. For trivial cofibrations, note that the trivial cofibrations in $\SSet_{/X}$ are generated by the horn inclusions $h^k_n \co \Lambda^{k}[n] \rightarrow \Delta[n]$ for all possible choices of $x \co \Delta[n] \rightarrow X$. By \cref{lemma:genTcof_strongHequiv} they are all strong $k$-oriented homotopy equivalences. Moreover, their pullback to $A$ is also their pullback along the map $A \times_X \Delta[n] \rightarrow \Delta[n]$ which is again a fibration with cofibrant domain by \cref{lem:cofibrant_fiber_product}. Hence  \cref{lemma:pb_of_StrongHomotopyEq} implies that the pullback 
-to~$A$ are also strong $k$-oriented homotopy equivalences. Since they are cofibrations, they are 
-trivial cofibrations by \cref{rem:below-strhtpyequiv}.
-\end{proof}
-
-
 
 \begin{theorem}\label{cor:Pi_types_are_fibrant}
-Let $p \co A \rightarrow X$ be a fibration with cofibrant domain. The dependent product $\Pi_p \co \SSet_{/A} \to \SSet_{/X}$ preserves  fibrations.
+Let $p \co A \rightarrow X$ be a fibration with cofibrant domain,
+\begin{enumerate}[$(i)$]
+
+\item The pullback functor $p^* \co \SSet_{/X} \to \SSet_{/A}$ preserves trivial cofibrations.
+
+\item The dependent product $\Pi_p \co \SSet_{/A} \to \SSet_{/X}$ preserves  fibrations.
+
+\end{enumerate}
 \end{theorem}
 
-\begin{proof}
-Since $p^*$ preserves  trivial cofibrations, its right adjoint $\Pi_p$ preserves fibrations.
+\begin{proof} Part~(i) follows from \cref{thm:cof-pbk} which show that it preserves cofibrations, together with the right properness of the simplicial model structure which shows that it preserve weak equivalences.
+ Part~(ii) follows from part~(i) as $\Pi_p$ is right adjoint to $p^*$.
 \end{proof}
-
-
-
-
-
-% \begin{theorem} 
-% \label{thm:restricted-frobenius}
-% The semi-model structure for Kan complexes on $\SSet$ has the restricted Frobenius condition.
-% \end{theorem} 
-
-% \begin{proof}  Since the semi-model structure in which we 
-% are working is cofibrantly generated, it is sufficient [TO CHECK] that $p^*$ sends generating trivial cofibrations to trivial cofibrations. So, let $p \co B \to \Delta[n]$ be a fibration, $i \co \Lambda^k[n]
-% \to \Delta[n]$ be a horn inclusion, and define $ j \defeq p^*(i)$, given by 
-% the pullback diagram
-% \[
-% \xymatrix{
-% \bullet  \ar[r] \ar[d]_j \drpullback & \Lambda^k[n] \ar[d]^{i} \\
-% B \ar[r]_-{p} & \Delta[n] }
-% \]
-% We need to show that $j$ is a trivial cofibration.  
-% First, since $i$ is a trivial cofibration, it is in particular
-% a cofibration and therefore $j$ is again a cofibration by~\cref{thm:cof-pbk}. Secondly, since~$i \in \cal{J}$,
-% by part~(i) of \cref{thm:missing-1}, it is a cofibration and a strong homotopy equivalence. Since its codomain is cofibrant, $j$ is a strong homotopy equivalence by~\cref{thm:missing-2}.
-% But now $j$ is both a cofibration and a strong homotopy equivalence
-% and hence it is a trivial cofibration, as required, by part~(ii) of \cref{thm:missing-2}.
-% \end{proof} 
 
 
 
  
-
-
 \begin{remark}[$\Pi$-types] \label{rem:pi-types}
 We can define the interpretation of $\Pi$-types using~\cref{cor:Pi_types_are_fibrant} and a cofibrant replacement, as follows. 
 Recall that, for maps $p \co A \to X$ and $q \co B \to A$,  the dependent product $\Pi_p(q) \co \Pi_A(B)
@@ -886,7 +735,7 @@ which is constructed as the diagonal filler in the following diagram
 \Delta[1] \times Y \ar[r] \ar@{.>}[ur] & \Pi_A(B) }
 \]
 where the bottom map is the constant homotopy given by the equality in the $\eta$-rule in~\eqref{equ:betaeta}.
-\end{remark}
+\end{remark}g
 
 
 
@@ -1393,7 +1242,7 @@ f^*(A_2) \ar[r] \ar[d]   & A_2 \ar[d] \\
 Y \ar[r]_f & X }
 \]
 \caution{is a weak equivalence}.
-Since the maps $p_i \co A_i \rightarrow X$ (for $i = 1, 2$) are fibrations with cofibrant domain, \cref{prop:Frobenius} implies that pullbacks of trivial cofibration between cofibrant objects 
+Since the maps $p_i \co A_i \rightarrow X$ (for $i = 1, 2$) are fibrations with cofibrant domain, \cref{cor:Pi_types_are_fibrant} implies that pullbacks of trivial cofibration between cofibrant objects 
 \caution{along such 
 a map} are trivial cofibrations. This implies that all the horizontal maps of the diagram above are weak equivalence, and so the upper right map also is. This shows that~$\mathsf{Weq}(\U) \rightarrow \U^{\rightarrow}$ is a fibration.
 \end{proof}
@@ -1696,10 +1545,3 @@ a \co A
 \]
 
 \appendix
-
-
-
-
-
-
-
