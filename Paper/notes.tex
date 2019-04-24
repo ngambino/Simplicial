@@ -205,9 +205,9 @@ Throughout the paper, we adopt a slight abuse of language and say that a map has
 \noindent 
 \textbf{Acknowledgements.} Nicola Gambino gratefully acknowledges the support of
 EPSRC under grant EP/M01729X/1 and the US Air Force Office for Scientific Research under 
-agreement FA8655-13-1-3038. 
-He is also grateful to Steve Awodey, Marc Bezem, Thierry Coquand, Andr\'e Joyal, Christian Sattler, Karol Szumi{\l}o  for useful conversations. The hospitality of the Centre for Advanced Study (Oslo), in occasion of the
-special programme on Homotopy Type Theory and Verification is gratefully acknowledged.
+agreement FA8655-13-1-3038 and the hospitality of the 
+School of Mathematics of the University of Manchester and the Centre for Advanced Study in Oslo,
+where the paper was written while on study leave. He is also grateful to Steve Awodey, Marc Bezem, Thierry Coquand, Andr\'e Joyal, Christian Sattler, Karol Szumi{\l}o  for useful conversations. 
 
 
 
@@ -224,7 +224,32 @@ special programme on Homotopy Type Theory and Verification is gratefully acknowl
 
 
 We write $\Delta$ for the simplicial category. The objects of $\Delta$ are written as $[n]$, for $n \geq 0$.
-We write $\SSet \defeq [\Delta^{\op}, \Set]$ for the category of simplicial sets. For $n \geq 0$, $\Delta[n] \in \SSet$ is the representable simplicial set associated to $[n] \in \Delta$. For $[n] \in \Delta$, we write $i^n \co  \partial \Delta[n] \to \Delta[n]$ for the boundary inclusion into the $n$-simplex and, for $1 \leq i \leq n$,  
+We write $\SSet \defeq [\Delta^{\op}, \Set]$ for the category of simplicial sets. For $n \geq 0$, $\Delta[n] \in \SSet$ is the representable simplicial set associated to $[n] \in \Delta$. Given a map $f \co Y \to X$ in $\SSet$, we write $f^* \co \SSet_{/X} \to \SSet_{/Y}$
+for the associated pullback functor. The functor $f^*$ has a left adjoint, defined
+by composition, which we write $\Sigma_{f} \co \SSet_{/Y} \to \SSet_{/X}$ and refer
+to as the \emph{dependent sum} along $f$. Since $\SSet$ is locally cartesian closed, pullback
+along $f$ has also a right adjoint, which we write 
+$\Pi_f \co \SSet_{/Y} \to \SSet_{/X}$ and refer to as the \emph{dependent
+product}  along $f$. The action of these functors on a
+map $g \co Z \to Y$ will be written $\Sigma_f(g) \co \Sigma_Y(Z) \to X$ and 
+$\Pi_f(g) \co \Pi_Y(Z) \to X$, respectively. Since  $\Sigma_f$ is defined by composition,~$\Sigma_Y(Z) \defeq Z$ and~$\Sigma_f(g) = g f $. 
+
+As a special case of a well-known result for presheaf 
+categories for every~$[n] \in \Delta$ there is an equivalence of categories
+\begin{equation}
+\label{equ:psh-slice-sset}
+\SSet_{/\Delta[n]} \simeq  [ {\Delta_{/[n]}}^{\op}, \Set]   \, .
+\end{equation}
+For $F \co {\Delta_{/[n]}}^{\op} \to \Set$, we write $\pi_F \co \int F \to \Delta[n]$
+for the corresponding object of~$\SSet_{/ \Delta[n]}$. Here, $\int F$ is the
+simplicial set whose $m$-simplices are pairs $(\theta, x)$ where $\theta \co [m] \to [n]$
+is a map in~$\Delta$ and $x \in F(\theta)$. The component of the natural
+transformation $\pi_F$ are the first projections.
+
+
+
+
+For $[n] \in \Delta$, we write $i^n \co  \partial \Delta[n] \to \Delta[n]$ for the boundary inclusion into the $n$-simplex and, for $1 \leq i \leq n$,  
 $h^i_n  \co \Lambda^i[n] \to \Delta[n]$  for the $i$-th horn inclusion into the $n$-simplex. The simplicial set $\Delta[1]$ is an interval object in $\SSet$, with endpoint inclusions~$\kcyl \co \braces{ k} \to \Delta[1]$ defined by~$\kcyl \defeq h^1_k$. Throughout this paper, we shall work  with the constructive 
 Kan-Quillen model structure $(\Weq, \Cof, \Fib)$ on $\SSet$ defined in~\cite{henry2019qms}. 
 For the convenience of the reader, we recall the main aspects of this model structure below.
@@ -250,7 +275,13 @@ inclusions, \ie
 \[
 (\TrivCof, \Fib) = ( \mathsf{Sat}(\cal{J}) \, , \cal{J}^\pitchfork)
 \] 
-on $\SSet$. 
+on $\SSet$. For a map $f \co Y \to X$, we denote the action of the pullback $f^*$ on a fibration~$p \co A \to X$ as
+\[
+\xymatrix{
+A[f] \ar[r] \ar[d]_{p[f]} & A \ar[d]^{p} \\
+Y \ar[r]_f & X \, .}
+\]
+
 
 For $X \in \SSet$, we write $\Fib_{/X}$ for the full subcategory of the slice category $\SSet_{/X}$ spanned by the fibrations with codomain $X$. For $X \in \SSet$, we write $\BFFib_{/X}$ for  the full subcategory of  $\Fib_{/X}$ spanned by fibrations with cofibrant domain. For a simplicial set $X$, we write $\mathbb{L}(X)$ for its cofibrant replacement and $\mathbb{R}(X)$ for its
 fibrant replacement. These objects come equipped with a trivial fibration $\varepsilon_X \co \mathbb{L}(X) \to X$ and a trivial cofibration $\eta_X \co 
@@ -286,33 +317,57 @@ Therefore, the pushout-property  implies its dual version, asserting that  if $f
 
 \medskip
 
-Given a map $f \co Y \to X$ in $\SSet$, we write $f^* \co \SSet_{/X} \to \SSet_{/Y}$
-for the associated pullback functor. The functor $f^*$ has a left adjoint, defined
-by composition, which we write $\Sigma_{f} \co \SSet_{/Y} \to \SSet_{/X}$ and refer
-to as the \emph{dependent sum} along $f$. Since $\SSet$ is locally cartesian closed, pullback
-along $f$ has also a right adjoint, which we write 
-$\Pi_f \co \SSet_{/Y} \to \SSet_{/X}$ and refer to as the \emph{dependent
-product}  along $f$. The action of these functors on a
-map $g \co Z \to Y$ will be written $\Sigma_f(g) \co \Sigma_Y(Z) \to X$ and 
-$\Pi_f(g) \co \Pi_Y(Z) \to X$, respectively. Since  $\Sigma_f$ is defined by composition,~$\Sigma_Y(Z) \defeq Z$ and~$\Sigma_f(g) = g f $. We denote the action of $f^*$ on a fibration~$p \co A \to X$ as
-\[
-\xymatrix{
-A[f] \ar[r] \ar[d]_{p[f]} & A \ar[d]^{p} \\
-Y \ar[r]_f & X \, .}
-\]
+We will make use also of another weak factorisation system $(\mathsf{L}, \mathsf{R})$ on $\SSet$, which is useful to prove
+decidability conditions and which we use to prove~\cref{proposition:PathObjectCofibrant} and 
+~\cref{Lemma:ForTheExtProperty} here. By definition, $(\mathsf{L}, \mathsf{R})$ is the
+weak factorisation system cofibrantly generated by the set of degeneracy maps $\sigma \co \Delta[m] \to \Delta[n]$, \ie the maps induced by surjections $[m] \rightarrow [n]$ in $\Delta$. We refer to maps in $\mathsf{L}$ as the \emph{degeneracy quotients} and the
+maps in $\mathsf{R}$ as the \emph{degeneracy-detecting} maps. Since degeneracy maps are (split) epimorphisms in $\SSet$, the weak factorization system $(\mathsf{L}, \mathsf{R})$ is actually a unique factorization system. Since the degeneracy-detecting maps are the maps with the (unique) right lifting property against degeneracy map,  they are exactly the simplicial morphisms $f \co X \rightarrow Y$ such that for $x \in X$, $f(x)$ is degenerated if and only if $x$ is degenerated. The degeneracy quotient maps are
+instead the pushouts of coproducts of degeneracy maps, \ie the maps of the form $X \rightarrow X[(x_i,\sigma_i])$ where $x_i \in X_{n-1}$ are a family of cells,  $\sigma \co [n_i] \twoheadrightarrow [m_i]$ a family of degeneracies and $X[(x_i,\sigma_i)]$ is obtained from from $X$ by freely making $x_i$ in the image of $\sigma_i $ for each $i$. For the convenience of the reader, we recall
+ the results in \cite{henry2019qms} about this factorization system that will be used here.
 
 
-Finally, let us recall that, as a special case of a well-known result for presheaf 
-categories for every~$[n] \in \Delta$ there is an equivalence of categories
-\begin{equation}
-\label{equ:psh-slice-sset}
-\SSet_{/\Delta[n]} \simeq  [ {\Delta_{/[n]}}^{\op}, \Set]   \, .
-\end{equation}
-For $F \co {\Delta_{/[n]}}^{\op} \to \Set$, we write $\pi_F \co \int F \to \Delta[n]$
-for the corresponding object of~$\SSet_{/ \Delta[n]}$. Here, $\int F$ is the
-simplicial set whose $m$-simplices are pairs $(\theta, x)$ where $\theta \co [m] \to [n]$
-is a map in~$\Delta$ and $x \in F(\theta)$. The component of the natural
-transformation $\pi_F$ are the first projections.
+\begin{lemma}
+\label{lem:decidability_lift_degen_quo}
+Let $p \co A \rightarrow B$ be a degeneracy quotient between finite decidable simplicial set, $X$  a cofibrant simplicial set and $f \co
+A \rightarrow X$ be any morphism. Then it is decidable whether $f$ can be factored through $p$ or not. \qed
+\end{lemma}
+
+\begin{proof} See~\cite[Lemma~3.18]{henry2019qms}.
+\end{proof} 
+
+
+The proof of the result above is sufficiently simple  that it can be outlined in a few words. Since $B = A[(a_i,\sigma_i)]$ for a finite collection of cells $a_i$,  $f$ factors through $p$ if and only if $f(a_i) =\sigma_i^*  x_i$ for each $i$, but when $X$ is cofibrant one can decide for each $i$ if this is the case or not. As there is only a finite number of such $i$, one can decide if it is the case for all $i$ or not.
+
+
+\begin{proposition}{}
+\label{prop:Degen_quotient_are_pullback_stable}
+The class of degeneracy quotient is stable under pullback. 
+\end{proposition}
+
+\begin{proof} See~\cite[Proposition 3.1.11]{henry2019qms}.
+\end{proof}
+
+
+These results lead to the following corollary.
+
+\begin{corollary} \label{prop:X^kCofibrant}  \hfill 
+\begin{enumerate}[$(i)$]
+\item If $A \rightarrow B$ is a degeneracy quotient and $X$ any simplicial set then $A \times X \rightarrow B \times X$ is a degeneracy quotient.
+\item If $X$ is cofibrant, and $K$ is finite and decidable, then $X^K$ is cofibrant.
+\item If $A \rightarrow B$ is a degeneracy quotient of finite decidable simplicial sets and $X$ is cofibrant then the induced map $X^B \rightarrow X^A$ is a cofibration between cofibrant objects.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof} Part~(i) is a special case of \cref{prop:Degen_quotient_are_pullback_stable}. For part~(ii), recall that an $n$-cell $\Delta[n] \rightarrow X^K$ is a morphism $\Delta[n] \times K \rightarrow X$. Thus, for a degeneracy map $\Delta[n] \rightarrow \Delta[m]$, the map $\Delta[n] \times K \rightarrow \Delta[m] \times K$ is a degeneracy quotient by part (i), as it is a map between finite decidable simplicial sets. Thus, \cref{lem:decidability_lift_degen_quo} implies that the question of whether a map $\Delta[n] \times K \rightarrow X$ factor through $\Delta[n] \times K \rightarrow \Delta[m] \times K$ is also decidable. But this is exactly the question of degeneracy of cells in $X^K$.
+
+Similarly, for part (iii), since an $n$-cell of $X^A$ is a morphism $\Delta[n] \times A \rightarrow X$, it belongs to $X^B$ if and only it can be factored as $\Delta[n] \times A \rightarrow \Delta[n] \times B \rightarrow X$. This is decidable by \cref{lem:decidability_lift_degen_quo} because $\Delta[n] \times A \rightarrow \Delta[n] \times B$ is a degeneracy quotient between finite decidable simplicial sets by part (i).
+\end{proof} 
+
+
+
+
+\medskip
+
 
 
 
@@ -383,37 +438,6 @@ under composition. Therefore, if $q \co B \to A$ is a fibration with cofibrant d
 $\Sigma_p(q) \co \Sigma_A(B) \to X$ is again a fibration with cofibrant domain.
 \end{remark} 
 
-
-Finally, in section $3.1$ of \cite{henry2019qms} we introduced another factorization system on the category of simplicial sets called ``degeneracy quotient/degeneracy detecting map''. It has proved very useful to get certain decidability conditions and which we will need to use again to get some important lemma in the present paper. It is the factorization system cofibrantly generated by the degeneracy map $\Delta[m] \overset{\sigma}{\rightarrow} \Delta[n]$, i.e. the map induced by surjection $[m] \rightarrow [n]$. As the degeneracy map are epimorphisms in $\SSet$ (they are split epimorphism) this factorization is actually a unique factorization system. The degeneracy detecting map are the map with the (unique) right lifting property against degeneracy map. They are exactly the simplicial morphisms $f :X \rightarrow Y$ such that for $x \in X$, $f(x)$ is degenerated if and only if $x$ is degenerated. The degeneracy quotient are the pushout of coproduct of degeneracy maps, i.e. morphisms of the form $X \rightarrow X[(x_i,\sigma_i])$ where $x_i \in X_{n-1}$ are a familly of cells  and $\sigma: [n_i] \twoheadrightarrow [m_i]$ a familly of degeneracy and $X[(x_i,\sigma_i)]$ is obtained from from $X$ by freely making $x_i$ in the image of $\sigma_i $ for each $i$. There is a couple of results of \cite{henry2019qms} about this factorization system that will be of use here:
-
-
-\begin{lemma} \label{lem:decidability_lift_degen_quo}
-  If $p:A \rightarrow B$ is a degeneracy quotient between finite decidable simplicial set, $X$ is a cofibrant simplicial set and $f :A \rightarrow X$ any morphisms, then it is decidable whether $f$ can be factored through $p$ or not.
-\end{lemma}
-
-This is lemma 3.1.8 in \cite{henry2019qms}. The proof is simple enough so that we can explain it in a few words: $B = A[(a_i,\sigma_i)]$ for a finite collection of cells $a_i$,  hence $f$ factors through $p$ if and only if $f(a_i) =\sigma_i^*  x_i$ for each $i$, but when $X$ is cofibrant one can decide for each $i$ if this is the case or not. As there is only a finite number of such $i$, one can decide if it is the case for all $i$ or not.
-
-
-\begin{proposition} \label{prop:Degen_quotient_are_pullback_stable}
-The class of degeneracy quotient is stable under pullback.
-\end{proposition}
-
-See proposition 3.1.11 in \cite{henry2019qms} for the proof. This two results together have a quite interesting corollary:
-
-\begin{proposition} \label{prop:X^kCofibrant}
-\begin{enumerate}[$(i)$]
-\item[]
-\item If $p:A \rightarrow B$ is a degeneracy quotient and $V$ any simplicial set then $A \times V \rightarrow B \times V$ is a degeneracy quotient.
-\item If $X$ is cofibrant, and $K$ is finite and decidable, then $X^K$ is cofibrant.
-\item If $A \rightarrow B$ is a degeneracy quotient of finite decidable simplicial sets and $X$ is cofibrant then the induced map $X^B \rightarrow X^A$ is a cofibration between cofibrant objects.
-\end{enumerate}
-
-\end{proposition}
-
-\begin{proof} $(i)$ is a special case of \cref{prop:Degen_quotient_are_pullback_stable}. For $(ii)$, given any $n$-cell $\Delta[n] \rightarrow X^K$ it corresponds to a morphisms $\Delta[n] \times K \rightarrow X$. For any degeneracy map $\Delta[n] \rightarrow \Delta[m]$, the map $\Delta[n] \times K \rightarrow \Delta[m] \times K$ is a degeneracy quotient by $(i)$, as it is a map between finite decidable simplicial sets lemma \cref{lem:decidability_lift_degen_quo} implies that the question of whether a map $\Delta[n] \times K \rightarrow X$ factor through $\Delta[n] \times K \rightarrow \Delta[m] \times K$ is also decidable. But this is exactly the question of degeneratness of cells in $X^K$.
-
-Similarly, an $n$-cell of $X^A$, corresponds to a morphism $\Delta[n] \times A \rightarrow X$, it belongs to $X^B$ if and only it can factored as $\Delta[n] \times A \rightarrow \Delta[n] \times B \rightarrow X$, which is decidable by \cref{lem:decidability_lift_degen_quo} because $\Delta[n] \times A \rightarrow \Delta[n] \times B$ is a degeneracy quotient, by $(i)$, between finite decidable simplicial sets.
-\end{proof} 
 
 
 
@@ -826,7 +850,7 @@ f^* \Delta[k] \ar@{.>}[ur]^? \ar[r] & Y  \\
 }
 \]
 
-The objects $f^* \Delta[n]$ and $f^* \Delta[k]$ are decidable simplicial subset of $\Delta[n]$ and $\Delta[k]$ because $f$ is itself a levelwise complemented monomorphism, hence they are both finite decidable simplicial sets. The map $f^* \sigma$ is degeneracy quotient by \cref{prop:Degen_quotient_are_pullback_stable}), hence lemma \ref{lem:decidability_lift_degen_quo} shows that the existence of such a lift is decidable (as degeneracy quotients are epimorphisms, the existence of lift making the upper triangle commutes is equivalent to the existence of lift making the square commutes).
+The objects $f^* \Delta[n]$ and $f^* \Delta[k]$ are decidable simplicial subset of $\Delta[n]$ and $\Delta[k]$ because $f$ is itself a levelwise complemented monomorphism, hence they are both finite decidable simplicial sets. The map $f^* \sigma$ is degeneracy quotient by \cref{prop:Degen_quotient_are_pullback_stable}), hence \cref{lem:decidability_lift_degen_quo} shows that the existence of such a lift is decidable (as degeneracy quotients are epimorphisms, the existence of lift making the upper triangle commutes is equivalent to the existence of lift making the square commutes).
 
 
 %    let $v$ be a $n$-cell in $\Pi_Y(A)$.
@@ -928,7 +952,7 @@ $u \circ r$ and $1_{A[f]}$, whose composite with $A[f] \rightarrow Y$ is the tri
 B \ar[d] \ar@{=}[r]  & B \ar[d] \\
 A[f] \ar[r] \ar@{.>}[ur]^r  & Y 
 } \quad \xymatrix{
-\displaystyle A[f] \coprod_B \left( B \times \Delta[1] \right) \coprod_B A[f] \ar[d] \ar[r]  & A[f] \ar[d] \\
+\displaystyle A[f] +_B \left( B \times \Delta[1] \right) +_B A[f] \ar[d] \ar[r]  & A[f] \ar[d] \\
 A[f] \times \Delta[1] \ar[r] \ar@{.>}[ur]_H  & Y 
 }\]
 
