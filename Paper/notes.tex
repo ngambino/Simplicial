@@ -348,7 +348,7 @@ The class of degeneracy quotients is stable under pullback.
 By~\cref{prop:Degen_quotient_are_pullback_stable}, if $f \co A \rightarrow B$ be a degeneracy quotient  then $f \times X \co A \times X \rightarrow B \times X$ is again a degeneracy quotient for every $X$.
 
 
-\section{Basic results on cofibrations}
+\section{The comprehension category of cofibrant simplicial sets}
 \label{sec:basrp}
 
 
@@ -358,7 +358,7 @@ throughout the paper.
 
 
 
-\begin{proposition}\label{lem:cofibrant_fiber_product} \hfill 
+\begin{lemma}\label{lem:cofibrant_fiber_product} \hfill 
 \begin{enumerate}[$(i)$] 
 \item Let $A \, , B$ be cofibrant simplicial sets. Then their product $A \times B$ is cofibrant.
 \item Let $f \co A \to X$ and $g \co B \to X$ be maps with  cofibrant domain. Then their
@@ -370,7 +370,7 @@ A \ar[r]_f & X \, ,}
 \]
 is cofibrant.
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 \begin{proof} Part~(i) follows immediately from the fact that the model structure on simplicial sets is cartesian, i.e. satisfies the pushout-product conditions.
 
@@ -382,7 +382,47 @@ in~$A \times_X B$ is indeed decidable.
 \end{proof}
 
 
+We now introduce the  comprehension category that will be the focus of
+our development.  We refer to~\cite{JacobsB:catltt,LumsdaineP:locuoc} for the definition of a comprehension category  and related notions.  Let $\SSet_{\mathsf{cof}}$ be the full subcategory of $\SSet$ spanned by
+cofibrant simplicial sets. 
 
+
+\begin{proposition} \label{thm:compcat}
+The category $\SSet_{\mathsf{cof}}$ is the base of a comprehension category
+of the form
+\begin{equation*}
+\begin{gathered}
+\xymatrix{
+\mathbf{Fib}_{ \mathsf{cof}} \ar[dr]_{p} \ar[rr]^{\chi} & & \SSet^{\to}_{\mathsf{cof}} \ar[dl]^{\mathrm{cod}} \\ 
+ & \SSet_{\mathsf{cof}} &  }
+ \end{gathered}
+ \end{equation*}
+ where $\mathbf{Fib}_{ \mathsf{cof}}$ is the full subcategory of $\SSet^{\to}_{\mathsf{cof}}$ spanned by fibrations.
+\end{proposition} 
+
+\begin{proof}  The category $\SSet^\to_{\mathsf{cof}}$ is the associated arrow category, whose objects are
+maps $p \co A \to X$ between cofibrant objects. The codomain
+functor 
+\[
+\mathrm{cod} \co \SSet^{\to}_{\mathsf{cof}} \to \SSet_{\mathsf{cof}}
+\] 
+is a Grothendieck fibration by part~(ii) of~\cref{lem:cofibrant_fiber_product}. Finally, $\mathbf{Fib}_{ \mathsf{cof}}$ is the full subcategory of $\SSet^{\to}_{\mathsf{cof}}$ spanned by fibrations. Thus,
+its objects are fibrations $p \co A \to X$ between cofibrant objects. The comprehension $\chi$ is
+defined to be the inclusion, so that $p = \mathrm{cod} \circ \chi$. Since $\chi$ preserves pullbacks,
+we have a comprehension category. 
+\end{proof}
+
+
+
+It immediate to observe that this comprehension category supports $\Sigma$-types, since for
+a fibration $p \co A \to X$ between cofibrant objects, dependent sum along $p$ 
+functor~$\Sigma_p \co \SSet_{/A} \to \SSet_{/X}$, which is defined by
+composition with $p$, maps fibrations to fibrations.
+
+\medskip
+
+
+We conclude this section with some auxiliary results on cofibrations.
 
 
 \begin{proposition} \label{thm:cof-pbk}  Let $p \co A \to X$  be a map with cofibrant domain.
@@ -419,32 +459,6 @@ Similarly, for part (ii), since an $n$-cell of $X^A$ is a morphism $\Delta[n] \t
 
 
 
-\begin{remark} We conclude this section by defining the comprehension category 
-\begin{equation}
-\label{equ:compcat}
-\begin{gathered}
-\xymatrix{
-\mathbf{Fib}_{ \mathsf{cof}} \ar[dr]_{p} \ar[rr]^{\chi} & & \SSet^{\to}_{\mathsf{cof}} \ar[dl]^{\mathrm{cod}} \\ 
- & \SSet_{\mathsf{cof}} &  }
- \end{gathered}
- \end{equation}
-that will be  shown to support various type-theoretic constructors in the rest of the paper. We refer to~\cite{JacobsB:catltt,LumsdaineP:locuoc} for the definition of a comprehension category 
-and related notions. The category $\SSet_{\mathsf{cof}}$ that is the base  of the comprehension category in~\eqref{equ:compcat} is defined to be the full subcategory of $\SSet$ spanned by cofibrant simplicial sets. The category $\SSet^\to_{\mathsf{cof}}$ is the associated arrow category, whose objects are
-maps $p \co A \to X$ between cofibrant objects. The codomain
-functor 
-\[
-\mathrm{cod} \co \SSet^{\to}_{\mathsf{cof}} \to \SSet_{\mathsf{cof}}
-\] 
-is a Grothendieck fibration by part~(ii) of~\cref{lem:cofibrant_fiber_product}. Finally, $\mathbf{Fib}_{ \mathsf{cof}}$ is the full subcategory of $\SSet^{\to}_{\mathsf{cof}}$ spanned by fibrations. Thus,
-its objects are fibrations $p \co A \to X$ between cofibrant objects. The comprehension $\chi$ is
-defined to be the inclusion, so that $p = \mathrm{cod} \circ \chi$. Since $\chi$ preserves pullbacks,
-we have a comprehension category. 
-
-It immediate to observe that this comprehension category supports $\Sigma$-types, since for
-a fibration $p \co A \to X$ between cofibrant objects, dependent sum along $p$ 
-functor~$\Sigma_p \co \SSet_{/A} \to \SSet_{/X}$, which is defined by
-composition with $p$, maps fibrations to fibrations.
-\end{remark} 
 
 
 
@@ -453,8 +467,8 @@ composition with $p$, maps fibrations to fibrations.
 \label{sec:pats}
 
 
-In this section we begin to show how the the comprehension category of~\eqref{equ:compcat} supports 
-various type-theoretic constructs by considering identity types. Following the fundamental insight in~\cite{awodey-warren:homotopy-idtype}, in order to equip the comprehension category of~\eqref{equ:compcat} with identity types it suffices to show that
+In this section we begin to show how the the comprehension category of~\cref{thm:compcat} supports 
+various type-theoretic constructs by considering identity types. Following the fundamental insight in~\cite{awodey-warren:homotopy-idtype}, in order to equip the comprehension category of~\cref{thm:compcat} with identity types it suffices to show that
 for every fibration $p \co A \to X$ with cofibrant domain, there is a  fibration with cofibrant domain~$\partial \co \Id_A \to A \times_X A$ and a trivial cofibration $\mathsf{refl}_A \co A \to \Id_A$ that provide a factorisation of the diagonal map $\delta_p \co A \to A \times_X A$~\cite{LumsdaineP:locuoc}. While such a factorisation is guaranteed to exist by the model structure on $\SSet$, here we show that such a factorisation can be obtained by letting~$\Id_A$ be a suitable mapping path space. 
 This is useful in order to support the intuition of elements of identity types as paths that is central to Homotopy Type Theory~\cite{hottbook}. 
 
@@ -605,7 +619,7 @@ of a map which has been proved to be a levelwise complemented inclusion in~\cref
 \label{sec:Pi-types}
 
 The aim of this section is to prove the results of simplicial homotopy theory necessary to show that
-the comprehension category of~\eqref{equ:compcat} supports $\Pi$-types. 
+the comprehension category of~\cref{thm:compcat} supports $\Pi$-types. 
 In order to do this, we should consider a fibration with cofibrant domain $p \co A \to X$  and define an operation mapping a fibration with cofibrant domain $q \co B \to A$  to a new fibration with cofibrant domain~$\widetilde{\Pi}_p(q) \co \widetilde{\Pi}_A(B) \to X$. together with additional data~\cite{LumsdaineP:locuoc}. 
 Given such a map $q \co B \to A$, we proceed
 in two steps. First, we apply the dependent product along $p$, 
