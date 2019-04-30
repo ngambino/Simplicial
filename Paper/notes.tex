@@ -351,11 +351,10 @@ By~\cref{prop:Degen_quotient_are_pullback_stable}, if $f \co A \rightarrow B$ be
 \section{The comprehension category of cofibrant simplicial sets}
 \label{sec:basrp}
 
-
-We make some elementary observations on pullbacks of cofibrant objects and cofibrations which will be used
-throughout the paper.
-
-
+The main goal of this section is to introduce the comprehension category of cofibrant simplicial sets. The
+results of simplicial homotopy theory that we obtain in the following sections will show how this 
+comprehension category supports various type-theoretic constructions. We refer to~\cite{JacobsB:catltt} for the definition of a comprehension category and basic results and to~\cite{LumsdaineP:locuoc} for the
+definitions categorical counterparts of the type-theoretic constructs.  
 
 
 \begin{lemma}\label{lem:cofibrant_fiber_product} \hfill 
@@ -382,8 +381,8 @@ in~$A \times_X B$ is indeed decidable.
 \end{proof}
 
 
-We now introduce the  comprehension category that will be the focus of
-our development.  We refer to~\cite{JacobsB:catltt,LumsdaineP:locuoc} for the definition of a comprehension category  and related notions.  Let $\SSet_{\mathsf{cof}}$ be the full subcategory of $\SSet$ spanned by
+The next proposition introduces the  comprehension category  cofibrant simplicial sets.
+Recall that we write~$\SSet_{\mathsf{cof}}$ for the full subcategory of $\SSet$ spanned by
 cofibrant simplicial sets. 
 
 
@@ -400,33 +399,35 @@ of the form
  where $\mathbf{Fib}_{ \mathsf{cof}}$ is the full subcategory of $\SSet^{\to}_{\mathsf{cof}}$ spanned by fibrations.
 \end{proposition} 
 
-\begin{proof}  The category $\SSet^\to_{\mathsf{cof}}$ is the associated arrow category, whose objects are
-maps $p \co A \to X$ between cofibrant objects. The codomain
+\begin{proof} Recall that the category $\SSet^\to_{\mathsf{cof}}$ is the arrow category of $\SSet_{\mathsf{cof}}$, whose objects are
+maps $p \co A \to X$ between cofibrant objects. Then, the codomain
 functor 
 \[
 \mathrm{cod} \co \SSet^{\to}_{\mathsf{cof}} \to \SSet_{\mathsf{cof}}
 \] 
-is a Grothendieck fibration by part~(ii) of~\cref{lem:cofibrant_fiber_product}. Finally, $\mathbf{Fib}_{ \mathsf{cof}}$ is the full subcategory of $\SSet^{\to}_{\mathsf{cof}}$ spanned by fibrations. Thus,
-its objects are fibrations $p \co A \to X$ between cofibrant objects. The comprehension $\chi$ is
-defined to be the inclusion, so that $p = \mathrm{cod} \circ \chi$. Since $\chi$ preserves pullbacks,
-we have a comprehension category. 
+is a Grothendieck fibration by part~(ii) of~\cref{lem:cofibrant_fiber_product}. 
+Since $\mathbf{Fib}_{ \mathsf{cof}}$ is the full subcategory of $\SSet^{\to}_{\mathsf{cof}}$ spanned by fibrations and the comprehension functor $\chi$ is the inclusion, $p = \mathrm{cod} \circ \chi$
+and~$\chi$ preserves pullbacks.
 \end{proof}
 
 
 
-It immediate to observe that this comprehension category supports $\Sigma$-types, since for
-a fibration $p \co A \to X$ between cofibrant objects, dependent sum along $p$ 
-functor~$\Sigma_p \co \SSet_{/A} \to \SSet_{/X}$, which is defined by
+\begin{remark} \label{thm:sigma-types} It is immediate to see that the comprehension category of cofibrant simplicial sets supports $\Sigma$-types. since for a fibration $p \co A \to X$ between cofibrant objects, dependent sum along $p$  functor~$\Sigma_p \co \SSet_{/A} \to \SSet_{/X}$, which is defined by
 composition with $p$, maps fibrations to fibrations.
+\end{remark}
 
 \medskip
 
 
-We conclude this section with some auxiliary results on cofibrations.
+We conclude this section with some auxiliary results on cofibrant objects and cofibrations
+that will be useful in the following. 
 
 
 \begin{proposition} \label{thm:cof-pbk}  Let $p \co A \to X$  be a map with cofibrant domain.
-Then the pullback functor $p^* \co \SSet_{/X} \to \SSet_{/A}$ preserves cofibrations. 
+Then pullback along $p$, \[
+p^* \co \SSet_{/X} \to \SSet_{/A} \, , 
+\]
+preserves cofibrations. 
 \end{proposition}
 
 \begin{proof} Let $f \co Y \to X$ be a cofibration and consider the pullback
