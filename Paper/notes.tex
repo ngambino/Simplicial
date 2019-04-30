@@ -1372,7 +1372,62 @@ a trivial fibration, as required.
 \end{proof} 
 
 
+\section{Conclusion}
+\label{sec:conclusion}
 
+We can now sumarize our results in the following theorem:
+
+\begin{theorem} \label{th:main_ContextualCat}
+
+The comprehension category
+
+\[ \xymatrix{
+\mathbf{Fib}_{ \mathsf{cof}} \ar[dr]_{p} \ar[rr]^{\chi} & & \SSet^{\to}_{\mathsf{cof}} \ar[dl]^{\mathrm{cod}} \\ 
+ & \SSet_{\mathsf{cof}} &  }
+ \]
+
+
+of ??? has, in the terminology of \cite{LumsdaineP:locuoc}:
+
+\begin{itemize}
+
+\item Pseudo-stable $\Sigma$-types.
+
+\item Partially pseudo-stable $\Id$-types.
+
+\item Weakly stable $\Pi$-types.
+
+\item A type universe $\pi_c: \UU_c \rightarrow \U_c$ (weakly) à la Tarski, closed under the $\Sigma$-types, $\Id$-types and $\Pi$-types constructions.
+
+\end{itemize}
+
+Furthermore the fibration $\pi_c: \UU_c \rightarrow \U_c $ is univalent.
+
+\end{theorem}
+
+
+\begin{proof}
+
+We have checked that this is indeed a comprehension category in ???. $\Sigma$-types have been constructed in ???. Identity types are constructed in section \ref{sec:pats}, more precisely see \cref{thm:MainPathObject} and above. The construction of $\Id$-types themselves invole only categorical dependants products and pullbacks, which are all pseudo-stable, but the construction of the $j$-elimination involves a lifting properties which might not be pseudo-stable, this corresponds to what is called a partially pseudo-stable identity types in \cite[definition 2.3.4]{LumsdaineP:locuoc}.
+The $\Pi$-types have been constructed in section \ref{sec:Pi-types} as cofibrant replacement $\mathbb{L} \Pi_A B$ of the categorical dependant products $\Pi_A B$. The categorical dependant products are pseudo-stable, so given such a $\pi$-type $\mathbb{L} \Pi_A B$, in context $\Gamma$ its pullback $f^*( \mathbb{L} \Pi_A B)$ along a context morphism $f:\Gamma' \rightarrow \Gamma$ might be different from $\mathbb{L} \Pi_{f^* A} f^* B$ but is also a cofibrant replacement of $\Pi_{f^* A} f^* B$ hence also has the property of being a $\Pi$-type.
+
+Finally, in section \ref{sec:unifbb} we constructed the universe $\UU_c \rightarrow \U_c$ as a classifier for all small fibrations between cofibrant objects. As small fibrations are stable under all the constructor above, this gives the stability of the universe. It has been shown in \ref{thm:univalence-of-u-and-uc} in that this fibration is indeed univalent.
+
+\end{proof}
+
+
+
+\begin{remark}
+The $\Pi$-types constructed in the present paper have stronger properties than being weakly stable $\Pi$-types as stated above. First, has explained in remark \ref{rem:pi-types} they satisfies a propositional $\eta$-rule (while \cite{LumsdaineP:locuoc} require no $\eta$-rule at all). Moreover, given a $\Pi$-type $\mathbb{L} \Pi_A B$ in context $\Gamma$ in the sense of theorem \ref{th:main_ContextualCat}, and $f: \Gamma' \rightarrow \Gamma$ a morphism of context, then as observed in the proof above, both the pullback $f^*( \mathbb{L} \Pi_A B )$ and $\Pi$-type $\mathbb{L} \Pi_{f^* A} f^* B$ are both cofibrant replacement of the categorical dependent product $f^* \Pi_A B \simeq \Pi_{f^*A} f^* B $, hence they are homotopy equivalent. 
+
+
+\end{remark}
+
+
+
+\begin{remark}
+The main result of \cite{LumsdaineP:locuoc} assert that if a contextual category $\mathcal{C}$, satisfying a certain additional condition called (LF), (see \cite[definition 3.1.3]{LumsdaineP:locuoc}), has such weakly stable type constructor, then its universal split replacement $\mathcal{C}_!$ has strictly stable similar type constructor. This solves the coherence problem, but, unfortunately, condition (LF) is $\emph{not}$ satisfied in our framework. It involves the existence of some dependent products in the contextual category, but as cofibrant objects are generally not stable under dependent products it does not seems possible to apply this techniques in our framework.  New ideas are required to solve the coherence problem in this case.
+\end{remark}
 
 
 
