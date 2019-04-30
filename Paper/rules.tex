@@ -1,3 +1,115 @@
+
+
+
+
+\begin{table}[htb]
+\fbox{\begin{minipage}{14cm}  \smallskip
+\[
+\begin{gathered}
+\begin{prooftree}
+\Gamma \vdash A \co \type \qquad
+\Gamma \vdash a \co A \quad
+\Gamma \vdash b \co A
+\justifies
+\Gamma \vdash \Id_A(a,b) \co \type
+\end{prooftree} 
+\end{gathered} \qquad 
+\begin{gathered}
+\begin{prooftree}
+\Gamma \vdash a \co A
+\justifies
+\Gamma\vdash \mathsf{refl}(a) \co \Id_A(a,a) 
+\end{prooftree}
+\end{gathered}
+\]  \bigskip
+\begin{table}[htb]
+\fbox{\begin{minipage}{14cm}  \smallskip
+\[
+\begin{prooftree}
+\Gamma \vdash A \co \type \qquad
+\Gamma, x \co A \vdash B \co \type
+\justifies
+\Gamma \vdash (\Pi x \co A) B \co \type
+\end{prooftree} 
+\] 
+\medskip
+\[
+\begin{gathered}
+\begin{prooftree}
+\Gamma, x \co A \vdash b \co B
+\justifies
+\Gamma\vdash (\lambda x \co A) b \co (\Pi x \co A) B
+\end{prooftree}
+\end{gathered} \qquad
+\begin{gathered}
+\begin{prooftree}
+\Gamma \vdash f \co (\Pi x \co A) B \quad
+\Gamma \vdash a \co A 
+\justifies
+\Gamma \vdash \mathsf{app}(f,a) \co B[a/x]
+\end{prooftree}
+\end{gathered}
+\]
+\medskip
+\[
+\begin{gathered}
+\begin{prooftree}
+\Gamma, x \co A \vdash b \co B \quad
+\Gamma \vdash a \co A 
+\justifies
+\Gamma \vdash \mathsf{app}((\lambda x \co A) b, a) = b[a/x] \co B[a/x]
+\end{prooftree}
+\end{gathered}
+\qquad
+\begin{gathered}
+\begin{prooftree}
+\Gamma \vdash f \co (\Pi x \co A) B \quad
+\justifies
+\Gamma \vdash \eta_f \co \Id(f \, , (\lambda x \co A) \mathsf{app}(f, x) )
+\end{prooftree}
+\end{gathered}
+\] \medskip
+\end{minipage} }
+\medskip
+\caption{Rules for $\Pi$-types.} 
+\label{tab:Pi-types}
+\end{table}
+
+
+
+\[
+\begin{prooftree}
+\Gamma \vdash p \co \Id_A(a,b) \quad
+\Gamma, x, y \co A, u \co \Id_A(x,y) \vdash E(x,y,u) \co \type \quad
+\Gamma, x \co X \vdash e \co E(x,x, \mathsf{refl}(x)) 
+\justifies
+\Gamma \vdash \mathsf{J}(a,b,p, e) \co E(a,b,p) 
+\end{prooftree}
+\]
+\medskip
+\[
+\begin{prooftree}
+\Gamma \vdash a \co A \quad
+\Gamma, x, y \co A, u \co \Id_A(x,y) \vdash E(x,y,u) \co \type \quad
+\Gamma, x \co X \vdash e \co E(x,x, \mathsf{refl}(x)) 
+\justifies
+\Gamma \vdash \mathsf{J}(a,a,\mathsf{refl}(a), e) = e(a) \co E(a,a,\mathsf{refl}(a)) 
+\end{prooftree}
+\] \medskip
+\end{minipage} }
+\medskip
+\caption{Rules for $\Id$-types.} 
+\label{tab:Id-types}
+\end{table}
+
+
+
+
+
+
+
+
+
 \begin{table}[htb]
 \fbox{\begin{minipage}{14cm}  \smallskip
 \[

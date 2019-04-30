@@ -419,32 +419,31 @@ Similarly, for part (ii), since an $n$-cell of $X^A$ is a morphism $\Delta[n] \t
 
 
 
-
-
-
-\begin{remark} We conclude this section by introducing the comprehension category that will be 
-shown to support various type-theoretic constructions in the rest of the paper. For brevity, we do not recall
-the definition of a comprehension category and refer the readers to~\cite{JacobsB:catltt} instead. The comprehension category will be
-\[
+\begin{remark} We conclude this section by defining the comprehension category 
+\begin{equation}
+\label{equ:compcat}
+\begin{gathered}
 \xymatrix{
 \mathbf{Fib}_{ \mathsf{cof}} \ar[dr]_{p} \ar[rr]^{\chi} & & \SSet^{\to}_{\mathsf{cof}} \ar[dl]^{\mathrm{cod}} \\ 
  & \SSet_{\mathsf{cof}} &  }
- \]
-Here, $\SSet_{\mathsf{cof}}$ is the full subcategory of $\SSet$ spanned by cofibrant simplicial sets. We then
-write $\SSet_{\mathsf{cof}}$
- 
+ \end{gathered}
+ \end{equation}
+that will be  shown to support various type-theoretic constructors in the rest of the paper. We refer to~\cite{JacobsB:catltt,LumsdaineP:locuoc} for the definition of a comprehension category 
+and related notions. The category $\SSet_{\mathsf{cof}}$ that is the base  of the comprehension category in~\eqref{equ:compcat} is defined to be the full subcategory of $\SSet$ spanned by cofibrant simplicial sets. The category $\SSet^\to_{\mathsf{cof}}$ is the associated arrow category, whose objects are
+maps $p \co A \to X$ between cofibrant objects. The codomain
+functor 
+\[
+\mathrm{cod} \co \SSet^{\to}_{\mathsf{cof}} \to \SSet_{\mathsf{cof}}
+\] 
+is a Grothendieck fibration by part~(ii) of~\cref{lem:cofibrant_fiber_product}. Finally, $\mathbf{Fib}_{ \mathsf{cof}}$ is the full subcategory of $\SSet^{\to}_{\mathsf{cof}}$ spanned by fibrations. Thus,
+its objects are fibrations $p \co A \to X$ between cofibrant objects. The comprehension $\chi$ is
+defined to be the inclusion, so that $p = \mathrm{cod} \circ \chi$. Since $\chi$ preserves pullbacks,
+we have a comprehension category. 
 
-\
-
-In the constructive simplicial interpretation of HoTT described in the introduction, substitution of terms into types 
-is interpreted by pullback of fibrations. Indeed, \cref{thm:cof-pbk} shows that, given a map $f \co Y \to X$,  the pullback functor $f^* \co \SSet_{/\Gamma} \to \SSet_{/\Gamma'}$ restricts to a functor $f^* \co \BFFib_{/\Gamma}  \to \BFFib_{/\Gamma'}$. The interpretation of $\Sigma$-types is straightforward. 
-Let  $p \co A \to X$ be a fibration with cofibrant domain. The
-functor~$\Sigma_p \co \SSet_{/A} \to \SSet_{/X}$ defined by
-composition with $p$ restricts to a functor
-$\Sigma_p \co \BFFib_{/A}  \to \BFFib_{/X}$
- Since fibrations are defined by a right lifting property, they are closed
-under composition. Therefore, if $q \co B \to A$ is a fibration with cofibrant domain, then
-$\Sigma_p(q) \co \Sigma_A(B) \to X$ is again a fibration with cofibrant domain.
+It immediate to observe that this comprehension category supports $\Sigma$-types, since for
+a fibration $p \co A \to X$ between cofibrant objects, dependent sum along $p$ 
+functor~$\Sigma_p \co \SSet_{/A} \to \SSet_{/X}$, which is defined by
+composition with $p$, maps fibrations to fibrations.
 \end{remark} 
 
 
@@ -453,64 +452,11 @@ $\Sigma_p(q) \co \Sigma_A(B) \to X$ is again a fibration with cofibrant domain.
 \section{Identity types as path spaces}
 \label{sec:pats}
 
-The aim of this section is to show that identity types can be intepreted as path spaces. Adapting
-the results in~\cite{awodey-warren:homotopy-idtype} to our setting, it is easy to see that 
- in order to interpret the rules for $\Id$-types (recalled in~\cref{tab:Id-types}) we need show that, given a  cofibrant Kan complex $X$ and a fibration with cofibrant domain $p \co A \to X$,
-we have a fibration with cofibrant domain~$\partial \co \Id_A \to A \times_X A$ and a trivial cofibration
-$\mathsf{refl}_A \co A \to \Id_A$ that provide a factorisation of the diagonal map $\delta_p \co A \to A \times_X A$. Here, we will show that such a factorisation can be obtained by letting $\Id_A$ be a suitable mapping path space. 
 
-
-
-
-
-\begin{table}[htb]
-\fbox{\begin{minipage}{14cm}  \smallskip
-\[
-\begin{gathered}
-\begin{prooftree}
-\Gamma \vdash A \co \type \qquad
-\Gamma \vdash a \co A \quad
-\Gamma \vdash b \co A
-\justifies
-\Gamma \vdash \Id_A(a,b) \co \type
-\end{prooftree} 
-\end{gathered} \qquad 
-\begin{gathered}
-\begin{prooftree}
-\Gamma \vdash a \co A
-\justifies
-\Gamma\vdash \mathsf{refl}(a) \co \Id_A(a,a) 
-\end{prooftree}
-\end{gathered}
-\]  \bigskip
-\[
-\begin{prooftree}
-\Gamma \vdash p \co \Id_A(a,b) \quad
-\Gamma, x, y \co A, u \co \Id_A(x,y) \vdash E(x,y,u) \co \type \quad
-\Gamma, x \co X \vdash e \co E(x,x, \mathsf{refl}(x)) 
-\justifies
-\Gamma \vdash \mathsf{J}(a,b,p, e) \co E(a,b,p) 
-\end{prooftree}
-\]
-\medskip
-\[
-\begin{prooftree}
-\Gamma \vdash a \co A \quad
-\Gamma, x, y \co A, u \co \Id_A(x,y) \vdash E(x,y,u) \co \type \quad
-\Gamma, x \co X \vdash e \co E(x,x, \mathsf{refl}(x)) 
-\justifies
-\Gamma \vdash \mathsf{J}(a,a,\mathsf{refl}(a), e) = e(a) \co E(a,a,\mathsf{refl}(a)) 
-\end{prooftree}
-\] \medskip
-\end{minipage} }
-\medskip
-\caption{Rules for $\Id$-types.} 
-\label{tab:Id-types}
-\end{table}
-
-
-We begin with some simple observations.
-
+In this section we begin to show how the the comprehension category of~\eqref{equ:compcat} supports 
+various type-theoretic constructs by considering identity types. Following the fundamental insight in~\cite{awodey-warren:homotopy-idtype}, in order to equip the comprehension category of~\eqref{equ:compcat} with identity types it suffices to show that
+for every fibration $p \co A \to X$ with cofibrant domain, there is a  fibration with cofibrant domain~$\partial \co \Id_A \to A \times_X A$ and a trivial cofibration $\mathsf{refl}_A \co A \to \Id_A$ that provide a factorisation of the diagonal map $\delta_p \co A \to A \times_X A$~\cite{LumsdaineP:locuoc}. While such a factorisation is guaranteed to exist by the model structure on $\SSet$, here we show that such a factorisation can be obtained by letting~$\Id_A$ be a suitable mapping path space. 
+This is useful in order to support the intuition of elements of identity types as paths that is central to Homotopy Type Theory~\cite{hottbook}. 
 
 
 
@@ -520,7 +466,7 @@ We begin with some simple observations.
 \item Let $X$ be cofibrant and $A$ be fibrant.  Then $A^X$ is fibrant.
 \item Let $f \co Y \rightarrow X$ be a cofibration and $A$ be fibrant. Then $A^f \co A^X \rightarrow A^Y$ is a fibration.
 \item Let $f \co Y \rightarrow X$ be a trivial cofibration and $A$ be fibrant.  Then $A^f \co A^X \rightarrow A^Y$ is a trivial fibration.
-\item Let $X$ be cofibrant and $p \co B \rightarrow A$ be a (trivial) fibration. Then $p^X \co B^X \rightarrow A^X$ is also a trivial fibration.
+\item Let $X$ be cofibrant and $p \co B \rightarrow A$ be a (trivial) fibration. Then $p^X \co B^X \rightarrow A^X$ is also a (trivial) fibration.
 \end{enumerate}
 \end{lemma}
 
@@ -658,76 +604,21 @@ of a map which has been proved to be a levelwise complemented inclusion in~\cref
 \section{$\Pi$-types via cofibrant replacements}
 \label{sec:Pi-types}
 
-The aim of this section is to prove the results of simplicial homotopy theory necessary to interpret
-the rule for $\Pi$-types in~\cref{tab:Pi-types}. Here, note that we are considering the propositional
-version of the $\eta$-rule.
-
-\begin{table}[htb]
-\fbox{\begin{minipage}{14cm}  \smallskip
-\[
-\begin{prooftree}
-\Gamma \vdash A \co \type \qquad
-\Gamma, x \co A \vdash B \co \type
-\justifies
-\Gamma \vdash (\Pi x \co A) B \co \type
-\end{prooftree} 
-\] 
-\medskip
-\[
-\begin{gathered}
-\begin{prooftree}
-\Gamma, x \co A \vdash b \co B
-\justifies
-\Gamma\vdash (\lambda x \co A) b \co (\Pi x \co A) B
-\end{prooftree}
-\end{gathered} \qquad
-\begin{gathered}
-\begin{prooftree}
-\Gamma \vdash f \co (\Pi x \co A) B \quad
-\Gamma \vdash a \co A 
-\justifies
-\Gamma \vdash \mathsf{app}(f,a) \co B[a/x]
-\end{prooftree}
-\end{gathered}
-\]
-\medskip
-\[
-\begin{gathered}
-\begin{prooftree}
-\Gamma, x \co A \vdash b \co B \quad
-\Gamma \vdash a \co A 
-\justifies
-\Gamma \vdash \mathsf{app}((\lambda x \co A) b, a) = b[a/x] \co B[a/x]
-\end{prooftree}
-\end{gathered}
-\qquad
-\begin{gathered}
-\begin{prooftree}
-\Gamma \vdash f \co (\Pi x \co A) B \quad
-\justifies
-\Gamma \vdash \eta_f \co \Id(f \, , (\lambda x \co A) \mathsf{app}(f, x) )
-\end{prooftree}
-\end{gathered}
-\] \medskip
-\end{minipage} }
-\medskip
-\caption{Rules for $\Pi$-types.} 
-\label{tab:Pi-types}
-\end{table}
-
-In order to interpret the formation rule, we should consider a fixed cofibrant Kan complex~$X$ and a fibration with cofibrant domain $p \co A \to X$  and define an operation mapping a fibration with cofibrant domain $q \co B \to A$  to a new fibration with cofibrant domain~$\widetilde{\Pi}_p(q) \co \widetilde{\Pi}_A(B) \to X$. Given such a map $q \co B \to A$, we proceed
+The aim of this section is to prove the results of simplicial homotopy theory necessary to show that
+the comprehension category of~\eqref{equ:compcat} supports $\Pi$-types. 
+In order to do this, we should consider a fibration with cofibrant domain $p \co A \to X$  and define an operation mapping a fibration with cofibrant domain $q \co B \to A$  to a new fibration with cofibrant domain~$\widetilde{\Pi}_p(q) \co \widetilde{\Pi}_A(B) \to X$. together with additional data~\cite{LumsdaineP:locuoc}. 
+Given such a map $q \co B \to A$, we proceed
 in two steps. First, we apply the dependent product along $p$, 
 \[
 \Pi_p \co \SSet_{/A} \to \SSet_{/X} \, , 
 \]
 to $q \co B \to A$ and obtain a map $\Pi_p(q) \co \Pi_A(B) \to X$, which we will show to be again a fibration. Since this fibration does not seem to have  cofibrant domain in general, we then apply a
-cofibrant replacement in $\SSet_{/X}$ to $\Pi_p(q) \co \Pi_A(B) \to X$ so as to obtain a map with all the desired
-properties. 
+cofibrant replacement in $\SSet_{/X}$ to $\Pi_p(q) \co \Pi_A(B) \to X$ so as to obtain a map with all the desired properties. Remarkably, the result will support a categorical counterpart of the propositional
+$\eta$-rule.
 
-Below, we will show that, for a fibration $p \co A \rightarrow X$ with cofibrant domain, the dependent product along $p$ preserves fibrations, without assuming $X$ to be a cofibrant Kan complex. By adjointness, this is equivalent to showing that its left adjoint, \ie 
+Below, we show that, for a fibration $p \co A \rightarrow X$ with cofibrant domain, the dependent product along $p$ preserves fibrations. By adjointness, this is equivalent to showing that its left adjoint, \ie 
  pullback along $f$, preserves trivial cofibrations. This amounts to proving a restricted version of the Frobenius property~\cite{BergB:topsmi}, obtained by considering pullbacks along fibrations with
-cofibrant domain rather than general fibrations. As we will see, some of these assumptions are essential in our
-setting.  
+cofibrant domain rather than general fibrations. By the results in~\cite{coquand-non-constructivity-kan}  these cofibrancy assumptions are essential in our constructive setting.  
 
 
 \begin{theorem}\label{cor:Pi_types_are_fibrant}
