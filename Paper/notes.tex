@@ -571,9 +571,9 @@ with the two projections.
 
 \begin{theorem}
 \label{thm:MainPathObject}
-Assume that $p \co A \rightarrow X $ is a fibration, with $A$ cofibrant and $X$  bifibrant. Then,
+Assume that $p \co A \rightarrow X $ is a fibration between cofibrant objects Then,
 \begin{enumerate}[(i)] 
-\item \label{thm:MainPathObject:IdBifib} $\Path(p)$ is bifibrant, 
+\item \label{thm:MainPathObject:IdBifib} $\Path(p)$ is cofibrant, 
 \item the map $\Path(p) \rightarrow X$ is a fibration,
 \item the map $\partial \co \Path(p) \rightarrow A \times_{X} A$ is a fibration,
 \item $\partial_k \co \Path(p) \rightarrow A \times_{X} A$  is a trivial fibration, for $k \in \braces{0 \, , 1 }$,
@@ -581,8 +581,7 @@ Assume that $p \co A \rightarrow X $ is a fibration, with $A$ cofibrant and $X$ 
 \end{enumerate}
 \end{theorem}
 
-\begin{proof} The map $\Path(p) \rightarrow X$ is a pullback of the maps $\Path(A) \rightarrow \Path(X)$ along $X \rightarrow \Path(X)$. Hence, since $\Path(A) \rightarrow \Path(X)$ is a fibration (by part~(iv) 
-of~\cref{thm:exponentials}), the map $\Path(p) \rightarrow X$ is a fibration, in particular $\Path(p)$ is fibrant. Since $X$ is cofibrant by assumption and $\Path(A)$ is  cofibrant by \cref{proposition:PathObjectCofibrant}, we have that $\Path(p)$ is also cofibrant by~\cref{lem:cofibrant_fiber_product}. 
+\begin{proof} The map $\Path(p) \rightarrow X$ is a pullback of the maps $\Path(A) \rightarrow \Path(X)$ along $X \rightarrow \Path(X)$. Hence, since $\Path(A) \rightarrow \Path(X)$ is a fibration (by part~(iv) of~\cref{thm:exponentials}), the map $\Path(p) \rightarrow X$ is a fibration. Since $X$ is cofibrant by assumption and $\Path(A)$ is  cofibrant by \cref{proposition:PathObjectCofibrant}, we have that $\Path(p)$ is also cofibrant by~\cref{lem:cofibrant_fiber_product}. 
 
 By the dual of the pushout-product property, the map $\langle \partial \Delta[n] \hookrightarrow \Delta[n] ,  A \rightarrow X \rangle$ is a fibration. This map is 
 \[ 
