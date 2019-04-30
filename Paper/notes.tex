@@ -337,7 +337,7 @@ A \rightarrow X$ be any morphism. Then it is decidable whether $f$ can be factor
 The proof of the result above can be outlined in a few words. Since $B = A[(a_i,\sigma_i)]$ for a finite collection of cells $a_i$,  $f$ factors through $p$ if and only if $f(a_i) =\sigma_i^*  x_i$ for each $i$, but when $X$ is cofibrant one can decide for each $i$ if this is the case or not. As there is only a finite number of such $i$, one can decide if it is the case for all $i$ or not.
 
 
-\begin{proposition}{}
+\begin{proposition}
 \label{prop:Degen_quotient_are_pullback_stable}
 The class of degeneracy quotients is stable under pullback. 
 \end{proposition}
@@ -345,35 +345,10 @@ The class of degeneracy quotients is stable under pullback.
 \begin{proof} See~\cite[Proposition 3.1.11]{henry2019qms}.
 \end{proof}
 
-
-These results lead to the following corollary.
-
-\begin{corollary} \label{prop:X^kCofibrant}  \hfill 
-\begin{enumerate}[$(i)$]
-\item Let $A \rightarrow B$ be a degeneracy quotient and $X$ any simplicial set. Then $A \times X \rightarrow B \times X$ is a degeneracy quotient.
-\item Let $X$ be cofibrant and $K$ finite and decidable. Then $X^K$ is cofibrant.
-\item Let $A \rightarrow B$ be a degeneracy quotient of finite decidable simplicial sets and $X$  cofibrant. Then the induced map $X^B \rightarrow X^A$ is a cofibration between cofibrant objects.
-\end{enumerate}
-\end{corollary}
-
-\begin{proof} Part~(i) is a special case of \cref{prop:Degen_quotient_are_pullback_stable}. For part~(ii), recall that an $n$-cell $\Delta[n] \rightarrow X^K$ is a morphism $\Delta[n] \times K \rightarrow X$. Thus, for a degeneracy map $\Delta[n] \rightarrow \Delta[m]$, the map $\Delta[n] \times K \rightarrow \Delta[m] \times K$ is a degeneracy quotient by part (i), as it is a map between finite decidable simplicial sets. Thus, \cref{lem:decidability_lift_degen_quo} implies that the question of whether a map $\Delta[n] \times K \rightarrow X$ factor through $\Delta[n] \times K \rightarrow \Delta[m] \times K$ is also decidable. But this is exactly the question of degeneracy of cells in $X^K$.
-
-Similarly, for part (iii), since an $n$-cell of $X^A$ is a morphism $\Delta[n] \times A \rightarrow X$, it belongs to $X^B$ if and only it can be factored as $\Delta[n] \times A \rightarrow \Delta[n] \times B \rightarrow X$. This is decidable by \cref{lem:decidability_lift_degen_quo} because $\Delta[n] \times A \rightarrow \Delta[n] \times B$ is a degeneracy quotient between finite decidable simplicial sets by part (i).
-\end{proof} 
+By~\cref{prop:Degen_quotient_are_pullback_stable}, if $f \co A \rightarrow B$ be a degeneracy quotient  then $f \times X \co A \times X \rightarrow B \times X$ is again a degeneracy quotient for every $X$.
 
 
-
-
-\medskip
-
-
-
-
-
-
-
-
-\section{Basic results on pullbacks and cofibrations}
+\section{Basic results on cofibrations}
 \label{sec:basrp}
 
 
@@ -425,7 +400,42 @@ Since $A$ is cofibrant, it suffices to show that it is a levelwise complemented.
 \end{proof} 
 
 
-\begin{remark}
+
+
+\begin{proposition} \label{prop:X^kCofibrant}  \hfill 
+\begin{enumerate}[$(i)$]
+\item Let $X$ be cofibrant and $K$ finite and decidable. Then $X^K$ is cofibrant.
+\item Let $f \co A \rightarrow B$ be a degeneracy quotient of finite decidable simplicial sets and $X$  cofibrant. Then $X^f \co X^B \rightarrow X^A$ is a cofibration between cofibrant objects.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}  For part~(i), recall that an $n$-cell $\Delta[n] \rightarrow X^K$ is a morphism $\Delta[n] \times K \rightarrow X$. Now let $\sigma \co \Delta[n] \rightarrow \Delta[m]$ be a degeneracy map. Then the map 
+$\sigma \times K \co \Delta[n] \times K \rightarrow \Delta[m] \times K$ is again degeneracy quotient.
+Since it is a map between finite decidable simplicial sets, the question of whether a map $\Delta[n] \times K \rightarrow X$ factor through $\Delta[n] \times K \rightarrow \Delta[m] \times K$ is decidable
+by~\cref{lem:decidability_lift_degen_quo}. But this is exactly the question of degeneracy of cells in $X^K$.
+Similarly, for part (ii), since an $n$-cell of $X^A$ is a morphism $\Delta[n] \times A \rightarrow X$, it belongs to $X^B$ if and only it can be factored as $\Delta[n] \times A \rightarrow \Delta[n] \times B \rightarrow X$. This is decidable by \cref{lem:decidability_lift_degen_quo} because $\Delta[n] \times A \rightarrow \Delta[n] \times B$ is a degeneracy quotient between finite decidable simplicial sets by part (i).
+\end{proof} 
+
+
+
+
+
+
+
+\begin{remark} We conclude this section by introducing the comprehension category that will be 
+shown to support various type-theoretic constructions in the rest of the paper. For brevity, we do not recall
+the definition of a comprehension category and refer the readers to~\cite{JacobsB:catltt} instead. The comprehension category will be
+\[
+\xymatrix{
+\mathbf{Fib}_{ \mathsf{cof}} \ar[dr]_{p} \ar[rr]^{\chi} & & \SSet^{\to}_{\mathsf{cof}} \ar[dl]^{\mathrm{cod}} \\ 
+ & \SSet_{\mathsf{cof}} &  }
+ \]
+Here, $\SSet_{\mathsf{cof}}$ is the full subcategory of $\SSet$ spanned by cofibrant simplicial sets. We then
+write $\SSet_{\mathsf{cof}}$
+ 
+
+\
+
 In the constructive simplicial interpretation of HoTT described in the introduction, substitution of terms into types 
 is interpreted by pullback of fibrations. Indeed, \cref{thm:cof-pbk} shows that, given a map $f \co Y \to X$,  the pullback functor $f^* \co \SSet_{/\Gamma} \to \SSet_{/\Gamma'}$ restricts to a functor $f^* \co \BFFib_{/\Gamma}  \to \BFFib_{/\Gamma'}$. The interpretation of $\Sigma$-types is straightforward. 
 Let  $p \co A \to X$ be a fibration with cofibrant domain. The
