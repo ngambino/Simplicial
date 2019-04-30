@@ -468,10 +468,11 @@ Similarly, for part (ii), since an $n$-cell of $X^A$ is a morphism $\Delta[n] \t
 \label{sec:pats}
 
 
-In this section we begin to show how the the comprehension category of~\cref{thm:compcat} supports 
-various type-theoretic constructs by considering identity types. Following the fundamental insight in~\cite{awodey-warren:homotopy-idtype}, in order to equip the comprehension category of~\cref{thm:compcat} with identity types it suffices to show that
-for every fibration $p \co A \to X$ with cofibrant domain, there is a  fibration with cofibrant domain~$\partial \co \Id_A \to A \times_X A$ and a trivial cofibration $\mathsf{refl}_A \co A \to \Id_A$ that provide a factorisation of the diagonal map $\delta_p \co A \to A \times_X A$~\cite{LumsdaineP:locuoc}. While such a factorisation is guaranteed to exist by the model structure on $\SSet$, here we show that such a factorisation can be obtained by letting~$\Id_A$ be a suitable mapping path space. 
-This is useful in order to support the intuition of elements of identity types as paths that is central to Homotopy Type Theory~\cite{hottbook}. 
+In this section we begin to show how the the comprehension category of cofibrant simplicial
+sets introduced in \cref{thm:compcat} supports 
+various type-theoretic constructs by considering identity types. Following the fundamental insight in~\cite{awodey-warren:homotopy-idtype}, in order to equip the comprehension category  with identity types it suffices to show that
+for every fibration $p \co A \to X$ with cofibrant domain, there is a  fibration with cofibrant domain~$\partial \co \Id_A \to A \times_X A$ and a trivial cofibration $\mathsf{refl}_A \co A \to \Id_A$ that provide a factorisation of the diagonal map $\delta_p \co A \to A \times_X A$~\cite{LumsdaineP:locuoc}. While such a factorisation is guaranteed to exist by the model structure on $\SSet$, here we show that it can be obtained by letting~$\Id_A$ be a mapping path space. 
+This is useful in order to support the intuition of elements of identity types as paths, a central idea in Homotopy Type Theory~\cite{hottbook}. 
 
 
 
@@ -620,8 +621,8 @@ of a map which has been proved to be a levelwise complemented inclusion in~\cref
 \label{sec:Pi-types}
 
 The aim of this section is to prove the results of simplicial homotopy theory necessary to show that
-the comprehension category of~\cref{thm:compcat} supports $\Pi$-types. 
-In order to do this, we should consider a fibration with cofibrant domain $p \co A \to X$  and define an operation mapping a fibration with cofibrant domain $q \co B \to A$  to a new fibration with cofibrant domain~$\widetilde{\Pi}_p(q) \co \widetilde{\Pi}_A(B) \to X$. together with additional data~\cite{LumsdaineP:locuoc}. 
+the comprehension category of cofibrant simplicial sets supports $\Pi$-types. 
+In order to do this, we should consider a fibration with cofibrant domain $p \co A \to X$  and define an operation mapping a fibration with cofibrant domain $q \co B \to A$  to a new fibration with cofibrant domain~$\widetilde{\Pi}_p(q) \co \widetilde{\Pi}_A(B) \to X$ together with additional data~\cite{LumsdaineP:locuoc}. 
 Given such a map $q \co B \to A$, we proceed
 in two steps. First, we apply the dependent product along $p$, 
 \[
@@ -654,8 +655,7 @@ It is also possible to give a direct proof of this claim based on the same strat
 
  
 \begin{remark}  \label{rem:pi-types}
-We can define the interpretation of $\Pi$-types using~\cref{cor:Pi_types_are_fibrant} and a cofibrant replacement, as follows. 
-Recall that, for maps $p \co A \to X$ and $q \co B \to A$,  the dependent product $\Pi_p(q) \co \Pi_A(B)
+We define explicitly how the $\Pi$-types of the comprehension category of cofibrant simplicial sets are defined. For this, let us recall that, for maps $p \co A \to X$ and $q \co B \to A$,  the dependent product $\Pi_p(q) \co \Pi_A(B)
 \to X$ is equipped with a map
 \[
 \mathsf{app} \co \Pi_A(B) \times_A  A \to B
@@ -894,44 +894,13 @@ Since $\bar{B} \rightarrow A$ is a deformation retract, it is invertible in the 
 \label{sec:unifbb}
 
 
-The aim of this section is to begin establishing the results necessary to interpret a type-theoretic universe
-\`a la Tarski satisfying the univalence axiom. \cref{tab:U-type} gives the basic rules for the type-theoretic universe,
-while we refer to~\cite{voevodsky-simplicial-model} for the statement of the univalence axiom and the
-relationship to its simplicial counterpart.
-
-\begin{table}[htb]
-\fbox{\begin{minipage}{8cm}  \smallskip
-\[
-\begin{gathered}
-\U \co \type
-\end{gathered}  \qquad  \qquad 
-\begin{gathered}
-\begin{prooftree}
-\Gamma \vdash a \co \U
-\justifies
-\Gamma  \vdash \mathsf{T}(a) \co \type
-\end{prooftree}
-\end{gathered} 
-\]
-\end{minipage} }
-\smallskip
-\caption{Rules for the type-theoretic universe.} 
-\label{tab:U-type}
-\end{table}
-
-In order to interpret these rules, we need to define a cofibrant Kan complex $\U_c$ and a Kan 
-fibration with cofibrant domain $\pi_c \co \UU_c \to \U_c$. With these, the elimination rule of the
-type theoretic universe will correspond to taking a pullback of $\pi_c$ along a map $a \co X
-\to \U_c$ with cofibrant domain:
-\[
-\xymatrix{
-\mathsf{T}(a) \ar[d] \ar[r] & \UU_c \ar[d]^{\pi_c} \\
-X \ar[r]_a & \U_c}
-\]
-Furthermore, the closure of the type-theoretic universe under various type-formation operations
+The aim of this section is to begin establishing the results necessary to have a pseudo Tarski
+universe satisfying the univalence axiom in the comprehension category of cofibrant simplicial
+sets. For this, we need to define a cofibrant Kan complex $\U_c$ and a Kan 
+fibration with cofibrant domain $\pi_c \co \UU_c \to \U_c$. The closure of the type-theoretic universe under various type-formation operations
 corresponds to the closure of the class of maps arising as pullbacks of $\pi_c$ under the 
-operations necessary to intepret the corresponding types. For this, it is convenient to consider
-$\pi_c$ to be a fibration that classifies small fibrations between cofibrant simplicial
+operations necessary to intepret the corresponding types. For this, it is convenient to 
+consider~$\pi_c$ to be a fibration that classifies small fibrations between cofibrant simplicial
 sets, \ie such that for every such fibration $p \co A \to X$ there exists a map $a \co X \to \U_c$ fitting in a pullback diagram of the form
 \[
 \xymatrix{
