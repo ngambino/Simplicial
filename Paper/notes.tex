@@ -4,7 +4,7 @@
 \input{../Auxiliary/prooftree}
 
 
-\title[]{Towards a constructive  simplicial model \\ of Homotopy Type Theory}
+\title[]{Towards a constructive  simplicial model \\ of Univalent Foundations}
 
 \begin{document}
 
@@ -39,14 +39,11 @@ classifying fibration for small fibrations between bifibrant objects.
 
 \section*{Introduction} 
 
-\textbf{Context and motivation.} This paper investigates Voevodsky's model of Homotopy  Type Theory (HoTT), \ie Martin-L\"of type theory~\cite{nordstrom-petersson-smith:ml} extended with the univalence axiom~\cite{voevodsky:univalence}, in the category of simplicial sets~\cite{voevodsky-simplicial-model}. This model is of fundamental importance since it informs a new approach to the development of mathematics
-and its computer-assisted formalisation, guided by the notion of the homotopy level of a type and by the univalence axiom, which makes precise the idea that isomorphic structures should be considered as 
-equal~\cite{hottbook,voevodsky:library}. 
+\textbf{Context and motivation.} This paper investigates Voevodsky's model of Homotopy  Type Theory (HoTT), \ie Martin-L\"of type theory~\cite{nordstrom-petersson-smith:ml} extended with the univalence axiom~\cite{voevodsky:univalence}, in the category of simplicial sets~\cite{voevodsky-simplicial-model}. This model is of fundamental importance since it has informed a new approach to the development of mathematics
+and its computer-assisted formalisation~\cite{voevodsky:library} and has been an inspiration for the
+wider area of Homotopy Type Theory~\cite{hottbook}.
 
-The original definition of the simplicial model  was carried out working within classical Zermelo-Fraenkel set theory extended with the axiom of choice (ZFC) and two inaccessible cardinals. Given the wide gap in proof-theoretic strength between Martin-L\"of type theory and ZFC~\cite{GrifforE:strsml} and the fact that the former is constructive  while the latter is classical,
- the question of whether the simplicial model could be defined working constructively (\ie without the use of the law of excluded middle or the axiom of choice) arose immediately and was one of the
- central issues investigated during the thematic programme on Univalent Foundations at the Institute for Advanced Study in 2012/13. In spite of the significant efforts devoted to answering this question,
-the issue is still open to date.
+The original definition of the simplicial model  was carried out in  Zermelo-Fraenkel set theory extended with the axiom of choice (ZFC) and two inaccessible cardinals. Given the wide gap in proof-theoretic strength between that theory and Martin-L\"of type theory~\cite{GrifforE:strsml} and the fact that the former is classical  while the latter is constructive,  the question of whether the simplicial model could be defined working constructively (\ie without the use of the law of excluded middle or the axiom of choice) arose immediately and was one of the central issues investigated during the thematic programme on Univalent Foundations at the Institute for Advanced Study in 2012/13. In spite of the significant efforts devoted to answering this question, the issue is still open to date.
 
 The aim of this paper is to provide a partial solution to this problem.  In order to
 explain our results and the novel aspects of our work, let us recall from~\cite{voevodsky-simplicial-model} that the main results of  homotopy theory necessary 
@@ -61,8 +58,8 @@ as its base and the category of Kan fibrations as its total category
 and to show that this comprehension category supports identity types, $\Sigma$-types, 
 $\Pi$-types, in the sense of~\cite{LumsdaineP:locuoc},  and a univalent type universe closed under the above type
 constructors,  in the sense of~\cite{ShulmanM:allths}. Such a comprehension category is not quite a 
-model of HoTT because of well-known coherence issues, but it gives rise to one
-by appropriate strictification results~\cite{voevodsky-simplicial-model,LumsdaineP:locuoc,ShulmanM:allths}.
+model of HoTT because of well-known strictness issues, but it gives rise to one
+by appropriate coherence results~\cite{voevodsky-simplicial-model,LumsdaineP:locuoc,ShulmanM:allths}.
 
 
 
@@ -88,9 +85,9 @@ since they do not admit a classifier, essentially because
 representables  in simplicial sets are not closed under under products while they are in cubical sets~\cite{SattlerC:faiaut}. 
 
 In summary, to date there is no known model of HoTT that is both definable in a constructive setting and
-is based on a category homotopically equivalent to the category of simplicial sets. 
+is based on a category homotopically equivalent to that of simplicial sets. 
 
-\medskip
+
 
 \noindent
 \textbf{Main results.}
@@ -123,20 +120,21 @@ domain preserves fibrations, which implies that, for a cofibrant simplicial set 
 
 These results allow us to define a comprehension category having the category of cofibrant simplicial
 sets as its base and the category of Kan fibrations between cofibrant simplicial sets as its total space
-and to show that this comprehension category supports identity types, $\Sigma$-types, $\Pi$-types and a univalent type universe closed under various type constructors. In this contextual  category, type-theoretic
+and to show that this comprehension category supports identity types, $\Sigma$-types, $\Pi$-types and a univalent type universe closed under various type constructors (\cref{th:main_ContextualCat}). In this 
+comprehension category, type-theoretic
 contexts correspond to cofibrant objects.   Dependent types correspond fibrations $p \co A \to X$ where 
  $A$ and $X$ are cofibrant. This choice is informed by the fact that, for a simplicial set~$X$, the slice category~$\SSet_{/X}$ admits a model structure in which fibrations and cofibrations are the maps that are fibrations and cofibrations in~$\SSet$, respectively. Then, the bifibrant objects in~$\SSet_{/X}$ are the fibrations $p \co A \to X$ with cofibrant domain. 
 Our main results above show how this comprehension category 
 supports the type constructors listed above.
 For example, \cref{thm:MainPathObject} shows that identity types can be interpreted as 
-mapping path spaces. The classical and the constructive interpretations of HoTT in simplicial sets are compared in~\cref{tab:interpretations}. 
+mapping path spaces. The classical and the constructive comprehension categories are compared in~\cref{tab:interpretations}. 
 
 
 \begin{table}[htb]
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline 
-{\em Type theory} & {\em Classical comprehension} & {\em Constructive comprehension} \\ \hline 
+{\em Type theory} & {\em Classical} & {\em Constructive } \\ \hline 
  $X$ context  & $X$ Kan complex & $X$  cofibrant Kan complex \\[3ex]
  $X \vdash A \co \text{type}$ & $p \co A \to X$ Kan fibration    &  $p \co A \to X$ Kan fibration with $A$, $X$ cofibrant  \\[3ex] 
   $X \vdash a \co A$ &  $\begin{gathered} \xymatrix{X \ar[rr]^a \ar[dr]_{1_X}  & & A  \ar[dl]^{p} \\
@@ -149,12 +147,11 @@ mapping path spaces. The classical and the constructive interpretations of HoTT 
 \label{tab:interpretations}
 \end{table}
 
-\smallskip
+
 
 \noindent
-\textbf{Novelty.} The key novelty of our approach is the use of the homotopy-theoretic notion of cofibrancy
-to encapsulate  with the logical notion of decidability of degeneracies and to work with it in a 
-mathematically efficient way. In particular, we use of the cofibrant  replacement functor
+\textbf{Novel aspects.} The key novelty of our approach is the use of the homotopy-theoretic notion of cofibrancy to encapsulate the logical notion of decidability of degeneracies and to work with it in a 
+mathematically efficient way. In particular, we use the cofibrant  replacement functor
 to obtain $\Pi$-types and the type-theoretic universe in our comprehension category.  For $\Pi$-types, given a fibration $p \co A \to X$ with cofibrant domain, the result of applying the dependent product along $p$ to a fibration $q \co B \to A$ with cofibrant domain produces a map  $\Pi_p(q) \co \Pi_A(B) \to X$, which is a fibration by~\cref{cor:Pi_types_are_fibrant}, but whose domain
 is not necessarily cofibrant. In order to remedy this, we define  $\Pi$-types to be given by a cofibrant replacement of
 $\Pi_p(q) \co \Pi_A(B) \to X$, which is now a fibration with cofibrant domain. 
@@ -177,7 +174,8 @@ satisfy strictly the stability conditions governing the interaction of substitui
 referred to as the Beck-Chevalley conditions. While there are well-known techniques to address these issues~\cite{voevodsky-simplicial-model,LumsdaineP:locuoc,ShulmanM:allths}, they do not seem to apply in our  context.
 Thus, we only need an appropriate coherence result for the kind of 
 comprehension category defined in this paper, 
-which we leave the investigation of such a coherence result to future work.
+which we leave the investigation of such a coherence result to future work (see \cref{sec:conclusion} for
+details).
 
 Let us conclude these introductory remarks by mentioning that 
 although the proofs of our main results are inspired by arguments  in the existing literature, especially those in~\cite{voevodsky-simplicial-model}, but require a systematic
@@ -1362,7 +1360,7 @@ a trivial fibration, as required.
 \end{proof} 
 
 
-\section{Conclusion}
+\section{Conclusions and future work}
 \label{sec:conclusion}
 
 We can now sumarize our results using the comprehension category of cofibrant simplicial sets introduced in \cref{thm:compcat}, 
@@ -1381,7 +1379,7 @@ that of  \cite[Appendix~A]{ShulmanM:allths}  regarding the type-theoretic univer
 \item weakly stable $\Pi$-types,
 \item a pseudo Tarski universe $\pi_c: \UU_c \rightarrow \U_c$, closed under the $\Sigma$-types, $\Id$-types and $\Pi$-types constructions.
 \end{itemize}
-Furthermore the fibration $\pi_c: \UU_c \rightarrow \U_c $ is univalent.
+Furthermore, the fibration $\pi_c: \UU_c \rightarrow \U_c $ is univalent.
 \end{theorem}
 
 
@@ -1399,16 +1397,22 @@ A careful analysis of how the cofibrant replacement of a simplicial set is const
 
 
 \begin{remark}
-The $\Pi$-types constructed in the present paper have stronger properties than being weakly stable $\Pi$-types as stated above. First, has explained in remark \ref{rem:pi-types} they satisfies a propositional $\eta$-rule (while \cite{LumsdaineP:locuoc} require no $\eta$-rule at all). Moreover, given a $\Pi$-type $\mathbb{L} \Pi_A B$ in context $\Gamma$ in the sense of theorem \ref{th:main_ContextualCat}, and $f: \Gamma' \rightarrow \Gamma$ a morphism of context, then as observed in the proof above, both the pullback $f^*( \mathbb{L} \Pi_A B )$ and $\Pi$-type $\mathbb{L} \Pi_{f^* A} f^* B$ are both cofibrant replacement of the categorical dependent product $f^* \Pi_A B \simeq \Pi_{f^*A} f^* B $, hence they are homotopy equivalent. 
+The $\Pi$-types constructed in the present paper have stronger properties than being weakly stable $\Pi$-types as stated above. First, as explained in \cref{rem:pi-types}, they satisfy a propositional $\eta$-rule, while \cite{LumsdaineP:locuoc} require no $\eta$-rule. Secondly, given our $\Pi$-type $\mathbb{L}(\Pi_A B)$ over $X$ in the sense of \cref{th:main_ContextualCat}, and $f \co X'  \rightarrow X$, then  both $f^*( \mathbb{L} ( \Pi_A B ))$ and $\Pi$-type $\mathbb{L} \big( \Pi_{f^* A} f^* B \big)$ are both cofibrant replacements of $f^* (\Pi_A B) \cong \Pi_{f^*A} f^* B $. Hence, they are homotopy equivalent. 
 \end{remark}
 
 
 
 \begin{remark}
-The main result of \cite{LumsdaineP:locuoc} assert that if a contextual category $\mathcal{C}$, satisfying a certain additional condition called (LF), (see \cite[definition 3.1.3]{LumsdaineP:locuoc}), has such weakly stable type constructor, then its universal split replacement $\mathcal{C}_!$ has strictly stable similar type constructor. This solves the coherence problem, but, unfortunately, condition (LF) is $\emph{not}$ satisfied in our framework. It involves the existence of some dependent products in the contextual category, but as cofibrant objects are generally not stable under dependent products it does not seems possible to apply this techniques in our framework.  New ideas are required to solve the coherence problem in this case.
+The main result of \cite{LumsdaineP:locuoc} assert that if a contextual category $\mathcal{C}$, satisfying 
+the additional condition  (LF) of \cite[Definition 3.1.3]{LumsdaineP:locuoc}) has weakly stable type constructors, then left adjoint splitting $\mathcal{C}_!$ has the same constructors, but now strictly stable,
+thus solving the coherence problem. Unfortunately, condition (LF) is not satisfied in our constructive
+setting, essentially because cofibrant objects are generally not closed under dependent products.  
 \end{remark}
 
-
+We leave as an open problem the question of whether a comprehension category as in~\cref{th:main_ContextualCat} can be split so as obtain a model of HoTT and so,]in particular,
+obtain a constructive version of the simplicial model of HoTT. It should be noted that this question
+is now completely independent from simplicial homotopy theory, as our results in this paper have 
+obtained all the necessary results to produce the structure in~\cref{th:main_ContextualCat}. 
 
 
 
