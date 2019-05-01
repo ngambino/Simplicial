@@ -181,3 +181,153 @@
 \caption{Rules for $\Pi$-types.}
 \label{tab:Pi-types}
 \end{table}
+
+
+% Type theory rules
+
+\section{Type-theoretic rules}
+
+
+
+\subsection*{Identity types}
+
+
+\[
+\begin{gathered}
+\begin{prooftree}
+\Gamma \vdash A \co \type \qquad
+\Gamma \vdash a \co A \qquad
+\Gamma \vdash b \co A 
+\justifies
+\Gamma \vdash \mathsf{Id}_A(a,b) \co \type
+\end{prooftree} \\[2ex]
+\begin{prooftree}
+a \co A 
+\justifies
+\mathsf{refl}(a) \co \mathsf{Id}_A(a,a)
+\end{prooftree} \\[2ex]
+\begin{prooftree}
+\Gamma \vdash p \co \Id_A(a,b) \qquad
+\Gamma, x, y \co A, z \co \Id_A(x,y) \vdash B \co \type \qquad
+\Gamma, x \co A \vdash d \co B[x/y, \mathsf{refl}(x)/z] 
+\justifies
+\Gamma \vdash \mathsf{J}(a,b,p,d) \co B[a/x, b/y, p/z]
+\end{prooftree} \\[2ex]
+\begin{prooftree}
+\Gamma \vdash a \co A \qquad
+\Gamma, x, y \co A, z \co \Id_A(x,y) \vdash B \co \type \qquad
+\Gamma, x \co A \vdash d \co B[x/y, \mathsf{refl}(x)/z] 
+\justifies
+\Gamma \vdash \mathsf{J}(a,a,\mathsf{refl}(a),d) = d[a/x] \co B[a/x, a/y, \mathsf{refl}(a)/z]
+\end{prooftree}
+\end{gathered}
+\]
+
+
+
+\subsection*{$\Sigma$-types}
+
+\[
+\begin{gathered}
+\begin{prooftree}
+\Gamma \vdash A \co \type \qquad
+\Gamma, x \co A \vdash B \co \type
+\justifies
+\Gamma \vdash (\Sigma x \co A) B 
+\end{prooftree}  \\[1ex]
+\begin{prooftree}
+\Gamma \vdash a \co A  \qquad
+\Gamma \vdash b \co B[a/x] 
+\justifies
+\Gamma \vdash \mathsf{pair}(a,b) \co (\Sigma x \co A) B 
+\end{prooftree}  \\[2ex]
+\begin{prooftree}
+\Gamma \vdash c \co (\Sigma x \co A) B 
+\justifies
+\Gamma \vdash  \pi_1(c) \co A 
+\end{prooftree} \qquad
+\begin{prooftree}
+\Gamma \vdash c \co (\Sigma x \co A) B 
+\justifies
+\Gamma \vdash \pi_2(c) \co B[ \pi_1(c)/x] 
+\end{prooftree} \\[2ex]
+\begin{prooftree}
+\Gamma \vdash a \co A  \qquad
+\Gamma \vdash b \co B[a/x] 
+\justifies
+\Gamma \vdash \pi_1 \big( \mathsf{pair}(a,b) \big)  = a \co A
+\end{prooftree}  \qquad
+\begin{prooftree}
+\Gamma \vdash a \co A  \qquad
+\Gamma \vdash b \co B[a/x] 
+\justifies
+\Gamma \vdash \pi_2\big( \mathsf{pair}(a,b) \big) = b \co B[a/x]
+\end{prooftree} \\[2ex]
+\begin{prooftree}
+\Gamma \vdash c \co (\Sigma x \co A) B 
+\justifies
+\Gamma \vdash  c = \mathsf{pair}(\pi_1(c), \pi_2(c))  \co   (\Sigma x \co A) B 
+\end{prooftree}
+\end{gathered}
+\]
+
+
+
+
+
+
+
+\subsection*{$\Pi$-types}
+ 
+\[ 
+\begin{gathered} 
+\begin{prooftree}
+\Gamma \vdash A \co \type \qquad
+\Gamma, x \co A \vdash B \co \type
+\justifies
+\Gamma \vdash (\Pi x \co A) B 
+\end{prooftree}  \\[2ex]
+\begin{prooftree}
+\Gamma, x \co A \vdash b \co B
+\justifies
+\Gamma \vdash (\lambda x \co A) b \co (\Pi x \co A) B 
+\end{prooftree} \\[2ex]
+\begin{prooftree}
+\Gamma \vdash f \co (\Pi x \co A) B \quad
+\Gamma \vdash a \co A 
+\justifies
+\Gamma \vdash \mathsf{app}(f,a) \co B[a/x]
+\end{prooftree} \\[2ex]
+\begin{prooftree}
+\Gamma, x \co A \vdash b \co B \qquad
+\Gamma \vdash a \co A 
+\justifies
+\Gamma \vdash \mathsf{app}( (\lambda x \co A)b, a) = b[a/x] \co B[a/x] 
+\end{prooftree} \\[2ex]
+\begin{prooftree}
+\Gamma \vdash f \co (\Pi x \co A) B 
+\justifies
+\Gamma \vdash \eta_f \co \Id_{(\Pi x \co A)B} \big( f, (\lambda x \co A) \mathsf{app}(f,x)\big)
+\end{prooftree}
+\end{gathered}
+\]
+
+
+
+
+
+
+\subsection*{Universe type}
+
+
+\[
+\U \co \type \qquad 
+\begin{prooftree}
+\Gamma \vdash a \co \U
+\justifies
+\Gamma \vdash \mathsf{T}(a) \co \type
+\end{prooftree}
+\]
+
+\appendix
+
