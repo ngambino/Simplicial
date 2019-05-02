@@ -40,8 +40,8 @@ classifying fibration for small fibrations between bifibrant objects.
 \section*{Introduction} 
 
 \textbf{Context and motivation.} This paper investigates Voevodsky's model of Martin-L\"of type theory (ML)
-extended with the Univalence Axiom (UA)  in the category of simplicial sets~\cite{voevodsky-simplicial-model}.  This model is of fundamental importance since it has informed a new approach to the development of mathematics and its computer-assisted formalisation~\cite{voevodsky:library} and has been one of
-the sources of inspiration for the rapid development of Homotopy Type Theory~\cite{hottbook}.
+extended with the Univalence Axiom (UA)  in the category of simplicial sets~\cite{voevodsky-simplicial-model}.  This model is of fundamental importance in mathematical logic and theoretical computer science since it  informs a new approach to the development of mathematics and its computer-assisted formalisation~\cite{voevodsky:library} and is one of
+the sources of inspiration for the development of Homotopy Type Theory~\cite{hottbook}.
 
 The original definition of the simplicial model  was carried out in  Zermelo-Fraenkel set theory extended with the axiom of choice (ZFC) and two inaccessible cardinals. Given the wide gap in proof-theoretic strength between that theory and Martin-L\"of type theory~\cite{GrifforE:strsml} and the fact that the former is classical  while the latter is constructive,  the question of whether the simplicial model could be defined working constructively (\ie without the use of the law of excluded middle or the axiom of choice) arose immediately and was one of the central issues investigated during the thematic programme on Univalent Foundations at the Institute for Advanced Study in 2012/13. In spite of the significant efforts devoted to answering this question, the issue is still open to date.
 
@@ -61,7 +61,7 @@ allow us to define a comprehension category
  & \SSet &  }
  \end{gathered}
 \]
-where $\SSet$ is the category of simplicial sets $\SSet$
+where $\SSet$ is the category of simplicial sets 
 and $\mathbf{Fib}$ is the category of Kan fibrations, 
 and to show that this comprehension category supports the type
 constructors of ML in the sense of~\cite{LumsdaineP:locuoc},  and a univalent type universe closed under the above type
@@ -96,7 +96,7 @@ representables  in simplicial sets are not closed under under products while the
 In summary, to date there is no known model of ML + UA that is definable in a constructive setting and
 based on a category homotopically equivalent to that of simplicial sets. 
 
-
+\smallskip
 
 \noindent
 \textbf{Main results.}
@@ -144,7 +144,7 @@ contexts correspond to cofibrant objects, while dependent types correspond fibra
 For example, \cref{thm:MainPathObject} shows that identity types can be interpreted as 
 mapping path spaces. 
 
-\medskip
+\smallskip
 
 \noindent
 \textbf{Novel aspects.} The key novelty of our approach is the use of the homotopy-theoretic notion of cofibrancy to encapsulate the logical notion of decidability of degeneracies and to work with it in a 
@@ -291,7 +291,8 @@ Y \ar[r]_f & X \, .}
 
 For $X \in \SSet$, we write $\Fib_{/X}$ for the full subcategory of the slice category $\SSet_{/X}$ spanned by the fibrations with codomain $X$. For $X \in \SSet$, we write $\BFFib_{/X}$ for  the full subcategory of  $\Fib_{/X}$ spanned by fibrations with cofibrant domain. For a simplicial set $X$, we write $\mathbb{L}(X)$ for its cofibrant replacement and $\mathbb{R}(X)$ for its
 fibrant replacement. These objects come equipped with a trivial fibration $\varepsilon_X \co \mathbb{L}(X) \to X$ and a trivial cofibration $\eta_X \co 
-X \to \mathbb{R}(X)$, respectively.
+X \to \mathbb{R}(X)$, respectively. An explicit definition of the cofibrant replacement is given 
+in~\cref{sec:appendix}.
 
 \medskip
 
@@ -1442,6 +1443,8 @@ would then be essentially equivalent to a solution to the coherence problem, {cf
 \appendix
 
 \section{The cofibrant replacement functor}
+\label{sec:appendix}
+
 
 The goal of this appendix is to give a more explicit description of the cofibrant replacement functor on simplicial sets (\cref{prop:Cof_replacement}) and to use it to discuss the size of this cofibrant replacement.
 
