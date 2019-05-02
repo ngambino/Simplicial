@@ -10,7 +10,7 @@
 
 \begin{abstract}
 We provide a partial solution to the open problem of defining a constructive version of 
-Voevodsky's simplicial model of Homotopy Type Theory. This is done by establishing
+Voevodsky's simplicial model of univalent foundations. This is done by establishing
 constructive counterparts of the main results of simplicial homotopy theory
 necessary to define a model. In particular, 
  we show constructively that dependent products along fibrations with
@@ -39,26 +39,34 @@ classifying fibration for small fibrations between bifibrant objects.
 
 \section*{Introduction} 
 
-\textbf{Context and motivation.} This paper investigates Voevodsky's model of Homotopy  Type Theory (HoTT), \ie Martin-L\"of type theory~\cite{nordstrom-petersson-smith:ml} extended with the univalence axiom~\cite{voevodsky:univalence}, in the category of simplicial sets~\cite{voevodsky-simplicial-model}. This model is of fundamental importance since it has informed a new approach to the development of mathematics
-and its computer-assisted formalisation~\cite{voevodsky:library} and has been an inspiration for the
-wider area of Homotopy Type Theory~\cite{hottbook}.
+\textbf{Context and motivation.} This paper investigates Voevodsky's model of Martin-L\"of type theory (ML)
+extended with the Univalence Axiom (UA)  in the category of simplicial sets~\cite{voevodsky-simplicial-model}.  This model is of fundamental importance since it has informed a new approach to the development of mathematics and its computer-assisted formalisation~\cite{voevodsky:library} and has been one of
+the sources of inspiration for the rapid development of Homotopy Type Theory~\cite{hottbook}.
 
 The original definition of the simplicial model  was carried out in  Zermelo-Fraenkel set theory extended with the axiom of choice (ZFC) and two inaccessible cardinals. Given the wide gap in proof-theoretic strength between that theory and Martin-L\"of type theory~\cite{GrifforE:strsml} and the fact that the former is classical  while the latter is constructive,  the question of whether the simplicial model could be defined working constructively (\ie without the use of the law of excluded middle or the axiom of choice) arose immediately and was one of the central issues investigated during the thematic programme on Univalent Foundations at the Institute for Advanced Study in 2012/13. In spite of the significant efforts devoted to answering this question, the issue is still open to date.
 
 The aim of this paper is to provide a partial solution to this problem.  In order to
 explain our results and the novel aspects of our work, let us recall from~\cite{voevodsky-simplicial-model} that the main results of  homotopy theory necessary 
-to define the simplicial model of HoTT are 
+to define the simplicial model of ML + UA are 
 the existence of a Quillen
 model structure on the category of simplicial sets whose fibrations are the Kan fibrations, 
  the fact that dependent product along a fibration preserves fibrations,
  the existence of a fibration $\pi \co \UU \to \U$ that classifies small fibrations, 
 the fibrancy of $\U$ and, finally, the univalence of the fibration $\pi$. These results
-allow us to define a comprehension category having the category of simplicial sets
-as its base and the category of Kan fibrations as its total category
-and to show that this comprehension category supports identity types, $\Sigma$-types, 
-$\Pi$-types, in the sense of~\cite{LumsdaineP:locuoc},  and a univalent type universe closed under the above type
+allow us to define a comprehension category 
+\[
+\begin{gathered}
+\xymatrix{
+\mathbf{Fib}\,  \ar[dr] \ar@{>->}[rr] & & \SSet^{\to} \ar[dl]^{\mathrm{cod}} \\ 
+ & \SSet &  }
+ \end{gathered}
+\]
+where $\SSet$ is the category of simplicial sets $\SSet$
+and $\mathbf{Fib}$ is the category of Kan fibrations, 
+and to show that this comprehension category supports the type
+constructors of ML in the sense of~\cite{LumsdaineP:locuoc},  and a univalent type universe closed under the above type
 constructors,  in the sense of~\cite{ShulmanM:allths}. Such a comprehension category is not quite a 
-model of HoTT because of well-known strictness issues, but it gives rise to one
+model of ML + UA because of well-known strictness issues~\cite{HofmannM:intttl}, but it gives rise to one
 by appropriate coherence results~\cite{voevodsky-simplicial-model,LumsdaineP:locuoc,ShulmanM:allths}.
 
 
@@ -66,13 +74,14 @@ by appropriate coherence results~\cite{voevodsky-simplicial-model,LumsdaineP:loc
 A fundamental obstruction to a constructive redevelopment of  the simplicial model was discovered in~\cite{coquand-non-constructivity-kan}, where it was shown that
 it is not possible to prove constructively that for a simplicial set $A$ and a
 Kan complex $B$, the exponential~$B^A$ is again a Kan complex.
-Because of this, Coquand and his collaborators  defined homotopy-theoretic models of HoTT in categories of cubical sets~\cite{coquand-cubical-sets}, opening a profitable new research direction, cf.~\cite{awodey-cubical,PittsAM:aximct} for example. Apart from switching 
+Because of this, Coquand and his collaborators  defined homotopy-theoretic models of type
+theories with the univalence axiom in categories of cubical sets~\cite{coquand-cubical-sets}, opening a profitable new research direction, cf.~\cite{awodey-cubical,cohen-et-al:cubicaltt,PittsAM:aximct} for example. Apart from switching 
 from simplicial sets to cubical sets, they also switched from ordinary fibrations, defined by a right lifting property,
 to uniform fibrations, defined as maps equipped with additional algebraic structure which 
 in particular provides a choice of fillers for lifting problems, as in the
-theory of algebraic weak factorisation systems~\cite{garner:small-object-argument}. While 
-categories of cubical sets considered in this line of work allow us to define constructively models of HoTT 
-and admit a Quillen
+theory of algebraic weak factorisation systems~\cite{garner:small-object-argument,grandis-tholen-nwfs}. While 
+categories of cubical sets considered in this line of work allow us to define constructively models of 
+ML + UA and admit a Quillen
 model structure~\cite{SattlerC:equepu}, none of them
  is known to be Quillen equivalent to simplicial sets or topological spaces.
 
@@ -84,8 +93,8 @@ are not as well-behaved in simplicial sets as in cubical sets,
 since they do not admit a classifier, essentially because 
 representables  in simplicial sets are not closed under under products while they are in cubical sets~\cite{SattlerC:faiaut}. 
 
-In summary, to date there is no known model of HoTT that is both definable in a constructive setting and
-is based on a category homotopically equivalent to that of simplicial sets. 
+In summary, to date there is no known model of ML + UA that is definable in a constructive setting and
+based on a category homotopically equivalent to that of simplicial sets. 
 
 
 
@@ -103,7 +112,7 @@ model structure are obtained in~\cite{GambinoN:anocp} without relying on the res
 
 
  The present paper extends this work to obtain constructive counterparts of all the other main results of 
-homotopy theory were necessary to define the simplicial model of HoTT. In particular, our main results are the following:
+homotopy theory were necessary to define the simplicial model of ML(UA). In particular, our main results are the following:
 \begin{itemize}
 \item \cref{thm:MainPathObject}, asserting that, for a fibration with cofibrant domain $p \co A \to X$, the mapping path space 
 gives a factorisation of the diagonal $\delta_p \co A \to A \times_X A$ as a trivial cofibration followed by a fibration;
@@ -118,36 +127,24 @@ domain preserves fibrations, which implies that, for a cofibrant simplicial set 
 
 
 
-These results allow us to define a comprehension category having the category of cofibrant simplicial
-sets as its base and the category of Kan fibrations between cofibrant simplicial sets as its total space
-and to show that this comprehension category supports identity types, $\Sigma$-types, $\Pi$-types and a univalent type universe closed under various type constructors (\cref{th:main_ContextualCat}). In this 
+These results allow us to define a comprehension category 
+\begin{equation*}
+\begin{gathered}
+\xymatrix{
+\mathbf{Fib}_{ \mathsf{cof}} \, \ar[dr] \ar@{>->}[rr] & & \SSet^{\to}_{\mathsf{cof}} \ar[dl]^{\mathrm{cod}} \\ 
+ & \SSet_{\mathsf{cof}} &  }
+ \end{gathered}
+ \end{equation*}
+ where $\SSet_{\mathsf{cof}}$ is the category of cofibrant simplicial sets and  $\mathbf{Fib}_{ \mathsf{cof}}$ is the category of $\SSet$ of fibrations between cofibrant simplicial
+ sets, and to show that this comprehension category supports the type constructors of ML and a univalent type universe~(\cref{th:main_ContextualCat}). In this 
 comprehension category, type-theoretic
-contexts correspond to cofibrant objects.   Dependent types correspond fibrations $p \co A \to X$ where 
- $A$ and $X$ are cofibrant. This choice is informed by the fact that, for a simplicial set~$X$, the slice category~$\SSet_{/X}$ admits a model structure in which fibrations and cofibrations are the maps that are fibrations and cofibrations in~$\SSet$, respectively. Then, the bifibrant objects in~$\SSet_{/X}$ are the fibrations $p \co A \to X$ with cofibrant domain. 
-Our main results above show how this comprehension category 
-supports the type constructors listed above.
+contexts correspond to cofibrant objects, while dependent types correspond fibrations $p \co A \to X$ where 
+ $A$ and $X$ are cofibrant. This choice is informed by the fact that, for a simplicial set~$X$, the slice category~$\mathbf{SSet}_{/X}$ admits a model structure in which the bifibrant objects are
+ the fibrations $p \co A \to X$ with $A$ cofibrant. Our main results above show how this comprehension category  supports the type constructors of ML and a univalent type universe.
 For example, \cref{thm:MainPathObject} shows that identity types can be interpreted as 
-mapping path spaces. The classical and the constructive comprehension categories are compared in~\cref{tab:interpretations}. 
+mapping path spaces. 
 
-
-\begin{table}[htb]
-\begin{center}
-\begin{tabular}{|c|c|c|}
-\hline 
-{\em Type theory} & {\em Classical} & {\em Constructive } \\ \hline 
- $X$ context  & $X$ Kan complex & $X$  cofibrant Kan complex \\[3ex]
- $X \vdash A \co \text{type}$ & $p \co A \to X$ Kan fibration    &  $p \co A \to X$ Kan fibration with $A$, $X$ cofibrant  \\[3ex] 
-  $X \vdash a \co A$ &  $\begin{gathered} \xymatrix{X \ar[rr]^a \ar[dr]_{1_X}  & & A  \ar[dl]^{p} \\
- & X & }\end{gathered}$ & $\begin{gathered} \xymatrix{X \ar[rr]^a \ar[dr]_{1_X}  & & A  \ar[dl]^{p} \\
- & X & }\end{gathered}$ \\ \hline
-\end{tabular}
-\end{center}
 \medskip
-\caption{Two simplicial interpretations of type theory.} 
-\label{tab:interpretations}
-\end{table}
-
-
 
 \noindent
 \textbf{Novel aspects.} The key novelty of our approach is the use of the homotopy-theoretic notion of cofibrancy to encapsulate the logical notion of decidability of degeneracies and to work with it in a 
@@ -185,7 +182,7 @@ when discussing a universe, we are not interested in defining a small fibration 
 rather a small fibration that classifies small fibrations between cofibrant objects. 
 
 
-
+\smallskip
 
 \noindent 
 \textbf{Outline of the paper.} \cref{sec:preliminaries} recalls the constructive version of the 
@@ -195,19 +192,24 @@ establishes the weak equivalence extension property.
 \cref{sec:unifbb} introduces a fibration $\pi_c \co \UU_c \to \U_c$ that classifies small fibrations
 between cofibrant Kan complexes. \cref{sec:fibrancy-and-univalence} proves that $\U_c$ is bifibrant and that $\pi_c \co \UU_c \to \U_c$ is univalent, using the weak equivalence extension property.
 We conclude in~\cref{sec:conclusion} by summarising our main results in terms of
-the comprehension category.
+the comprehension category and stating some open problems for future research.
 
+\smallskip
 
 \noindent
 \textbf{Remarks on constructivity.} We work in  Constructive Zermelo-Fraenkel set theory (CZF),
 a set theory based on intuitionistic logic~\cite{AczelP:typtic-I}. When discussing smallness of sets,
 simplicial sets and fibrations, we assume the existence of an inaccessible set $\mathsf{u}$, as defined 
-in~\cite[Definition~18.1.2]{AczelP:notcst}, such that if $a \in \mathsf{u}$ and $S$ is a subset of  $a$ then 
-$S \in \mathsf{u}$. We say that a set is small if it is an element of $\mathsf{u}$.
+in~\cite[Definition~18.1.2]{AczelP:notcst}. We say that a set is small if it is an element of $\mathsf{u}$.
+For some of our results (cf.~\cref{rem:strength}) we will assume a form of `propositional resizing', asserting that every subset 
+of a small set is again small, \ie 
+\[
+\forall a \, , b \,  ( a \subseteq b \land b \in \mathsf{u} \rightarrow a \in \mathsf{u} ) \, . 
+\]
 Throughout the paper, we adopt a slight abuse of language and say that a map has a right (or left) lifting property to mean that there exists a function mapping elements of the class of lifting problems to a chosen solution. 
 
 
-
+\smallskip
 
 \noindent 
 \textbf{Acknowledgements.} Nicola Gambino gratefully acknowledges the support of
@@ -1384,14 +1386,17 @@ Furthermore, the fibration $\pi_c: \UU_c \rightarrow \U_c $ is univalent.
 
 
 \begin{proof}
-We have checked that this is indeed a comprehension category in \cref{thm:compcat}. $\Sigma$-types have been constructed in \cref{thm:sigma-types} and are clearly stable under pullback up to isomorphism. Identity types are constructed in~\cref{sec:pats}. In particular, see \cref{thm:MainPathObject}. The construction of $\Id$-types themselves involves only categorical dependents products and pullbacks, which are all pseudo-stable, but the construction of the $j$-elimination involves a lifting properties which is not pseudo-stable 
+We have checked that this is indeed a comprehension category in \cref{thm:compcat}. $\Sigma$-types have been constructed in \cref{thm:sigma-types} and are clearly stable under pullback up to isomorphism. Identity types are constructed in~\cref{sec:pats}. In particular, see \cref{thm:MainPathObject}. The construction of $\Id$-types themselves involves only categorical dependents products and pullbacks, which are all pseudo-stable, but the construction of the $\mathsf{J}$-eliminator involves a lifting properties which is not pseudo-stable 
 in general. Thus, we have partially pseudo-stable identity types, as in~\cite[Definition 2.3.4]{LumsdaineP:locuoc}.
-The $\Pi$-types have been constructed in section \ref{sec:Pi-types} as cofibrant replacement $\mathbb{L} \Pi_A B$ of the categorical dependant products $\Pi_A B$. The categorical dependant products are pseudo-stable, so given such a $\pi$-type $\mathbb{L} \Pi_A B$, in context $\Gamma$ its pullback $f^*( \mathbb{L} \Pi_A B)$ along a context morphism $f:\Gamma' \rightarrow \Gamma$ might be different from $\mathbb{L} \Pi_{f^* A} f^* B$ but is also a cofibrant replacement of $\Pi_{f^* A} f^* B$ hence also has the property of being a $\Pi$-type.
+The $\Pi$-types have been constructed in \cref{sec:Pi-types} as cofibrant replacement $\mathbb{L} \Pi_A B$ of the categorical dependent products $\Pi_A B$. The categorical dependant products are pseudo-stable, so given such a $\Pi$-type $\mathbb{L} \Pi_A B$, in context $\Gamma$ its pullback $f^*( \mathbb{L} \Pi_A B)$ along a context morphism $f:\Gamma' \rightarrow \Gamma$ might be different from $\mathbb{L} \Pi_{f^* A} f^* B$ but is also a cofibrant replacement of $\Pi_{f^* A} f^* B$ hence also has the property of being a $\Pi$-type.
 
-Finally, in section \ref{sec:unifbb} we constructed the universe $\UU_c \rightarrow \U_c$ as a classifier for all small fibrations between cofibrant objects. As small fibrations are stable under all the constructor above, this gives the stability of the universe. It has been shown in \ref{thm:univalence-of-u-and-uc} in that this fibration is indeed univalent.
+Finally, in \cref{sec:unifbb} we constructed the universe $\UU_c \rightarrow \U_c$ as a classifier for all small fibrations between cofibrant objects. As small fibrations are stable under all the constructor above, this gives the stability of the universe. It has been shown in \cref{thm:univalence-of-u-and-uc} in that this fibration is indeed univalent.
 
 A careful analysis of how the cofibrant replacement of a simplicial set is constructed (using the small object arguement) shows that given any simplicial sets $X$ the map $\mathbb{L} X \rightarrow X$ is always a small fibration independently of whether $X$ is small or not. Hence the construction of $\Pi$-types really preserves small fibrations, even between non-small objects.
 \end{proof}
+
+
+
 
 
 
@@ -1401,6 +1406,16 @@ The $\Pi$-types constructed in the present paper have stronger properties than b
 \end{remark}
 
 
+\begin{remark} \label{rem:strength}
+Our proof that the universe is closed under $\Pi$-types relies on the assumption that the inacessible
+set $\mathsf{u}$ satisfies a form of propositional resizing, as observed in~\cref{cor:cofibrant_smallness}. If one wishes to avoid this additional assumption, there are at least two alternatives.  MORE TO BE ADDED.
+\end{remark}
+
+
+\begin{remark} A lack of strict stability for $\Pi$-types is also present in the semisimplicial
+model defined in~\cite{CoquandT:gentgi}. This may of interest since cofibrant simplicial
+sets are closely connected to semisimplicial sets~\cite{henry2019qms}. 
+\end{remark} 
 
 \begin{remark}
 The main result of \cite{LumsdaineP:locuoc} assert that if a contextual category $\mathcal{C}$, satisfying 
@@ -1409,10 +1424,19 @@ thus solving the coherence problem. Unfortunately, condition (LF) is not satisfi
 setting, essentially because cofibrant objects are generally not closed under dependent products.  
 \end{remark}
 
-We leave as an open problem the question of whether a comprehension category as in~\cref{th:main_ContextualCat} can be split so as obtain a model of HoTT and so,]in particular,
-obtain a constructive version of the simplicial model of HoTT. It should be noted that this question
+We leave as an open problem the question of whether a comprehension category as in~\cref{th:main_ContextualCat} can be split so as obtain a model of ML(UA) and so,]in particular,
+obtain a constructive version of the simplicial model of ML(UA). It should be noted that this question
 is now completely independent from simplicial homotopy theory, as our results in this paper have 
 obtained all the necessary results to produce the structure in~\cref{th:main_ContextualCat}. 
+
+We also leave as open problem the question of whether our comprehension category supports
+higher-inductive types in the sense of~\cite{hottbook}. 
+
+Finally, we mention as a potential area of further research the idea of designing a dependent type
+theory with explicit substitutions~\cite{AbadiM:exps} with rules matching the structure of the comprehension category of~\cref{th:main_ContextualCat}, extending the idea of 
+substitution up to isomorphism of~\cite{CurienP:subi} to that of substitution up to weak equivalence. 
+A conservativity result of such a system over ML(UA)
+would then be essentially equivalent to a solution to the coherence problem, {cf.}~\cite{CurienPL:revcit}.
 
 
 \appendix
