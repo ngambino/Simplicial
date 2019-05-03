@@ -12,11 +12,13 @@
 We provide a partial solution to the open problem of defining a constructive version of 
 Voevodsky's simplicial model of univalent foundations. This is done by establishing
 constructive counterparts of the main results of simplicial homotopy theory
-necessary to define a model. In particular, 
+and use them to define a comprehension category supporting identity types,
+$\Sigma$-types, $\Pi$-types and a univalent universe.  In particular, 
  we show constructively that dependent products along fibrations with
- cofibrant domains preserve fibrations, that the model structure satisfies the weak equivalence extension property
-for weak equivalences between fibrations with cofibrant domain and that there exists a univalent 
-classifying fibration for small fibrations between bifibrant objects.
+ cofibrant domains preserve fibrations, establish the weak equivalence extension property
+for weak equivalences between fibrations with cofibrant domain and define a univalent 
+classifying fibration for small fibrations between bifibrant objects. This leaves only
+a coherence question to be addressed.
 \end{abstract}
 
 \author{Nicola Gambino}
@@ -40,10 +42,9 @@ classifying fibration for small fibrations between bifibrant objects.
 \section*{Introduction} 
 
 \textbf{Context and motivation.} This paper investigates Voevodsky's model of Martin-L\"of type theory (ML)
-extended with the Univalence Axiom (UA)  in the category of simplicial sets~\cite{voevodsky-simplicial-model}.  This model is of fundamental importance in mathematical logic and theoretical computer science since it  informs a new approach to the development of mathematics and its computer-assisted formalisation~\cite{voevodsky:library}. Furthermore, together with~\cite{awodey-warren:homotopy-idtype}, it
-provided the initial inspiration for the development of Homotopy Type Theory~\cite{hottbook}.
+extended with the Univalence Axiom (UA)  in the category of simplicial sets~\cite{voevodsky-simplicial-model}.  This model is of fundamental importance since it  informs a new approach to the development of mathematics and its computer-assisted formalisation~\cite{voevodsky:library}. Furthermore, in combination with the discovery of a close connection between identity types and homotopical algebra~\cite{awodey-warren:homotopy-idtype}, it provided initial inspiration for the development of  Homotopy Type Theory~\cite{hottbook}.
 
-The original definition of the simplicial model  was carried out in  Zermelo-Fraenkel set theory extended with the axiom of choice (ZFC) and two inaccessible cardinals. Given the wide gap in proof-theoretic strength between that theory and ML~\cite{GrifforE:strsml} and the fact that the former is classical  while the latter is constructive,  the question of whether the simplicial model could be defined working constructively (\ie without the use of the law of excluded middle or the axiom of choice) arose immediately and was one of the central issues investigated during the thematic programme on Univalent Foundations at the Institute for Advanced Study in 2012/13. In spite of the significant efforts devoted to answering this question, the issue is still open to date.
+The original definition of the simplicial model  was carried out in  Zermelo-Fraenkel set theory extended with the axiom of choice (ZFC) and two inaccessible cardinals~\cite[Theorem~3.4.3]{voevodsky-simplicial-model} . Given the wide gap in proof-theoretic strength between that theory and ML~\cite{GrifforE:strsml} and the fact that the former is classical  while the latter is constructive,  the question of whether the simplicial model could be defined working constructively (\ie without the use of the law of excluded middle or the axiom of choice) arose immediately and was one of the central issues investigated during the thematic programme on Univalent Foundations at the Institute for Advanced Study in 2012/13. In spite of the significant efforts devoted to answering this question since then, the issue is still open to date.
 
 The aim of this paper is to provide a partial solution to this problem.  In order to
 explain our results and the novel aspects of our work, let us recall from~\cite{voevodsky-simplicial-model} that the main results of  homotopy theory necessary 
@@ -68,12 +69,12 @@ constructors of ML (which we take to be $0$, $1$, $+$, $\mathbb{N}$,
 $\mathsf{Id}$, $\Sigma$, $\Pi$ and $\mathsf{U}$),
 in the sense of~\cite{LumsdaineP:locuoc},  and a univalent type universe closed under the above type
 constructors,  in the sense of~\cite{ShulmanM:allths}. Such a comprehension category is not quite a 
-model of ML + UA because of well-known strictness issues~\cite{HofmannM:intttl}, but it gives rise to one
+model of ML(UA) because of well-known strictness issues~\cite{HofmannM:intttl}, but it gives rise to one
 by appropriate coherence results~\cite{voevodsky-simplicial-model,LumsdaineP:locuoc,ShulmanM:allths}.
 
+ 
 
-
-A fundamental obstruction to a constructive redevelopment of  the simplicial model was discovered in~\cite{coquand-non-constructivity-kan}, where it was shown that
+A fundamental obstruction to a constructive development of  the simplicial model was discovered in~\cite{coquand-non-constructivity-kan}, where it was shown that
 it is not possible to prove constructively that for a simplicial set $A$ and a
 Kan complex $B$, the exponential~$B^A$ is again a Kan complex.
 Because of this, Coquand and his collaborators  defined homotopy-theoretic models of type
@@ -83,7 +84,7 @@ to uniform fibrations, defined as maps equipped with additional algebraic struct
 in particular provides a choice of fillers for lifting problems, as in the
 theory of algebraic weak factorisation systems~\cite{garner:small-object-argument,grandis-tholen-nwfs}. While 
 categories of cubical sets considered in this line of work allow us to define constructively models of 
-ML + UA and admit a Quillen
+ML(UA) and admit a Quillen
 model structure~\cite{SattlerC:equepu}, none of them
  is known to be Quillen equivalent to simplicial sets or topological spaces.
 
@@ -95,7 +96,7 @@ are not as well-behaved in simplicial sets as in cubical sets,
 since they do not admit a classifier, essentially because 
 representables  in simplicial sets are not closed under under products while they are in cubical sets~\cite{SattlerC:faiaut}. 
 
-In summary, to date there is no known model of ML + UA that is definable in a constructive setting and
+In summary, to date there is no known model of ML(UA) that is definable in a constructive setting and
 based on a category homotopically equivalent to that of simplicial sets. 
 
 \smallskip
@@ -210,13 +211,8 @@ the comprehension category and stating some open problems for future research.
 a set theory based on intuitionistic logic~\cite{AczelP:typtic-I}. When discussing smallness of sets,
 simplicial sets and fibrations, we assume the existence of an inaccessible set $\mathsf{u}$, as defined 
 in~\cite[Definition~18.1.2]{AczelP:notcst}. We say that a set is small if it is an element of $\mathsf{u}$.
-For some of our results we will assume a form of `propositional resizing', asserting that every subset 
-of a small set is again small, \ie 
-\[
-\forall a \, , b \,  ( a \subseteq b \land b \in \mathsf{u} \rightarrow a \in \mathsf{u} ) \, . 
-\]
-
-A further discussion of what can be done without this assumption can be found in \ref{rem:strength}. Throughout the paper, we adopt a slight abuse of language and say that a map has a right (or left) lifting property to mean that there exists a function mapping elements of the class of lifting problems to a chosen solution. 
+For the closure of the type universe under $\Pi$-types, we will assume a form of `propositional resizing', asserting that every subset 
+of a small set is again small, \ie  $\forall a \, , b \,  ( a \subseteq b \land b \in \mathsf{u} \rightarrow a \in \mathsf{u} )$.  A further discussion of what can be done without this assumption can be found in \cref{rem:strength}. Throughout the paper, we adopt a slight abuse of language and say that a map has a right (or left) lifting property to mean that there exists a function mapping elements of the class of lifting problems to a chosen solution. 
 
 
 \smallskip
@@ -667,7 +663,8 @@ Let $p \co A \rightarrow X$ be a fibration with cofibrant domain,
 \end{proof}
 
 
-It is also possible to give a direct proof of this claim based on the same strategy as in \cite{gambino2017frobenius} instead of using the right properness of the model structure on simplicial sets. See~\cite{GambinoN:anocp} for details.
+Another proof of~\cref{cor:Pi_types_are_fibrant} is given in~\cite{GambinoN:anocp} modifying appropriately
+the arguments in~\cite{gambino2017frobenius}.
 
 
  
@@ -906,6 +903,9 @@ Since $\bar{B} \rightarrow A$ is a deformation retract, it is invertible in the 
 \end{proof}
 
  
+ Another proof of~\cref{cor:Pi_types_are_fibrant} is given in~\cite{GambinoN:anocp} modifying appropriately
+the arguments in~\cite{SattlerC:equepu}.
+
 
 \section{A  classifying small fibration between bifibrant objects}
 \label{sec:unifbb}
@@ -1466,19 +1466,19 @@ would then be essentially equivalent to a solution to the coherence problem, {cf
 \label{sec:appendix}
 
 
-The goal of this appendix is to give a more explicit description of the cofibrant replacement functor on simplicial sets (\cref{prop:Cof_replacement}) and to use it to discuss the size of this cofibrant replacement.
+The goal of this appendix is to give an explicit description of the cofibrant replacement functor on simplicial sets (\cref{prop:Cof_replacement}) and to use it to discuss the size of this cofibrant replacement.
 
 
 \begin{definition}\hfill
 \begin{enumerate}[(i)]  
-\item If $x \in X([n])$ is an $n$-cell in a simplicial set $X$, the \emph{degeneracy type} of $x$ is the set of face maps $\delta:[i] \rightarrow [n]$ such that $\delta^* x$ is a degenerate cell.
-\item By a ``degeneracy type'', or ``degeneracy $n$-type'' we mean a subset of faces of $\Delta[n]$ that can appear as the degeneracy type of an $n$-cell of a simplicial sets.
+\item If $x \in X_n$ is an $n$-cell in a simplicial set $X$, the \emph{degeneracy type} of $x$ is the set of face maps $\delta:[i] \rightarrow [n]$ such that $\delta^* x$ is a degenerate cell.
+\item By a \emph{degeneracy type} or \emph{degeneracy $n$-type} we mean a subset of faces of $\Delta[n]$ that can appear as the degeneracy type of an $n$-cell of a simplicial sets.
 \end{enumerate}
 \end{definition}
 
 \medskip
 
-Note that given any $n$-cell $x \in X([n])$, the factorization of $\Delta[n] \rightarrow X$ as a degeneracy quotient followed by a degeneracy detecting morphism, construct a degeneracy quotient $y:\Delta[n] \rightarrow K$ such that $y$ has the same degeneracy type as $x$. This induces a correspondence between degeneracy $n$-type and (isomorphism classes of) degeneracy quotient $\Delta[n] \rightarrow K$. 
+Note that given any $n$-cell $x \in X_n$, the factorization of $x \co \Delta[n] \rightarrow X$ as a degeneracy quotient followed by a degeneracy detecting morphism constructs a degeneracy quotient $y \co \Delta[n] \rightarrow K$ such that $y$ has the same degeneracy type as $x$. This induces a correspondence between degeneracy $n$-types and (isomorphism classes of) degeneracy quotients $\Delta[n] \rightarrow K$. 
 
 \begin{lemma} A degeneracy $n$-type is the degeneracy type of a cell in a cofibrant object  if and only if it is decidable as a subset of faces of $\Delta[n]$.
 \end{lemma}
@@ -1492,58 +1492,58 @@ Given an $n$-cell $x$ in a cofibrant simplicial set $X$, given any face $\delta:
 We will now construct a ``simplicial set of decidable degeneracy type $D$''. Note that the construction would work exactly the same without the assumption ``decidable'', with the exception that as CZF do not has power set, this might not be a simplicial set, but rather a simplicial class.
 
 
- We start with a simplicial set $D_0$ whose $n$-cells are all the decidable subset of the faces of $\Delta[n]$, i.e. decidable subsets of the set of finite subsets of $[n]$. As decidable subsets are justs functions to $\{0,1\}$ this is indeed a set.  If $f : [m] \rightarrow [n]$ and $P \in D_0([n])$ one defines $f^* P$ as the set of faces  $[i] \rightarrow [m]$ such that the composite $[i] \rightarrow [m] \overset{f}{\rightarrow} [n]$ is either in $P$ or non-injective, which is indeed a decidable set of faces.
+ We start with a simplicial set $D_0$ whose $n$-cells are all the decidable subset of the faces of $\Delta[n]$, i.e. decidable subsets of the set of finite subsets of $[n]$. As decidable subsets are justs functions to $\{0,1\}$ this is indeed a set.  If $f : [m] \rightarrow [n]$ and $P \in D_0([n])$ one defines $f^* P$ as the set of faces  $[i] \rightarrow [m]$ such that the composite 
+ \[
+ [i] \rightarrow [m] \overset{f}{\rightarrow} [n]
+ \] is either in $P$ or non-injective, which is indeed a decidable set of faces.
 
-\begin{lemma}
+\begin{lemma} \label{lem:prev}
 $D_0$ is a cofibrant simplicial set, and for any cofibrant simplicial set $X$, the map $X \rightarrow D_0$ sending each $n$ cell to its degeneracy type is a simplicial and degeneracy detecting map.
 \end{lemma}
 
 \begin{proof}
-It is immediate to check that $D_0$ is a simplicial set. Moreover as if has decidable equality one can decide whether a cell $x$ is degenerated by testing if it is equal to $s^* d^* x$ for some non trivial face $d$ and degeneracy $s$, hence $D_0$ is cofibrant. Let $x \in X([n])$ and $f:[m] \rightarrow [n]$, in order to check that the maps $X \rightarrow D_0$ sending each cell to its degeneracy type is simplicial, one need to check that the degeneracy type of $f^* x$ is indeed described from the degeneracy type of $x$ using the formula for the functoriality of $D_0$. For face maps $[i] \rightarrow [m]$ the cell $i^* f^* x$ is degenerated as soon as $f \circ i$ is non injective, and if $f\circ i$ is injective, then it depends on whether $f \circ i$ is in the degeneracy type of $x$ or not.
+It is immediate to check that $D_0$ is a simplicial set. Moreover as if has decidable equality one can decide whether a cell $x$ is degenerated by testing if it is equal to $s^* d^* x$ for some non trivial face $d$ and degeneracy $s$, hence $D_0$ is cofibrant. Let $x \in X_n$ and $f:[m] \rightarrow [n]$, in order to check that the maps $X \rightarrow D_0$ sending each cell to its degeneracy type is simplicial, one need to check that the degeneracy type of $f^* x$ is indeed described from the degeneracy type of $x$ using the formula for the functoriality of $D_0$. For face maps $[i] \rightarrow [m]$ the cell $i^* f^* x$ is degenerated as soon as $f \circ i$ is non injective, and if $f\circ i$ is injective, then it depends on whether $f \circ i$ is in the degeneracy type of $x$ or not.
 
-If $f:[n] \rightarrow [m]$ is non-injective then for any $s \in D_0([m])$ the identity map $[n] \rightarrow [n]$ is in $f^* s$. So a degenerate cell of $D_0$ always contains the maximal face. In particular the map $X \rightarrow D_0$ constructed above send non-degenerate cell of $X$ to non-degenerate cells of $D_0$.
+If $f:[n] \rightarrow [m]$ is non-injective then for any $s \in (D_0)_m$ the identity map $[n] \rightarrow [n]$ is in $f^* s$. So a degenerate cell of $D_0$ always contains the maximal face. In particular the map $X \rightarrow D_0$ constructed above send non-degenerate cell of $X$ to non-degenerate cells of $D_0$.
 
 \end{proof}
 
-In particular, the lemma construct a map $P:D_0 \rightarrow D_0$ to itself sending any cell to its degeneracy type. As $P$ preserves and detects degeneracy, it preserves the degeneracy type and hence $P \circ P =P$.
+\cref{lem:prev} constructs a map $P \co D_0 \rightarrow D_0$ sending any cell to its degeneracy type. As $P$ preserves and detects degeneracy, it preserves the degeneracy type and hence $P \circ P =P$.
 
 \begin{definition}
 The simplicial set $D$ is the set of fix point of the idempotent $P$ acting on $D_0$.
 \end{definition}
 
-Note that for any simplicial set $X$, the map $f:X \rightarrow D_0$ sending each cell to its degeneracy type preserves the degeneracy type, hence $P f = f$. In particular a cell of $D_0$ is in $D$ if and only if it is a degeneracy type. One deduces that:
+Note that for any simplicial set $X$, the map $f:X \rightarrow D_0$ sending each cell to its degeneracy type preserves the degeneracy type, hence $P f = f$. In particular a cell of $D_0$ is in $D$ if and only if it is a degeneracy type. This leads to the following fact. 
 
 \begin{lemma}
-$n$-cells of $D$ are in bijection with decidable degeneracy $n$-type. Each cofibrant simplicial set $X$ has a unique map detecting degeneracy to $D$, which is the map sending a cell to its degeneracy type.
+$n$-cells of $D$ are in bijection with decidable degeneracy $n$-type. Each cofibrant simplicial set $X$ has a unique map detecting degeneracy to $D$, which is the map sending a cell to its degeneracy type. \qed
 \end{lemma}
 
 
 
 \begin{lemma} \label{lem:D_contractible}
-Given a map $\partial \Delta[n] \rightarrow D$ there is a unique way to extend it into map $\Delta[n] \rightarrow D$ such that the non-degenerate $n$-cell of $\Delta[n]$ is send to a non-degenerate cell.
+Given a map $\partial \Delta[n] \rightarrow D$ there is a unique way to extend it into map $\Delta[n] \rightarrow D$ such that the non-degenerate $n$-cell of $\Delta[n]$ is sent to a non-degenerate cell.
 \end{lemma}
 
 \begin{proof}
 If such an extension exists the $n$-cell $x$ corresponding to $\Delta[n] \rightarrow D$ has to be as follows: $x$ does not contains the face $[n] \rightarrow [n]$, and for all other face $\delta:[i] \rightarrow [n]$ it is in $x$ is and only the composite $[i] \rightarrow \partial \Delta[n] \rightarrow D$ is a degenerate cell. So the uniqueness is clear. We only need to show that this set is indeed a degeneracy type. But if one form $D \coprod_{\partial \Delta[n]} \Delta[n]$ then the new added $n$-cell has exactly this degeneracy type so this conclude the proof.
 \end{proof}
 
-Let $\mathbb{L} X \overset{\sim}{\twoheadrightarrow} X $ be the cofibrant replacement of a simplicial set $X$ constructed using Richard Garner version of the small object argument from \cite{garner:small-object-argument}.
+Let $\varepsilon_X \co \mathbb{L} X \to X$ be the cofibrant replacement of a simplicial set $X$ constructed using Richard Garner's version of the small object argument~\cite{garner:small-object-argument}.
 
 \begin{proposition} \label{prop:Cof_replacement}
-The map $\mathbb{L} X \rightarrow D \times X$ sending an $n$-cell to its degeneracy type $s \in D$ and its image is $X$ induce a bijection between $\mathbb{L}X([n])$ and the set of pairs of a decidable degeneracy type $s$ and a cell of $x$ of degeneracy type larger than $s$.
+The map $\mathbb{L} X \rightarrow D \times X$ sending an $n$-cell to its degeneracy type $s \in D$ and its image is $X$ induces  a bijection between $\mathbb{L}X([n])$ and the set of pairs of a decidable degeneracy type $s$ and a cell of $x$ of degeneracy type larger than $s$.
 \end{proposition}
 
-\begin{proof}
-
-Due to the stratified nature of the simplicial generating cofibration, $\mathbb{L} X$ can be written as the colimit of a sequence:
-
-
- \[ \mathbb{L}^{(0)} X \hookrightarrow \mathbb{L}^{(1)} X \hookrightarrow \dots \hookrightarrow \mathbb{L}^{(n)} X \hookrightarrow \dots \]
-
+\begin{proof} Because of the stratified nature of the simplicial generating cofibration, $\mathbb{L} X$ can be written as the colimit of a sequence:
+ \[ 
+ \mathbb{L}^{(0)} X \hookrightarrow \mathbb{L}^{(1)} X \hookrightarrow \dots \hookrightarrow \mathbb{L}^{(n)} X \hookrightarrow \dots 
+ \]
 where $\mathbb{L}^{(0)} X$ is just the set of $0$-cell of $X$ and the map $\mathbb{L}^{(n-1)} X \rightarrow \mathbb{L}^{(n)} X$ is constructed as the pushout of the coproduct of one copy of $\partial \Delta[n] \rightarrow \Delta[n]$ for each square of the form:
-
-\[ \xymatrix{\partial \Delta[n]  \ar[r] \ar@{>->}[d] & \mathbb{L}^{(n-1)} X \ar[d] \\ \Delta[n]  \ar[r] & X} \]
-
+\[ 
+\xymatrix{\partial \Delta[n]  \ar[r] \ar@{>->}[d] & \mathbb{L}^{(n-1)} X \ar[d] \\ \Delta[n]  \ar[r] & X} 
+\]
 Indeed, the pushout constructing $\mathbb{L}^{(n)} X$ from $\mathbb{L}^{(n-1)} X$ do not change the $k$-skeleton for $k <n$ and the set of maps $\partial \Delta[k] \rightarrow \mathbb{L}^{(n-1)} X$ only depends on the $k$-skeleton of $X$, so one can always do all the necessary pushout by $\partial \Delta[k] \hookrightarrow \Delta[k]$ by for $k<n$ before those by $\partial \Delta[n] \hookrightarrow \Delta[n]$.
 
 
@@ -1558,7 +1558,7 @@ In $\mathbb{L}^{(n)} X $ there is exactly one such cell for each square as above
 
 \[ \xymatrix{\partial \Delta[n]  \ar[r] \ar@{^{(}->}[d] & Y^{n-1} \ar[d] \\ \Delta[n]  \ar[r] & X} \]
 
-lemma \ref{lem:D_contractible} above give a unique map to extend $\partial \Delta[n] \rightarrow D$ to a non-degenerate $n$-cell of $D$, and the image of $\Delta[n]$ in $X$ automatically has a larger degeneracy type that this extension so this gives a non-degenerate cell of $Y^{n}$ generating this square. This is the unique way to get such a cell in $Y^n$ to be non-degenerate: indeed a cell in $Y^n$ is non-degenerate if and only if its image in $D$ is non-degenerate.
+\cref{lem:D_contractible} above gives a unique map to extend $\partial \Delta[n] \rightarrow D$ to a non-degenerate $n$-cell of $D$, and the image of $\Delta[n]$ in $X$ automatically has a larger degeneracy type that this extension so this gives a non-degenerate cell of $Y^{n}$ generating this square. This is the unique way to get such a cell in $Y^n$ to be non-degenerate: indeed a cell in $Y^n$ is non-degenerate if and only if its image in $D$ is non-degenerate.
 \end{proof}
 
 
@@ -1573,7 +1573,7 @@ The simplicial set $D$ of decidable degeneracy type is the cofibrant replacement
  
 \item Under the assumption that ``subsets of small sets are small sets'', the map $\mathbb{L} X \rightarrow X$ is a small fibration for any simplicial set $X$.
 
-\item In CZF, given a simplicial class $X$, the cofibrant replacement $\mathbb{L} X \rightarrow X$ exists as a simplicial class, is cofibrant, and the class map $\mathbb{L} X \rightarrow X$ is a trivial fibrations whose fibers are sets.
+\item In $\mathrm{CZF}$, given a simplicial class $X$, the cofibrant replacement $\mathbb{L} X \rightarrow X$ exists as a simplicial class, is cofibrant, and the class map $\mathbb{L} X \rightarrow X$ is a trivial fibrations whose fibers are sets.
 
 \end{enumerate}
 \end{corollary}
@@ -1582,8 +1582,7 @@ The simplicial set $D$ of decidable degeneracy type is the cofibrant replacement
 
 For part~$(i)$, the cells of $\mathbb{L} X$ over a given cell $x \in X([n])$ are the decidable degeneracy $n$-types $s$ smaller than the degenracy type of $x$. In particular this identifies with a subset of the set of all degeneracy $n$-types and hence form a small set by assumption.
 
-For part~$(ii)$, the explicit description of $\mathbb{L} X$ given by \cref{prop:Cof_replacement} immediatly allows to make sense of it as a simplicial class. Indeed the class of $(s,x)$ where $x\in X([n])$, $s$ is a decidable degeneracy type smaller than the degeneracy type of $x$ is clearly a type. Such a pair $(s,x)$ is degenerated if and only if $s$ is, hence this is decidable, and using lemma \ref{lem:D_contractible} one can immediately see that the projection $\mathbb{L} X \rightarrow X$ is a trivial fibrations. Finally, the fiber over an $n$-cell $x \in X$, is isomorphic to a subsets of the set of decidable degeneracy $n$-types defined by bounded separation, hence it is a set.
-
+For part~$(ii)$, the explicit description of $\mathbb{L} X$ given by \cref{prop:Cof_replacement} immediatly allows to make sense of it as a simplicial class. Indeed the class of $(s,x)$ where $x\in X_n$, $s$ is a decidable degeneracy type smaller than the degeneracy type of $x$ is clearly a type. Such a pair $(s,x)$ is degenerated if and only if $s$ is, hence this is decidable, and using \cref{lem:D_contractible} one can immediately see that the projection $\varepsilon_X \co \mathbb{L} X \rightarrow X$ is a trivial fibrations. Finally, the fiber over an $n$-cell $x \in X$, is isomorphic to a subsets of the set of decidable degeneracy $n$-types defined by Restricted Separation, hence it is a set.
 \end{proof}
 
 
