@@ -43,9 +43,10 @@ a coherence question to be addressed.
 \section*{Introduction} 
 
 \textbf{Context and motivation.} This paper investigates Voevodsky's model of Martin-L\"of type theory (ML)
-extended with the Univalence Axiom (UA)  in the category of simplicial sets~\cite{voevodsky-simplicial-model}.  This model is of fundamental importance since it  informs a new approach to the development of mathematics and its computer-assisted formalisation~\cite{voevodsky:library}. Furthermore, in combination with the discovery of a close connection between identity types and homotopical algebra~\cite{awodey-warren:homotopy-idtype}, it provided initial inspiration for the development of  Homotopy Type Theory~\cite{hottbook}.
+extended with the Univalence Axiom (UA)  in the category of simplicial sets~\cite{voevodsky-simplicial-model,StreicherT:modtts}.  This model is of fundamental importance since it  informs a new approach to the development 
+ of mathematics and its computer-assisted formalisation~\cite{voevodsky:library}. Furthermore, in combination with the discovery of a close connection between identity types and homotopical algebra~\cite{awodey-warren:homotopy-idtype,gambino-garner:idtypewfs}, it provided initial inspiration for the development of  Homotopy Type Theory~\cite{hottbook}.
 
-The original definition of the simplicial model  was carried out in  Zermelo-Fraenkel set theory extended with the axiom of choice (ZFC) and two inaccessible cardinals~\cite[Theorem~3.4.3]{voevodsky-simplicial-model} . Given the wide gap in proof-theoretic strength between that theory and ML~\cite{GrifforE:strsml} and the fact that the former is classical  while the latter is constructive,  the question of whether the simplicial model could be defined working constructively (\ie without the use of the law of excluded middle or the axiom of choice) arose immediately atfer its discovery around 2009~\cite{KapulkinC:uniss,VoevodskyV:notts} and was one of the central issues investigated during the thematic programme on Univalent Foundations at the Institute for Advanced Study in 2012/13. In spite of the significant efforts devoted to answering this question since then, the issue is still open to date.
+The original definition of the simplicial model  was carried out in  Zermelo-Fraenkel set theory extended with the axiom of choice (ZFC) and two inaccessible cardinals~\cite[Theorem~3.4.3]{voevodsky-simplicial-model} . Given the wide gap in proof-theoretic strength between that theory and ML~\cite{GrifforE:strsml} and the fact that the former is classical  while the latter is constructive,  the question of whether the simplicial model could be defined working constructively (\ie without the use of the law of excluded middle or the axiom of choice) arose immediately after its discovery around 2006~\cite{KapulkinC:uniss,StreicherT:modtts,VoevodskyV:notts} and was one of the central issues investigated during the thematic programme on Univalent Foundations at the Institute for Advanced Study in 2012/13. In spite of  significant efforts since then, the question is still open.
 
 The aim of this paper is to provide a partial solution to this problem.  In order to
 explain our results and the novel aspects of our work, let us recall from~\cite{voevodsky-simplicial-model} that the main results of  homotopy theory necessary 
@@ -66,7 +67,7 @@ allow us to define a comprehension category
 where $\SSet$ is the category of simplicial sets 
 and $\mathbf{Fib}$ is the category of Kan fibrations, 
 and to show that this comprehension category supports the type
-constructors of ML (which we take to be $0$, $1$, $+$, $\mathbb{N}$, 
+constructors of ML (which we take here to be $0$, $1$, $+$, $\mathbb{N}$, 
 $\mathsf{Id}$, $\Sigma$, $\Pi$ and $\mathsf{U}$),
 in the sense of~\cite{LumsdaineP:locuoc},  and a univalent type universe closed under the above type
 constructors,  in the sense of~\cite{ShulmanM:allths}. Such a comprehension category is not quite a 
@@ -81,22 +82,20 @@ Kan complex $B$, the exponential~$B^A$ is again a Kan complex.
 Because of this, Coquand and his collaborators  defined homotopy-theoretic models of type
 theories with the univalence axiom in categories of cubical sets~\cite{coquand-cubical-sets}, opening a profitable new research direction, cf.~\cite{awodey-cubical,cohen-et-al:cubicaltt,PittsAM:aximct} for example. Apart from switching 
 from simplicial sets to cubical sets, they also switched from ordinary fibrations, defined by a right lifting property,
-to uniform fibrations, defined as maps equipped with additional algebraic structure which 
-in particular provides a choice of fillers for lifting problems, as in the
-theory of algebraic weak factorisation systems~\cite{garner:small-object-argument,grandis-tholen-nwfs}. While 
+to uniform fibrations, defined as maps equipped with additional structure which 
+ provides a choice of fillers for lifting problems, as in algebraic weak factorisation systems~\cite{garner:small-object-argument,grandis-tholen-nwfs}. While 
 categories of cubical sets considered in this line of work allow us to define constructively models of 
 ML(UA) and admit a Quillen
 model structure~\cite{SattlerC:equepu}, none of them
  is known to be Quillen equivalent to simplicial sets or topological spaces.
 
-As shown in~\cite{gambino2017frobenius}, it is possible to develop  a constructive theory of uniform fibrations
-also in simplicial sets and prove that dependent product along a uniform fibration preserves
-uniform fibrations and in particular that for a simplicial set $A$ and an 
- algebraic Kan complex $B$, the simplicial set $B^A$ admits the structure of an algebraic Kan complex. However,  uniform fibrations
-are not as well-behaved in simplicial sets as in cubical sets,
+In simplicial sets, although it is possible to develop  a constructive theory of uniform fibrations and prove that dependent product along a uniform fibration preserves
+uniform fibrations (and in particular that for a simplicial set $A$ and an 
+ algebraic Kan complex $B$, the simplicial set $B^A$ is an algebraic Kan complex),
+  as shown in~\cite{gambino2017frobenius}, the uniform fibrations
+are not as well-behaved as in cubical sets,
 since they do not admit a classifier, essentially because 
 representables  in simplicial sets are not closed under under products while they are in cubical sets~\cite{SattlerC:faiaut}. 
-
 In summary, to date there is no known model of ML(UA) that is definable in a constructive setting and
 based on a category homotopically equivalent to that of simplicial sets. 
 
@@ -106,9 +105,9 @@ based on a category homotopically equivalent to that of simplicial sets.
 \textbf{Main results.}
 A breakthrough has been obtained  by the second-named author in~\cite{henry2019qms}, where, building on his previous work on weak model structures~\cite{henry2018wms},
 it is shown constructively that the category of simplicial sets admits a Quillen model structure in which the
-fibrations are the Kan fibrations. Moreover, this model structure is shown to be cartesian and proper.  Crucially for our goals here, not all monomorphisms are 
-cofibrations in this model structure, but only by those monomorphisms $i \co A \to B$ that are levelwise complemented 
-and for which the degeneracy of $n$-simplices is decidable in $B_n \setminus A_n$ for every $[n] \in \Delta$. In particular, not all simplicial sets are cofibrant objects, but only those with decidable degeneracies. However, this model structure coincides with
+fibrations are the Kan fibrations. Moreover, this model structure is shown to be cartesian and proper.  Crucially for our goals here,  in this model structure not all monomorphisms are 
+cofibrations, but only by those monomorphisms $i \co A \to B$ that are levelwise complemented 
+and for which the degeneracy of $n$-simplices is decidable in $B_n \setminus A_n$ for every $[n] \in \Delta$. In particular, not all simplicial sets are cofibrant, but only those with decidable degeneracies. However, this model structure coincides with
 the standard one as soon as the law of excluded middle is assumed. Two other  
 proofs of the  existence of this constructive
 model structure are obtained in~\cite{GambinoN:anocp} without relying on the results in~\cite{henry2018wms}. 
@@ -154,7 +153,7 @@ mapping path spaces.
 
 \noindent
 \textbf{Novel aspects.} The key novelty of our approach is the use of the homotopy-theoretic notion of cofibrancy to encapsulate the logical notion of decidability of degeneracies and to work with it in a 
-mathematically efficient way. To the best of our knowledge, this paper is the first to make use of the cofibrant replacement functor in the study of models of dependent type theory.
+mathematically efficient way. Also, to the best of our knowledge, this paper is the first to make use of the cofibrant replacement functor in the study of models of dependent type theory.
 
 We will use the cofibrant  replacement functor
 to obtain $\Pi$-types and the type-theoretic universe in our comprehension category.  For $\Pi$-types, given a fibration $p \co A \to X$ with cofibrant domain, the result of applying the dependent product along $p$ to a fibration $q \co B \to A$ with cofibrant domain produces a map  $\Pi_p(q) \co \Pi_A(B) \to X$, which is a fibration by~\cref{cor:Pi_types_are_fibrant}, but whose domain
@@ -162,9 +161,9 @@ is not necessarily cofibrant. In order to remedy this, we define  $\Pi$-types to
 $\Pi_p(q) \co \Pi_A(B) \to X$, which is now a fibration with cofibrant domain. 
 Interestingly, this definition validates
 a judgemental $\beta$-rule and a propositional $\eta$-rule (see~\cref{rem:pi-types} for details), a combination that arises naturally when  Martin-L\"of type theory is presented
-within the Logical Framework~\cite{nordstrom-petersson-smith:ml}, as well as in
-versions of the Coq assistant, including the one used for the original development of  univalent foundations
-library~\cite{voevodsky:library}. Interestingly, the proof that the univalence axiom implies the principle of function extensionality exploited crucially the propositional $\eta$-rule for $\Pi$-types. See also~\cite{GarnerR:strdp}.
+within the Logical Framework~\cite{nordstrom-petersson-smith:ml,GarnerR:strdp}, as well as in
+the versions of the Coq assistant used for the original development of  univalent foundations
+library~\cite{voevodsky:library}. Interestingly, Voevodsky's proof that the univalence axiom implies the principle of function extensionality exploits crucially the propositional $\eta$-rule for $\Pi$-types. 
 
 For the definition of a  type-theoretic universe satisfying the univalence axiom, we proceed
 in two steps. First, we construct a small fibration $\pi \co \UU \to \U$ that classifies small fibrations with cofibrant fibers and prove that $\U$ is fibrant. 
@@ -184,14 +183,15 @@ comprehension category defined in this paper,
 which we leave the investigation of such a coherence result to future work (see \cref{sec:conclusion} for
 details).
 
-Let us conclude these introductory remarks by mentioning that although our main results are inspired by the existing literature, especially those in~\cite{voevodsky-simplicial-model}, their proof requires a systematic and careful cofibrancy considerations. In particular, in order to 
+Let us conclude these introductory remarks by mentioning that although our main results are inspired by the existing literature, especially those in~\cite{voevodsky-simplicial-model}, their proofs require a systematic and careful cofibrancy considerations. In particular, in order to 
 exhibit identity types as path objects (\cref{thm:MainPathObject}) and to prove the weak equivalence
-extension property (\cref{Prop:Homotopy_ext_prop}) we will need to show that certain dependent products preserve cofibrancy (see~\cref{prop:X^kCofibrant} and~\cref{Lemma:ForTheExtProperty} for details), a 
-fact in general does not hold. Furthermore, when discussing a universe, we are not interested in defining a small fibration that classifies small fibrations as in~\cite{voevodsky-simplicial-model}, but
+extension property (\cref{Prop:Homotopy_ext_prop}) we will need to establish the non-trivial
+and surprising fact that the appropriate dependent products preserve cofibrancy (see~\cref{prop:X^kCofibrant} and~\cref{Lemma:ForTheExtProperty} for details), a 
+fact that does not hold in general. Furthermore, when discussing a universe, we are not interested in defining a small fibration that classifies small fibrations as in~\cite{voevodsky-simplicial-model}, but
 rather a small fibration that classifies small fibrations between cofibrant objects. 
 
 
-, 
+
 
 \smallskip
 
