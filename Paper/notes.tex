@@ -714,12 +714,13 @@ which exists since $Y$ is cofibrant and $\varepsilon$ is a trivial fibration. It
 \]
 so the $\beta$-rule holds as an equality. Instead, for $f \co X \to \mathbb{L}(\Pi_A(B))$, we have a homotopy
 \[
-\eta_f  \co \widetilde{\lambda}( \widetilde{\mathsf{app}}(f \times_A 1_A)) \sim  f  \, ,
+\eta_f  \co \widetilde{\lambda}( \widetilde{\mathsf{app}} \, (f \times_A 1_A)) \sim  f  \, ,
 \]
 which is constructed as the diagonal filler in the following diagram
 \[
-\xymatrix@C=2cm{
-\partial \Delta[1] \times Y \ar[r]^-{[f, \widetilde{\lambda}(f \times 1_A)]} \ar[d] & \mathbb{L}(\Pi_A(B)) \ar[d]^\varepsilon \\
+\xymatrix@C=3cm{
+\partial \Delta[1] \times Y \ar[r]^-{\big[f \, , \;  \widetilde{\lambda} ( 
+\widetilde{\mathsf{app}} \,  (f \times 1_A) ) \big]} \ar[d] & \mathbb{L}(\Pi_A(B)) \ar[d]^\varepsilon \\
 \Delta[1] \times Y \ar[r] \ar@{.>}[ur] & \Pi_A(B) \, , }
 \]
 where the bottom map is the constant homotopy given by the equality in the $\eta$-rule in~\eqref{equ:betaeta}.
