@@ -23,13 +23,13 @@ a coherence question to be addressed.
 \end{abstract}
 
 \author{Nicola Gambino}
-\address{School of Mathematics, University of Leeds, Leeds LS2 9JT, United Kingdom}
+\address{School of Mathematics, University of Leeds, United Kingdom}
 \email{n.gambino@leeds.ac.uk}
 
 
 \author{Simon Henry}
-\address{Department of Mathematics and Statistics, Masaryk University, Brno, Czeck Republic}
-\email{henrys@math.muni.cz} 
+\address{Department of Mathematics and Statistics, University of Ottawa, Canads}
+\email{ shenry2@uottawa.ca} 
 
 
  \date{\today}
@@ -38,7 +38,7 @@ a coherence question to be addressed.
 
 \maketitle
 
-
+\tableofcontents
 
 \section*{Introduction} 
 
@@ -223,7 +223,7 @@ of a small set is again small, \ie  $\forall a \, , b \,  ( a \subseteq b \land 
 EPSRC under grant EP/M01729X/1 and the US Air Force Office for Scientific Research under 
 agreement FA8655-13-1-3038 and the hospitality of the 
 School of Mathematics of the University of Manchester and the Centre for Advanced Study in Oslo,
-where the paper was written while on study leave from the University of Leeds. During the preparation of this work, Simon Henry was supported by the Operational Programme Research, Development and Education Project ``Postdoc@MUNI'' (No. CZ.02.2.69/0.0/0.0/16\_027/0008360). We are also grateful to Steve Awodey, Marc Bezem, Thierry Coquand, Andr\'e Joyal, Michael Rathjen, Christian Sattler, Karol Szumi{\l}o  for useful conversations. 
+where the paper was written while on study leave from the University of Leeds. During the preparation of this work, Simon Henry was supported by the Operational Programme Research, Development and Education Project ``Postdoc@MUNI'' (No. CZ.02.2.69/0.0/0.0/16\_027/0008360). We are also grateful to Steve Awodey, Marc Bezem, Paolo Capriotti, Thierry Coquand, Andr\'e Joyal, Andy Pitts, Michael Rathjen, Christian Sattler, Karol Szumi{\l}o, Thomas Streicher  for useful conversations. 
 
 
 
@@ -664,8 +664,7 @@ Let $p \co A \rightarrow X$ be a fibration with cofibrant domain,
 \end{proof}
 
 
-Another proof of~\cref{cor:Pi_types_are_fibrant} is given in~\cite{GambinoN:anocp} modifying appropriately
-the arguments in~\cite{gambino2017frobenius}.
+Another proof of~\cref{cor:Pi_types_are_fibrant} is given in~\cite[Section~4]{GambinoN:anocp} modifying appropriately the arguments in~\cite{gambino2017frobenius}.
 
 
  
@@ -692,7 +691,7 @@ in $\SSet_{/A}$ which is universal in the sense that, for every  $Y \to X$, the 
  well-known judgemental $\beta$-rule and $\eta$-rule for $\Pi$-types, respectively.
  
  When $p$ and $q$ are fibrations and $A$ is cofibrant, the map 
- $\Pi_p(q) \co \Pi_A(B) \to X$ is a fibration by \cref{cor:Pi_types_are_fibrant} but $\Pi_A(B)$ is not cofibrant
+ $\Pi_p(q) \co \Pi_A(B) \to X$ is a fibration by \cref{cor:Pi_types_are_fibrant} but $\Pi_A(B)$ is not cofibrant,
  in general. Thus, we interpret  $\Pi$-types as the 
  cofibrant replacement  of $\Pi_A(B)$, which is given by a cofibrant simplicial set
  $\mathbb{L}(\Pi_A(B)$  equipped with
@@ -703,15 +702,16 @@ We then define $\widetilde{\mathsf{app}} \co   \mathbb{L}(\Pi_A(B)) \times_A A \
 \]
 For a bifibrant simplicial set $Y$ and maps $Y \to X$,  $b \co Y \times_A A \to B$, we define $\widetilde{\lambda}(b) \co Y \to \mathbb{L}(\Pi_A(B))$ to be the
 diagonal filler
-\[
+\begin{equation}
+\label{equ:diag-for-beta}
+\begin{gathered}
 \xymatrix{
 0 \ar[r] \ar[d] & \mathbb{L}(\Pi_A(B))  \ar[d]^\varepsilon \\
 Y \ar[r]_{\lambda(b)} \ar@{.>}[ur] & \Pi_A(B) \, ,}
-\]
-which exists since $Y$ is cofibrant and $\varepsilon$ is a trivial fibration. It follows immediately that
-\[
- \widetilde{\mathsf{app}}(\widetilde{\lambda}(b) \times_A 1_A) = b \, ,
-\]
+\end{gathered}
+\end{equation} 
+which exists since $Y$ is cofibrant and $\varepsilon$ is a trivial fibration. It follows 
+that~$ \widetilde{\mathsf{app}}(\widetilde{\lambda}(b) \times_A 1_A) = b$, 
 so the $\beta$-rule holds as an equality. Instead, for $f \co X \to \mathbb{L}(\Pi_A(B))$, we have a homotopy
 \[
 \eta_f  \co \widetilde{\lambda}( \widetilde{\mathsf{app}} \, (f \times_A 1_A)) \sim  f  \, ,
@@ -723,15 +723,28 @@ which is constructed as the diagonal filler in the following diagram
 \widetilde{\mathsf{app}} \,  (f \times 1_A) ) \big]} \ar[d] & \mathbb{L}(\Pi_A(B)) \ar[d]^\varepsilon \\
 \Delta[1] \times Y \ar[r] \ar@{.>}[ur] & \Pi_A(B) \, , }
 \]
-where the bottom map is the constant homotopy given by the equality in the $\eta$-rule in~\eqref{equ:betaeta}.
-\end{remark}
+where the bottom map is the constant homotopy given by the equality in the $\eta$-rule in~\eqref{equ:betaeta}. 
 
+This result will allow us to equip the comprehension category
+of cofibrant simplicial sets~\cref{thm:compcat} with weakly stable $\Pi$-types. We 
+will take the $\Pi$-types in the comprehension category to be given by the objects
+$ \mathbb{L}(\Pi_A(B))$, these will satisfy weaker stability properties than those of
+those satisfied by $\Pi_A(B)$ in the classical simplicial model, essentially the same 
+as the weak stability properties enjoyed by $\mathsf{Id}$-types in homotopy-theoretic
+models, weaker even than those considered in~\cite{CarboniA:locccec}.  
+
+Let us also note that the requirement of cofibrancy of $Y$ is used in an 
+essential way to construct the diagonal filler in~\eqref{equ:diag-for-beta}. For this
+reason, it seems impossible to obtain an analogous result for the comprehension category 
+with base the category of all simplicial sets and total category that of Kan fibrations 
+with cofibrant domain.
+\end{remark}
 
 
 \section{The weak equivalence extension property}
 \label{sec:equep}
 
-The main goal of this section is to prove the so-called weak equivalence extension property, which will be the key to prove the univalence of the classifying fibrations considered in~\cref{sec:unifbb,sec:fibrancy-and-univalence}.  For this, we follow closely the approach in \cite{voevodsky-simplicial-model}, but exploiting crucially the cofibrancy requirements that are part of our set-up.
+The main goal of this section is to prove the so-called weak equivalence extension property, which will be the key to prove the univalence of the classifying fibrations considered in~\cref{sec:unifbb,sec:fibrancy-and-univalence}.  For this, we follow closely the approach in \cite{voevodsky-simplicial-model}, but exploiting crucially the cofibrancy requirements that are part of our set-up. Another proof is given in~\cite[Section~3.2]{GambinoN:anocp}, adapting the argument in~\cite{SattlerC:equepu}.
 
 
 
