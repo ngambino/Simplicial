@@ -217,6 +217,10 @@
 \newcommand{\V}{\mathsf{V}}
 
 \newcommand{\Weq}{\mathsf{Weq}}
+\newcommand{\Iseq}{\mathsf{Inv}}
+
+\newcommand{\Linv}{\mathsf{LInv}}
+\newcommand{\Rinv}{\mathsf{RInv}}
 \newcommand{\Set}{\mathbf{Set}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -360,7 +364,6 @@
 
 \newcommand{\inc}[1]{i^{#1}}
 \newcommand{\horninc}[2]{h^{#1}_{#2}}
-
 
 
 
@@ -1443,11 +1446,14 @@ By the assumption that $p$ has cofibrant fibers, the simplicial set $A[x]$ is co
 \end{proof} 
 
 
-Define a subobject $\U \subseteq \V$ by letting, for $[n] \in \Delta$, 
+Define an object $U$, with an arrow $\U \to \V$ by letting, for $[n] \in \Delta$, 
 \[
 \U_n = \{ F \in \V_n \ | \ \pi_F \co \textstyle{\int F} \to \Delta[n] \text{ is a small fibration and 
 $ \textstyle{\int F}$ is cofibrant} \} \, .
 \]
+
+Note that by ``is a fibration'' we really mean ``is equiped with a fibration structure'' i.e. it comes with choices of lifts against all maps $\Lambda^k[n] \to \Delta[n]$, in particular, the map $\U \to \V$ is not injective. $U$ is a presheaf because $V$ is a presheaf, that a pullback of a fibration (with chosen lift) is again a fibration (with chosen lift) and by \cref{lem:cofibrant_fiber_product} for the cofibrancy assumptions.
+
 We then define the map $\pi \co \UU \to \U$ via the pullback 
 \begin{equation}
 \label{equ:def-of-pi}
@@ -1460,18 +1466,11 @@ We then define the map $\pi \co \UU \to \U$ via the pullback
 
 
 
-
 \begin{proposition} \label{thm:universe-u}  \hfill 
 \begin{enumerate}[(i)] 
 \item The map $\pi \co \UU \to \U$ is a small fibration with cofibrant fibers.
-\item The map $\pi \co \UU \to \U$ classifies small fibrations with cofibrant fibers, \ie 
-a map $p \co A \to X$ is a small fibrations with cofibrant fibers if and only if 
-there is a map $a \co X \to \U$ and a pullback  of the form
-\[
-\xymatrix{
-A \ar[r] \ar[d]_p \drpullback & \UU \ar[d]^\pi \\
-X \ar[r]_{a} & \U \, . }
-\]
+\item The map $\pi \co \UU \to \U$ classifies small fibrations with cofibrant fibers. More precisely, a map $v:X \to \V$ can be lifted to a map $X \to \U$ if and only if it classifies a fibration with cofibrant fibers. Moreover, choice of a lift to $\U$ corresponds (functorially) to the choice of a structure of fibration on the map classified by $v$.
+
 \end{enumerate}
 \end{proposition}
 
@@ -1480,19 +1479,18 @@ For part~(i), consider a map $a \co \Delta[n] \rightarrow \U$ and the pullbacks
 \[
 \xymatrix{
 A \ar[r] \ar[d]_p  \drpullback & \UU \ar[d]^{\pi} \ar[r]  \drpullback & \VV \ar[d]^{\rho} \\
-\Delta[n] \ar[r]_{a} & \U \ar@{>->}[r] & \V \, . }
+\Delta[n] \ar[r]_{a} & \U \ar[r] & \V \, . }
 \]
 This shows that $p \co A \rightarrow \Delta[n]$ is isomorphic to $\pi_F \co \int F \rightarrow \Delta[n]$ in $\SSet_{/ \Delta[n]}$, where $F$ corresponds under the equivalence in~\eqref{equ:psh-slice-sset} to 
-$a \co \Delta[n] \rightarrow \V$. Therefore, by definition of $\U$, $A$ is cofibrant and $p \co A \rightarrow \Delta[n]$ is a small fibration. This implies that $\pi \co \UU \rightarrow \U$ is has cofibrant fibers. To show it is a fibration, we rewrite a general lifting problem against a horn inclusion $h^n_k \co \Lambda^k[n] \rightarrow \Delta[n]$ as follows:
+$a \co \Delta[n] \rightarrow \V$. Therefore, by definition of $\U$, $A$ is cofibrant and $p \co A \rightarrow \Delta[n]$ is a small fibration. This implies that $\pi \co \UU \rightarrow \U$ has cofibrant fibers. To show it is a fibration, we rewrite a general lifting problem against a horn inclusion $h^n_k \co \Lambda^k[n] \rightarrow \Delta[n]$ as follows:
 \[
 \xymatrix{
 \Lambda^k[n] \ar[r] \ar[d]_{h^k_n} & A  \ar[d]^{p} \ar[r] & \UU \ar[d]^\pi \\
 \Delta[n] \ar@{=}[r]  & \Delta[n] \ar[r]_a & \U \, ,  }
 \]
-and then use that $p \co A  \to \Delta[n]$ is a fibration.
+and then use that $p \co A  \to \Delta[n]$ is a fibration, with chosen lifts, which hence produce a chosen lift in the diagram above.
 
-For part~(ii), if a map $p \co A \to X$ fits in a diagram as in the statement, then it is clearly a small fibration with
-cofibrant fibers. Conversely, let $p \co A \to X$ be a small fibration with cofibrant fibers. Being a small 
+For part~(ii), if a map $v \co X \to \V$ lift to $\U$, then the map $A \to X$ it classified is a pullback of $\UU \to \U$ so it is a small fibration with cofibrant fibers. Conversely, let $p \co A \to X$ be a small fibration with cofibrant fibers. Being a small 
 map, $p$ fits into a pullback of the form 
 \[
 \xymatrix{
@@ -1500,7 +1498,7 @@ A \ar[r] \ar[d]_p \drpullback  &  \VV \ar[d]^{\rho} \\
 X \ar[r]_{a} & \V \, . }
 \]
 
-For each cell of $X$,  $x \co \Delta[n] \rightarrow X$ the pullback $A[x] \rightarrow \Delta[n]$ is a small fibration with cofibrant domain by the assumptions on $p$, which means, by the definition of $\U$ that the image of the cell $x$ in $\V$ belongs to $\U$. Hence $X \rightarrow \V$ factors in $\U$, and hence $A \rightarrow X$ is actually the pullback of $\UU \rightarrow \U$. \qedhere
+For each cell of $X$,  $x \co \Delta[n] \rightarrow X$ the pullback $A[x] \rightarrow \Delta[n]$ is a small fibration with cofibrant domain by the assumptions on $p$, which means, by the definition of $\U$ that the image of the cell $x$ in $\V$ lifts to $\U$. As one can easily check that this lifts to $\U$ are functorial in $[n]$, the map $X \rightarrow \V$ lifts to $\U$, and hence $A \rightarrow X$ is actually the pullback of $\UU \rightarrow \U$. One also easily check that there is a correspondence between fibration structure on the map $A \to X$ and compatible choice of fibrations structure on each pullback along a map $\Delta[n] \to X$, so that the two construction explained above are inverse of each other. \qedhere
 \end{proof} 
 
 
@@ -1565,6 +1563,7 @@ Here, the right-hand side square and the rectangle are pullbacks and therefore t
 side square is also a pullback. Hence $p$ is indeed a pullback of $\UU_c \rightarrow \U_c$. Conversely, any pullback  $p \co A \rightarrow X$ of $\UU_c \rightarrow \U_c$ is a small fibrations with cofibrant fibers, hence by part~(ii) of \ref{lem:Cofib_fiber}, if $X$ is cofibrant, $p$ is small fibration between cofibrant objects.
 \end{proof} 
 
+
 \section{Fibrancy and univalence of the universe}
 \label{sec:fibrancy-and-univalence}
 
@@ -1601,92 +1600,103 @@ as in the argument for part~(i) of  \cref{thm:universe-u}.
 \end{proof}
 
 
-We define $\mathsf{Weq}(\U)$ as the simplicial subset of $\U^\to$ whose $n$-simplices are the $n$-simplices $(F_1, F_2, \phi)$ of $\U^\to$ such that the corresponding map~$f$ in~\eqref{equ:corresp} is a weak equivalence.
-
-
-In order for $\mathsf{Weq}(\U)$ to actually be a simplicial subset of $\U^{\to}$, one needs to check that given two fibrations with cofibrant domain $F_1 \co X_1 \rightarrow \Delta[n]$ and $F_2 \co X_2 \rightarrow \Delta[n]$ and a weak equivalence $\phi:F_1 \rightarrow F_2$ over $\Delta[n]$, the pullback of $\phi$ along any morphisms $\Delta[m] \rightarrow \Delta[n]$ is again an equivalence. This is the case because the pullback  $\SSet_{/\Delta[n]} \rightarrow \SSet_{/\Delta[m]}$ preserves fibrations and trivial fibrations, hence also preserves weak equivalences between fibrant objects (either by Ken Brown's lemma or because it is a right Quillen functor).
+Given $f:A \to B$ an arrow in $\BFFib_{/X}$ we now construct the object $\Iseq(f)$ in $\BFFib_{/X}$ of ``weak equivalences structure'' on $f$. We will use the definition of weak equivalence as ``arrows with both a left inverse and a right inverse'', that is ``bi-invertible maps'' as in Section 4.3 of \cite{hottbook}. However, we cannot use directly the material in \cite{hottbook} as we don't quite have a model of type theory due to the coherence problems. A categorical version of this definition, bypassing the coherence problem, can be found in \cite{ShulmanM:unifid} and has been expanded in section 1.4 of \cite{StenzelR:unirca}. However we cannot use these either because they both assumes that $\Pi$-types are given by categorical exponential, i.e. right adjoint to pullback functors. This corresponds to having both judgmental $\beta$-rule and $\eta$-rule for $\Pi$ types, which we do not have if we restrict to cofibrant objects, and they also have assumptions on the path objects that would not be satisfied without restricting to cofibrant objects. For these reasons, we need to reprove some basic facts about this definition. This being said, as this is very similar to the references cited above, we will not give as much details.
 
 
 
-\begin{lemma}
-\label{prop:Weq_classify_Weq}
-For any cofibrant object $X$, a map $a \co X \rightarrow \U^{\rightarrow}$ factors via 
- $\mathsf{Weq}(\U)$ if and only the map in $\BFFib_{/X}$ classified by $a$,
+Given a map $f:A \to B$ in $\BFFib_{/X}$, a right inverse for $f$, is a map $h:B \to A$ in $\BFFib_{/X}$ and a homotopy $f \circ h \sim \Id_B$, given by an arrow $B \to \Path_{/X}(B)$ in $\BFFib_{/X}$. Similarly, a left inverse for $f$ is an arrow $g:B \to A$ together with a homotopy $g \circ f \sim \Id_A$, given by an arrow $A \to \Path_{/X}(A)$ in $\BFFib_{/X}$.
+
+Using our $\Pi$-types (the non-cofibrant version at this points), we can construct fibrant objects $\Linv(f) \twoheadrightarrow X$ and $\Rinv(f) \twoheadrightarrow X$, that are respectively the types of left and right inverse of $f$. Explicitely, for an object $Y \in \SSet_{/X}$ a map $Y \to \Linv(f)$ is the same as a left inverse to the map $A \times_{X} Y \to B \times_X Y$ in $\BFFib_{/Y}$.
+
+We then define $\Iseq(f) = \Linv(f) \times_X \Rinv(f)$. It is also fibrant over $X$, and an arrow $Y \to \Iseq(f)$ in $\SSet_{/X}$ is the same as the data of both a left inverse and a right inverse of the pullback of $f$ to $\SSet_{/Y}$.
+
+
+\begin{proposition} Let $f:U \to V$ be an arrow in $\BFFib_{/X}$ between two fibration with cofibrant fibers $U,V \twoheadrightarrow X$. Let $A \hookrightarrow B$ a cofibration between cofibrant objects in $\SSet_{/X}$, then a lifting problem
+
 \[
-\xymatrix{
-A_1 \ar[rr]^w  \ar@{->>}[dr]_{p_1} & & A_2 \ar@{->>}[dl]^{p_2} \\
- & X \, , & }
- \]
-is a weak equivalence.
-\end{lemma}
-
-\begin{proof} By definition of $\mathsf{Weq}(\U)$, $a$ factors via $\mathsf{Weq}(\U)$ if and only if the pullback of $w \co A_1 \to A_2$ along any simplex $x \co \Delta[n] \rightarrow X$  is a weak equivalence. As observed above, pullbacks preserves equivalences between fibrations so this is indeed the case if $w$ is an equivalence.
-
-Conversely,
-we let $w \co A_1 \rightarrow A_2$ be a map between bifibrant objects of $\SSet_{/X}$, assume that the pullback of $w$ along every $x \co \Delta[n] \rightarrow X$ is a weak equivalence and show that $w$ is also a weak equivalence. One factors $w = p j$ as a trivial cofibration $j$ followed by a fibration $p$ and we will show that $p$ is a trivial fibration. For any $x \co \Delta[n] \rightarrow X$, the pullback of $x^* w$ is an equivalence by assumption and the pullback of $x^* j$ is an equivalence by the first part of the proof, hence by the 3-for-2 property for weak equivalences, the pullback of $x^* p$ is also an equivalence, and hence a trivial fibration.
-
-To conclude, let $p : Y_1 \rightarrow Y_2$ be a fibration in $\SSet_{/X}$ such that for all cell $x: \Delta[n] \rightarrow X$ the morphism $x^* p \co \Delta[n]\times_X Y_1 \rightarrow \Delta[n] \times_X Y_2$ is a trivial fibration, we show that $p$ is a trivial fibration. Indeed, given any lifting problem of $\partial \Delta[n] \rightarrow \Delta[n]$ against $p$, one can consider the composite of $x: \Delta[n] \rightarrow Y_2 \rightarrow X$, take the pullback $x^* p$ of $p$ along this map, using that this pullback is a trivial fibration one obtains the lift:
-
-\[\xymatrix{
-\partial \Delta[n] \ar[d] \ar[r] & Y_1 \times_X \Delta[n] \drpullback \ar[r] \ar@{->>}[d] & Y_1 \ar@{->>}[d] \\
-\Delta[n] \ar[r] \ar@{.>}[ur] \ar@{=}[dr] & Y_2 \times_X \Delta[n] \drpullback \ar[r] \ar[d] & Y_2 \ar[d] \\
-& \Delta[n] \ar[r] & X \, ,
+\xymatrix{ A \ar[r] \ar[d]^i & \Iseq(f) \ar[d] \\
+B \ar[r]_{p} & X
 }
 \]
-which solves the given lifting problem.
+
+has a diagonal filling if and only if the pullback of $f$ to $\SSet_{/B}$ is a weak equivalence.
+
+\end{proposition}
+
+\begin{proof}
+ By construction, a lift $B \to \Iseq(f)$ gives both a left and a right inverse to $U \times_X B \to V\times_X B$ which is an arrow between bifibrant objects in $\SSet_{/B}$, this implies that it is a weak equivalence, and conclude the proof of this implication.
+
+Conversely, we assume that $p^*(f): p^*(U) \to p^*(V)$ is a weak equivalence, where $p^*$ denotes the pullback along $p$ functor $\SSet_{/X} \to \SSet_{/B}$. Note that as $U$ and $V$ are assumed to have cofibrant fibers over $X$ and $A$ and $B$ are cofibrant, all the objects $p^*U$, $i^*U$, $p^*V$ and $i^* V$ are cofibrant.
+
+Because $\Iseq(f)$ is constructed as $\Rinv(f) \times_X \Linv(f)$, we only need to construct lifts to $\Linv(f)$ and $\Rinv(f)$ separately. We start with the lift to $\Rinv(f)$. A right inverse to $f : U \to V$ in $\SSet_{/X}$ can be described as a section to a fibration $\pi_f: U \times_V \Path_{/X}(V) \to V$, indeed in terms of generalized elements it should associate to each $v \in V$ an element $u\in U$ together with a homotopy between $f(u)$ and $v$. The construction  $f \mapsto \pi_f$ is stable under pullback in the sense that $\pi_{p^* f}$ coincide with $p^*(\pi_f)$ up to natural isomorphisms. Morever, if $f$ is an equivalence $\pi_f$ also is, and hence it is a trivial fibration, in particular $p^*(\pi_f)$ and $i^*(\pi_f)$ are trivial fibrations. Now construing a lift to $\Rinv(f)$ is the same as constructing a section of $p^*(\pi_f)$ to $B$ (which is a trivial fibration) that extent the given section of $i^*(\pi_f)$. By our cofibrancy assumption, and \cref{thm:cof-pbk}, the horizontal maps in the square:
+\[
+\xymatrix{  i^*\left( U \times_V \Path_{/X}(V) \right) \ar[r] \ar[d]^{i^* \pi_f} & p^*\left( U \times_V \Path_{/X}(V) \right)  \ar[d]^{p^*(\pi_f)} \\
+i^*V \ar[r] & p^* V
+}
+\]
+are cofibrations, and so the desired section on $p^*\pi_f$ extending the one on $i^*\pi_f$ can be constructed using the lifting property of $p^*V \to i^* V$ against the trivial fibration $p^* \pi_f \simeq \pi_{p^* f}$.
+
+  
+We now move to the lift to $\Linv(f)$. A left inverse of $f$, can be described dually as a retraction of the map $\sigma_f: U \hookrightarrow \Delta[1] \times U \coprod_U V$ in $\SSet_X$. This construction is also stable under pullback (i.e. $p^*\sigma_f \simeq \sigma_{p^* f}$), it is cofibration when $U$ and $V$ are cofibrant and is a trivial cofibration if in addition is $f$ is an equivalence, so as before, $p^*(\sigma_f)$ and $i^*(\sigma_f)$ are trivial cofibrations. So the lift we are trying to construct is equivalent to a retraction in $\SSet_{/B}$ of the right map in the square below that extend the retraction already existing in $\SSet_{/A}$ of the left map:
+
+\[
+\xymatrix{
+i^* U \ar[r] \ar[d]^{i^* \sigma_f} & p^* U   \ar[d]^{p^*(\sigma_f)} \\
+i^*\left( \Delta[1] \times U \coprod_U V \right) \ar[r] & p^* \left( \Delta[1] \times U \coprod_U V \right)
+}
+\]
+
+This can be achieved by chosing a lift in:
+
+\[
+\xymatrix{  p^* U \coprod_{i^* U} i^*\left( \Delta[1] \times U \coprod_U V \right) \ar[r] \ar[d] & p^* U   \ar[d] \\
+p^* \left( \Delta[1] \times U \coprod_U V \right) \ar[r] \ar@{.>}[ur] & B
+}
+\]
+
+where the map on the right is a fibration, and the left arrow is a weak equivalence by $2$-out-of-$3$ because both maps $p^*(\sigma_f)$ and (the pushout of) $i^* \sigma_f$ are trivial cofibration, and it is a cofibration as it is a monomorphism and the decidability condition easily follows from the fact that the arrow in the previous square where all cofibrations.
 \end{proof}
 
 
-%Former proof: We do so using~\cite[\S 2.5.7]{henry2018wms}, and show that $w$ has the weak right lifting property against all $i_n \co \partial \Delta[n] \rightarrow \Delta[n]$. So let us consider the diagram
-% \begin{equation}
-% \label{equ:before-pullback}
-% \begin{gathered}
-% \xymatrix{\partial \Delta[n] \ar[rr] \ar[d] & & A_1 \ar[d]^w \\
-% \Delta[n] \ar[rr] \ar[dr]_{x}
-%  & & A_2 \ar[dl] \\
-% & X \, .&}  
-% \end{gathered}
-% \end{equation}
-% By pulling back everything to $\Delta[n]$ we obtain the diagram
-% \begin{equation}
-% \label{equ:after-pullback}
-% \begin{gathered}
-% \xymatrix{
-% \partial \Delta[n] \ar[r] \ar[d] & A_1 \times_X \Delta[n] \ar[d]^{x^*(w)} \\
-% \Delta[n] \ar[r] & A_2 \times_X \Delta[n]  \, .
-% } 
-% \end{gathered}
-% \end{equation}
-% By assumption $x^*(w)$ is a weak equivalence between fibrant objects hence it has the weak right lifting property against $i^n \co \partial \Delta[n] \rightarrow \Delta[n]$. A weak diagonal filler for~\eqref{equ:after-pullback} then gives  a weak diagonal filler for~\eqref{equ:before-pullback}, as required.
 
+Finally, we define $\Weq(U) \twoheadrightarrow U^\to$ by applying this construction $\Iseq(f)$, to the universal arrow between small fibrations with cofibrant fibers, which lives over $\U^\to$. By the previous result we have:
 
-
-
-
-
-\begin{lemma} \label{thm:lemma-for-u} The map $\mathsf{Weq}(\U) \rightarrow \U^\to$ is a fibration.
-\end{lemma}
-
-
-\begin{proof}  Let $f \co Y \to X$ be a trivial cofibration between cofibrant objects and consider the diagram
-\[ 
-\xymatrix{ 
-Y \ar@{>->}[d]_f \ar[r]^-{w} & \mathsf{Weq}(\U) \ar[d] \\
-X \ar[r]_-{a} & \U^{\rightarrow} } \, .
+\begin{proposition} \label{prop:Weq_classify_Weq}
+The map $\Weq(U) \to \U^\to$ is a fibration and given $A \rightarrowtail B$ a cofibration between cofibrant objects, a lifting problem:
+\[
+\xymatrix{ A \ar[r] \ar@{>->}[d] & \mathsf{Weq}(\U) \ar[d] \\
+B \ar@{.>}[ur] \ar[r]_{p} & \U^\to
+}
 \]
-Such a lifting exists if and only if the map $\overline{a} \co A_1 \to A_2$ in $\SSet_{/X}$ classified by $a$ is a weak equivalence. Its pullback $f^*(\overline{a})$, fitting in the diagram:
-\[ 
-\xymatrix{ 
-f^*(A_1) \ar[d]_{f^*(\overline{a})}  \ar[r]  & A_1 \ar[d]^{\overline{a}} \\
-f^*(A_2) \ar[r] \ar[d]   & A_2 \ar[d] \\
-Y \ar@{>->}[r]_f & X \, ,}
-\]
-is a weak equivalence, because the map $Y \rightarrow \U^{\to}$ corresponding to it factors into $\mathsf{Weq}(\U)$.
+has a dotted diagonal filling if and only if the map classified by $p$ is a weak equivalence.
+\end{proposition}
 
-Since the maps $p_i \co A_i \rightarrow X$ (for $i = 1, 2$) are fibrations with cofibrant domain, \cref{cor:Pi_types_are_fibrant} implies that pullbacks of trivial cofibrations between cofibrant objects along such 
-a map are trivial cofibrations. This implies that all the horizontal maps of the diagram above are weak equivalence, and so 
-$\bar{a}$ is as well. This shows that~$\mathsf{Weq}(\U) \rightarrow \U^{\rightarrow}$ is a fibration.
-\end{proof}
+
+
+%No longer needed:
+% \begin{lemma} \label{thm:lemma-for-u} The map $\mathsf{Weq}(\U) \rightarrow \U^\to$ is a fibration.
+% \end{lemma}
+
+
+% \begin{proof}  Let $f \co Y \to X$ be a trivial cofibration between cofibrant objects and consider the diagram
+% \[ 
+% \xymatrix{ 
+% Y \ar@{>->}[d]_f \ar[r]^-{w} & \mathsf{Weq}(\U) \ar[d] \\
+% X \ar[r]_-{a} & \U^{\rightarrow} } \, .
+% \]
+% Such a lifting exists if and only if the map $\overline{a} \co A_1 \to A_2$ in $\SSet_{/X}$ classified by $a$ is a weak equivalence. Its pullback $f^*(\overline{a})$, fitting in the diagram:
+% \[ 
+% \xymatrix{ 
+% f^*(A_1) \ar[d]_{f^*(\overline{a})}  \ar[r]  & A_1 \ar[d]^{\overline{a}} \\
+% f^*(A_2) \ar[r] \ar[d]   & A_2 \ar[d] \\
+% Y \ar@{>->}[r]_f & X \, ,}
+% \]
+% is a weak equivalence, because the map $Y \rightarrow \U^{\to}$ corresponding to it factors into $\mathsf{Weq}(\U)$.
+
+% Since the maps $p_i \co A_i \rightarrow X$ (for $i = 1, 2$) are fibrations with cofibrant domain, \cref{cor:Pi_types_are_fibrant} implies that pullbacks of trivial cofibrations between cofibrant objects along such 
+% a map are trivial cofibrations. This implies that all the horizontal maps of the diagram above are weak equivalence, and so 
+% $\bar{a}$ is as well. This shows that~$\mathsf{Weq}(\U) \rightarrow \U^{\rightarrow}$ is a fibration.
+% \end{proof}
 
 
 \begin{theorem} \label{thm:fibrancy-of-u-and-uc} \hfill 
@@ -1753,8 +1763,8 @@ Part~(ii) follows immediately from part~(i) since $\tau \co \U_c \to \U$ is a tr
 
 
 We now wish to define  what it means for a small fibration with cofibrant fibers, and in particular for a small fibration between cofibrant objects, to  be univalent. For this, we fix such a fibration $p \co A \to X$ and construct an object $\Weq(p) \to X \times X$ that represents weak
-equivalences between fibers of $p$, in the sense that maps $Y \to \Weq(p)$ in $\SSet_{/X \times X}$ are in bijective correspondence with triples $(x_1, x_2, w)$ consisting of two map $x_1 \, , x_2 \co Y \to X$ and a weak equivalence $w \co A[x_1]
-\to A[x_2]$ in $\SSet_{/Y}$. The required object $\Weq(p)$ can be constructed as the pullback
+equivalences between fibers of $p$, in the sense that maps $Y \to \Weq(p)$ in $\SSet_{/X \times X}$ are in bijective correspondence with tuples $(x_1, x_2, w,e)$ consisting of two map $x_1 \, , x_2 \co Y \to X$, a map $w \co A[x_1]
+\to A[x_2]$ in $\SSet_{/Y}$, and $e$ a weak equivalence structure on $w$. The required object $\Weq(p)$ can be constructed as the pullback
 \[
 \xymatrix{
 \Weq(p) \drpullback \ar[r] \ar@{->>}[d] & \Weq(\U) \ar@{->>}[d]^{(s,t)} \\
@@ -1763,7 +1773,7 @@ X \times X \ar[r]_{a \times a} & \U \times \U \, ,}
 where $a \co X \to \U$ is a classifying map for the small fibration $p \co A \to X$, which exists by our assumption
 that $A$ and $X$ are cofibrant and part~(iii) of~\cref{thm:universe-u}. The verification that $\Weq(p)$
 has the required universal property is an easy calculation, which we leave to the readers. There is an
-evident map $i \co X \to \Weq(p)$ corresponding via the universal property of $\Weq(p)$ to the triple of identity maps $(1_X, 1_X, 1_A)$.
+evident map $i \co X \to \Weq(p)$ corresponding via the universal property of $\Weq(p)$ to the tuple of identity maps $(1_X, 1_X, 1_A,e)$ where $e$ is just the ``trivial'' weak equivalence structure on the identity, using the identity as both a left and a right inverse.
 
 
 
@@ -1795,15 +1805,15 @@ definition of univalence. This will be the case for $\pi_c \co \UU_c \to \U_c$, 
 \end{enumerate}
 \end{theorem}
 
-\begin{proof} For part (i), we prove that $t \co  \mathsf{Weq}(\U) \to \U$ has the right lifting property with respect
+\begin{proof} For part (i), we prove that $t \co  \Weq(\U) \to \U$ has the right lifting property with respect
 to all cofibrations. So let $f \co Y \rightarrow X$ be a cofibration and consider the diagonal
 filling problem
 \[
-\xymatrix{Y \ar@{>->}[d]_f \ar[r] & \mathsf{Weq}(\U) \ar@{->>}[d] \\
+\xymatrix{Y \ar@{>->}[d]_f \ar[r] & \Weq(\U) \ar@{->>}[d] \\
 X \ar[r] \ar@{.>}[ur]  & \U \, .
 }
 \]
-By  \cref{prop:Weq_classify_Weq}, this corresponds exactly to a diagram as in the equivalence extension property as in \cref{Prop:Homotopy_ext_prop}. Indeed, the map $X \rightarrow \U$ gives us
+By construction of $\Weq(\U)$, and using \cref{prop:Weq_classify_Weq}, this corresponds exactly to a diagram as in the equivalence extension property as in \cref{Prop:Homotopy_ext_prop}. Indeed, the map $X \rightarrow \U$ gives us
 $p \co A \to X$, the composite of~$Y \rightarrow  \mathsf{Weq}(\U)$ with the first projection
 gives us $q \co B \to Y$, while the rest of the data and the commutativity of the square 
 gives us a weak equivalence $u$ between $B$ and $A[f]$ over~$X$. The completion of this diagram given by \cref{Prop:Homotopy_ext_prop} is exactly what one needs to produce the required diagonal filler.
@@ -1981,7 +1991,7 @@ If such an extension exists the $n$-cell $x$ corresponding to $\Delta[n] \righta
 Let $\varepsilon_X \co \mathbb{L} X \to X$ be the cofibrant replacement of a simplicial set $X$ constructed using Richard Garner's version of the small object argument~\cite{garner:small-object-argument}.
 
 \begin{proposition} \label{prop:Cof_replacement}
-The map $\mathbb{L} X \rightarrow D \times X$ sending an $n$-cell to its degeneracy type $s \in D$ and its image is $X$ induces  a bijection between $\mathbb{L}X([n])$ and the set of pairs of a decidable degeneracy type $s$ and a cell of $x$ of degeneracy type larger than $s$.
+The map $\mathbb{L} X \rightarrow D \times X$ sending an $n$-cell to its degeneracy type $s \in D$ and its image in $X$ induces a bijection between $\mathbb{L}X([n])$ and the set of pairs of a decidable degeneracy type $s$ and a cell of $x$ of degeneracy type larger than $s$.
 \end{proposition}
 
 \begin{proof} Because of the stratified nature of the simplicial generating cofibration, $\mathbb{L} X$ can be written as the colimit of a sequence:
@@ -2252,10 +2262,21 @@ C.~Sattler.
   composition in simplicial sets.
 \newblock Unpublished note, 2018.
 
+\bibitem[Shu15]{ShulmanM:unifid}
+M.~Shulman.
+\newblock Univalence for inverse diagrams and homotopy canonicity.
+\newblock {\em Mathematical Structures in Computer Science}, 25(5):1203--1277, 2015.
+
 \bibitem[Shu19]{ShulmanM:allths}
 M.~Shulman.
 \newblock All $(\infty,1)$-toposes have strict univalent universes.
 \newblock arXiv:1904.07004, 2019.
+
+\bibitem[Ste19]{StenzelR:unirca}
+    R.~Stenzel
+    \newblock On univalence, Rezk completeness and presentable quasi-categories?
+    \newblock Phd thesis, University of Leeds, 2019.
+    
 
 \bibitem[Str14]{StreicherT:modtts}
 T.~Streicher.
@@ -2289,5 +2310,7 @@ V.~Voevodsky.
 
 
 \end{document}
+
+
 
 
