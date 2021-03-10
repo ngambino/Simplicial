@@ -654,10 +654,9 @@ in~\cite[Definition~18.1.2]{AczelP:notcst}. We say that a set is small if it is 
 For the closure of the type universe under $\Pi$-types, we will assume a form of `propositional resizing', asserting that every subset 
 of a small set is again small, \ie  $\forall a \, , b \,  ( a \subseteq b \land b \in \mathsf{u} \rightarrow a \in \mathsf{u} )$.  A further discussion of what can be done without this assumption can be found in \cref{rem:strength}. 
 
-Throughout the paper, we adopt a slight abuse of language and say that a map has a right (or left) lifting property to mean a pair consisting of a map and a function 
-sending elements of the class of lifting problems to a solution. In particular, for us a Kan fibration is a pair consisting of a map and a function providing solutions for
-lifting problems againts horn inclusions. Morphisms between such maps will always be taken to be mere commutative squares, with no uniformity conditions with
-respect to the chosen fillers.
+Throughout the paper, we adopt a slight abuse of language and say that a map $f \co X \to Y$ has a right (or left) lifting property with respect to a given 
+class of maps to mean that we have pair consisting of $f \co X \to Y$ and a function sending an element of the class of lifting problems againsts $f$ to a solution
+for it. In particular, for us a Kan fibration is a pair consisting of a map and a fibration structure on it, \ie a choice of solutions for lifting problems against horn inclusions. Morphisms between such maps will always be taken to be mere commutative squares, with no uniformity conditions with respect to the chosen fillers.
 
 
 \smallskip
@@ -866,8 +865,9 @@ functor
 \[
 \mathrm{cod} \co \SSet^{\to}_{\mathsf{cof}} \to \SSet_{\mathsf{cof}}
 \] 
-is a Grothendieck fibration by part~(ii) of~\cref{lem:cofibrant_fiber_product}. We then define $p = \mathrm{cod} \circ \chi$ and obtain that
-$p$ is also a Grothendieck fibration. Since $\chi$ is the forgetful functor, it clearly preserves pullbacks.
+is a Grothendieck fibration by part~(ii) of~\cref{lem:cofibrant_fiber_product}. We then define $p = \mathrm{cod} \circ \chi$, which
+ is also a Grothendieck fibration, since the pullback of a fibration (with chosen lifts) is a fibration (with chosen lifts).
+  Since $\chi$ is the forgetful functor, it clearly preserves pullbacks.
 \end{proof}
 
 
@@ -1223,7 +1223,7 @@ For part~(i), since the dependent product functor $\Pi_f$ is right adjoint to th
 
 For part~(ii),  since $f$ is a monomorphism,  $\Sigma_f \co \SSet_{/X} \rightarrow \SSet_{/Y}$ is fully faithful and hence the unit $\eta \co 1 \rightarrow f^*  \Sigma_{f}$ is an isomorphism. By adjointness, the counit $\varepsilon \co f^* \Pi_f \rightarrow 1$ is also an isomorphism. 
 
-For part (iii), Let $y \co  \Delta[n] \rightarrow \Pi_Y(B)$ be a  $k$-cell, we will show that for a given degeneracy $\sigma \co [n] \rightarrow [k]$ it is decidable if $y$ is ``$\sigma$-degenerated'', i.e. if $y$ factors through $\sigma \co \Delta[n] \rightarrow \Delta[k]$. As degeneracy is decidable in $Y$, one can freely assume that the image of $y$ in $Y$ is $\sigma$-degenerated (as if it is not the case, $y$ is not $\sigma$-degenerated) hence one has a solid diagram:
+For part (iii), Let $y \co  \Delta[n] \rightarrow \Pi_Y(B)$ be a  $k$-cell, we will show that for a given degeneracy $\sigma \co [n] \rightarrow [k]$ it is decidable if $y$ is ``$\sigma$-degenerated'', i.e. if $y$ factors through $\sigma \co \Delta[n] \rightarrow \Delta[k]$. As degeneracy is decidable in $X$, one can freely assume that the image of via $\Pi_f(q)$ of $y$ in $X$ is $\sigma$-degenerated (as if it is not the case, $y$ is not $\sigma$-degenerated) hence one has a solid diagram:
 
 \[
 \xymatrix{
@@ -1271,8 +1271,8 @@ Let
 B \ar[r]^g \ar@{->>}[d]_q & A \ar@{->>}[d]^p \\
 Y \ar[r]_f & X \, ,}
 \]
-be a commutative diagram with $p \co A \to X$ and $q \co B \to Y$ be fibrations with cofibrant domains, $f \co Y \to X$ 
-a cofibration and such that the map $u \co B \to A[f]$ defined by $u \defeq (q, g)$, fitting the diagram 
+be a commutative diagram where $p \co A \to X$ and $q \co B \to Y$ are fibrations with cofibrant domains and $f \co Y \to X$ is
+a cofibration between cofibrant objects. Assume that the map $u \co B \to A[f]$ defined by~$u \defeq (q, g)$, fitting the diagram 
 of solid maps
 \[ 
 \xymatrix{
@@ -1456,13 +1456,13 @@ By the assumption that $p$ has cofibrant fibers, the simplicial set $A[x]$ is co
 \end{proof} 
 
 
-Define an object $U$, with an arrow $\U \to \V$ by letting, for $[n] \in \Delta$, 
+Define an object $\U$ by letting, for $[n] \in \Delta$, 
 \[
 \U_n = \{ F \in \V_n \ | \ \pi_F \co \textstyle{\int F} \to \Delta[n] \text{ is a small fibration and 
 $ \textstyle{\int F}$ is cofibrant} \} \, .
 \]
-
-Note that by ``is a fibration'' we really mean ``is equiped with a fibration structure'' i.e. it comes with choices of lifts against all maps $\Lambda^k[n] \to \Delta[n]$, in particular, the map $\U \to \V$ is not injective. $U$ is a presheaf because $V$ is a presheaf, that a pullback of a fibration (with chosen lift) is again a fibration (with chosen lift) and by \cref{lem:cofibrant_fiber_product} for the cofibrancy assumptions.
+Here, recall that by a fibration we  mean a function together with a fibration structure, \ie a choice of lifts against the horn inclusions $\Lambda^k[n] \to \Delta[n]$.
+There is then an evident forgetful map $\U \to \V$, which is not injective. Here, $\U$ is a presheaf because $\V$ is a presheaf, the pullback of a fibration (with chosen lifts) is again a fibration (with chosen lifts), and \cref{lem:cofibrant_fiber_product} (for the cofibrancy conditions).
 
 We then define the map $\pi \co \UU \to \U$ via the pullback 
 \begin{equation}
@@ -1479,7 +1479,7 @@ We then define the map $\pi \co \UU \to \U$ via the pullback
 \begin{proposition} \label{thm:universe-u}  \hfill 
 \begin{enumerate}[(i)] 
 \item The map $\pi \co \UU \to \U$ is a small fibration with cofibrant fibers.
-\item The map $\pi \co \UU \to \U$ classifies small fibrations with cofibrant fibers. More precisely, a map $v:X \to \V$ can be lifted to a map $X \to \U$ if and only if it classifies a fibration with cofibrant fibers. Moreover, choice of a lift to $\U$ corresponds (functorially) to the choice of a structure of fibration on the map classified by $v$.
+\item The map $\pi \co \UU \to \U$ classifies small fibrations with cofibrant fibers. More precisely, a map $v \co X \to \V$ can be lifted to a map $X \to \U$ if and only if it classifies a fibration with cofibrant fibers. Moreover, choice of a lift to $\U$ corresponds (functorially in $X$ and $V$) to the choice of a fibration structure on the map classified by $v$.
 
 \end{enumerate}
 \end{proposition}
@@ -1610,27 +1610,26 @@ as in the argument for part~(i) of  \cref{thm:universe-u}.
 \end{proof}
 
 
-Given $f:A \to B$ an arrow in $\BFFib_{/X}$ we now construct the object $\Iseq(f)$ in $\BFFib_{/X}$ of ``weak equivalences structure'' on $f$. We will use the definition of weak equivalence as ``arrows with both a left inverse and a right inverse'', that is ``bi-invertible maps'' as in Section 4.3 of \cite{hottbook}. However, we cannot use directly the material in \cite{hottbook} as we don't quite have a model of type theory due to the coherence problems. A categorical version of this definition, bypassing the coherence problem, can be found in \cite{ShulmanM:unifid} and has been expanded in section 1.4 of \cite{StenzelR:unirca}. However we cannot use these either because they both assumes that $\Pi$-types are given by categorical exponential, i.e. right adjoint to pullback functors. This corresponds to having both judgmental $\beta$-rule and $\eta$-rule for $\Pi$ types, which we do not have if we restrict to cofibrant objects, and they also have assumptions on the path objects that would not be satisfied without restricting to cofibrant objects. For these reasons, we need to reprove some basic facts about this definition. This being said, as this is very similar to the references cited above, we will not give as much details.
+Given $f:A \to B$ an arrow in $\BFFib_{/X}$ we now construct the object $\Iseq(f)$ in $\BFFib_{/X}$ of weak equivalences structures on $f$. We will use the definition of weak equivalence as arrows with both a left inverse and a right inverse, \ie what are called bi-invertible maps in \cite[Section 4.3]{hottbook}. However, we cannot use directly the material in \cite{hottbook} as we do not quite have a model of type theory due to the coherence problems. A categorical version of this definition, bypassing the coherence problem, can be found in \cite{ShulmanM:unifid} and has been expanded in \cite[Section 1.4]{StenzelR:unirca}. However we cannot use these either because they both assumes that $\Pi$-types are given by categorical exponential, i.e. right adjoint to pullback functors. This corresponds to having both judgmental $\beta$-rule and $\eta$-rule for $\Pi$ types, which we do not have if we restrict to cofibrant objects, and they also have assumptions on the path objects that would not be satisfied without restricting to cofibrant objects. For these reasons, we need to prove \cref{thm:black-box} explicitly. This being said, as this is very similar to the references cited above, we will not give as much details.
 
 
 
 Given a map $f:A \to B$ in $\BFFib_{/X}$, a right inverse for $f$, is a map $h:B \to A$ in $\BFFib_{/X}$ and a homotopy $f \circ h \sim \Id_B$, given by an arrow $B \to \Path_{/X}(B)$ in $\BFFib_{/X}$. Similarly, a left inverse for $f$ is an arrow $g:B \to A$ together with a homotopy $g \circ f \sim \Id_A$, given by an arrow $A \to \Path_{/X}(A)$ in $\BFFib_{/X}$.
 
-Using our $\Pi$-types (the non-cofibrant version at this points), we can construct fibrant objects $\Linv(f) \twoheadrightarrow X$ and $\Rinv(f) \twoheadrightarrow X$, that are respectively the types of left and right inverse of $f$. Explicitely, for an object $Y \in \SSet_{/X}$ a map $Y \to \Linv(f)$ is the same as a left inverse to the map $A \times_{X} Y \to B \times_X Y$ in $\BFFib_{/Y}$.
+Using dependent products (without taking cofibrant replacements), we can construct fibrant objects $\Linv(f) \twoheadrightarrow X$ and $\Rinv(f) \twoheadrightarrow X$, that are respectively the objects of left and right inverse of $f$. Explicitely, for an object $Y \in \SSet_{/X}$ a map $Y \to \Linv(f)$ is the same as a left inverse to the map $A \times_{X} Y \to B \times_X Y$ in $\BFFib_{/Y}$.
 
 We then define $\Iseq(f) = \Linv(f) \times_X \Rinv(f)$. It is also fibrant over $X$, and an arrow $Y \to \Iseq(f)$ in $\SSet_{/X}$ is the same as the data of both a left inverse and a right inverse of the pullback of $f$ to $\SSet_{/Y}$.
 
 
-\begin{proposition} Let $f:U \to V$ be an arrow in $\BFFib_{/X}$ between two fibration with cofibrant fibers $U,V \twoheadrightarrow X$. Let $A \hookrightarrow B$ a cofibration between cofibrant objects in $\SSet_{/X}$, then a lifting problem
+\begin{proposition} \label{thm:black-box}
+Let $f:U \to V$ be an arrow in $\BFFib_{/X}$ between two fibration with cofibrant fibers $U,V \twoheadrightarrow X$. Let $A \hookrightarrow B$ a cofibration between cofibrant objects in $\SSet_{/X}$, then a lifting problem
 
 \[
 \xymatrix{ A \ar[r] \ar[d]^i & \Iseq(f) \ar[d] \\
 B \ar[r]_{p} & X
 }
 \]
-
 has a diagonal filling if and only if the pullback of $f$ to $\SSet_{/B}$ is a weak equivalence.
-
 \end{proposition}
 
 \begin{proof}
@@ -1669,16 +1668,16 @@ where the map on the right is a fibration, and the left arrow is a weak equivale
 
 
 
-Finally, we define $\Weq(U) \twoheadrightarrow U^\to$ by applying this construction $\Iseq(f)$, to the universal arrow between small fibrations with cofibrant fibers, which lives over $\U^\to$. By the previous result we have:
+Finally, we define $\Weq(U) \twoheadrightarrow U^\to$ by applying this construction $\Iseq(f)$, to the universal arrow between small fibrations with cofibrant fibers, which lives over $\U^\to$. By \cref{thm:black-box}, we have the following result.
 
 \begin{proposition} \label{prop:Weq_classify_Weq}
-The map $\Weq(U) \to \U^\to$ is a fibration and given $A \rightarrowtail B$ a cofibration between cofibrant objects, a lifting problem:
+The map $\Weq(\U) \to \U^\to$ is a fibration and given $A \rightarrowtail B$ a cofibration between cofibrant objects, a lifting problem:
 \[
 \xymatrix{ A \ar[r] \ar@{>->}[d] & \mathsf{Weq}(\U) \ar[d] \\
 B \ar@{.>}[ur] \ar[r]_{p} & \U^\to
 }
 \]
-has a dotted diagonal filling if and only if the map classified by $p$ is a weak equivalence.
+has a dotted diagonal filling if and only if the map classified by $p$ is a weak equivalence. \qed
 \end{proposition}
 
 
@@ -1836,7 +1835,7 @@ observe that we have a diagram
 \U_c \times \U_c \ar@{->>}[r]^{\tau \times \tau} \ar@{->>}[d]_{\pi_2} & \U \times \U \ar@{->>}[d]^{\pi_2} \\
 \U_c \ar@{->>}[r]_\tau & \U \, . }
 \]
-The composite  on the left-hand side is the map $t$ that we wish to show to be a trivial cofibration.
+The composite  on the left-hand side is the map $t$ that we wish to show to be a trivial fibration.
 First, using part (i), observe that it is a fibration since it is the composite of two fibrations. Secondly,
 observe that the top square is a pullback and so $\sigma$ is a trivial fibration since $\tau \times \tau$ 
 is so. Thus, applying 3-for-2 to the outer square, we obtain that $t$ is a weak equivalence and hence
@@ -2113,7 +2112,7 @@ B.~{\noopsort{Berg A}}van~den Berg and R.~Garner.
 \bibitem[{\noopsort{Berg A}}dBM15]{vandenberg_moerdijk_2015}
 B.~{\noopsort{Berg A}}van~den Berg and I.~Moerdijk.
 \newblock W-types in homotopy type theory.
-\newblock {\em Mathematical Structures in Computer Science}, 25(5):1100?1115,
+\newblock {\em Mathematical Structures in Computer Science}, 25(5):1100-1115,
   2015.
 
 \bibitem[CCHM16]{cohen-et-al:cubicaltt}
@@ -2192,7 +2191,7 @@ S.~Henry.
 S.~Henry.
 \newblock A constructive treatment of the {K}an-{Q}uillen model structure and
   of {K}an's $\mathrm{Ex}^\infty$ functor.
-\newblock ArXiv, 2019.
+\newblock arXiv:1905.06160, 2019.
 
 \bibitem[Hof94]{HofmannM:intttl}
 M.~Hofmann.
@@ -2204,7 +2203,7 @@ M.~Hofmann.
 \bibitem[HS97]{hofmann-streicher-universes}
 M.~Hofmann and T.~Streicher.
 \newblock Lifting {G}rothendieck universes.
-\newblock Available from the second-named author's web page, 1997.
+\newblock Available from \url{http://www2.mathematik.tu-darmstadt.de/~streicher/NOTES/lift.pdf}, 1997.
 
 \bibitem[Jac99]{JacobsB:catltt}
 B.~Jacobs.
