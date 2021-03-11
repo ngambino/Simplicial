@@ -482,10 +482,9 @@ a coherence question to be addressed.
 \section*{Introduction} 
 
 \textbf{Context and motivation.} This paper investigates Voevodsky's model of Martin-L\"of type theory (ML)
-extended with the Univalence Axiom (UA)  in the category of simplicial sets~\cite{voevodsky-simplicial-model,StreicherT:modtts}.  This model is of fundamental importance since it  informs a new approach to the development of mathematics, in which the notion of a space (rather than that of a set) is taken as primitive, 
-  and its computer-assisted formalisation~\cite{voevodsky:library}. Furthermore, in combination with the discovery of a close connection between identity types and homotopical algebra~\cite{awodey-warren:homotopy-idtype,gambino-garner:idtypewfs}, it provided inspiration for the development of  Homotopy Type Theory~\cite{hottbook}.
+extended with the Univalence Axiom (UA)  in the category of simplicial sets~\cite{voevodsky-simplicial-model}.  This model is of fundamental importance since it  informs a new approach to the development of mathematics, known as Univalent Foundations, which takes the notion of a space (rather than that of a set) as the most primitive and is supported by a new approach to computer-assisted formalisation of mathematics~\cite{voevodsky:library}. In combination with the discovery of a close connection between identity types and Quillen's homotopical algebra~\cite{awodey-warren:homotopy-idtype,gambino-garner:idtypewfs}, the simplicial model also provided inspiration for the development of  Homotopy Type Theory~\cite{hottbook}.
 
-The original definition of the simplicial model  was carried out in  Zermelo-Fraenkel set theory extended with the axiom of choice (ZFC) and two inaccessible cardinals~\cite[Theorem~3.4.3]{voevodsky-simplicial-model} . Given the wide gap in proof-theoretic strength between that theory and ML~\cite{GrifforE:strsml} and the fact that the former is classical  while the latter is constructive,  the question of whether the simplicial model could be defined working constructively (\ie without the use of the law of excluded middle or the axiom of choice) arose immediately after its discovery around 2006~\cite{KapulkinC:uniss,StreicherT:modtts,VoevodskyV:notts} and was one of the central issues investigated during the thematic programme on Univalent Foundations at the Institute for Advanced Study in 2012/13. In spite of  significant efforts since then, the question is still open to date.
+The original definition of the model  was carried out in  Zermelo-Fraenkel set theory extended with the axiom of choice (ZFC) and two inaccessible cardinals~\cite[Theorem~3.4.3]{voevodsky-simplicial-model}. Given the wide gap in proof-theoretic strength between that theory and ML~\cite{GrifforE:strsml} and the fact that the former is a classical theory  while the latter is a constructive one,  the question of whether the simplicial model could be defined working constructively (\ie without the use of the law of excluded middle or the axiom of choice) arose immediately after its discovery around~2006~\cite{KapulkinC:uniss,StreicherT:modtts,VoevodskyV:notts} and was one of the central issues investigated during the thematic programme on Univalent Foundations at the Institute for Advanced Study in 2012/13. In spite of  significant efforts since then, the question is still open to date.
 
 The aim of this paper is to provide a partial solution to this problem.  In order to
 explain our results and the novel aspects of our work, let us recall from~\cite{voevodsky-simplicial-model} that the main results of  homotopy theory necessary 
@@ -521,7 +520,7 @@ Because of this, Coquand and his collaborators  defined homotopy-theoretic model
 theories with the univalence axiom in categories of cubical sets~\cite{coquand-cubical-sets}, opening a profitable new research direction, cf.~\cite{awodey-cubical,cohen-et-al:cubicaltt,PittsAM:aximct} for example. Apart from switching 
 from simplicial sets to cubical sets, they also switched from ordinary fibrations, defined by a right lifting property,
 to uniform fibrations, defined as maps equipped with additional structure which 
- provides a choice of fillers for lifting problems, as in algebraic weak factorisation systems~\cite{garner:small-object-argument,grandis-tholen-nwfs}. While 
+ provides a choice of fillers for lifting problems satisfying uniformity conditions, as in algebraic weak factorisation systems~\cite{garner:small-object-argument,grandis-tholen-nwfs}. While 
 categories of cubical sets considered in this line of work allow us to define constructively models of 
 ML(UA) and admit a Quillen
 model structure~\cite{SattlerC:equepu}, none of them
@@ -619,7 +618,7 @@ referred to as the Beck-Chevalley conditions. While there are several results to
 comprehension category defined, which is independent of simplicial homotopy theory  and we leave to future work (see \cref{sec:conclusion} for
 details).
 
-Let us conclude these introductory remarks by mentioning that although our main results are inspired by the existing literature, especially those in~\cite{voevodsky-simplicial-model}, their proofs require a systematic and careful cofibrancy considerations. In particular, in order to 
+Let us conclude these introductory remarks by mentioning that although our main results are inspired by the existing literature, especially those in~\cite{voevodsky-simplicial-model}, their proofs require systematic and careful cofibrancy considerations. In particular, in order to 
 exhibit identity types as path objects (\cref{thm:MainPathObject}) and to prove the weak equivalence
 extension property (\cref{Prop:Homotopy_ext_prop}) we will need to establish the non-trivial
 and surprising fact that the appropriate dependent products preserve cofibrancy (see~\cref{prop:X^kCofibrant} and~\cref{Lemma:ForTheExtProperty} for details), a 
@@ -651,9 +650,11 @@ in~\cite[Definition~18.1.2]{AczelP:notcst}. We say that a set is small if it is 
 For the closure of the type universe under $\Pi$-types, we will assume a form of `propositional resizing', asserting that every subset 
 of a small set is again small, \ie  $\forall a \, , b \,  ( a \subseteq b \land b \in \mathsf{u} \rightarrow a \in \mathsf{u} )$.  A further discussion of what can be done without this assumption can be found in \cref{rem:strength}. 
 
-Throughout the paper, we adopt a slight abuse of language and say that a map $f \co X \to Y$ has a right (or left) lifting property with respect to a given 
-class of maps to mean that we have pair consisting of $f \co X \to Y$ and a function sending a lifting problem againsts $f$ to a solution
-for it. In particular,  a Kan fibration is a pair consisting of a map and a fibration structure on it, \ie a choice of solutions for lifting problems against horn inclusions. Morphisms between such maps will always be taken to be mere commutative squares, with no uniformity conditions with respect to the chosen fillers.
+Throughout the paper, we use a slight abuse of language and say that a map $f \co X \to Y$ has
+the right lifting property with respect to a given set of maps to mean that we have a pair consisting
+of $f \co X \to Y$ and a function assigning diagonal fillers to the corresponding set of lifting problems, with
+no uniformity conditions. In particular, fibrations and trivial fibrations will always be treated as maps equipped with additional structure. Morphisms between such maps will always be taken to be mere commutative squares, with no compatibility conditions with respect to the chosen diagonal fillers. In contrast, cofibrations and
+trivial cofibrations will be simply maps satisfying suitable properties.
 
 
 \smallskip
@@ -736,8 +737,9 @@ Y \ar[r]_f & X \, .}
 \]
 
 
-For $X \in \SSet$, we write $\Fib_{/X}$ for the category of fibrations with codomain $X$, which admits a forgetful functor to 
-the slice category $\SSet_{/X}$. For $X \in \SSet$, we write $\BFFib_{/X}$ for the category of fibrations with codomain $X$ and cofibrant domain. For a simplicial set $X$, we write $\mathbb{L}(X)$ for its cofibrant replacement and $\mathbb{R}(X)$ for its
+For $X \in \SSet$, we write $\Fib_{/X}$ for the category whose objects are fibrations with codomain~$X$ 
+and whose maps are determined by saying that the functor $U \co \Fib_{/X} \to \SSet_{/X}$ forgetting the
+fibration structure is  full and faithful. We then write $\BFFib_{/X}$ for the full subcategory of $\Fib_{/X}$  spanned by fibrations with cofibrant domain. For a simplicial set $X$, we write $\mathbb{L}(X)$ for its cofibrant replacement and $\mathbb{R}(X)$ for its
 fibrant replacement. These objects come equipped with a trivial fibration $\varepsilon_X \co \mathbb{L}(X) \to X$ and a trivial cofibration $\eta_X \co 
 X \to \mathbb{R}(X)$, respectively. An explicit definition of the cofibrant replacement is given 
 in Appendix~\ref{sec:appendix}.
@@ -767,7 +769,7 @@ Dually, using  exponentials instead of products and pullbacks instead of pushout
 & B^Y \ar[r] & A^Y  \, . \\
  }
  \]
-By adjointness (see~\cite{joyal-tierney-segal} for details), a map $f$ has the left lifting property agains $\langle p \, , q \rangle $ if and only if $f \hattimes p$ has the left lifting property against $q$.
+By adjointness (see~\cite{joyal-tierney-segal} for details), $\langle p \, , q \rangle $ has the right lifting property against a map $f$  if and only if $q$ has the right lifting property agains $f \hattimes p$.
 Therefore, the pushout-property  implies its dual version, asserting that  if $f \co Y \to X$ is a cofibration and $p \co B \to A$ a fibration then $\langle f \, , p \rangle$ is a fibration and if, additionally,  either $p$ or $f$ is a weak equivalence, then so so is $\langle f \, , p \rangle$.
 
 \medskip
@@ -831,10 +833,10 @@ in~$A \times_X B$ is indeed decidable.
 
 
 The next proposition introduces the  comprehension category  cofibrant simplicial sets.
-Recall that we write~$\SSet_{\mathsf{cof}}$ for the category of 
-cofibrant simplicial sets and simplicial maps between them. We then define $\mathbf{Fib}_{ \mathsf{cof}}$ to be the category that 
+Recall that we write~$\SSet_{\mathsf{cof}}$ for the full subcategory of  $\SSet$ spanned by
+cofibrant simplicial sets. We then define $\mathbf{Fib}_{ \mathsf{cof}}$ to be the category that 
 has fibrations between cofibrant objects as objects and commutative squares as maps. Here,
-recall from the Introduction that we always take fibrations to mean pairs consisting of a map
+recall from the Introduction that we take fibrations to be pairs consisting of a map
 and a function providing fillers for lifting problems against horn inclusions. 
 
 
@@ -1637,7 +1639,7 @@ Because $\Iseq(f)$ is constructed as $\Rinv(f) \times_X \Linv(f)$, we only need 
 i^*V \ar[r] & p^* V
 }
 \]
-are cofibrations, and so the desired section on $p^*\pi_f$ extending the one on $i^*\pi_f$ can be constructed using the lifting property of $p^*V \to i^* V$ against the trivial fibration $p^* \pi_f \simeq \pi_{p^* f}$.
+are cofibrations, and so the desired section on $p^*\pi_f$ extending the one on $i^*\pi_f$ can be constructed using the right lifting property of the trivial fibration $p^* \pi_f \simeq \pi_{p^* f}$ against $p^*V \to i^* V$ .
 
   
 We now move to the lift to $\Linv(f)$. A left inverse of $f$, can be described dually as a retraction of the map $\sigma_f: U \hookrightarrow \Delta[1] \times U \coprod_U V$ in $\SSet_X$. This construction is also stable under pullback (i.e. $p^*\sigma_f \cong \sigma_{p^* f}$), it is cofibration when $U$ and $V$ are cofibrant and is a trivial cofibration if in addition $f$ is a weak equivalence. So, as before, $p^*(\sigma_f)$ and $i^*(\sigma_f)$ are trivial cofibrations. Thus, the lift that we are trying to construct is equivalent to a retraction in $\SSet_{/B}$ of the right map in the square below that extends the retraction already existing in $\SSet_{/A}$ of the left map:
