@@ -644,8 +644,11 @@ the comprehension category and stating some open problems for future research.
 \smallskip
 
 \noindent
-\textbf{Remarks on constructivity.} We work in  Constructive Zermelo-Fraenkel set theory (CZF),
-a set theory based on intuitionistic logic~\cite{AczelP:typtic-I}. When discussing smallness of sets,
+\textbf{Remarks on constructivity.} We work in Constructive Zermelo-Fraenkel set theory (CZF),
+a set theory based on intuitionistic logic~\cite{AczelP:typtic-I} which does not include the Power Set axiom.
+In CZF, the Exponentiation axiom (asserting that for any two sets $A$ and $B$, the class of set functions from $A$ to $B$ is again a set)
+is provable, thanks to the Subset Collection axiom. No other application of Subset Collection axiom is used here.
+When discussing smallness of sets,
 simplicial sets and fibrations, we assume the existence of an inaccessible set $\mathsf{u}$, as defined 
 in~\cite[Definition~18.1.2]{AczelP:notcst}. We say that a set is small if it is an element of $\mathsf{u}$.
 For the closure of the type universe under $\Pi$-types, we will assume a form of `propositional resizing', asserting that every subset 
