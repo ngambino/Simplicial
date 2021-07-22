@@ -1,0 +1,35 @@
+THE LONDON MATHEMATICAL SOCIETY
+
+Referee's Report Form
+
+Reference number of paper: JLMS 210315-Gambino
+
+Date of completion of report: 2 July 2021
+
+GENERAL COMMENTS
+
+It is now known that with a bit of modification, large parts of mathematics can be developed constructively, without the law of excluded middle or axiom of choice.  In addition to its computational advantages, this means that mathematics is valid internal to any suitably structured category, such as a topos.  However, some parts of mathematics have proven more resistant than others to constructivization, including abstract homotopy theory.  Recently various advances have been made on this front, and this paper is an important further contribution.
+
+Much of the progress in constructive homotopy theory is due to the increasing interest in homotopy type theory and univalent foundations (HoTT/UF).  Itself, HoTT/UF is a family of formal systems that appears constructive and treats homotopy theory "natively" rather than defining homotopy types in terms of sets.  Although Voevodsky's original model of this theory in the category of simplicial sets used classical mathematics, constructive models are now known using categories of cubical sets, and varieties of cubical type theory show that HoTT/UF can be made computationally constructive as well.
+
+However, it is unclear whether these cubical set models also present the "correct" homotopy theory of spaces; indeed, it is known that many of them do not.  Unpublished work of Awodey, Cavallo, Coquand, Riehl, and Sattler has finally shown that there is at least one cubical set model that does present the correct homotopy theory in *classical* mathematics, but it is unclear whether it is also correct constructively.  For all of these reasons, developing the homotopy theory of *simplicial* sets constructively is also an important endeavor.
+
+The model category structure of simplicial sets was recently established to exist constructively in a series of papers.  The present paper shows that this model category also constructively interprets all the individual pieces of HoTT/UF, lacking only a coherence theorem to model the entire system.  This is highly nontrivial due to the fact that constructively, not all simplicial sets are cofibrant; thus various techniques are required to carry through cofibrancy assumptions in ways that are entirely invisible classically.
+
+The interest of these results is not limited to the modeling of HoTT/UF.  Classically, the category of simplicial sets is "ridiculously well-behaved", which plays into its ubiquitous uses throughout abstract homotopy theory.  The properties that lead to this category modeling HoTT/UF are among those that make it ridiculously well-behaved, and thus are likely to have direct uses in abstract homotopy theory as well.  Similarly, interest in the constructive nature of the results is not limited to those with constructive philosophical inclinations, but leads automatically to conclusions about model categories of internal simplicial objects in toposes.
+
+I believe the paper to be correct and important, and recommend its publication.  Following are a few minor points.
+
+SPECIFIC CORRECTIONS
+
+p2: "the wide gap in proof-theoretic strength between that theory and ML [GR94]" -- I think this may be a bit misleading.  It's true that unaugmented ML is much weaker than ZFC, but the model of ML constructed by Voevodsky also interprets additional axioms that make the theory much stronger, notably propositional resizing, LEM, and AC.  Indeed, Chapter 10 the HoTT Book constructs a model of set theory inside HoTT+UF, which under the assumption of LEM and AC should be a model of ZFC.  So while this may not have been made fully precise, it seems likely that Voevodsky's construction in ZFC models a type theory that is actually equiconsistent with ZFC.
+
+p2: "for a simplicial set A and an uniform Kan complex B, the simplicial set B^A is an algebraic Kan complex" -- should the word "algebraic" here be also "uniform"?
+
+p4: The theory usually called "CZF" includes some idiosyncratic axioms such as "subset collection".  Do you make use of these?
+
+In the proof of Theorem 7.6, I don't think the completion of this diagram given by Proposition 5.2 is "exactly" what one needs to produce a diagonal filler.  One needs in addition to choose a classifying map for the new object \bar{B} that strictly extends the given classifying map for B.  Presumably this his possible due to the decidability of cofibrations, but I think this should be spelled out explicitly in a lemma.  (It could also be cited in the proof of Theorem 7.4 where a similar thing happens.)
+
+
+1. How strong is the case for publication of the paper?
+(e) strong
