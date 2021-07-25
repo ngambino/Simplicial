@@ -1416,6 +1416,23 @@ map} \}
 \]
 for $[n] \in \Delta$. The object $\VV$ and the map $\rho \co \VV \to \V$ are then defined in an evident way. 
 
+We note the following lemma:
+
+\begin{lemma} Given a solid diagram:
+
+\[\xymatrix{
+K[i] \ar[rr] \ar[dr] \ar[dd] & & \VV \ar[dd] \\
+ & K \ar[dd] \ar@{.>}[ur] & \\
+A \ar[rr] \ar@{>->}[dr]_i & & V\\
+ &B \ar@{.>}[ur]&  
+}\]
+
+where both squares are pullback and $i:A \to B$ is a cofibration, there exists dotted arrows that makes the third square a pullback and the diagram commutative.
+\end{lemma}
+
+\begin{proof}
+  \notesh{TODO}
+\end{proof}
 
 \bigskip
 
@@ -1478,12 +1495,25 @@ We then define the map $\pi \co \UU \to \U$ via the pullback
 \begin{proposition} \label{thm:universe-u}  \hfill 
 \begin{enumerate}[(i)] 
 \item The map $\pi \co \UU \to \U$ is a small fibration with cofibrant fibers.
+
 \item The map $\pi \co \UU \to \U$ classifies small fibrations with cofibrant fibers. More precisely, a map $v \co X \to \V$ can be lifted to a map $X \to \U$ if and only if it classifies a fibration with cofibrant fibers. Moreover, choice of a lift to $\U$ corresponds (functorially in $X$ and $V$) to the choice of a fibration structure on the map classified by $v$.
+
+
+\item A lifting problem
+
+\[\xymatrix{
+A \ar@{>->}[d]_i \ar[r] & \U \ar[d] \\
+B \ar[r]_t & \V
+}
+\]
+
+where $i$ is a cofibration between simplicial sets, has a solution if and only if the map $K \to B$ classified by $t$ is a fibration with cofibrant fibers.
+
 
 \end{enumerate}
 \end{proposition}
 
-\begin{proof} We prove the two claims separately.
+\begin{proof}
 For part~(i), consider a map $a \co \Delta[n] \rightarrow \U$ and the pullbacks
 \[
 \xymatrix{
@@ -1507,7 +1537,13 @@ A \ar[r] \ar[d]_p \drpullback  &  \VV \ar[d]^{\rho} \\
 X \ar[r]_{a} & \V \, . }
 \]
 
-For each cell of $X$,  $x \co \Delta[n] \rightarrow X$ the pullback $A[x] \rightarrow \Delta[n]$ is a small fibration with cofibrant domain by the assumptions on $p$, which means, by the definition of $\U$ that the image of the cell $x$ in $\V$ lifts to $\U$. As one can easily check that this lifts to $\U$ are functorial in $[n]$, the map $X \rightarrow \V$ lifts to $\U$, and hence $A \rightarrow X$ is actually the pullback of $\UU \rightarrow \U$. One also easily check that there is a correspondence between fibration structures on the map $A \to X$ and compatible choices of fibration structures on each pullback along a map $\Delta[n] \to X$, so that the two construction explained above are inverse of each other. \qedhere
+For each cell of $X$,  $x \co \Delta[n] \rightarrow X$ the pullback $A[x] \rightarrow \Delta[n]$ is a small fibration with cofibrant domain by the assumptions on $p$, which means, by the definition of $\U$ that the image of the cell $x$ in $\V$ lifts to $\U$. As one can easily check that this lifts to $\U$ are functorial in $[n]$, the map $X \rightarrow \V$ lifts to $\U$, and hence $A \rightarrow X$ is actually the pullback of $\UU \rightarrow \U$. One also easily check that there is a correspondence between fibration structures on the map $A \to X$ and compatible choices of fibration structures on each pullback along a map $\Delta[n] \to X$, so that the two construction explained above are inverse of each other.
+
+
+For part~(iii), the existence of diagonal lift implies that $t$ classifies a fibration with cofibrant fibers by part~(ii). Conversely assuming that $t$ classifies a fibration with cofibrant fibers, it follows from part~(ii) that constructing a diagonal lift is the same as chosing lifts for the map $K \to B$ classified by $t$ such that the choice of lift induced on the pullback to $A$ corresponds to these given by the map $A \to \U$ in the square. But this is easily acheived as follows, for each lifting problem of $\Lambda^k[n] \to \Delta[n]$ against $K \to B$, as $A \to B$ is a cofibration, it is decidable if the map $\Delta[n] \to B$ factors through $A$ or not. Depending on this, one chose the lift given by the fact that $K \to B$ is a fibration if $\Delta[n] \to B$ does not factor in $A$ and the one chose the one provided by the fibration structure on the pullback $K[i] \to A$ given by the map $A \to \U$.
+
+
+\qedhere
 \end{proof} 
 
 
@@ -2331,6 +2367,9 @@ V.~Voevodsky.
 
 
 \end{document}
+
+
+
 
 
 
