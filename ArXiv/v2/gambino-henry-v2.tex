@@ -1411,10 +1411,10 @@ is small. Let us also recall the  construction of a map of simplicial sets $\rho
 small maps of simplicial sets, which is a special case of the results in~\cite{hofmann-streicher-universes} for arbitrary presheaf categories.  For this, we use the equivalence in~\eqref{equ:psh-slice-sset} and the notation associated to it.
 The simplicial set $\V$ is defined by letting
 \[
-\mathsf{V}_n \defeq \{ F \co {\Delta_{/[n]}}^{\op} \to \Set \ | \ \pi_F \co \textstyle{\int F} \to \Delta[n] \text{ is a small
-map} \}
+\mathsf{V}_n \defeq \{ F \co {\Delta_{/[n]}}^{\op} \to \Set \}
 \]
-for $[n] \in \Delta$. The object $\VV$ and the map $\rho \co \VV \to \V$ are then defined in an evident way. 
+for $[n] \in \Delta$, where $\Set$ denotes the category of small sets. More generally, if $X$ is a simplicial set then maps from $X$ to $V$ corresponds to functors $F: \Delta/X \to \Set$, where $\Delta/X$ denotes the category of elements of $X$.
+The object $\VV$ is then defined in exactly the same way by replacing the category of sets by the category of pointed sets and the map $\VV \to \V$ is induced by forgetting the marked point.
 
 We note the following lemma:
 
@@ -1423,7 +1423,7 @@ We note the following lemma:
 \[\xymatrix{
 K[i] \ar[rr] \ar[dr] \ar[dd] & & \VV \ar[dd] \\
  & K \ar[dd] \ar@{.>}[ur] & \\
-A \ar[rr] \ar@{>->}[dr]_i & & V\\
+A \ar[rr] \ar@{>->}[dr]_i & & \V\\
  &B \ar@{.>}[ur]&  
 }\]
 
@@ -1431,7 +1431,7 @@ where both squares are pullback and $i:A \to B$ is a cofibration, there exists d
 \end{lemma}
 
 \begin{proof}
-  \notesh{TODO}
+The map $K \to B$ is classified by some map $\chi:B \to \V$, this gives us two dotted arrow as in the diagram above, that makes the first square a pullback. However the diagram obtained this way is not commutative: $\chi$ corresponds to a presheaf $\mathcal{K}$ on $\Delta/B$, on the other hand the map $A \to \V$ corresponds to a presheaf $\mathcal{F}$ on $\Delta/B$. The solid diagram means that the composite $\Delta/A \to \Delta/B \overset{\mathcal{K}}{\to} \Set$ is isomorphic to $\mathcal{F}$. But the complete diagram will commute only if they are not just isomorphic but equal. As $A \to B$ is a cofibration, it is levelwise decidable, hence the functor $\Delta/A \to \Delta/B$ is a fully faithful inclusion and is a decidable inclusion at the level of objects. So we can then simply redefined $\mathcal{K}$ to be equal to $\mathcal{F}$ on object that are in the image of $\Delta/A$ and equal to the previously defined $\mathcal{K}$ on the other objects. There is an obvious way to make this into a functor by using the natural isomorphism between $\mathcal{F}$ and the restriction of $\mathcal{K}$ and this gives the commutative diagram in the lemma.
 \end{proof}
 
 \bigskip
@@ -2367,6 +2367,7 @@ V.~Voevodsky.
 
 
 \end{document}
+
 
 
 
