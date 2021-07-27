@@ -118,6 +118,7 @@
 \crefname{theorem}{Theorem}{Theorems}
 
 \crefname{table}{Table}{Table}
+\crefname{theorem}{Theorem}{Theorem}
 
 
 \defthm{corollary}{corollaries}{Corollary}{Corollaries}
@@ -1413,25 +1414,34 @@ The simplicial set $\V$ is defined by letting
 \[
 \mathsf{V}_n \defeq \{ F \co {\Delta_{/[n]}}^{\op} \to \Set \}
 \]
-for $[n] \in \Delta$, where $\Set$ denotes the category of small sets. More generally, if $X$ is a simplicial set then maps from $X$ to $V$ corresponds to functors $F: \Delta/X \to \Set$, where $\Delta/X$ denotes the category of elements of $X$.
+for $[n] \in \Delta$, where $\Set$ denotes the category of small sets. More generally, if $X$ is a simplicial set then maps from $X$ to $V$ corresponds to functors $F: \Delta/X \to \Set$, where $\Delta_{/X}$ denotes the category of elements of $X$.
 The object $\VV$ is then defined in exactly the same way by replacing the category of sets by the category of pointed sets and the map $\VV \to \V$ is induced by forgetting the marked point.
 
-We note the following lemma:
+The next lemma is essentially \cite[Lemma~3.9]{cisinski-univalent-universes} and 
+\cite[Property~$(2')$]{ShulmanM:unierp}, but it is proved here constructively by 
+exploiting crucially the decidability property of cofibrations. The lemma will be used to `rectify' the 
+choice of lifts in the proofs of \cref{thm:fibrancy-of-u-and-uc} and \cref{thm:univalence-of-u-and-uc}. 
 
-\begin{lemma} Given a solid diagram:
-
+\begin{lemma}  \label{thm:rectify-via-decidability}
+Given a solid diagram
 \[\xymatrix{
 K[i] \ar[rr] \ar[dr] \ar[dd] & & \VV \ar[dd] \\
  & K \ar[dd] \ar@{.>}[ur] & \\
-A \ar[rr] \ar@{>->}[dr]_i & & \V\\
+A \ar[rr] \ar@{>->}[dr]_i & & \V \mathrlap{,} \\
  &B \ar@{.>}[ur]&  
 }\]
-
-where both squares are pullback and $i:A \to B$ is a cofibration, there exists dotted arrows that makes the third square a pullback and the diagram commutative.
+where both solid squares are pullbacks and $i \co A \to B$ is a cofibration, there exists dotted arrows that makes  the whole diagram commutative and the third square also a pullback.
 \end{lemma}
 
 \begin{proof}
-The map $K \to B$ is classified by some map $\chi:B \to \V$, this gives us two dotted arrow as in the diagram above, that makes the first square a pullback. However the diagram obtained this way is not commutative: $\chi$ corresponds to a presheaf $\mathcal{K}$ on $\Delta/B$, on the other hand the map $A \to \V$ corresponds to a presheaf $\mathcal{F}$ on $\Delta/B$. The solid diagram means that the composite $\Delta/A \to \Delta/B \overset{\mathcal{K}}{\to} \Set$ is isomorphic to $\mathcal{F}$. But the complete diagram will commute only if they are not just isomorphic but equal. As $A \to B$ is a cofibration, it is levelwise decidable, hence the functor $\Delta/A \to \Delta/B$ is a fully faithful inclusion and is a decidable inclusion at the level of objects. So we can then simply redefined $\mathcal{K}$ to be equal to $\mathcal{F}$ on object that are in the image of $\Delta/A$ and equal to the previously defined $\mathcal{K}$ on the other objects. There is an obvious way to make this into a functor by using the natural isomorphism between $\mathcal{F}$ and the restriction of $\mathcal{K}$ and this gives the commutative diagram in the lemma.
+Since the map $K \to B$ is classified by some map $\chi \co B \to \V$, there are two dotted arrow as in the diagram above that make the third square a pullback. However, the whole diagram obtained in this way
+is not necessarily commutative: the map $\chi$ corresponds to a presheaf~$\mathcal{K}$ on~$\Delta_{/B}$, the map $A \to \V$ corresponds to a presheaf $\mathcal{F}$ on~$\Delta_{/A}$, and the 
+commutativity of the given solid diagram means that the composite 
+\[
+\xymatrix{
+{\Delta_{/A}}^{\op} \ar[r] & {\Delta_{/B}}^{\op} \ar[r]^{\mathcal{K}} &  \Set} 
+\] 
+is isomorphic to $\mathcal{F}$. But the whole diagram commutes, as required, only if they are not just isomorphic, but equal. Since $i \co A \to B$ is a cofibration, it is levelwise decidable, hence the functor $\Delta_{/A} \to \Delta_{/B}$ is a decidable inclusion at the level of objects and fully faithful. We can then redefine $\mathcal{K}$ to be equal to $\mathcal{F}$ on object that are in the image of $\Delta_{/A}$ and equal to the previously defined $\mathcal{K}$ on the other objects. There is an evident way to make this into a functor, using the natural isomorphism between $\mathcal{F}$ and the restriction of $\mathcal{K}$, and this gives the required commutative diagram.
 \end{proof}
 
 \bigskip
@@ -1498,16 +1508,14 @@ We then define the map $\pi \co \UU \to \U$ via the pullback
 
 \item The map $\pi \co \UU \to \U$ classifies small fibrations with cofibrant fibers. More precisely, a map $v \co X \to \V$ can be lifted to a map $X \to \U$ if and only if it classifies a fibration with cofibrant fibers. Moreover, choice of a lift to $\U$ corresponds (functorially in $X$ and $V$) to the choice of a fibration structure on the map classified by $v$.
 
-
 \item A lifting problem
 
 \[\xymatrix{
 A \ar@{>->}[d]_i \ar[r] & \U \ar[d] \\
-B \ar[r]_t & \V
+B \ar[r]_t & \V \mathrlap{,}
 }
 \]
-
-where $i$ is a cofibration between simplicial sets, has a solution if and only if the map $K \to B$ classified by $t$ is a fibration with cofibrant fibers.
+where $i$ is a cofibration, has a solution if and only if the map $K \to B$ classified by $t$ is a fibration with cofibrant fibers.
 
 
 \end{enumerate}
@@ -1540,10 +1548,8 @@ X \ar[r]_{a} & \V \, . }
 For each cell of $X$,  $x \co \Delta[n] \rightarrow X$ the pullback $A[x] \rightarrow \Delta[n]$ is a small fibration with cofibrant domain by the assumptions on $p$, which means, by the definition of $\U$ that the image of the cell $x$ in $\V$ lifts to $\U$. As one can easily check that this lifts to $\U$ are functorial in $[n]$, the map $X \rightarrow \V$ lifts to $\U$, and hence $A \rightarrow X$ is actually the pullback of $\UU \rightarrow \U$. One also easily check that there is a correspondence between fibration structures on the map $A \to X$ and compatible choices of fibration structures on each pullback along a map $\Delta[n] \to X$, so that the two construction explained above are inverse of each other.
 
 
-For part~(iii), the existence of diagonal lift implies that $t$ classifies a fibration with cofibrant fibers by part~(ii). Conversely assuming that $t$ classifies a fibration with cofibrant fibers, it follows from part~(ii) that constructing a diagonal lift is the same as chosing lifts for the map $K \to B$ classified by $t$ such that the choice of lift induced on the pullback to $A$ corresponds to these given by the map $A \to \U$ in the square. But this is easily acheived as follows, for each lifting problem of $\Lambda^k[n] \to \Delta[n]$ against $K \to B$, as $A \to B$ is a cofibration, it is decidable if the map $\Delta[n] \to B$ factors through $A$ or not. Depending on this, one chose the lift given by the fact that $K \to B$ is a fibration if $\Delta[n] \to B$ does not factor in $A$ and the one chose the one provided by the fibration structure on the pullback $K[i] \to A$ given by the map $A \to \U$.
-
-
-\qedhere
+For part~(iii), the existence of diagonal lift implies that $t$ classifies a fibration with cofibrant fibers by part~(ii). Conversely, assuming that $t$ classifies a fibration with cofibrant fibers, it follows from part~(ii) that constructing a diagonal lift is the same as choosing lifts for the map~$K \to B$ classified by~$t$ such that the choice of lift induced on the pullback to $A$ is the one induced by the map $A \to \U$. But this is easily achieved as follows. Given a lifting problem of $\Lambda^k[n] \to \Delta[n]$ against $K \to B$, since $A \to B$ is a cofibration it is decidable whether the map $\Delta[n] \to B$ factors through $A$ or not. One then chooses the lift given by the fact that $K \to B$ is a fibration if $\Delta[n] \to B$ does not factor thought $A$ and the one provided by the fibration structure on the pullback $K[i] \to A$ \noten{Unclear what is being
+referred to here} given by the map $A \to \U$. 
 \end{proof} 
 
 
@@ -1605,7 +1611,7 @@ A \ar[r] \ar@{->>}[d]_p &  \UU_c \ar[r]  \ar@{->>}[d]^{\pi_c}  & \UU \ar@{->>}[d
 X \ar[r]_{a_c} & \U_c \ar[r]_{a} &  \U \, . }
 \]
 Here, the right-hand side square and the rectangle are pullbacks and therefore the left-hand
-side square is also a pullback. Hence $p$ is indeed a pullback of $\UU_c \rightarrow \U_c$. Conversely, any pullback  $p \co A \rightarrow X$ of $\UU_c \rightarrow \U_c$ is a small fibrations with cofibrant fibers, hence by part~(ii) of \ref{lem:Cofib_fiber}, if $X$ is cofibrant, $p$ is small fibration between cofibrant objects.
+side square is also a pullback. Hence $p$ is indeed a pullback of $\UU_c \rightarrow \U_c$. Conversely, any pullback  $p \co A \rightarrow X$ of $\UU_c \rightarrow \U_c$ is a small fibrations with cofibrant fibers, hence by part~(ii) of \cref{lem:Cofib_fiber}, if $X$ is cofibrant, $p$ is small fibration between cofibrant objects.
 \end{proof} 
 
 
@@ -1645,15 +1651,15 @@ as in the argument for part~(i) of  \cref{thm:universe-u}.
 \end{proof}
 
 
-We recall that $\BFFib_{/X}$ denotes the full subcategory of $\SSet_{/X}$ of fibrations with cofibrant domain. Given $f \co A \to B$ an arrow in $\BFFib_{/X}$ we now construct the object $\Iseq(f)$ in $\BFFib_{/X}$ of weak equivalences structures on $f$. We will use the 
+We recall that $\BFFib_{/X}$ denotes the full subcategory of $\SSet_{/X}$ of fibrations with cofibrant domain. Given~$f \co A \to B$ an arrow in~$\BFFib_{/X}$ we now construct the object $\Iseq(f)$ in $\BFFib_{/X}$ of weak equivalences structures on $f$. We will use the 
 characterisation of weak equivalences as maps that have both a left inverse and a right inverse, \ie what are called bi-invertible maps in \cite[Section 4.3]{hottbook}. 
 For this, we essentially follow \cite{ShulmanM:unifid} and \cite[Section 1.4]{StenzelR:unirca}, which in turn are a category-theoretic counterpart of the type-theoretic
 treatment in \cite{hottbook}. We cannot use the results in \cite{ShulmanM:unifid} and \cite[Section 1.4]{StenzelR:unirca} directly since they both work under 
-assumptions on path objects that would not be satisfied for us without restricting to cofibrant objects and assume that $\Pi$-types are given by dependent products, i.e. right adjoints to pullback functors, which we do not have if we restrict to cofibrant objects. For these reasons, we need to prove \cref{thm:black-box} explicitly. However, since this is very similar to the references cited above, we will not give all details.
+assumptions on path objects that would not be satisfied for us without restricting to cofibrant objects and assume that $\Pi$-types are given by dependent products, {i.e.}~right adjoints to pullback functors, which we do not have if we restrict to cofibrant objects. For these reasons, we need to prove \cref{thm:black-box} explicitly. However, since this is very similar to the references cited above, we will not give all details.
 
 
 
-Given a map $f:A \to B$ in $\BFFib_{/X}$, a right inverse for $f$, is a map $h:B \to A$ in $\BFFib_{/X}$ and a homotopy $f \circ h \sim \Id_B$, given by an arrow $B \to \Path_{/X}(B)$ in $\BFFib_{/X}$. Similarly, a left inverse for $f$ is an arrow $g:B \to A$ together with a homotopy $g \circ f \sim \Id_A$, given by an arrow $A \to \Path_{/X}(A)$ in $\BFFib_{/X}$.
+Given a map $f \co A \to B$ in $\BFFib_{/X}$, a right inverse for $f$, is a map $h \co B \to A$ in $\BFFib_{/X}$ and a homotopy $f \circ h \sim \Id_B$, given by an arrow $B \to \Path_{/X}(B)$ in $\BFFib_{/X}$. Similarly, a left inverse for~$f$ is an arrow~$g \co B \to A$ together with a homotopy $g \circ f \sim \Id_A$, given by an arrow~$A \to \Path_{/X}(A)$ in~$\BFFib_{/X}$.
 
 Using dependent products (without taking cofibrant replacements), we can construct fibrant objects $\Linv(f) \twoheadrightarrow X$ and $\Rinv(f) \twoheadrightarrow X$, that are respectively the objects of left and right inverse of $f$. Explicitely, for an object $Y \in \SSet_{/X}$ a map $Y \to \Linv(f)$ is the same as a left inverse to the map $A \times_{X} Y \to B \times_X Y$ in $\BFFib_{/Y}$.
 
@@ -2318,7 +2324,7 @@ M.~Shulman.
 \newblock Univalence for inverse diagrams and homotopy canonicity.
 \newblock {\em Mathematical Structures in Computer Science}, 25(5):1203--1277, 2015.
 
-\bibitem[Shu15b]{ShulmanM:unifid}
+\bibitem[Shu15b]{ShulmanM:unierp}
 M.~Shulman.
 \newblock The univalence axiom for elegant {R}eedy presheaves.
 \newblock {\em Homology, Homotopy and Applications}, 17(2):81--106, 2015.
