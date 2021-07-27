@@ -1804,11 +1804,11 @@ By the observation above, the composite map $\big( \Delta[1] \times \Lambda^k[n]
 }
 \] 
 So we can construct a fibration  $\bar{q} \co \bar{B} \to \Delta[n]$ with cofibrant domain whose pullback 
-along~$h^k_n$ is isomorphic to $q \co B \to \Lambda^k_n$. The map $b \co \Delta[n] \rightarrow \U$ classifying $\bar{q}$, if chosen carefully, gives the lift we are looking for. More precisely, by \cref{thm:rectify-via-decidability} one can chose a map $\Delta[n] \rightarrow \V$ that classifies $\bar{q}$ and extend the map $\Lambda^k[n] \to \U \to \V$ classyfing $q$ (the bottom dotted arrow in the diagram below), and finally using part~(iii) of \cref{thm:universe-u} one can lift this map to map $\Delta[n] \to \U$ that gives the lift we are looking for (the diagonal dotted arrow in the diagram below). 
+along~$h^k_n$ is isomorphic to $q \co B \to \Lambda^k_n$. The map $b \co \Delta[n] \rightarrow \U$ classifying $\bar{q}$, if chosen carefully, gives the lift we are looking for. More precisely, by \cref{thm:rectify-via-decidability} one can chose (in the diagram below) a map $a:\Delta[n] \rightarrow \V$ that classifies $\bar{q}$ and extend the map $\Lambda^k[n] \to \U \to \V$ classifying $q$, and finally using part~(iii) of \cref{thm:universe-u} one can (also in the diagram below) lift this map to map $b:\Delta[n] \to \U$ that gives the lift we are looking for. 
 
 \[\xymatrix{
 \Lambda^k[n] \ar[r] \ar[d] & \U \ar[d] \\
-\Delta[n] \ar@{.>}[r] \ar@{.>}[ur] & \V \, . \\
+\Delta[n] \ar@{.>}[r]_a \ar@{.>}[ur]^b & \V \, . \\
 }\]
 Part~(ii) follows immediately from part~(i) since $\tau \co \U_c \to \U$ of \eqref{equ:ucu} is a trivial fibration.
 \end{proof}
@@ -1860,17 +1860,55 @@ definition of univalence. This will be the case for $\pi_c \co \UU_c \to \U_c$, 
 \end{theorem}
 
 \begin{proof} For part (i), we prove that $t \co  \Weq(\U) \to \U$ has the right lifting property with respect
-to all cofibrations. So let $f \co Y \rightarrow X$ be a cofibration and consider the diagonal
+to all cofibrations between cofibrant objects. So let $f \co Y \rightarrow X$ be a cofibration between cofibrant objects and consider the diagonal
 filling problem
 \[
 \xymatrix{Y \ar@{>->}[d]_f \ar[r] & \Weq(\U) \ar@{->>}[d] \\
 X \ar[r] \ar@{.>}[ur]  & \U \, .
 }
 \]
-By construction of $\Weq(\U)$, and using \cref{prop:Weq_classify_Weq}, this corresponds exactly to a diagram as in the equivalence extension property as in \cref{Prop:Homotopy_ext_prop}. Indeed, the map $X \rightarrow \U$ gives us
+By construction of $\Weq(\U)$, and using \cref{prop:Weq_classify_Weq}, this induce a diagram as in the equivalence extension property of \cref{Prop:Homotopy_ext_prop}. Indeed, the map $X \rightarrow \U$ gives us
 $p \co A \to X$, the composite of~$Y \rightarrow  \mathsf{Weq}(\U)$ with the first projection
 gives us $q \co B \to Y$, while the rest of the data and the commutativity of the square 
-gives us a weak equivalence $u$ between $B$ and $A[f]$ over~$X$. The completion of this diagram given by \cref{Prop:Homotopy_ext_prop} is exactly what one needs to produce the required diagonal filler.
+gives us a weak equivalence $u$ between $B$ and $A[f]$ over~$X$. The completion of this diagram given by \cref{Prop:Homotopy_ext_prop0}:
+
+\[ 
+\xymatrix{
+ B
+  \ar@{.>}[rr]
+  \ar[dr]^{u}
+  \ar@{->>}[dd]_(.3){q}
+&&
+  \bar{B}
+  \ar@{.>}[dr]^{v}
+  \ar@{.>>}[dd]_(.3){\bar{q}}|{\hole}
+&\\&
+  A[f] 
+  \ar[rr]
+  \ar@{->>}[dl]
+&&
+  A
+  \ar@{->>}[dl]^{p}
+\\
+  Y
+  \ar[rr]_{f}
+&&
+  X \, ,
+&
+}
+\]
+
+ is what one needs to produce the required diagonal filler, at least if one chose the classifying maps correctly. Indeed, by \cref{thm:rectify-via-decidability} one can chose of map $X \to \V$ classifying $\bar{B} \to X$ whose restriction along $Y \to X$ is the composite $Y \to \Weq(\U) \to \U \to \V$ that classifies $B$, and by part~(iii) of \cref{thm:universe-u}, one can lift it to a classifying map $X \to \U$ that restrict to the composite $Y \to \Weq(\U) \to \U$. At this point we have a solide commutative diagram:
+
+\[ \xymatrix{ Y \ar@{>->}[dd] \ar[r] & \Weq(\U) \ar[d] \\
+ & \U^\to \ar[d] \\
+X \ar@{.>}[ur] \ar@{.>}[uur] \ar[r] & \U \times \U 
+}\]
+
+The dottes lift $X \to \U^\to$ is obtained from the map $\bar{B} \to A$ using the definition of $\U^\to$ as an exponential type, and the dotted lift $X \to \Weq(\U)$ is constructed from \cref{prop:Weq_classify_Weq} as the map $\bar{B} \to A$ is a weak equivalence. post composing all this with the appropriate projection $\U \times \U \to \U$ gives the solution to our lifting problem and conclude the proof of part~(i).
+
+
+
 
 For part~(ii), we prove that $t \co \Weq(\pi_c) \to \U_c$ is a trivial fibration. For this, let us
 observe that we have a diagram 
@@ -2375,7 +2413,6 @@ V.~Voevodsky.
 
 
 \end{document}
-
 
 
 
