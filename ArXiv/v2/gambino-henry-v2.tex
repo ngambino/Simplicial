@@ -1804,10 +1804,12 @@ By the observation above, the composite map $\big( \Delta[1] \times \Lambda^k[n]
 }
 \] 
 So we can construct a fibration  $\bar{q} \co \bar{B} \to \Delta[n]$ with cofibrant domain whose pullback 
-along~$h^k_n$ is isomorphic to $q \co B \to \Lambda^k_n$. The map $b \co \Delta[n] \rightarrow \U$ classifying $\bar{q}$ gives the lift we are looking for. More precisely, we can use $q  \co \bar{B} \to
-\Delta[n]$ to construct  a map $b \co \Delta[n] \rightarrow \U$ which extends the one we started from and classifies 
-an object isomorphic to $\bar{B}$.
+along~$h^k_n$ is isomorphic to $q \co B \to \Lambda^k_n$. The map $b \co \Delta[n] \rightarrow \U$ classifying $\bar{q}$, if chosen carefully, gives the lift we are looking for. More precisely, by \cref{thm:rectify-via-decidability} one can chose a map $\Delta[n] \rightarrow \V$ that classifies $\bar{q}$ and extend the map $\Lambda^k[n] \to \U \to \V$ classyfing $q$ (the bottom dotted arrow in the diagram below), and finally using part~(iii) of \cref{thm:universe-u} one can lift this map to map $\Delta[n] \to \U$ that gives the lift we are looking for (the diagonal dotted arrow in the diagram below). 
 
+\[\xymatrix{
+\Lambda^k[n] \ar[r] \ar[d] & \U \ar[d] \\
+\Delta[n] \ar@{.>}[r] \ar@{.>}[ur] & \V \, . \\
+}\]
 Part~(ii) follows immediately from part~(i) since $\tau \co \U_c \to \U$ of \eqref{equ:ucu} is a trivial fibration.
 \end{proof}
 
@@ -2373,7 +2375,6 @@ V.~Voevodsky.
 
 
 \end{document}
-
 
 
 
