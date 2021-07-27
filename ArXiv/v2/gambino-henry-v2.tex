@@ -1799,12 +1799,12 @@ By the observation above, the composite map $\big( \Delta[1] \times \Lambda^k[n]
   \Lambda^k[n]
   \ar[rr]_{h^k_n}
 &&
-  \Delta[n]
+  \Delta[n] \mathrlap{.}
 &
 }
 \] 
 So we can construct a fibration  $\bar{q} \co \bar{B} \to \Delta[n]$ with cofibrant domain whose pullback 
-along~$h^k_n$ is isomorphic to $q \co B \to \Lambda^k_n$. The map $b \co \Delta[n] \rightarrow \U$ classifying $\bar{q}$, if chosen carefully, gives the lift we are looking for. More precisely, by \cref{thm:rectify-via-decidability} one can chose (in the diagram below) a map $a:\Delta[n] \rightarrow \V$ that classifies $\bar{q}$ and extend the map $\Lambda^k[n] \to \U \to \V$ classifying $q$, and finally using part~(iii) of \cref{thm:universe-u} one can (also in the diagram below) lift this map to map $b:\Delta[n] \to \U$ that gives the lift we are looking for. 
+along~$h^k_n$ is isomorphic to $q \co B \to \Lambda^k_n$. The map $b \co \Delta[n] \rightarrow \U$ classifying $\bar{q}$, if chosen carefully, gives the lift we are looking for. More precisely, by \cref{thm:rectify-via-decidability} one can chose (in the diagram below) a map $a \co \Delta[n] \rightarrow \V$ that classifies $\bar{q}$ and extends the map $\Lambda^k[n] \to \U \to \V$ classifying $q$, and finally using part~(iii) of \cref{thm:universe-u} one can (also in the diagram below) lift this map to map $b \co \Delta[n] \to \U$ that gives the lift we are looking for, 
 
 \[\xymatrix{
 \Lambda^k[n] \ar[r] \ar[d] & \U \ar[d] \\
@@ -1867,10 +1867,11 @@ filling problem
 X \ar[r] \ar@{.>}[ur]  & \U \, .
 }
 \]
-By construction of $\Weq(\U)$, and using \cref{prop:Weq_classify_Weq}, this induce a diagram as in the equivalence extension property of \cref{Prop:Homotopy_ext_prop}. Indeed, the map $X \rightarrow \U$ gives us
+By construction of $\Weq(\U)$, and using \cref{prop:Weq_classify_Weq}, this induces a diagram of solid
+arrows as in the equivalence extension property of \cref{Prop:Homotopy_ext_prop}. Indeed, the map $X \rightarrow \U$ gives us
 $p \co A \to X$, the composite of~$Y \rightarrow  \mathsf{Weq}(\U)$ with the first projection
 gives us $q \co B \to Y$, while the rest of the data and the commutativity of the square 
-gives us a weak equivalence $u$ between $B$ and $A[f]$ over~$X$. The completion of this diagram given by \cref{Prop:Homotopy_ext_prop0}:
+gives us a weak equivalence $u$ between $B$ and $A[f]$ over~$X$. The completion of this diagram given by \cref{Prop:Homotopy_ext_prop}, 
 
 \[ 
 \xymatrix{
@@ -1897,15 +1898,14 @@ gives us a weak equivalence $u$ between $B$ and $A[f]$ over~$X$. The completion 
 &
 }
 \]
-
- is what one needs to produce the required diagonal filler, at least if one chose the classifying maps correctly. Indeed, by \cref{thm:rectify-via-decidability} one can chose of map $X \to \V$ classifying $\bar{B} \to X$ whose restriction along $Y \to X$ is the composite $Y \to \Weq(\U) \to \U \to \V$ that classifies $B$, and by part~(iii) of \cref{thm:universe-u}, one can lift it to a classifying map $X \to \U$ that restrict to the composite $Y \to \Weq(\U) \to \U$. At this point we have a solide commutative diagram:
-
-\[ \xymatrix{ Y \ar@{>->}[dd] \ar[r] & \Weq(\U) \ar[d] \\
+ is what one needs to produce the required diagonal filler, at least if one choses the classifying maps correctly. Indeed, by \cref{thm:rectify-via-decidability} one can chose of map $X \to \V$ classifying $\bar{B} \to X$ whose restriction along $Y \to X$ is the composite $Y \to \Weq(\U) \to \U \to \V$ that classifies $B$, and by part~(iii) of \cref{thm:universe-u}, one can lift it to a classifying map $X \to \U$ that restricts to the composite $Y \to \Weq(\U) \to \U$. At this point we have a solid commutative diagram
+\[ 
+\xymatrix{ Y \ar@{>->}[dd] \ar[r] & \Weq(\U) \ar[d] \\
  & \U^\to \ar[d] \\
-X \ar@{.>}[ur] \ar@{.>}[uur] \ar[r] & \U \times \U 
-}\]
-
-The dottes lift $X \to \U^\to$ is obtained from the map $\bar{B} \to A$ using the definition of $\U^\to$ as an exponential type, and the dotted lift $X \to \Weq(\U)$ is constructed from \cref{prop:Weq_classify_Weq} as the map $\bar{B} \to A$ is a weak equivalence. post composing all this with the appropriate projection $\U \times \U \to \U$ gives the solution to our lifting problem and conclude the proof of part~(i).
+X \ar@{.>}[ur] \ar@{.>}[uur] \ar[r] & \U \times \U \mathrlap{.}
+}
+\]
+The dotted lift $X \to \U^\to$ is obtained from the map $\bar{B} \to A$ using the definition of $\U^\to$ as an exponential type, and the dotted lift $X \to \Weq(\U)$ is constructed from \cref{prop:Weq_classify_Weq} as the map~$\bar{B} \to A$ is a weak equivalence. Post-composing all this with the appropriate projection~$\U \times \U \to \U$ gives the solution to our lifting problem and concludes the proof of part~(i).
 
 
 
