@@ -483,7 +483,7 @@ a coherence question to be addressed.
 \section*{Introduction} 
 
 \textbf{Context and motivation.} This paper investigates Voevodsky's model of Martin-L\"of type theory (ML)
-extended with the Univalence Axiom (UA)  in the category of simplicial sets~\cite{voevodsky-simplicial-model}.  This model is of fundamental importance since it  informs a new approach to the development of mathematics, known as Univalent Foundations, which takes the notion of a space (rather than that of a set) as the most primitive and is supported by a new approach to computer-assisted formalisation of mathematics~\cite{voevodsky:library}. In combination with the discovery of a close connection between identity types and Quillen's homotopical algebra~\cite{awodey-warren:homotopy-idtype,gambino-garner:idtypewfs}, the simplicial model also provided inspiration for the development of  Homotopy Type Theory~\cite{hottbook}.
+extended with the Univalence Axiom (UA)  in the category of simplicial sets~\cite{voevodsky-simplicial-model}.  This model is of fundamental importance since it  informs a new approach to the development of mathematics, known as Univalent Foundations, which takes the notion of a space (rather than that of a set) as the most primitive and is supported by a new approach to computer-assisted formalisation of mathematics~\cite{voevodsky:library}. In combination with the discovery of a close connection between identity types and Quillen's homotopical algebra~\cite{awodey-warren:homotopy-idtype,gambino-garner:idtypewfs}, the simplicial model also provides inspiration for the development of  Homotopy Type Theory~\cite{hottbook}.
 
 The original definition of the model of $\mathrm{ML(UA)} = \mathrm{ML} + \mathrm{UA}$ was carried out in  Zermelo-Fraenkel set theory extended with the axiom of choice (ZFC) and two inaccessible cardinals~\cite[Theorem~3.4.3]{voevodsky-simplicial-model}. Since $\mathrm{ML}$ is a constructive theory, 
 while ZFC is a classical one, the question of whether the simplicial model could be defined working constructively (\ie without the use of the law of excluded middle or the axiom of choice), so as to provide a constructive interpretation of~$\mathrm{UA}$, arose immediately after its discovery, around~2006~\cite{KapulkinC:uniss,StreicherT:modtts,VoevodskyV:notts}, and was one of the central issues investigated during the thematic programme on Univalent Foundations at the Institute for Advanced Study in 2012/13. In spite of  significant efforts since then, the question is still open to date.
@@ -501,7 +501,7 @@ allow us to define a comprehension category
 \begin{gathered}
 \xymatrix{
 \mathbf{Fib}\,  \ar[dr] \ar@{>->}[rr] & & \SSet^{\to} \ar[dl]^{\mathrm{cod}} \\ 
- & \SSet &  }
+ & \SSet \mathrlap{,} &  }
  \end{gathered}
 \]
 where $\SSet$ is the category of simplicial sets 
@@ -537,7 +537,8 @@ are not as well-behaved as in cubical sets,
 since they do not admit a classifier, essentially because 
 representables are not closed under under products in simplicial sets, unlike in cubical sets~\cite{SattlerC:faiaut}. 
 In summary, to date there is no known model of ML(UA) that is definable in a constructive setting and
-based on a category homotopically equivalent to that of simplicial sets. 
+based on a category homotopically equivalent to that of topological spaces (even assuming classical
+logic). 
 
 \smallskip
 
@@ -554,7 +555,7 @@ model structure are obtained in~\cite{GambinoN:anocp}.
 
 
 
- The present paper extends this work to obtain constructive counterparts of all the other main results of 
+ The present paper builds on this work to obtain constructive counterparts of all the other main results of 
 homotopy theory necessary to define the simplicial model of ML(UA). In particular, our main results are the following:
 \begin{itemize}
 \item \cref{thm:MainPathObject}, asserting that, for a fibration with cofibrant domain $p \co A \to X$, the mapping path space 
@@ -583,7 +584,7 @@ These results allow us to define a comprehension category
  where $\SSet_{\mathsf{cof}}$ is the category of cofibrant simplicial sets and  $\mathbf{Fib}_{ \mathsf{cof}}$ is the category of fibrations between cofibrant simplicial
  sets, and to show that this comprehension category supports the type constructors of ML and a univalent type universe~(\cref{th:main_ContextualCat}). In this 
 comprehension category, type-theoretic
-contexts correspond to cofibrant objects, while dependent types correspond fibrations $p \co A \to X$ where 
+contexts correspond to cofibrant objects, while dependent types correspond to fibrations $p \co A \to X$ where 
  $A$ and $X$ are cofibrant. This choice is informed by the fact that, for a simplicial set~$X$, the slice category~$\mathbf{SSet}_{/X}$ admits a model structure in which the bifibrant objects are
  the fibrations $p \co A \to X$ with $A$ cofibrant. Our main results above show how this comprehension category  supports the type constructors of ML and a univalent type universe.
 For example, \cref{thm:MainPathObject} shows that identity types can be interpreted as 
@@ -592,20 +593,20 @@ mapping path spaces.
 \smallskip
 
 \noindent
-\textbf{Novel aspects.} The key novelty of our approach is the use of the homotopy-theoretic notion of cofibrancy to encapsulate the logical notion of decidability of degeneracies and to work with it in a 
+\textbf{Novel aspects.} The key novelty of our approach is the use of the homotopy-theoretic notion of cofibrancy to encapsulate the logical notion of decidability of degeneracies, so as to work with it in a 
 mathematically efficient way. Also, to the best of our knowledge, this paper is the first to make use of the cofibrant replacement functor in the study of models of dependent type theory.
 
 We will use the cofibrant  replacement functor
 to obtain $\Pi$-types and the type-theoretic universe in our comprehension category.  For $\Pi$-types, given a fibration $p \co A \to X$ with cofibrant domain, the result of applying the dependent product along $p$ to a fibration $q \co B \to A$ with cofibrant domain produces a map  $\Pi_p(q) \co \Pi_A(B) \to X$, which is a fibration by~\cref{cor:Pi_types_are_fibrant}, but whose domain
 is not necessarily cofibrant. In order to remedy this, we define  $\Pi$-types to be given by a cofibrant replacement of
 $\Pi_p(q) \co \Pi_A(B) \to X$, which is now a fibration with cofibrant domain. 
-Interestingly, this definition validates
+This definition validates
 a judgemental $\beta$-rule and a propositional $\eta$-rule (see~\cref{rem:pi-types} for details), a combination that arises naturally when  Martin-L\"of type theory is presented
 within the Logical Framework~\cite{nordstrom-petersson-smith:ml,GarnerR:strdp}, as well as in
-the versions of the Coq assistant used for the original development of  univalent foundations
-library~\cite{voevodsky:library}. Interestingly, Voevodsky's proof that the univalence axiom implies the principle of function extensionality exploits crucially the propositional $\eta$-rule for $\Pi$-types. 
+the versions of the Coq assistant used for the original development of  Univalent Foundations
+library~\cite{voevodsky:library}. In particular, Voevodsky's proof that the univalence axiom implies the principle of function extensionality uses the propositional, rather than judgemental, $\eta$-rule for $\Pi$-types.
 
-For the definition of a  type-theoretic universe satisfying the univalence axiom, we proceed
+For the definition of a  type-theoretic universe satisfying the Univalence Axiom, we proceed
 in two steps. First, we construct a small fibration $\pi \co \UU \to \U$ that classifies small fibrations with cofibrant fibers and prove that $\U$ is fibrant. 
 Then, we consider a cofibrant replacement~$\U_c$ of~$\U$, which comes equipped with a trivial fibration $\varepsilon \co \U_c \to \U$, so that 
 we obtain a small fibration $\pi_c \co \UU_c \to \U_c$ with bifibrant codomain and cofibrant domain by pullback along $\varepsilon$. Our final result, \cref{thm:univalence-of-u-and-uc}, shows that
@@ -617,7 +618,9 @@ $\pi \co \UU \to \U$ and $\pi_c \co \UU_c \to \U_c$ are univalent fibrations.
 
 We refrain from claiming that our work provides a complete solution to the problem of defining a constructive simplicial model of type theory since the comprehension category we construct is not split and therefore does not
 satisfy strictly the stability conditions governing the interaction of substituion and type-formation rules, often
-referred to as the Beck-Chevalley conditions. While there are several results to address similar issues~\cite{clairambaultdybjer2014,HofmannM:intttl,voevodsky-simplicial-model,LumsdaineP:locuoc,ShulmanM:allths}, they do not seem to apply in our  context. However, our results here reduce the problem of defining a constructive version of the simplicial model of Univalent Foundations to that of proving appropriate coherence result for a particular kind of 
+referred to as the Beck-Chevalley conditions. While there are several results to address similar issues~\cite{clairambaultdybjer2014,HofmannM:intttl,voevodsky-simplicial-model,LumsdaineP:locuoc,ShulmanM:allths}, none of them seems to apply in our  context. 
+
+However, our results here reduce the problem of defining a constructive version of the simplicial model of Univalent Foundations to that of proving appropriate coherence result for a particular kind of 
 comprehension category defined, which is independent of simplicial homotopy theory  and we leave to future work (see \cref{sec:conclusion} for
 details).
 
@@ -636,7 +639,8 @@ rather a small fibration that classifies small fibrations between cofibrant obje
 \noindent 
 \textbf{Outline of the paper.} \cref{sec:preliminaries} recalls the constructive version of the 
 Kan-Quillen model structure and some auxiliary results from~\cite{henry2019qms}. \cref{sec:basrp} establishes some basic results on pullbacks. \cref{sec:pats} shows how path spaces provide factorisations
-as trivial cofibration followed by fibration. \cref{sec:Pi-types} proves the restricted Frobenius property. \cref{sec:equep}
+as trivial cofibration followed by fibration. \cref{sec:Pi-types} discussed the dependent product
+functor, proving the restricted Frobenius property. \cref{sec:equep}
 establishes the weak equivalence extension property.
 \cref{sec:unifbb} introduces a fibration $\pi_c \co \UU_c \to \U_c$ that classifies small fibrations
 between cofibrant Kan complexes. \cref{sec:fibrancy-and-univalence} proves that $\U_c$ is bifibrant and that $\pi_c \co \UU_c \to \U_c$ is univalent, using the weak equivalence extension property.
@@ -654,7 +658,7 @@ When discussing smallness of sets,
 simplicial sets and fibrations, we assume the existence of an inaccessible set $\mathsf{u}$, as defined 
 in~\cite[Definition~18.1.2]{AczelP:notcst}. We say that a set is small if it is an element of $\mathsf{u}$.
 For the closure of the type universe under $\Pi$-types, we will assume a form of `propositional resizing', asserting that every subset 
-of a small set is again small, \ie  $\forall a \, , b \,  ( a \subseteq b \land b \in \mathsf{u} \rightarrow a \in \mathsf{u} )$.  A further discussion of what can be done without this assumption can be found in \cref{rem:strength}. 
+of a small set is again small, \ie  $\forall a \, , b \,  ( a \subseteq b \land b \in \mathsf{u} \rightarrow a \in \mathsf{u} )$.  A  discussion of what can be done without this assumption is in \cref{rem:strength}. 
 
 Throughout the paper, we use a slight abuse of language and say that a map $f \co X \to Y$ has
 the right lifting property with respect to a given set of maps to mean that we have a pair consisting
@@ -787,6 +791,13 @@ instead the pushouts of coproducts of degeneracy maps, \ie the maps of the form 
  the results  about this factorization system that will be used here.
 
 
+Here and throughout the paper, a {\em finite set} means a set equipped with a bijection with the set~$\{1 \, , \ldots,  n \}$, for some $n \in \mathbb{N}$. Equality in such a set
+is always decidable, which we sometimes stress by saying `finite decidable set', rather than just `finite set',
+so as to distinguish  this notion from other notions of finiteness, like Kuratowski finiteness.
+We say that a simplicial set $X$ is finite if $X_n$ is a finite decidable set for each $n$ and  $X$ has a finite number of non-degenerate cells in total.
+
+
+
 \begin{lemma}[{\cite[Lemma~3.1.8]{henry2019qms}}]
 \label{lem:decidability_lift_degen_quo}
 Let $p \co A \rightarrow B$ be a degeneracy quotient between finite decidable simplicial set, $X$  a cofibrant simplicial set and $f \co
@@ -900,11 +911,6 @@ We need to show that the monomorphism $A[f] \rightarrowtail A$ is a cofibration.
 Since $A$ is cofibrant, it suffices to show that it is a levelwise complemented. For $a \in A_n$, we have that $a \in A[f]_n$ if and only if $p(a) \in Y_n$. Since $f \co Y \rightarrowtail X$ is a levelwise complemented monomorphism, this is decidable.
 \end{proof} 
 
-Here and thoughout the paper, a {\em finite set} means a set equipped with a bijection with $\{1 \, , \ldots,  n \}$, for some $n \in \mathbb{N}$. Equality in such a set
-is always decidable, which we sometimes stress by saying `finite decidable set', rather than just `finite set' to distinguishes it from other notion of finite set, like Kuratowski finiteness.
-
-We say that a simplicial set $X$ is finite if $X([n])$ is a finite decidable set for each $n$ and if $X$ has a finite number of non-degenerate cell in total.
-
 
 
 \begin{lemma} \label{prop:X^kCofibrant}  \hfill 
@@ -932,7 +938,7 @@ Similarly, for part (ii), since an $n$-cell of $X^A$ is a morphism $\Delta[n] \t
 \label{sec:pats}
 
 
-In this section we begin to show how the the comprehension category of cofibrant simplicial
+In this section we begin to show how the  comprehension category of cofibrant simplicial
 sets introduced in \cref{thm:compcat} supports 
 various type-theoretic constructs by considering identity types. Following the fundamental insight in~\cite{awodey-warren:homotopy-idtype}, in order to equip the comprehension category  with identity types it suffices to show that
 for every fibration $p \co A \to X$ with cofibrant domain, there are a  fibration with cofibrant domain~$\partial \co \Id_A \to A \times_X A$ and a trivial cofibration $\mathsf{refl}_A \co A \to \Id_A$ that provide a factorisation of the diagonal map $\delta_p \co A \to A \times_X A$~\cite{LumsdaineP:locuoc}. While such a factorisation is guaranteed to exist by the model structure on $\SSet$, here we show that it can be obtained by letting~$\Id_A$ be a mapping path space. 
@@ -954,8 +960,8 @@ of the construction, as well as preservation of (fibrewise) smallness.
 \begin{proof} The claims follow easily from the pushout product property of the model structure.
 \end{proof}
  
-Interestingly, the cofibrancy assumptions of part~(i) of~\cref{thm:exponentials} allows
-us to prove the claim constructively also by following the combinatorial proof in~\cite{MayJP:simoat}, exploiting the decidability of degeneracy in $X$ instead of appealing to the law of excluded middle.
+Part~(i) of~\cref{thm:exponentials} can be proved constructively also by following the combinatorial proof in~\cite{MayJP:simoat}, using the decidability of degeneracy in $X$ given
+by the cofibrancy assumption to  avoid appealing to the law of excluded middle.
 
 
 
@@ -968,12 +974,12 @@ with the two projections and $r \co A \to \Path(A)$ for the `constant path' map.
 
 
 \begin{proposition} \label{thm:id-types-for-types}
-Assume that $A$ is fibrant. Then,
+Let $A$ be  fibrant. 
 \begin{enumerate}[(i)] 
-\item $\Path(A)$ is fibrant,
-\item the boundary map $\partial  \co \Path(A) \rightarrow A \times A$ is a fibration,
-\item the composite of $\partial \co \Path(A) \rightarrow A \times A$ with either projection is a trivial fibration,
-\item the map $r \co A \rightarrow \Path(A)$ induced by the unique map $\Delta[1] \rightarrow \Delta[0]$ is a weak equivalence.
+\item The object $\Path(A)$ is fibrant.
+\item The boundary map $\partial  \co \Path(A) \rightarrow A \times A$ is a fibration.
+\item The composite of $\partial \co \Path(A) \rightarrow A \times A$ with either projection is a trivial fibration.
+\item The map $r \co A \rightarrow \Path(A)$ induced by the unique map $\Delta[1] \rightarrow \Delta[0]$ is a weak equivalence.
 \end{enumerate}
 \end{proposition} 
 
@@ -1032,7 +1038,7 @@ X \ar[ur] \ar[rr] & & X \ar[rr] \ar[ur] & & X \ar[ur] \\
 }
 \]
 where the three square in the vertical/diagonal direction are pullbacks. As before, the maps
-$\partial_0 \, , \partial_1 \co \Path(A) \to A$ are defined the composites of $\partial$
+$\partial_0 \, , \partial_1 \co \Path(A) \to A$ are defined as the composites of $\partial$
 with the two projections. 
 
 
@@ -1076,7 +1082,7 @@ We conclude by showing that the map $A \rightarrow \Path(p)$ is levelwise comple
 \[
 A \rightarrow \Path(p) \rightarrow \Path(A)
 \] 
-of a map which has been proved to be a levelwise complemented inclusion in~\cref{proposition:PathObjectCofibrant}. Therefore, for any cell of $\Path(p)$ one can decide if it is in $A$ or not by considering it as a cell of $\Path(A)$. Since $A$ and $\Path(p)$ are cofibrant, this shows that $A \rightarrow \Path(p)$ is a cofibration. The 3-for-2 property for weak equivalences applied to $A \rightarrow \Path(p) \rightarrow A$ shows that  $A \rightarrow \Path(p)$ is also a weak equivalence, and hence a trivial cofibration.
+of a map which has been proved to be a levelwise complemented inclusion in~\cref{proposition:PathObjectCofibrant}. Therefore, for any cell of~$\Path(p)$ one can decide if it is in $A$ or not by considering it as a cell of~$\Path(A)$. Since~$A$ and~$\Path(p)$ are cofibrant, this shows that $A \rightarrow \Path(p)$ is a cofibration. The 3-for-2 property for weak equivalences applied to $A \rightarrow \Path(p) \rightarrow A$ shows that  $A \rightarrow \Path(p)$ is also a weak equivalence, and hence a trivial cofibration.
 \end{proof}
 
 
@@ -1094,10 +1100,10 @@ in two steps. First, we apply the dependent product along $p$,
 \Pi_p \co \SSet_{/A} \to \SSet_{/X} \, , 
 \]
 to $q \co B \to A$ and obtain a map $\Pi_p(q) \co \Pi_A(B) \to X$, which we will show to be again a fibration. Since this fibration does not seem to have  cofibrant domain in general, we then apply a
-cofibrant replacement in $\SSet_{/X}$ to $\Pi_p(q) \co \Pi_A(B) \to X$ so as to obtain a map with all the desired properties. Interestingly, the result will support a categorical counterpart of the propositional
+cofibrant replacement in $\SSet_{/X}$ to $\Pi_p(q) \co \Pi_A(B) \to X$ so as to obtain a map with all the desired properties. The resulting map will support a categorical counterpart of the propositional
 $\eta$-rule for $\Pi$-types.
 
-Below, we show that, for a fibration $p \co A \rightarrow X$ with cofibrant domain, the dependent product along $p$ preserves fibrations. By adjointness, this is equivalent to showing that its left adjoint, \ie 
+We begin by showing that, for a fibration $p \co A \rightarrow X$ with cofibrant domain, the dependent product along $p$ preserves fibrations. By adjointness, this is equivalent to showing that its left adjoint, \ie 
  pullback along $f$, preserves trivial cofibrations. This amounts to proving a restricted version of the Frobenius property~\cite{BergB:topsmi}, obtained by considering pullbacks along fibrations with
 cofibrant domain rather than general fibrations. By the obstruction results in~\cite{coquand-non-constructivity-kan}  these cofibrancy assumptions are essential in our constructive setting.  
 
@@ -1193,7 +1199,9 @@ with cofibrant domain.
 \section{The weak equivalence extension property}
 \label{sec:equep}
 
-The main goal of this section is to prove the so-called weak equivalence extension property, which will be the key to prove the univalence of the classifying fibrations considered in~\cref{sec:unifbb,sec:fibrancy-and-univalence}.  For this, we follow closely the approach in \cite{voevodsky-simplicial-model}, but exploiting crucially the cofibrancy requirements that are part of our set-up. Another proof is given in~\cite[Section~3.2]{GambinoN:anocp}, adapting the argument in~\cite{SattlerC:equepu}.
+The main goal of this section is to prove the so-called weak equivalence extension property, which will be the key to prove the univalence of the classifying fibrations considered in~\cref{sec:unifbb,sec:fibrancy-and-univalence}.  For this, we follow closely the approach in \cite{voevodsky-simplicial-model}, but exploiting crucially the cofibrancy requirements that are part of our set-up. 
+
+%Another proof is given in~\cite[Section~3.2]{GambinoN:anocp}, adapting the argument in~\cite{SattlerC:equepu}.
 
 
 
@@ -1219,26 +1227,25 @@ cofibrant as well.
  
 \begin{proof} We prove the different parts separately. 
 
-For part~(i), since the dependent product functor $\Pi_f$ is right adjoint to the pullback functor~$f^*$ and trivial fibrations are the maps with the the right lifting property with respect to cofibrations, $\Pi_f$ preserves trivial fibrations if and only if $f^*$ preserves cofibrations. But this follows from~\cref{thm:cof-pbk}.
+For part~(i), since the dependent product functor $\Pi_f$ is right adjoint to the pullback functor~$f^*$ and trivial fibrations are the maps with the right lifting property with respect to cofibrations, $\Pi_f$ preserves trivial fibrations if and only if $f^*$ preserves cofibrations. But this follows from~\cref{thm:cof-pbk}.
 
 For part~(ii),  since $f$ is a monomorphism,  $\Sigma_f \co \SSet_{/X} \rightarrow \SSet_{/Y}$ is fully faithful and hence the unit $\eta \co 1 \rightarrow f^*  \Sigma_{f}$ is an isomorphism. By adjointness, the counit $\varepsilon \co f^* \Pi_f \rightarrow 1$ is also an isomorphism. 
 
-For part (iii), let $y \co  \Delta[n] \rightarrow \Pi_Y(B)$ be a  $k$-cell. We will show that for a given degeneracy $\sigma \co [n] \rightarrow [k]$ it is decidable if $y$ is ``$\sigma$-degenerated'', i.e. if $y$ factors through $\sigma \co \Delta[n] \rightarrow \Delta[k]$. As degeneracy is decidable in $X$, one can freely assume that the image of   $y$ in $X$ via $\Pi_f(q)$ is $\sigma$-degenerated (as if it is not the case, $y$ is not $\sigma$-degenerated) hence one has a solid diagram:
-
+For part (iii), let $y \co  \Delta[n] \rightarrow \Pi_Y(B)$ be a  $k$-cell. We will show that for a given degeneracy $\sigma \co [n] \rightarrow [k]$ it is decidable if $y$ is ``$\sigma$-degenerated'', i.e. if $y$ factors through $\sigma \co \Delta[n] \rightarrow \Delta[k]$. As degeneracy is decidable in $X$, one can freely assume that the image of   $y$ in $X$ via $\Pi_f(q)$ is $\sigma$-degenerated (as if it is not the case, $y$ is not $\sigma$-degenerated), hence one has the solid diagram
 \[
 \xymatrix{
 \Delta[n] \ar[d]_{\sigma} \ar[r] & \Pi_Y(B) \ar[d] \\
 \Delta[k] \ar@{.>}[ur]^? \ar[r] & X \, . \\
 }
 \]
-Because of the adjunction between dependent product and the pullback along $f$, the existence of a lift as above is equivalent to the existence of a lift in:
+Because of the adjunction between dependent product and the pullback along $f$, the existence of a lift as above is equivalent to the existence of a lift in the diagram
 \[
 \xymatrix{
 f^* \Delta[n] \ar[d]_{f^* \sigma} \ar[r]^x & B \ar[d] \\
 f^* \Delta[k] \ar@{.>}[ur]^? \ar[r] & Y \, .  \\
 }
 \]
-The objects $f^* \Delta[n]$ and $f^* \Delta[k]$ are decidable simplicial subset of $\Delta[n]$ and $\Delta[k]$ because $f$ is itself a levelwise complemented monomorphism, hence they are both finite decidable simplicial sets. The map $f^* \sigma$ is degeneracy quotient by \cref{prop:Degen_quotient_are_pullback_stable}), hence \cref{lem:decidability_lift_degen_quo} shows that the existence of such a lift is decidable (as degeneracy quotients are epimorphisms, the existence of lift making the upper triangle commutes is equivalent to the existence of lift making the square commutes).
+The objects $f^* \Delta[n]$ and $f^* \Delta[k]$ are decidable simplicial subset of $\Delta[n]$ and $\Delta[k]$ because $f$ is itself a levelwise complemented monomorphism, hence both of them are finite decidable simplicial sets. The map $f^* \sigma$ is degeneracy quotient (by \cref{prop:Degen_quotient_are_pullback_stable}), hence \cref{lem:decidability_lift_degen_quo} shows that the existence of such a lift is decidable (as degeneracy quotients are epimorphisms, the existence of lift making the upper triangle commutes is equivalent to the existence of lift making the square commute).
 
 
 %    let $v$ be a $n$-cell in $\Pi_Y(A)$.
@@ -1269,7 +1276,7 @@ Let
 \[
 \xymatrix{
 B \ar[r]^g \ar@{->>}[d]_q & A \ar@{->>}[d]^p \\
-Y \ar[r]_f & X \, ,}
+Y \ar[r]_f & X }
 \]
 be a commutative diagram where $p \co A \to X$ and $q \co B \to Y$ are fibrations with cofibrant domains and $f \co Y \to X$ is
 a cofibration between cofibrant objects. Assume that the map $u \co B \to A[f]$ defined by~$u \defeq (q, g)$, fitting the diagram 
@@ -1299,7 +1306,7 @@ of solid maps
 &
 }
 \]
-is a weak equivalence in $\SSet_{/ Y}$. Then there exist a fibration $\bar{q} \co \bar{B} \to X$, a weak equivalence $v \co \bar{B} \to A$ in $\SSet_{/X}$ and a map $B \to \bar{B}$ such that both squares in the diagram above are pullbacks. 
+is a weak equivalence in $\SSet_{/ Y}$. Then there exist a fibration $\bar{q} \co \bar{B} \to X$, a weak equivalence $v \co \bar{B} \to A$ in $\SSet_{/X}$ and a map $B \to \bar{B}$ such that both of the other squares in the diagram above are pullbacks. 
 \end{proposition}
 
 \begin{proof} We define the required object $\bar{B}$ as the following pullback:
@@ -1316,7 +1323,7 @@ which is a pullback since $f^* \Pi_f \iso 1$ by part~(ii) \cref{Lemma:ForTheExtP
 $B \iso \bar{B}[f]$, as required.
 
 
-Since $B$ is cofibrant, we have that $\Pi_Y(B)$ is cofibrant by part~(iii) of  \cref{Lemma:ForTheExtProperty}. Hence, the simplicial set~$\bar{B}$  is also cofibrant by \cref{lem:cofibrant_fiber_product}. Furthermore, the maps $B \rightarrow \bar{B}$ and~$A[f] \rightarrow A$ are cofibrations by~\cref{thm:cof-pbk}, as they are pullback of the cofibration~$f \co Y \rightarrow X$.
+Since $B$ is cofibrant, $\Pi_Y(B)$ is cofibrant by part~(iii) of  \cref{Lemma:ForTheExtProperty}. Hence, the simplicial set~$\bar{B}$  is also cofibrant by \cref{lem:cofibrant_fiber_product}. Furthermore, the maps $B \rightarrow \bar{B}$ and~$A[f] \rightarrow A$ are cofibrations by~\cref{thm:cof-pbk}, as they are pullback of the cofibration~$f \co Y \rightarrow X$.
 
 
 
@@ -1334,7 +1341,7 @@ We now assume that $u \co B \rightarrow A[f]$ is a trivial cofibration. Using th
 H \co \Delta[1] \times A[f] \rightarrow A[f]
 \] 
 between 
-$u \circ r$ and $1_{A[f]}$, whose composite with $A[f] \rightarrow Y$ is the trivial homotopy. Indeed, $r$ and  $H$ are respectively constructed as the dotted diagonal liftings in the squares:
+$u \circ r$ and $1_{A[f]}$, whose composite with $A[f] \rightarrow Y$ is the trivial homotopy. Indeed, $r$ and~$H$ are respectively constructed as the dotted diagonal liftings in the squares:
 
 \[\xymatrix{
 B \ar[d] \ar@{=}[r]  & B \ar@{->>}[d] \\
@@ -1348,7 +1355,7 @@ We want to show that $\bar{B} \rightarrow A$ is also a deformation retract by co
 \[
 H' \co \Delta[1] \times A \rightarrow A \, .
 \] 
-This homotopy will be constructed so that it is $H$ on $\Delta[1] \times A[f]$ ,  it is the map 
+This homotopy will be constructed so that it is~$H$ on~$\Delta[1] \times A[f]$,  it is the map 
 \[
 \Delta[1] \times \bar{B} \rightarrow \Delta[0]  \times \bar{B} \iso \bar{B} \rightarrow A
 \] 
@@ -1367,8 +1374,7 @@ Since $\bar{B} \rightarrow A$ is a deformation retract, it is invertible in the 
 \end{proof}
 
  
- Another proof of~\cref{cor:Pi_types_are_fibrant} is given in~\cite{GambinoN:anocp} modifying appropriately
-the arguments in~\cite{SattlerC:equepu}.
+ Another proof of~\cref{cor:Pi_types_are_fibrant} is obtained in~\cite[Section~3.2]{GambinoN:anocp} modifying the argument in~\cite{SattlerC:equepu}.
 
 
 \section{A  classifying small fibration between bifibrant objects}
@@ -1397,11 +1403,11 @@ In this section, we limit ourselves to define $\pi_c \co \UU_c \to \U_c$ and pro
 classifies small fibrations between cofibrant simplicial sets. We will then show 
 that $\U_c$ is bifibrant, that $\UU_c$ is cofibrant  and that $\pi_c$ is univalent 
 in~\cref{sec:fibrancy-and-univalence}. For the goal of this section, we proceed in two steps. First, we modify  the construction of the weak classifier for small fibrations in~\cite{voevodsky-simplicial-model} to obtain a small fibration $\pi \co \UU \to \U$ which classifies small fibrations with cofibrant fibers. Since the base of this fibration does not appear to be cofibrant,
-we then consider a suitable cofibrant replacement  of~$\U$ and obtain the required fibration $\pi_c \co \UU_c \to \U_c$ via a pullback. 
+we need to consider a suitable cofibrant replacement  of~$\U$ and obtain the required fibration $\pi_c \co \UU_c \to \U_c$ via a pullback. 
 
 \medskip
 
-As a preliminary step, let us recall that a simplicial set $A$ is \emph{small}  if $A_n$ is a small set for every $[n] \in \Delta$ and that a map $p \co A \to X$ of simplicial sets is \emph{small} if for every $x \co \Delta[n] 
+As a preliminary step, let us recall that a simplicial set $A$ is \emph{small}  if $A_n$ is a small set (in the sense specified in the Introduction) for every $[n] \in \Delta$ and that a map $p \co A \to X$ of simplicial sets is \emph{small} if for every $x \co \Delta[n] 
 \to X$ the simplicial set~$A[x]$ given by the pullback square
 \[
 \xymatrix{
@@ -1412,14 +1418,14 @@ is small. Let us also recall the  construction of a map of simplicial sets $\rho
 small maps of simplicial sets, which is a special case of the results in~\cite{hofmann-streicher-universes} for arbitrary presheaf categories.  For this, we use the equivalence in~\eqref{equ:psh-slice-sset} and the notation associated to it.
 The simplicial set $\V$ is defined by letting
 \[
-\mathsf{V}_n \defeq \{ F \co {\Delta_{/[n]}}^{\op} \to \Set \}
+\mathsf{V}_n \defeq \{ F \co {\Delta_{/[n]}}^{\op} \to \Set \} \mathrlap{,}
 \]
-for $[n] \in \Delta$, where $\Set$ denotes the category of small sets. More generally, if $X$ is a simplicial set then maps from $X$ to $V$ corresponds to functors $F: \Delta/X \to \Set$, where $\Delta_{/X}$ denotes the category of elements of $X$.
+for $[n] \in \Delta$, where $\Set$ denotes the category of small sets. More generally, if $X$ is a simplicial set then maps from $X$ to $\mathsf{V}$ corresponds to functors $F \co {\Delta_{/X}}^{\op} \to \Set$, where $\Delta_{/X}$ denotes the category of elements of $X$.
 The object $\VV$ is then defined in exactly the same way by replacing the category of sets by the category of pointed sets and the map $\VV \to \V$ is induced by forgetting the marked point.
 
 The next lemma is essentially \cite[Lemma~3.9]{cisinski-univalent-universes} and 
 \cite[Property~$(2')$]{ShulmanM:unierp}, but it is proved here constructively by 
-exploiting crucially the decidability property of cofibrations. The lemma will be used to `rectify' the 
+exploiting the decidability property of cofibrations. The lemma will be used to `rectify' the 
 choice of lifts in the proofs of \cref{thm:fibrancy-of-u-and-uc} and \cref{thm:univalence-of-u-and-uc}. 
 
 \begin{lemma}  \label{thm:rectify-via-decidability}
@@ -1435,16 +1441,16 @@ where both solid squares are pullbacks and $i \co A \to B$ is a cofibration, the
 
 \begin{proof}
 Since the map $K \to B$ is classified by some map $\chi \co B \to \V$, there are two dotted arrow as in the diagram above that make the third square a pullback. However, the whole diagram obtained in this way
-is not necessarily commutative: the map $\chi$ corresponds to a presheaf~$\mathcal{K}$ on~$\Delta_{/B}$, the map $A \to \V$ corresponds to a presheaf $\mathcal{F}$ on~$\Delta_{/A}$, and the 
+is not necessarily commutative: the map $\chi$ corresponds to a presheaf~$G$ on~$\Delta_{/B}$, the map $A \to \V$ corresponds to a presheaf $F$ on~$\Delta_{/A}$, and the 
 commutativity of the given solid diagram means that the composite 
 \[
 \xymatrix{
-{\Delta_{/A}}^{\op} \ar[r] & {\Delta_{/B}}^{\op} \ar[r]^{\mathcal{K}} &  \Set} 
+{\Delta_{/A}}^{\op} \ar[r] & {\Delta_{/B}}^{\op} \ar[r]^-{G} &  \Set} 
 \] 
-is isomorphic to $\mathcal{F}$. But the whole diagram commutes, as required, only if they are not just isomorphic, but equal. Since $i \co A \to B$ is a cofibration, it is levelwise decidable, hence the functor $\Delta_{/A} \to \Delta_{/B}$ is a decidable inclusion at the level of objects and fully faithful. We can then redefine $\mathcal{K}$ to be equal to $\mathcal{F}$ on object that are in the image of $\Delta_{/A}$ and equal to the previously defined $\mathcal{K}$ on the other objects. There is an evident way to make this into a functor, using the natural isomorphism between $\mathcal{F}$ and the restriction of $\mathcal{K}$, and this gives the required commutative diagram.
+is isomorphic to $F$. But the whole diagram commutes, as required, only if they are not just isomorphic, but equal. Since $i \co A \to B$ is a cofibration, it is levelwise decidable, hence the functor $\Delta_{/A} \to \Delta_{/B}$ is a decidable inclusion at the level of objects and fully faithful. We can then redefine $G$ to be equal to $F$ on object that are in the image of $\Delta_{/A}$ and equal to the previously defined $G$ on the other objects. There is an evident way to make this into a functor, using the natural isomorphism between $F$ and the restriction of $G$, and this gives the required commutative diagram.
 \end{proof}
 
-\bigskip
+
 
 We now come to our first step, in which we define a small fibration $\pi \co \UU \to \U$ which 
 classifies the class of small fibrations with cofibrant fibers. 
@@ -1467,7 +1473,7 @@ is cofibrant.
 \end{enumerate}
 \end{lemma} 
 
-\begin{proof} Part~(i) follows from \cref{lem:cofibrant_fiber_product}. For part~(ii), let $[n] \in \Delta$, $a \in A_n$. Since $X$ is cofibrant, by the constructive version of the Eilenberg-Zilber lemma we can write $p(a) \in X$ in a unique way as $p(a) =s^*(x)$, where $s \co [n] \to [k]$ is a degeneracy and 
+\begin{proof} Part~(i) follows from \cref{lem:cofibrant_fiber_product}. For part~(ii), let $[n] \in \Delta$, $a \in A_n$. Since $X$ is cofibrant, by the constructive version of the Eilenberg-Zilber lemma~\cite[Lemma~5.1.2]{henry2018wms}, we can write $p(a) \in X$ in a unique way as $p(a) =s^*(x)$, where $s \co [n] \to [k]$ is a degeneracy and 
 $x \in X_k$ is a non-degenerate cell. Let $x \co \Delta[k] \rightarrow X$ be the corresponding map. We now form the pullback
 \[
 \xymatrix{
@@ -1506,7 +1512,7 @@ We then define the map $\pi \co \UU \to \U$ via the pullback
 \begin{enumerate}[(i)] 
 \item The map $\pi \co \UU \to \U$ is a small fibration with cofibrant fibers.
 
-\item The map $\pi \co \UU \to \U$ classifies small fibrations with cofibrant fibers. More precisely, a map $v \co X \to \V$ can be lifted to a map $X \to \U$ if and only if it classifies a fibration with cofibrant fibers. Moreover, choice of a lift to $\U$ corresponds (functorially in $X$ and $V$) to the choice of a fibration structure on the map classified by $v$.
+\item The map $\pi \co \UU \to \U$ classifies small fibrations with cofibrant fibers. More precisely, a map $v \co X \to \V$ can be lifted to a map $X \to \U$ if and only if it classifies a fibration with cofibrant fibers. Moreover, choice of a lift to $\U$ corresponds (functorially in $X$ and $\V$) to the choice of a fibration structure on the map classified by $v$.
 
 \item A lifting problem
 
@@ -1535,9 +1541,9 @@ $a \co \Delta[n] \rightarrow \V$. Therefore, by definition of $\U$, $A$ is cofib
 \Lambda^k[n] \ar[r] \ar[d]_{h^k_n} & A  \ar[d]^{p} \ar[r] & \UU \ar[d]^\pi \\
 \Delta[n] \ar@{=}[r]  & \Delta[n] \ar[r]_a & \U \, ,  }
 \]
-and then use that $p \co A  \to \Delta[n]$ is a fibration, with chosen lifts, which hence produce a chosen lift in the diagram above.
+and then use that $p \co A  \to \Delta[n]$ is a fibration, with chosen lifts, which produces a chosen lift in the diagram above.
 
-For part~(ii), if a map $v \co X \to \V$ lifts to $\U$, then the map $A \to X$ classified by $v$ is a pullback of $\UU \to \U$ so it is a small fibration with cofibrant fibers. Conversely, let $p \co A \to X$ be a small fibration with cofibrant fibers. Being a small 
+For part~(ii), if a map $v \co X \to \V$ lifts to $\U$, then the map $A \to X$ classified by $v$ is a pullback of $\UU \to \U$ and therefore it is a small fibration with cofibrant fibers. Conversely, let $p \co A \to X$ be a small fibration with cofibrant fibers. Being a small 
 map, $p$ fits into a pullback of the form 
 \[
 \xymatrix{
@@ -1548,8 +1554,8 @@ X \ar[r]_{a} & \V \, . }
 For each cell of $X$,  $x \co \Delta[n] \rightarrow X$ the pullback $A[x] \rightarrow \Delta[n]$ is a small fibration with cofibrant domain by the assumptions on $p$, which means, by the definition of $\U$ that the image of the cell $x$ in $\V$ lifts to $\U$. As one can easily check that this lifts to $\U$ are functorial in $[n]$, the map $X \rightarrow \V$ lifts to $\U$, and hence $A \rightarrow X$ is actually the pullback of $\UU \rightarrow \U$. One also easily check that there is a correspondence between fibration structures on the map $A \to X$ and compatible choices of fibration structures on each pullback along a map $\Delta[n] \to X$, so that the two construction explained above are inverse of each other.
 
 
-For part~(iii), the existence of diagonal lift implies that $t$ classifies a fibration with cofibrant fibers by part~(ii). Conversely, assuming that $t$ classifies a fibration with cofibrant fibers, it follows from part~(ii) that constructing a diagonal lift is the same as choosing lifts for the map~$K \to B$ classified by~$t$ such that the choice of lift induced on the pullback to $A$ is the one induced by the map $A \to \U$. But this is easily achieved as follows. Given a lifting problem of $\Lambda^k[n] \to \Delta[n]$ against $K \to B$, since $A \to B$ is a cofibration it is decidable whether the map $\Delta[n] \to B$ factors through $A$ or not. One then chooses the lift given by the fact that $K \to B$ is a fibration if $\Delta[n] \to B$ does not factor thought $A$ and the one provided by the fibration structure on the pullback $K[i] \to A$ \noten{Unclear what is being
-referred to here} given by the map $A \to \U$. 
+For part~(iii), the existence of diagonal lift implies that $t$ classifies a fibration with cofibrant fibers by part~(ii). Conversely, assuming that $t$ classifies a fibration with cofibrant fibers, it follows from part~(ii) that constructing a diagonal lift is the same as choosing lifts for the map~$K \to B$ classified by~$t$ such that the choice of lift induced on the pullback to $A$ is the one induced by the map $A \to \U$. But this is easily achieved as follows. Given a lifting problem of $\Lambda^k[n] \to \Delta[n]$ against $K \to B$, since $A \to B$ is a cofibration it is decidable whether the map $\Delta[n] \to B$ factors through $A$ or not. One then chooses the lift given by the fact that $K \to B$ is a fibration if $\Delta[n] \to B$ does not factor thought $A$ and the one provided by the fibration structure on the pullback $K[i] \to A$ \noten{\textbf{Unclear what is being
+referred to here}} given by the map $A \to \U$. 
 \end{proof} 
 
 
@@ -1659,7 +1665,7 @@ assumptions on path objects that would not be satisfied for us without restricti
 
 
 
-Given a map $f \co A \to B$ in $\BFFib_{/X}$, a right inverse for $f$, is a map $h \co B \to A$ in $\BFFib_{/X}$ and a homotopy $f \circ h \sim \Id_B$, given by an arrow $B \to \Path_{/X}(B)$ in $\BFFib_{/X}$. Similarly, a left inverse for~$f$ is an arrow~$g \co B \to A$ together with a homotopy $g \circ f \sim \Id_A$, given by an arrow~$A \to \Path_{/X}(A)$ in~$\BFFib_{/X}$.
+Given a map $f \co A \to B$ in $\BFFib_{/X}$, a right inverse for $f$, is a map $h \co B \to A$ in $\BFFib_{/X}$ and a homotopy $f \circ h \sim 1_B$, given by an arrow $B \to \Path_{/X}(B)$ in $\BFFib_{/X}$. Similarly, a left inverse for~$f$ is an arrow~$g \co B \to A$ together with a homotopy $g \circ f \sim 1_A$, given by an arrow~$A \to \Path_{/X}(A)$ in~$\BFFib_{/X}$.
 
 Using dependent products (without taking cofibrant replacements), we can construct fibrant objects $\Linv(f) \twoheadrightarrow X$ and $\Rinv(f) \twoheadrightarrow X$, that are respectively the objects of left and right inverse of $f$. Explicitely, for an object $Y \in \SSet_{/X}$ a map $Y \to \Linv(f)$ is the same as a left inverse to the map $A \times_{X} Y \to B \times_X Y$ in $\BFFib_{/Y}$.
 
@@ -1688,7 +1694,7 @@ Because $\Iseq(f)$ is constructed as $\Rinv(f) \times_X \Linv(f)$, we only need 
 i^*V \ar[r] & p^* V
 }
 \]
-are cofibrations, and so the desired section on $p^*\pi_f$ extending the one on $i^*\pi_f$ can be constructed using the right lifting property of the trivial fibration $p^* \pi_f \simeq \pi_{p^* f}$ against $p^*V \to i^* V$ .
+are cofibrations, and so the desired section on $p^*\pi_f$ extending the one on $i^*\pi_f$ can be constructed using the right lifting property of the trivial fibration $p^* \pi_f \simeq \pi_{p^* f}$ against $p^*V \to i^* V$.
 
   
 We now move to the lift to $\Linv(f)$. A left inverse of $f$, can be described dually as a retraction of the map $\sigma_f: U \hookrightarrow \Delta[1] \times U \coprod_U V$ in $\SSet_X$. Similarly to the previous case, the construction $f \mapsto \sigma_f$ is also stable under pullback (i.e. $p^*\sigma_f \cong \sigma_{p^* f}$), the map $\sigma_f$ is cofibration when $U$ and $V$ are cofibrant and is a trivial cofibration if in addition $f$ is a weak equivalence. So, as before, $p^*(\sigma_f)$ and $i^*(\sigma_f)$ are trivial cofibrations. Thus, the lift that we are trying to construct is equivalent to a retraction in $\SSet_{/B}$ of the right map in the square below that extends the retraction already existing in $\SSet_{/A}$ of the left map:
@@ -1712,7 +1718,7 @@ Here, the map on the right is a fibration. The left arrow is a weak equivalence 
 
 
 
-Finally, we define $\Weq(\U) \twoheadrightarrow \U^\to$ by applying this construction $\Iseq(f)$, to the universal arrow between small fibrations with cofibrant fibers, which lives over $\U^\to$. By \cref{thm:black-box}, we have the following result.
+Finally, we define $\Weq(\U) \twoheadrightarrow \U^\to$ by applying this construction $\Iseq(f)$ to the universal arrow between small fibrations with cofibrant fibers, which lives over $\U^\to$. By \cref{thm:black-box}, we have the following result.
 
 \begin{proposition} \label{prop:Weq_classify_Weq}
 The map $\Weq(\U) \to \U^\to$ is a fibration and given $A \rightarrowtail B$ a cofibration between cofibrant objects, a lifting problem
@@ -1768,7 +1774,7 @@ diagram
 \Delta[1] \times X \ar[r]_{(a_1,h)} \ar@{.>}[ur] & \U \times \U \, .
 }
 \]
-Here, $i_1$ denotes a map classifying the identify of the object classified by $a_1$. By $a_1$ in the first component of the bottom arrow we mean the composite $\Delta[1] \times X \rightarrow X \rightarrow \U$. Composing the dotted arrow with $\delta^1$ gives us a map $X \rightarrow  \mathsf{Weq}(\U)$ whose projection to~$\U \times \U$ if $(a_1,a_2)$, \ie it classifies a weak equivalence between the objects classified by $a_1$ and $a_2$. One can do the same thing with $\delta^0$ and $\delta^1$ exchanged to get a weak equivalence in the other direction.
+Here, $i_1$ denotes a map classifying the identify of the object classified by $a_1$. By $a_1$ in the first component of the bottom arrow we mean the composite $\Delta[1] \times X \rightarrow X \rightarrow \U$. Composing the dotted arrow with $\delta^1$ gives us a map $X \rightarrow  \mathsf{Weq}(\U)$ whose projection to~$\U \times \U$ is $(a_1,a_2)$, \ie it classifies a weak equivalence between the objects classified by $a_1$ and $a_2$. One can do the same thing with $\delta^0$ and $\delta^1$ exchanged to get a weak equivalence in the other direction.
 
 Using this fact, we can now prove that $\U$ is fibrant. A map $h^k_n \co \Lambda^k[n] \rightarrow \U $ classifies a fibration $q \co B \rightarrow \Lambda^k[n]$ with cofibrant domain. The horn inclusion $h^k_n \co \Lambda^k [n] \rightarrow \Delta[n]$ fits into the retract diagram
 \[
@@ -1804,7 +1810,7 @@ By the observation above, the composite map $\big( \Delta[1] \times \Lambda^k[n]
 }
 \] 
 So we can construct a fibration  $\bar{q} \co \bar{B} \to \Delta[n]$ with cofibrant domain whose pullback 
-along~$h^k_n$ is isomorphic to $q \co B \to \Lambda^k_n$. The map $b \co \Delta[n] \rightarrow \U$ classifying $\bar{q}$, if chosen carefully, gives the lift we are looking for. More precisely, by \cref{thm:rectify-via-decidability} one can chose (in the diagram below) a map $a \co \Delta[n] \rightarrow \V$ that classifies $\bar{q}$ and extends the map $\Lambda^k[n] \to \U \to \V$ classifying $q$, and finally using part~(iii) of \cref{thm:universe-u} one can (also in the diagram below) lift this map to map $b \co \Delta[n] \to \U$ that gives the lift we are looking for, 
+along~$h^k_n$ is isomorphic to $q \co B \to \Lambda^k_n$. The map $b \co \Delta[n] \rightarrow \U$ classifying $\bar{q}$, if chosen carefully, gives the lift we are looking for. More precisely, by \cref{thm:rectify-via-decidability} one can chose (in the diagram below) a map $a \co \Delta[n] \rightarrow \V$ that classifies $\bar{q}$ and extends the map $\Lambda^k[n] \to \U \to \V$ classifying $q$. Finally, using part~(iii) of \cref{thm:universe-u} one can (also in the diagram below) lift this map to map $b \co \Delta[n] \to \U$ that gives the lift we are looking for, 
 
 \[\xymatrix{
 \Lambda^k[n] \ar[r] \ar[d] & \U \ar[d] \\
@@ -1962,7 +1968,8 @@ The $\Pi$-types have been constructed in \cref{sec:Pi-types} as cofibrant replac
 
 Finally, in \cref{sec:unifbb} we constructed the universe $\UU_c \rightarrow \U_c$ as a classifier for all small fibrations between cofibrant objects. As small fibrations are stable under all the constructor above, this gives the stability of the universe. It has been shown in \cref{thm:univalence-of-u-and-uc} in that this fibration is indeed univalent. Regarding the closure of the universe, the only delicate point concerns $\Pi$-types because of the
 use of the cofibrant replacement.  The explicit definition of the cofibrant replacement functor 
-in  \cref{sec:appendix} shows that  the trivial fibration $\varepsilon_X \co \mathbb{L} X \rightarrow X$ is a small fibration for every $X$, independently of whether $X$ is small or not (see part~(i) of \cref{cor:cofibrant_smallness} for details). Hence the construction of $\Pi$-types  preserves small fibrations, even between non-small objects.
+in  Appendix~\ref{sec:appendix} shows that  the trivial fibration $\varepsilon_X \co \mathbb{L} X \rightarrow X$ is a small fibration for every $X$, independently of whether $X$ is small or not (see \cref{rem:strength}
+for a comment on the use of a `resizing rule' in the proof of this claim and part~(i) of \cref{cor:cofibrant_smallness} for details). Hence the construction of $\Pi$-types  preserves small fibrations, even between non-small objects.
 \end{proof}
 
 
@@ -2060,13 +2067,13 @@ If $f:[n] \rightarrow [m]$ is non-injective then for any $s \in (D_0)_m$ the ide
 \cref{lem:prev} constructs a map $P \co D_0 \rightarrow D_0$ sending any cell to its degeneracy type. As $P$ preserves and detects degeneracy, it preserves the degeneracy type and hence $P \circ P =P$.
 
 \begin{definition}
-The simplicial set $D$ is the set of fix point of the idempotent $P$ acting on $D_0$.
+The simplicial set $D$ is the set of fix points of the idempotent $P$ acting on $D_0$.
 \end{definition}
 
 Note that for any simplicial set $X$, the map $f:X \rightarrow D_0$ sending each cell to its degeneracy type preserves the degeneracy type, hence $P f = f$. In particular a cell of $D_0$ is in $D$ if and only if it is a degeneracy type. This leads to the following fact. 
 
 \begin{lemma}
-$n$-cells of $D$ are in bijection with decidable degeneracy $n$-type. Each cofibrant simplicial set $X$ has a unique map detecting degeneracy to $D$, which is the map sending a cell to its degeneracy type. \qed
+The $n$-cells of $D$ are in bijection with decidable degeneracy $n$-types. Each cofibrant simplicial set $X$ has a unique map detecting degeneracy to $D$, which is the map sending a cell to its degeneracy type. \qed
 \end{lemma}
 
 
@@ -2089,9 +2096,9 @@ The map $\mathbb{L} X \rightarrow D \times X$ sending an $n$-cell to its degener
  \[ 
  \mathbb{L}^{(0)} X \hookrightarrow \mathbb{L}^{(1)} X \hookrightarrow \dots \hookrightarrow \mathbb{L}^{(n)} X \hookrightarrow \dots 
  \]
-where $\mathbb{L}^{(0)} X$ is just the set of $0$-cell of $X$ and the map $\mathbb{L}^{(n-1)} X \rightarrow \mathbb{L}^{(n)} X$ is constructed as the pushout of the coproduct of one copy of $\partial \Delta[n] \rightarrow \Delta[n]$ for each square of the form:
+where $\mathbb{L}^{(0)} X$ is just the set of $0$-cell of $X$ and the map $\mathbb{L}^{(n-1)} X \rightarrow \mathbb{L}^{(n)} X$ is constructed as the pushout of the coproduct of one copy of $\partial \Delta[n] \rightarrow \Delta[n]$ for each square of the form
 \[ 
-\xymatrix{\partial \Delta[n]  \ar[r] \ar@{>->}[d] & \mathbb{L}^{(n-1)} X \ar[d] \\ \Delta[n]  \ar[r] & X} 
+\xymatrix{\partial \Delta[n]  \ar[r] \ar@{>->}[d] & \mathbb{L}^{(n-1)} X \ar[d] \\ \Delta[n]  \ar[r] & X \mathrlap{.}}  
 \]
 Indeed, the pushout constructing $\mathbb{L}^{(n)} X$ from $\mathbb{L}^{(n-1)} X$ do not change the $k$-skeleton for $k <n$ and the set of maps $\partial \Delta[k] \rightarrow \mathbb{L}^{(n-1)} X$ only depends on the $k$-skeleton of $X$, so one can always do all the necessary pushout by $\partial \Delta[k] \hookrightarrow \Delta[k]$ by for $k<n$ before those by $\partial \Delta[n] \hookrightarrow \Delta[n]$.
 
@@ -2112,7 +2119,7 @@ In $\mathbb{L}^{(n)} X $ there is exactly one such cell for each square as above
 
 
 \begin{corollary}
-The simplicial set $D$ of decidable degeneracy type is the cofibrant replacement $\mathbb{L} 1$ of $1$.
+The simplicial set $D$ of decidable degeneracy type is the cofibrant replacement~$\mathbb{L} 1$ of~$1$.
 \end{corollary}
 
 \begin{corollary} \label{cor:cofibrant_smallness}
@@ -2250,10 +2257,10 @@ N.~Gambino and R.~Garner.
 \newblock The identity type weak factorisation system.
 \newblock {\em Theoretical Computer Science}, 409:94--109, 2008.
 
-\bibitem[GR94]{GrifforE:strsml}
-E.~Griffor and M.~Rathjen.
-\newblock The strength of some {M}artin-{L}\"of type theories.
-\newblock {\em Archive for Mathematical Logic}, 33(5):347--385, 1994.
+%\bibitem[GR94]{GrifforE:strsml}
+%E.~Griffor and M.~Rathjen.
+%\newblock The strength of some {M}artin-{L}\"of type theories.
+%\newblock {\em Archive for Mathematical Logic}, 33(5):347--385, 1994.
 
 \bibitem[GS17]{gambino2017frobenius}
 N.~Gambino and C.~Sattler.
@@ -2262,7 +2269,7 @@ N.~Gambino and C.~Sattler.
 
 \bibitem[GSS19]{GambinoN:anocp}
 N.~Gambino, C.~Sattler, and K.~Szumi{\l}o.
-\newblock The constructive {K}an-{Q}uillen model structure: two more proofs.
+\newblock The constructive {K}an-{Q}uillen model structure: two new proofs.
 \newblock arXiv:1907.05394, 2019.
 
 \bibitem[GT06]{grandis-tholen-nwfs}
@@ -2291,7 +2298,8 @@ M.~Hofmann.
 \bibitem[HS97]{hofmann-streicher-universes}
 M.~Hofmann and T.~Streicher.
 \newblock Lifting {G}rothendieck universes.
-\newblock Available from \url{http://www2.mathematik.tu-darmstadt.de/~streicher/NOTES/lift.pdf}, 1997.
+\newblock Unpublished note, 1997.
+\newblock Available from \url{http://www2.mathematik.tu-darmstadt.de/~streicher/NOTES/lift.pdf}.
 
 \bibitem[Jac99]{JacobsB:catltt}
 B.~Jacobs.
@@ -2376,9 +2384,10 @@ M.~Shulman.
 \newblock arXiv:1904.07004, 2019.
 
 \bibitem[Ste19]{StenzelR:unirca}
-    R.~Stenzel
-    \newblock On univalence, Rezk completeness and presentable quasi-categories?
-    \newblock Phd thesis, University of Leeds, 2019.
+    R.~Stenzel,
+    \newblock On univalence, Rezk completeness and presentable quasi-categories,
+    \newblock PhD thesis, University of Leeds, 2019.     
+    \newblock Available from \url{http://etheses.whiterose.ac.uk/24342}.
     
 
 \bibitem[Str14]{StreicherT:modtts}
@@ -2396,9 +2405,9 @@ The {Univalent Foundations Program}.
 \bibitem[Voe09]{VoevodskyV:notts}
 V.~Voevodsky.
 \newblock Notes on type systems.
+\newblock Unpublished note, 2009.
 \newblock Available from
-  \url{http://www.math.ias.edu/~vladimir/Site3/Univalent_Foundations_files/expressions_current.pdf},
-  2009.
+  \url{http://www.math.ias.edu/~vladimir/Site3/Univalent_Foundations_files/expressions_current.pdf}.
 
 \bibitem[Voe15]{voevodsky:library}
 V.~Voevodsky.
